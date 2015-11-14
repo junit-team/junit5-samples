@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 jar {
 	baseName = 'junit5-gradle-consumer'
@@ -13,12 +14,6 @@ repositories {
 	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
-compileJava {
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
-	options.compilerArgs += '-parameters'
-}
-
 compileTestJava {
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
@@ -27,6 +22,26 @@ compileTestJava {
 
 dependencies {
 	testCompile("org.junit.prototype:junit5-api:${junit5Version}")
+	testCompile("org.junit.prototype:junit-console:${junit5Version}")
+	testCompile("org.junit.prototype:junit5-engine:${junit5Version}")
+}
+
+configurations.all {
+	// Do NOT cache JUnit 5 snapshot JARs.
+	resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+}
+
+task junit5(type: JavaExec) {
+	description = 'Runs JUnit 5 tests.'
+	classpath = sourceSets.test.runtimeClasspath
+	main = 'org.junit.gen5.console.ConsoleRunner'
+	args 'com.example.project.FirstTest'
+}
+
+test {
+	description = 'Runs JUnit 4 and JUnit 5 tests.'
+	dependsOn junit5
+	useJUnit()
 }
 
 eclipse {
