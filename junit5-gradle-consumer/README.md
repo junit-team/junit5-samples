@@ -9,14 +9,14 @@ Invoking `gradlew clean junit5` from the command line will execute all
 tests in `com.example.project.FirstTest`, resulting in output similar
 to the following:
 
-```shell
+```
 Engine started: junit5
-Test started:     1 + 1 = 2 [junit5:com.example.project.FirstTest#myTest(java.lang.String)]
-Test succeeded:   1 + 1 = 2 [junit5:com.example.project.FirstTest#myTest(java.lang.String)]
+Test started:     My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myTest(java.lang.String)]
+Test succeeded:   My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myTest(java.lang.String)]
 Engine finished: junit5
 Test execution finished.
 
-Test run finished after 38 ms
+Test run finished after 36 ms
 [         1 tests found     ]
 [         1 tests started   ]
 [         0 tests skipped   ]
