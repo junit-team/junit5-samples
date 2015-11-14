@@ -1,12 +1,12 @@
-# junit5-maven-consumer
+# JUnit 5 Samples
 
-Example Maven consumer of JUnit 5 prototype
+Welcome to _JUnit 5 Samples_, a collection of sample applications
+using the JUnit 5 prototype.
 
-## Executing the example test
+## Samples
 
-Calling `mvn clean test` will execute the example test class `FirstTest`.
+The following sample projects demonstrate how to set up a project
+that uses the JUnit 5 prototype for various build systems.
 
-### Current limitations
-
-- It will only execute tests in `FirstTest`.
-- The build will not fail if a test fails.
+- Maven
+- Gradle
