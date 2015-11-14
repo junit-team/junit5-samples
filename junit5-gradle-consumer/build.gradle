@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+jar {
+	baseName = 'junit5-gradle-consumer'
+	version = '1.0.0-SNAPSHOT'
+}
+
+ext.junit5Version = '5.0.0-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+compileJava {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	options.compilerArgs += '-parameters'
+}
+
+compileTestJava {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	options.compilerArgs += '-parameters'
+}
+
+dependencies {
+	testCompile("org.junit.prototype:junit5-api:${junit5Version}")
+}
+
+eclipse {
+	classpath {
+		containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.8'
+}
