@@ -10,10 +10,10 @@ import org.junit.gen5.api.TestName;
 class FirstTest {
 
 	@Test
-	@Name("1 + 1 = 2")
+	@Name("My 1st JUnit 5 test! 😎")
 	void myTest(@TestName String testName) {
 		assertEquals(2, 1 + 1, "1 + 1 should equal 2");
-		assertEquals("1 + 1 = 2", testName, () -> "testName is injected correctly");
+		assertEquals("My 1st JUnit 5 test! 😎", testName, () -> "testName is injected correctly");
 	}
 
 }
