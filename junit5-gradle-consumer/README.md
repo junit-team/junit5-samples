@@ -55,6 +55,8 @@ Execution failed for task ':junit5'.
 > Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
 ```
 
+**Note**: the _exit value_ corresponds to the number of _tests failed_.
+
 ### Current Limitations
 
 - The `junit5` task currently only executes tests in the `com.example.project` package and its subpackages.
