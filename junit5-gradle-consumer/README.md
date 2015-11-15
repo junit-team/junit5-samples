@@ -21,8 +21,8 @@ Test run finished after 29 ms
 [         1 tests started   ]
 [         1 tests skipped   ]
 [         0 tests aborted   ]
-[         0 tests failed    ]
 [         1 tests successful]
+[         0 tests failed    ]
 ```
 
 If you comment out the `@Disabled` annotation on `SecondTest#mySecondTest()`, you will then see the build fail with output similar to the following:
@@ -43,8 +43,8 @@ Test run finished after 39 ms
 [         2 tests started   ]
 [         0 tests skipped   ]
 [         0 tests aborted   ]
-[         1 tests failed    ]
 [         1 tests successful]
+[         1 tests failed    ]
 
 :junit5 FAILED
 
