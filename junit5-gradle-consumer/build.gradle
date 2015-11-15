@@ -30,12 +30,12 @@ configurations.all {
 	// Do NOT cache JUnit 5 snapshot JARs.
 	resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
 }
- 
+
 task junit5(type: JavaExec) {
 	description = 'Runs JUnit 5 tests.'
 	classpath = sourceSets.test.runtimeClasspath
 	main = 'org.junit.gen5.console.ConsoleRunner'
-	args 'com.example.project.FirstTest'
+	args '-x', 'com.example.project.FirstTest'
 }
 
 test {
