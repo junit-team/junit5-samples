@@ -3,6 +3,7 @@ package com.example.project;
 
 import static org.junit.gen5.api.Assertions.assertEquals;
 
+import org.junit.gen5.api.Disabled;
 import org.junit.gen5.api.Name;
 import org.junit.gen5.api.Test;
 import org.junit.gen5.api.TestName;
@@ -10,10 +11,16 @@ import org.junit.gen5.api.TestName;
 class FirstTest {
 
 	@Test
-	@Name("1 + 1 = 2")
-	void myTest(@TestName String testName) {
+	@Name("My 1st JUnit 5 test! 😎")
+	void myFirstTest(@TestName String testName) {
 		assertEquals(2, 1 + 1, "1 + 1 should equal 2");
-		assertEquals("1 + 1 = 2", testName, () -> "testName is injected correctly");
+		assertEquals("My 1st JUnit 5 test! 😎", testName, () -> "testName is injected correctly");
+	}
+
+	@Test
+	@Disabled
+	void mySecondTest() {
+		assertEquals(2, 1, "2 is not equal to 1");
 	}
 
 }

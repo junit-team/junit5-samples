@@ -55,30 +55,21 @@
 					<execution>
 						<phase>test</phase>
 						<goals>
-							<goal>java</goal>
+							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<includePluginDependencies>true</includePluginDependencies>
-							<classpathScope>test</classpathScope>
-							<mainClass>org.junit.gen5.console.ConsoleRunner</mainClass>
+							<executable>java</executable>
 							<arguments>
+								<argument>-classpath</argument>
+								<classpath />
+								<argument>org.junit.gen5.console.ConsoleRunner</argument>
+								<argument>--enable-exit-code</argument>
 								<argument>com.example.project.FirstTest</argument>
 							</arguments>
+							<classpathScope>test</classpathScope>
 						</configuration>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.junit.prototype</groupId>
-						<artifactId>junit-console</artifactId>
-						<version>${junit.gen5.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.junit.prototype</groupId>
-						<artifactId>junit5-engine</artifactId>
-						<version>${junit.gen5.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
@@ -87,6 +78,18 @@
 		<dependency>
 			<groupId>org.junit.prototype</groupId>
 			<artifactId>junit5-api</artifactId>
+			<version>${junit.gen5.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.prototype</groupId>
+			<artifactId>junit-console</artifactId>
+			<version>${junit.gen5.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.prototype</groupId>
+			<artifactId>junit5-engine</artifactId>
 			<version>${junit.gen5.version}</version>
 			<scope>test</scope>
 		</dependency>
