@@ -10,16 +10,19 @@ tests in `com.example.project.FirstTest`, resulting in output similar
 to the following:
 
 ```
+Test execution started. Number of static tests: 2
 Engine started: junit5
-Test started:     My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myTest(java.lang.String)]
-Test succeeded:   My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myTest(java.lang.String)]
+Test started:     My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myFirstTest(java.lang.String)]
+Test succeeded:   My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myFirstTest(java.lang.String)]
+Test skipped:     mySecondTest [junit5:com.example.project.FirstTest#mySecondTest()]
+                  => Exception:   Skipped test method [void com.example.project.FirstTest.mySecondTest()] due to failed condition
 Engine finished: junit5
 Test execution finished.
 
-Test run finished after 36 ms
-[         1 tests found     ]
+Test run finished after 29 ms
+[         2 tests found     ]
 [         1 tests started   ]
-[         0 tests skipped   ]
+[         1 tests skipped   ]
 [         0 tests aborted   ]
 [         0 tests failed    ]
 [         1 tests successful]
