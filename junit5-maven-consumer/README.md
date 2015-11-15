@@ -53,7 +53,11 @@ Test run finished after 39 ms
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
+
+[ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.4.0:exec (default) on project junit5-maven-consumer: Command execution failed. Process exited with an error: 1 (Exit value: 1) -> [Help 1]
 ```
+
+**Note**: the _Exit value_ corresponds to the number of _tests failed_.
 
 ### Current Limitations
 
