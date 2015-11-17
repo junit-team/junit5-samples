@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: JUnit5Plugin
 
 jar {
 	baseName = 'junit5-gradle-consumer'
@@ -8,6 +9,7 @@ jar {
 }
 
 ext.junit5Version = '5.0.0-SNAPSHOT'
+ext.junit4Version = '4.12'
 
 repositories {
 	mavenCentral()
@@ -24,6 +26,10 @@ dependencies {
 	testCompile("org.junit.prototype:junit5-api:${junit5Version}")
 	testRuntime("org.junit.prototype:junit-console:${junit5Version}")
 	testRuntime("org.junit.prototype:junit5-engine:${junit5Version}")
+
+	// If you also want JUnit4 tests
+	testCompile("junit:junit:${junit4Version}")
+	testRuntime("org.junit.prototype:junit4-engine:${junit5Version}")
 }
 
 configurations.all {
@@ -31,18 +37,6 @@ configurations.all {
 	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
-task junit5(type: JavaExec) {
-	description = 'Runs JUnit 5 tests.'
-	classpath = sourceSets.test.runtimeClasspath
-	main = 'org.junit.gen5.console.ConsoleRunner'
-	args '--enable-exit-code', 'com.example.project'
-}
-
-test {
-	description = 'Runs JUnit 4 and JUnit 5 tests.'
-	dependsOn junit5
-	useJUnit()
-}
 
 eclipse {
 	classpath {
@@ -54,3 +48,15 @@ eclipse {
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.8'
 }
+
+class JUnit5Plugin implements Plugin<Project> {
+	void apply(Project project) {
+		project.task('test', type: org.gradle.api.tasks.JavaExec, overwrite: true) { task->
+			task.description = 'Runs JUnit 5 tests.'
+			task.classpath = project.sourceSets.test.runtimeClasspath
+			task.main = 'org.junit.gen5.console.ConsoleRunner'
+			task.args '--enable-exit-code', 'com.example.project', 'com.example.project.AJUnit4Test'
+		}
+	}
+}
+
