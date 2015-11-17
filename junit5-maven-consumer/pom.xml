@@ -64,7 +64,6 @@
 								<classpath />
 								<argument>org.junit.gen5.console.ConsoleRunner</argument>
 								<argument>--enable-exit-code</argument>
-								<argument>--argument-mode=packages</argument>
 								<argument>com.example.project</argument>
 							</arguments>
 							<classpathScope>test</classpathScope>

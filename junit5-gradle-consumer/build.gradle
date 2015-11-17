@@ -35,7 +35,7 @@ task junit5(type: JavaExec) {
 	description = 'Runs JUnit 5 tests.'
 	classpath = sourceSets.test.runtimeClasspath
 	main = 'org.junit.gen5.console.ConsoleRunner'
-	args '--enable-exit-code', '--argument-mode=packages', 'com.example.project'
+	args '--enable-exit-code', 'com.example.project'
 }
 
 test {
