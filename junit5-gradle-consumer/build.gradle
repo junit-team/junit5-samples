@@ -55,7 +55,7 @@ class JUnit5Plugin implements Plugin<Project> {
 			task.description = 'Runs JUnit 5 tests.'
 			task.classpath = project.sourceSets.test.runtimeClasspath
 			task.main = 'org.junit.gen5.console.ConsoleRunner'
-			task.args '--enable-exit-code', 'com.example.project'
+			task.args '--enable-exit-code', '--all'
 		}
 	}
 }
