@@ -12,15 +12,22 @@ class JUnit5Plugin implements Plugin<Project> {
 				project.dependencies.add("testRuntime", "org.junit.prototype:junit4-engine:${junit5Version}")
 			}
 
+			def testReport = new File("build/test-results/junit5-report.txt")
+
 			project.task('test', type: org.gradle.api.tasks.JavaExec, overwrite: true) { task->
-				//				def classpathRoots = project.sourceSets.test.runtimeClasspath.files
-				//				classpathRoots.each {
-				//					println "ROOT: " + it
-				//				}
+				//def classpathRoots = project.sourceSets.test.runtimeClasspath.files
+				task.outputs.file testReport
+
 				task.description = 'Runs JUnit 5 tests.'
 				task.classpath = project.sourceSets.test.runtimeClasspath
 				task.main = 'org.junit.gen5.console.ConsoleRunner'
 				task.args '--enable-exit-code', '--all'
+				//task.ignoreExitValue true //if the execution fails doLast is not called
+
+				doLast {
+					testReport.text = "Tests executed at ${new Date()}"
+					//throw new GradleException('tests failed')
+				}
 			}
 		}
 	}
