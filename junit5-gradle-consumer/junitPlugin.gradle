@@ -1,3 +1,13 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	}
+	dependencies {
+		classpath "org.junit.prototype:junit-launcher:5.0.0-SNAPSHOT"
+	}
+}
+
 class JUnit5Plugin implements Plugin<Project> {
 	void apply(Project project) {
 		def junit5 = project.extensions.create('junit5', JUnit5Extension)
@@ -15,7 +25,17 @@ class JUnit5Plugin implements Plugin<Project> {
 			def testReport = new File("build/test-results/junit5-report.txt")
 
 			project.task('test', type: org.gradle.api.tasks.JavaExec, overwrite: true) { task->
+//				def launcher = new org.junit.gen5.launcher.Launcher()
+//				println "LAUNCHER: " + launcher
+
 				//def classpathRoots = project.sourceSets.test.runtimeClasspath.files
+
+				project.sourceSets.test.runtimeClasspath.files.findAll {it.isDirectory()}.each { dir ->
+					task.inputs.dir(dir)
+				}
+				project.sourceSets.test.runtimeClasspath.files.findAll {it.isFile()}.each { file ->
+					task.inputs.file(file)
+				}
 				task.outputs.file testReport
 
 				task.description = 'Runs JUnit 5 tests.'
