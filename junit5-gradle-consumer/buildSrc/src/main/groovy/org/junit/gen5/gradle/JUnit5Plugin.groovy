@@ -42,9 +42,14 @@ class JUnit5Plugin implements Plugin<Project> {
 
 				doLast {
 					URL[] classpathUrls = classpathRoots.collect{it.toURL()}.toArray()
-					def testClassLoader = new URLClassLoader(classpathUrls, ReflectionUtils.getDefaultClassLoader())
+					classpathUrls.each {
+						println "URL: " + it
+					}
 
-					Launcher launcher = testClassLoader.loadClass(Launcher.getName()).newInstance()
+					def testClassLoader = new URLClassLoader(classpathUrls, ReflectionUtils.getDefaultClassLoader())
+					ReflectionUtils.setDefaultClassLoader(testClassLoader)
+
+					Launcher launcher = new Launcher()
 
 					def summary = new TestExecutionSummary();
 					def listener = new SummaryCreatingTestListener(summary);
@@ -53,19 +58,22 @@ class JUnit5Plugin implements Plugin<Project> {
 
 					Set<File> roots = classpathRoots.findAll { file -> file.isDirectory() && file.exists() }
 
-					println "ROOTS: " + roots[0].list()
+					roots.each {
+						println "ROOT: " + it.toString()
+
+					}
 
 					def specification = TestPlanSpecification.build(TestPlanSpecification.allTests(roots))
 
 					specification.each { AllTestsSpecification spec ->
 						println "SPEC: " + it
 						def classes = ReflectionUtils.findAllClassesInClasspathRoot(spec.classpathRoot) { true }
-						println "CLASSES: " + classes
+						println "ALL CLASSES: " + classes
 					}
 
 
-					println "PRODCLASS: " + ReflectionUtils.loadClass("com.example.project.ClassUnderTest", testClassLoader)
-					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest", testClassLoader)
+					println "PRODCLASS: " + ReflectionUtils.loadClass("com.example.project.ClassUnderTest")
+					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest")
 
 					launcher.execute(specification)
 
