@@ -2,9 +2,10 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-apply from: 'junitPlugin.gradle'
-apply plugin: junit5
+apply plugin: org.junit.gen5.gradle.JUnit5Plugin
 
+check.dependsOn.remove('test')
+check.dependsOn.add('junit5Test')
 
 jar {
 	baseName = 'junit5-gradle-consumer'
