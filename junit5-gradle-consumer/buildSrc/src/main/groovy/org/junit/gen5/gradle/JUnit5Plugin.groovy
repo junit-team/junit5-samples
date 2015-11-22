@@ -41,7 +41,10 @@ class JUnit5Plugin implements Plugin<Project> {
 				task.dependsOn project.tasks.getByName('testClasses')
 
 				doLast {
-					def launcher = new Launcher();
+					URL[] classpathUrls = classpathRoots.collect{it.toURL()}.toArray()
+					def testClassLoader = new URLClassLoader(classpathUrls, ReflectionUtils.getDefaultClassLoader())
+
+					Launcher launcher = testClassLoader.loadClass(Launcher.getName()).newInstance()
 
 					def summary = new TestExecutionSummary();
 					def listener = new SummaryCreatingTestListener(summary);
@@ -60,8 +63,9 @@ class JUnit5Plugin implements Plugin<Project> {
 						println "CLASSES: " + classes
 					}
 
-					println "PRODCLASS: " + ReflectionUtils.loadClass("com.example.project.ClassUnderTest")
-					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest")
+
+					println "PRODCLASS: " + ReflectionUtils.loadClass("com.example.project.ClassUnderTest", testClassLoader)
+					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest", testClassLoader)
 
 					launcher.execute(specification)
 
