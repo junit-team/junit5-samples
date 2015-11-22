@@ -1,8 +1,11 @@
 package org.junit.gen5.gradle
 
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-
+import org.junit.gen5.commons.util.ReflectionUtils
+import org.junit.gen5.engine.AllTestsSpecification
+import org.junit.gen5.engine.TestPlanSpecification
 import org.junit.gen5.launcher.listeners.*
 import org.junit.gen5.launcher.*
 
@@ -38,18 +41,42 @@ class JUnit5Plugin implements Plugin<Project> {
 				task.dependsOn project.tasks.getByName('testClasses')
 
 				doLast {
+					def launcher = new Launcher();
+
 					def summary = new TestExecutionSummary();
 					def listener = new SummaryCreatingTestListener(summary);
 
-					def roots = classpathRoots.findAll { file -> file.isDirectory() && file.exists() }
+					launcher.registerTestPlanExecutionListeners(listener)
+
+					Set<File> roots = classpathRoots.findAll { file -> file.isDirectory() && file.exists() }
+
+					println "ROOTS: " + roots[0].list()
+
 					def specification = TestPlanSpecification.build(TestPlanSpecification.allTests(roots))
+
+					specification.each { AllTestsSpecification spec ->
+						println "SPEC: " + it
+						def classes = ReflectionUtils.findAllClassesInClasspathRoot(spec.classpathRoot) { true }
+						println "CLASSES: " + classes
+					}
+
+					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest")
+
+					launcher.execute(specification)
+
+					def stderr = new PrintWriter(System.err);
+					def stdout = new PrintWriter(System.out);
+					summary.printFailuresOn(stderr)
+					summary.printOn(stdout)
 
 					reportsDir.mkdirs()
 					testReport.withPrintWriter {writer ->
 						summary.printFailuresOn(writer)
 						summary.printOn(writer)
 					}
-					//throw new GradleException('tests failed')
+
+					if(summary.countFailedTests() != 0)
+						throw new GradleException("tests failed: ${summary.countFailedTests()}")
 				}
 			}
 		}
