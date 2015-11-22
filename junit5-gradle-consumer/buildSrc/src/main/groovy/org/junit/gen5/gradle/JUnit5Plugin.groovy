@@ -4,13 +4,10 @@ import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.junit.gen5.commons.util.ReflectionUtils
-import org.junit.gen5.engine.AllTestsSpecification
-import org.junit.gen5.engine.EngineDescriptor
-import org.junit.gen5.engine.ExecutionRequest
-import org.junit.gen5.engine.TestEngine
 import org.junit.gen5.engine.TestPlanSpecification
-import org.junit.gen5.launcher.listeners.*
-import org.junit.gen5.launcher.*
+import org.junit.gen5.launcher.Launcher
+import org.junit.gen5.launcher.listeners.SummaryCreatingTestListener
+import org.junit.gen5.launcher.listeners.TestExecutionSummary
 
 class JUnit5Plugin implements Plugin<Project> {
 	void apply(Project project) {
@@ -35,7 +32,11 @@ class JUnit5Plugin implements Plugin<Project> {
 				def classpathRoots = project.sourceSets.test.runtimeClasspath.files
 
 				classpathRoots.each { file ->
-					task.inputs.file(file)
+					if (file.isDirectory()) {
+						task.inputs.dir(file)
+					} else {
+						task.inputs.file(file)
+					}
 				}
 				task.outputs.file testReport
 
@@ -44,10 +45,7 @@ class JUnit5Plugin implements Plugin<Project> {
 				task.dependsOn project.tasks.getByName('testClasses')
 
 				doLast {
-					URL[] classpathUrls = classpathRoots.collect{it.toURL()}.toArray()
-					classpathUrls.each {
-						println "URL: " + it
-					}
+					URL[] classpathUrls = classpathRoots.collect { it.toURL() }.toArray()
 
 					def testClassLoader = new URLClassLoader(classpathUrls, ReflectionUtils.getDefaultClassLoader())
 					ReflectionUtils.setDefaultClassLoader(testClassLoader)
@@ -60,40 +58,11 @@ class JUnit5Plugin implements Plugin<Project> {
 					launcher.registerTestPlanExecutionListeners(listener)
 
 					Set<File> roots = classpathRoots.findAll { file -> file.isDirectory() && file.exists() }
-
-					roots.each {
-						println "ROOT: " + it.toString()
-
-					}
-
 					def specification = TestPlanSpecification.build(TestPlanSpecification.allTests(roots))
 
-					specification.each { AllTestsSpecification spec ->
-						println "SPEC: " + spec
-						def classes = ReflectionUtils.findAllClassesInClasspathRoot(spec.classpathRoot) { true }
-						println "ALL CLASSES: " + classes
-					}
+					def testplan = launcher.discover(specification)
 
-
-					println "PRODCLASS: " + ReflectionUtils.loadClass("com.example.project.ClassUnderTest")
-					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest")
-
-//					def testEngines = ServiceLoader.load(TestEngine.class, ReflectionUtils.getDefaultClassLoader());
-					def testEngines = launcher.getAvailableEngines();
-					testEngines.each {
-						println "ENGINE: " + it.id
-					}
-
-					//def testPlan = launcher.discover(specification)
-
-					testEngines.each {engine ->
-						EngineDescriptor engineDescriptor = new EngineDescriptor(engine)
-						engine.discoverTests(specification, engineDescriptor)
-						println "TESTPLAN: " + engineDescriptor.children
-						def request = new ExecutionRequest(engineDescriptor, listener)
-						engine.execute(request);
-					}
-
+					launcher.execute(testplan);
 
 					def stderr = new PrintWriter(System.err);
 					def stdout = new PrintWriter(System.out);
@@ -101,13 +70,13 @@ class JUnit5Plugin implements Plugin<Project> {
 					summary.printOn(stdout)
 
 					reportsDir.mkdirs()
-					testReport.withPrintWriter {writer ->
+					testReport.withPrintWriter { writer ->
 						summary.printFailuresOn(writer)
 						summary.printOn(writer)
 					}
 
-					if(summary.countFailedTests() != 0)
-						throw new GradleException("tests failed: ${summary.countFailedTests()}")
+					if (summary.countFailedTests() != 0)
+						throw new GradleException("JUnit5 Tests Failed: ${summary.countFailedTests()}")
 				}
 			}
 		}
