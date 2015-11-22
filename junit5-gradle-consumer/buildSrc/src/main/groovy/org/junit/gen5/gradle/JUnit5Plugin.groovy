@@ -27,7 +27,7 @@ class JUnit5Plugin implements Plugin<Project> {
 			def reportsDir = new File("build/test-results")
 			def testReport = new File(reportsDir, "junit5-report.txt")
 
-			project.task('junit5Test', group: 'verification') { task -> //}, type: org.gradle.api.tasks.JavaExec, overwrite: true) { task ->
+			project.task('junit5Test', group: 'verification') { task ->
 
 				def classpathRoots = project.sourceSets.test.runtimeClasspath.files
 
@@ -60,6 +60,7 @@ class JUnit5Plugin implements Plugin<Project> {
 						println "CLASSES: " + classes
 					}
 
+					println "PRODCLASS: " + ReflectionUtils.loadClass("com.example.project.ClassUnderTest")
 					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest")
 
 					launcher.execute(specification)
