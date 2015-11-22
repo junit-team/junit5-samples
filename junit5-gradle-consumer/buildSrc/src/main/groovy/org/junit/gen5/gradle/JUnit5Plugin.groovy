@@ -5,6 +5,9 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.junit.gen5.commons.util.ReflectionUtils
 import org.junit.gen5.engine.AllTestsSpecification
+import org.junit.gen5.engine.EngineDescriptor
+import org.junit.gen5.engine.ExecutionRequest
+import org.junit.gen5.engine.TestEngine
 import org.junit.gen5.engine.TestPlanSpecification
 import org.junit.gen5.launcher.listeners.*
 import org.junit.gen5.launcher.*
@@ -66,7 +69,7 @@ class JUnit5Plugin implements Plugin<Project> {
 					def specification = TestPlanSpecification.build(TestPlanSpecification.allTests(roots))
 
 					specification.each { AllTestsSpecification spec ->
-						println "SPEC: " + it
+						println "SPEC: " + spec
 						def classes = ReflectionUtils.findAllClassesInClasspathRoot(spec.classpathRoot) { true }
 						println "ALL CLASSES: " + classes
 					}
@@ -75,7 +78,22 @@ class JUnit5Plugin implements Plugin<Project> {
 					println "PRODCLASS: " + ReflectionUtils.loadClass("com.example.project.ClassUnderTest")
 					println "TESTCLASS: " + ReflectionUtils.loadClass("com.example.project.FirstTest")
 
-					launcher.execute(specification)
+//					def testEngines = ServiceLoader.load(TestEngine.class, ReflectionUtils.getDefaultClassLoader());
+					def testEngines = launcher.getAvailableEngines();
+					testEngines.each {
+						println "ENGINE: " + it.id
+					}
+
+					//def testPlan = launcher.discover(specification)
+
+					testEngines.each {engine ->
+						EngineDescriptor engineDescriptor = new EngineDescriptor(engine)
+						engine.discoverTests(specification, engineDescriptor)
+						println "TESTPLAN: " + engineDescriptor.children
+						def request = new ExecutionRequest(engineDescriptor, listener)
+						engine.execute(request);
+					}
+
 
 					def stderr = new PrintWriter(System.err);
 					def stdout = new PrintWriter(System.out);
