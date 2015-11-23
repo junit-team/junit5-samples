@@ -4,5 +4,14 @@ class JUnit5Extension {
 	String version
 	boolean runJunit4
 	String classNameFilter
-	List<String> includeTags
+	List includeTags = []
+
+	void includeTag(tag) {
+		includeTags.add tag
+	}
+
+	void matchClassName(regex) {
+		classNameFilter = regex
+	}
+
 }

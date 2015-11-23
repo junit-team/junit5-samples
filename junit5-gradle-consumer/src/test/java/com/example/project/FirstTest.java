@@ -4,9 +4,11 @@ package com.example.project;
 import static org.junit.gen5.api.Assertions.assertEquals;
 
 import org.junit.gen5.api.Name;
+import org.junit.gen5.api.Tag;
 import org.junit.gen5.api.Test;
 import org.junit.gen5.api.TestName;
 
+@Tag("fast")
 class FirstTest {
 
 	@Test

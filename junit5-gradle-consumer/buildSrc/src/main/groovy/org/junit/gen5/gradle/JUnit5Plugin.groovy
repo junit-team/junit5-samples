@@ -23,20 +23,16 @@ class JUnit5Plugin implements Plugin<Project> {
 
 			project.task('junit5Test', group: 'verification', type: org.gradle.api.tasks.JavaExec) { task ->
 
-				task.outputs.file testReport
-
 				task.description = 'Runs JUnit 5 tests.'
 
-				task.dependsOn project.tasks.getByName('testClasses')
+				task.outputs.file testReport
+
+				defineTaskDependencies(project, task, junit5)
 
 				task.classpath = project.sourceSets.test.runtimeClasspath
 				task.main = 'org.junit.gen5.console.ConsoleRunner'
 
-
-
-				List args = buildArgs(project, junit5)
-
-				task.args args
+				task.args buildArgs(project, junit5)
 
 				doLast {
 
@@ -50,6 +46,18 @@ class JUnit5Plugin implements Plugin<Project> {
 		}
 	}
 
+	private void defineTaskDependencies(project, task, junit5) {
+		def check = project.tasks.getByName('check')
+		def test = project.tasks.getByName('test')
+		def testClasses = project.tasks.getByName('testClasses')
+
+		task.dependsOn testClasses
+		check.dependsOn task
+		if (junit5.runJunit4) {
+			check.dependsOn.remove(test)
+		}
+	}
+
 	private ArrayList<String> buildArgs(project, junit5) {
 
 		def args = ['--enable-exit-code', '--hide-details', '--all']
@@ -59,12 +67,9 @@ class JUnit5Plugin implements Plugin<Project> {
 			args.add(junit5.classNameFilter)
 		}
 
-		//Does not work yet
-		if (junit5.includeTags) {
-			junit5.includeTags.each { tag ->
-				args.add('-t')
-				args.add(tag)
-			}
+		junit5.includeTags.each { String tag ->
+			args.add('-t')
+			args.add(tag)
 		}
 
 		def classpathRoots = project.sourceSets.test.runtimeClasspath.files
