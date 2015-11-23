@@ -6,9 +6,6 @@ repositories {
 ext.junit5Version = '5.0.0-SNAPSHOT'
 
 dependencies {
-	compile 'com.cloudbees:cloudbees-api-client:1.4.0'
-	compile "org.junit.prototype:junit-console:${junit5Version}"
-	compile "org.junit.prototype:junit-launcher:${junit5Version}"
 	compile localGroovy()
 	//	testCompile 'org.spockframework:spock-core:0.6-groovy-1.8'
 }

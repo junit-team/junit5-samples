@@ -1,13 +1,7 @@
 package org.junit.gen5.gradle
 
-import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.junit.gen5.commons.util.ReflectionUtils
-import org.junit.gen5.engine.TestPlanSpecification
-import org.junit.gen5.launcher.Launcher
-import org.junit.gen5.launcher.listeners.SummaryCreatingTestListener
-import org.junit.gen5.launcher.listeners.TestExecutionSummary
 
 class JUnit5Plugin implements Plugin<Project> {
 	void apply(Project project) {
@@ -27,59 +21,57 @@ class JUnit5Plugin implements Plugin<Project> {
 			def reportsDir = new File("build/test-results")
 			def testReport = new File(reportsDir, "junit5-report.txt")
 
-			project.task('junit5Test', group: 'verification') { task ->
+			project.task('junit5Test', group: 'verification', type: org.gradle.api.tasks.JavaExec) { task ->
 
-				def classpathRoots = project.sourceSets.test.runtimeClasspath.files
-
-				classpathRoots.each { file ->
-					if (file.isDirectory()) {
-						task.inputs.dir(file)
-					} else {
-						task.inputs.file(file)
-					}
-				}
 				task.outputs.file testReport
 
 				task.description = 'Runs JUnit 5 tests.'
 
 				task.dependsOn project.tasks.getByName('testClasses')
 
+				task.classpath = project.sourceSets.test.runtimeClasspath
+				task.main = 'org.junit.gen5.console.ConsoleRunner'
+
+
+
+				List args = buildArgs(project, junit5)
+
+				task.args args
+
 				doLast {
-					URL[] classpathUrls = classpathRoots.collect { it.toURL() }.toArray()
-
-					def testClassLoader = new URLClassLoader(classpathUrls, ReflectionUtils.getDefaultClassLoader())
-					ReflectionUtils.setDefaultClassLoader(testClassLoader)
-
-					Launcher launcher = new Launcher()
-
-					def summary = new TestExecutionSummary();
-					def listener = new SummaryCreatingTestListener(summary);
-
-					launcher.registerTestPlanExecutionListeners(listener)
-
-					Set<File> roots = classpathRoots.findAll { file -> file.isDirectory() && file.exists() }
-					def specification = TestPlanSpecification.build(TestPlanSpecification.allTests(roots))
-
-					def testplan = launcher.discover(specification)
-
-					launcher.execute(testplan);
-
-					def stderr = new PrintWriter(System.err);
-					def stdout = new PrintWriter(System.out);
-					summary.printFailuresOn(stderr)
-					summary.printOn(stdout)
 
 					reportsDir.mkdirs()
 					testReport.withPrintWriter { writer ->
-						summary.printFailuresOn(writer)
-						summary.printOn(writer)
+						writer.println "JUnit 5 tests run at " + new Date().toString()
 					}
 
-					if (summary.countFailedTests() != 0)
-						throw new GradleException("JUnit5 Tests Failed: ${summary.countFailedTests()}")
 				}
 			}
 		}
+	}
+
+	private ArrayList<String> buildArgs(project, junit5) {
+
+		def args = ['--enable-exit-code', '--hide-details', '--all']
+
+		if (junit5.classNameFilter) {
+			args.add('-n')
+			args.add(junit5.classNameFilter)
+		}
+
+		//Does not work yet
+		if (junit5.includeTags) {
+			junit5.includeTags.each { tag ->
+				args.add('-t')
+				args.add(tag)
+			}
+		}
+
+		def classpathRoots = project.sourceSets.test.runtimeClasspath.files
+		def rootDirs = classpathRoots.findAll { it.isDirectory() && it.exists() }
+		rootDirs.each { File root -> args.add(root.getAbsolutePath()) }
+
+		return args
 	}
 }
 
