@@ -10,8 +10,8 @@ class JUnit5Plugin implements Plugin<Project> {
 		project.afterEvaluate {
 
 			def junit5Version = junit5.version
-			project.dependencies.add("testCompile", "org.junit.prototype:junit5-api:${junit5Version}")
 			project.dependencies.add("testRuntime", "org.junit.prototype:junit-console:${junit5Version}")
+			project.dependencies.add("testCompile", "org.junit.prototype:junit5-api:${junit5Version}")
 			project.dependencies.add("testRuntime", "org.junit.prototype:junit5-engine:${junit5Version}")
 
 			if (junit5.runJunit4) {
@@ -25,6 +25,10 @@ class JUnit5Plugin implements Plugin<Project> {
 
 				task.description = 'Runs JUnit 5 tests.'
 
+				task.inputs.property('version', junit5.version)
+				task.inputs.property('runJunit4', junit5.runJunit4)
+				task.inputs.property('classNameFilter', junit5.classNameFilter)
+				task.inputs.property('includeTags', junit5.includeTags)
 				task.outputs.file testReport
 
 				defineTaskDependencies(project, task, junit5)
