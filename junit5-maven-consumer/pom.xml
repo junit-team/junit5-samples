@@ -39,7 +39,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
@@ -48,28 +47,15 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.4.0</version>
-				<executions>
-					<execution>
-						<phase>test</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>java</executable>
-							<arguments>
-								<argument>-classpath</argument>
-								<classpath />
-								<argument>org.junit.gen5.console.ConsoleRunner</argument>
-								<argument>--enable-exit-code</argument>
-								<argument>com.example.project</argument>
-							</arguments>
-							<classpathScope>test</classpathScope>
-						</configuration>
-					</execution>
-				</executions>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.prototype</groupId>
+						<artifactId>surefire-junit5</artifactId>
+						<version>${junit.gen5.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
@@ -78,18 +64,6 @@
 		<dependency>
 			<groupId>org.junit.prototype</groupId>
 			<artifactId>junit5-api</artifactId>
-			<version>${junit.gen5.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.prototype</groupId>
-			<artifactId>junit-console</artifactId>
-			<version>${junit.gen5.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.prototype</groupId>
-			<artifactId>junit5-engine</artifactId>
 			<version>${junit.gen5.version}</version>
 			<scope>test</scope>
 		</dependency>
