@@ -7,7 +7,7 @@ the JUnit 5 prototype using Gradle with the help of a very basic `JUnit5Plugin`.
 
 To use the `JUnit5Plugin`, you first need to configure `build.gradle` as follows.
 
-```
+```groovy
 buildscript {
 	repositories {
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
@@ -24,7 +24,7 @@ apply plugin: 'org.junit.gen5.gradle'
 
 Once the `JUnit5Plugin` has been applied, you can configure it as follows.
 
-```
+```groovy
 junit5 {
 	version '5.0.0-SNAPSHOT'
 	runJunit4 true
@@ -38,7 +38,7 @@ Setting `runJunit4` to `true` instructs the `JUnit5Plugin` to run JUnit 4
 based tests as well. However, you will still need to configure a
 `testCompile` dependency on JUnit 4 in your project similar to the following.
 
-```
+```groovy
 dependencies {
 	testCompile('junit:junit:4.12')
 }
