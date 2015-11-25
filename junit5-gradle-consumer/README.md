@@ -1,58 +1,90 @@
 # junit5-gradle-consumer
 
 The `junit5-gradle-consumer` project demonstrates how to run tests based on
-the JUnit 5 prototype using Gradle with the help of a very basic `JUnit5Plugin`
-that is currently inlined in the `build.gradle` script.
+the JUnit 5 prototype using Gradle with the help of a very basic `JUnit5Plugin`.
+
+## Enabling the `JUnit5Plugin`
+
+To use the `JUnit5Plugin`, you first need to configure `build.gradle` as follows.
+
+```
+buildscript {
+	repositories {
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	}
+	dependencies {
+		classpath 'org.junit.prototype:junit-gradle:5.0.0-SNAPSHOT'
+	}
+}
+
+apply plugin: 'org.junit.gen5.gradle'
+```
+
+## Configuring the `JUnit5Plugin`
+
+Once the `JUnit5Plugin` has been applied, you can configure it as follows.
+
+```
+junit5 {
+	version '5.0.0-SNAPSHOT'
+	runJunit4 true
+	matchClassName '.*Test'
+	// includeTag 'fast'
+}
+
+```
+
+Setting `runJunit4` to `true` instructs the `JUnit5Plugin` to run JUnit 4
+based tests as well. However, you will still need to configure a
+`testCompile` dependency on JUnit 4 in your project similar to the following.
+
+```
+dependencies {
+	testCompile('junit:junit:4.12')
+}
+```
+
+If you supply one or more _tags_ to the `includeTag` configuration method,
+the `JUnit5Plugin` will only run JUnit 5 based tests that are _tagged_
+accordingly via the `@Tag` annotation. For example, the `FirstTest` class
+in this project is annotated with `@Tag("fast")`.
 
 ## Executing JUnit 5 Tests
 
-Invoking `gradlew clean test` from the command line will execute all tests in
-the `com.example.project` package and its subpackages as well as the
-`com.example.project.AJUnit4Test` JUnit 4 based test, resulting in output
-similar to the following:
+Once the `JUnit5Plugin` has been applied and configured, you have a new
+`junit5Test` task at your disposal.
+
+Invoking `gradlew clean junit5Test` (or `gradlew clean check`) from the
+command line will execute all tests within the project whose class names
+match the pattern `.*Test`. This will result in output similar to the
+following:
 
 ```
-Test execution started. Number of static tests: 3
-Engine started: junit5
-Test started:     My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myFirstTest(java.lang.String)]
-Test succeeded:   My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myFirstTest(java.lang.String)]
-Test skipped:     mySecondTest [junit5:com.example.project.SecondTest#mySecondTest()]
-                  => Exception:   Skipping test method [void com.example.project.SecondTest.mySecondTest()]; reason: @Disabled is present on test method [void com.example.project.SecondTest.mySecondTest()]
-Engine finished: junit5
-Engine started: junit4
-Test started:     myJunit4Test(com.example.project.AJUnit4Test) [junit4:myJunit4Test(com.example.project.AJUnit4Test)]
-Test succeeded:   myJunit4Test(com.example.project.AJUnit4Test) [junit4:myJunit4Test(com.example.project.AJUnit4Test)]
-Engine finished: junit4
-Test execution finished.
+:junit5Test
 
-Test run finished after 52 ms
+Test run finished after 50 ms
 [         3 tests found     ]
 [         2 tests started   ]
 [         1 tests skipped   ]
 [         0 tests aborted   ]
 [         2 tests successful]
 [         0 tests failed    ]
+
+BUILD SUCCESSFUL
 ```
 
 If you comment out the `@Disabled` annotation on `SecondTest#mySecondTest()`, you
 will then see the build fail with output similar to the following:
 
 ```
-Test execution started. Number of static tests: 3
-Engine started: junit5
-Test started:     My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myFirstTest(java.lang.String)]
-Test succeeded:   My 1st JUnit 5 test! 😎 [junit5:com.example.project.FirstTest#myFirstTest(java.lang.String)]
-Test started:     mySecondTest [junit5:com.example.project.SecondTest#mySecondTest()]
-Test failed:      mySecondTest [junit5:com.example.project.SecondTest#mySecondTest()]
-                  => Exception:   2 is not equal to 1 ==> expected:<2> but was:<1>
-Engine finished: junit5
-Engine started: junit4
-Test started:     myJunit4Test(com.example.project.AJUnit4Test) [junit4:myJunit4Test(com.example.project.AJUnit4Test)]
-Test succeeded:   myJunit4Test(com.example.project.AJUnit4Test) [junit4:myJunit4Test(com.example.project.AJUnit4Test)]
-Engine finished: junit4
-Test execution finished.
+:junit5Test
 
-Test run finished after 48 ms
+Test failures (1):
+  junit5:com.example.project.SecondTest:mySecondTest
+    com.example.project.SecondTest#mySecondTest
+    => Exception: 2 is not equal to 1 ==> expected:<2> but was:<1>
+
+Test run finished after 50 ms
 [         3 tests found     ]
 [         3 tests started   ]
 [         0 tests skipped   ]
@@ -60,18 +92,23 @@ Test run finished after 48 ms
 [         2 tests successful]
 [         1 tests failed    ]
 
-:test FAILED
+:junit5Test FAILED
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':test'.
-> Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
+Execution failed for task ':junit5Test'.
+> Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
 ```
 
 **Note**: the _exit value_ corresponds to the number of _tests failed_.
 
 ### Current Limitations
 
-- The `JUnit5Plugin` task currently only executes tests in the `com.example.project` package and its subpackages.
-- Even though the build will fail if a test fails, the results will not be included in the test report generated by Gradle.
+- Even though the build will fail if a test fails, the results will not
+  be included in the test report generated by Gradle.
+- With `runJunit4` set to `true`, the `JUnit5Plugin` takes over the
+  responsibility of running JUnit 4 tests, and the `check` Gradle task
+  will no longer depend on the Gradle `test` task. Consequently, the
+  results for JUnit 4 tests will not be included in the test report
+  generated by Gradle.
