@@ -44,10 +44,9 @@ dependencies {
 }
 ```
 
-If you supply one or more _tags_ to the `includeTag` configuration method,
-the `JUnit5Plugin` will only run JUnit 5 based tests that are _tagged_
-accordingly via the `@Tag` annotation. For example, the `FirstTest` class
-in this project is annotated with `@Tag("fast")`.
+If you supply a _tag_ to the `includeTag` configuration method, the `JUnit5Plugin`
+will only run JUnit 5 based tests that are _tagged_ accordingly via the `@Tag`
+annotation.
 
 ## Executing JUnit 5 Tests
 
