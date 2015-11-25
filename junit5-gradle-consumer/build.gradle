@@ -1,14 +1,9 @@
 buildscript {
 	repositories {
-		maven {
-			url 'https://oss.sonatype.org/content/repositories/snapshots'
-		}
-		maven {
-			url 'https://plugins.gradle.org/m2/'
-		}
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath "org.junit.prototype:junit-gradle:5.0.0-SNAPSHOT"
+		classpath 'org.junit.prototype:junit-gradle:5.0.0-SNAPSHOT'
 	}
 }
 
@@ -28,9 +23,8 @@ junit5 {
 	version '5.0.0-SNAPSHOT'
 	runJunit4 true
 	matchClassName '.*Test'
-//	includeTag "fast"
+	// includeTag 'fast'
 }
-
 
 repositories {
 	mavenCentral()
@@ -52,7 +46,6 @@ configurations.all {
 	// Do NOT cache JUnit 5 snapshot JARs.
 	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
-
 
 eclipse {
 	classpath {
