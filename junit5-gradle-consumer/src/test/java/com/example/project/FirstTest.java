@@ -14,8 +14,8 @@ class FirstTest {
 	@Test
 	@Name("My 1st JUnit 5 test! 😎")
 	void myFirstTest(@TestName String testName) {
-		ClassUnderTest out = new ClassUnderTest();
-		assertEquals(2, out.add(1, 1), "1 + 1 should equal 2");
+		Calculator calculator = new Calculator();
+		assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2");
 		assertEquals("My 1st JUnit 5 test! 😎", testName, () -> "testName is injected correctly");
 	}
 
