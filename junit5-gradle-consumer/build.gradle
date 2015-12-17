@@ -3,7 +3,7 @@ buildscript {
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit.prototype:junit-gradle:5.0.0-SNAPSHOT'
+		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
 	}
 }
 
@@ -21,7 +21,7 @@ ext.junit4Version = '4.12'
 
 junit5 {
 	version '5.0.0-SNAPSHOT'
-	runJunit4 true
+	runJunit4 false //Does not work yet in master
 	matchClassName '.*Test'
 	// includeTag 'fast'
 }
