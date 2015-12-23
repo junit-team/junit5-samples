@@ -24,6 +24,7 @@ junit5 {
 	runJunit4 false //Does not work yet in master
 	matchClassName '.*Test'
 	// includeTag 'fast'
+	excludeTag 'slow'
 }
 
 repositories {
