@@ -1,7 +1,7 @@
 # junit5-gradle-consumer
 
 The `junit5-gradle-consumer` project demonstrates how to run tests based on
-the JUnit 5 prototype using Gradle with the help of a very basic `JUnit5Plugin`.
+the current JUnit 5 Alpha using Gradle with the help of a very basic `JUnit5Plugin`.
 
 ## Enabling the `JUnit5Plugin`
 
@@ -13,7 +13,7 @@ buildscript {
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit.prototype:junit-gradle:5.0.0-SNAPSHOT'
+		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
 	}
 }
 
