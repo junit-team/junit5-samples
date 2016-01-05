@@ -1,6 +1,6 @@
 # junit5-maven-consumer
 
-The `junit5-maven-consumer` project demonstrates how to execute tests based on the JUnit 5 prototype using Maven. In addition, it showcases that existing JUnit 4 can be executed in the same run.
+The `junit5-maven-consumer` project demonstrates how to execute tests based on the JUnit 5 alpha version using Maven. In addition, it showcases that existing JUnit 4 can be executed in the same run.
 
 ## Executing JUnit 4 and JUnit 5 Tests
 

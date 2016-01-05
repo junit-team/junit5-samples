@@ -51,7 +51,7 @@
 				<version>2.19</version>
 				<dependencies>
 					<dependency>
-						<groupId>org.junit.prototype</groupId>
+						<groupId>org.junit</groupId>
 						<artifactId>surefire-junit5</artifactId>
 						<version>${junit.gen5.version}</version>
 					</dependency>
@@ -62,7 +62,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.junit.prototype</groupId>
+			<groupId>org.junit</groupId>
 			<artifactId>junit5-api</artifactId>
 			<version>${junit.gen5.version}</version>
 			<scope>test</scope>
