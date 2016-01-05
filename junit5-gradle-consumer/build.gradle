@@ -21,7 +21,7 @@ ext.junit4Version = '4.12'
 
 junit5 {
 	version '5.0.0-SNAPSHOT'
-	runJunit4 false //Does not work yet in master
+	runJunit4 true
 	matchClassName '.*Test'
 	// reportFile file('build/test-results/junit5-report.txt') // this is the default
 	// includeTag 'fast'
