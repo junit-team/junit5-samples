@@ -18,12 +18,14 @@ jar {
 }
 
 ext.junit4Version = '4.12'
+ext.log4JVersion  = '2.5'
 
 junit5 {
 	version '5.0.0-SNAPSHOT'
 	runJunit4 true
 	matchClassName '.*Test'
 	// reportFile file('build/test-results/junit5-report.txt') // this is the default
+	logManager 'org.apache.logging.log4j.jul.LogManager'
 	// includeTag 'fast'
 	excludeTag 'slow'
 }
@@ -42,6 +44,9 @@ compileTestJava {
 dependencies {
 	// If you also want JUnit4 tests
 	testCompile("junit:junit:${junit4Version}")
+
+	testRuntime("org.apache.logging.log4j:log4j-core:${log4JVersion}")
+	testRuntime("org.apache.logging.log4j:log4j-jul:${log4JVersion}")
 }
 
 configurations.all {
