@@ -1,0 +1,1 @@
+A simple JUnit 5 extension to integrate Mockito into JUnit 5 tests somewhat simpler.

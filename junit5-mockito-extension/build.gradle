@@ -1,0 +1,58 @@
+buildscript {
+	repositories {
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	}
+	dependencies {
+		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.junit.gen5.gradle'
+
+jar {
+	baseName = 'junit5-mockito-extension'
+	version = '1.0.0-SNAPSHOT'
+}
+
+junit5 {
+	version '5.0.0-SNAPSHOT'
+	runJunit4 false
+	matchClassName '.*Tests?'
+	// reportFile file('build/test-results/junit5-report.txt') // this is the default
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+compileTestJava {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	options.compilerArgs += '-parameters'
+}
+
+dependencies {
+	//Needed as compile since we're building a junit5 extension here
+	compile "org.mockito:mockito-core:1.+"
+	compile "org.junit:junit5-api:5.0.0-SNAPSHOT"
+}
+
+configurations.all {
+	// Do NOT cache JUnit 5 snapshot JARs.
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+eclipse {
+	classpath {
+		containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+	}
+}
+
+task wrapper(type: Wrapper) {
+	distributionUrl = 'https://services.gradle.org/distributions/gradle-2.9-all.zip'
+}
