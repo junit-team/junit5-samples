@@ -24,7 +24,7 @@ junit5 {
 	version '5.0.0-SNAPSHOT'
 	runJunit4 true
 	matchClassName '.*Test'
-	// reportFile file('build/test-results/junit5-report.txt') // this is the default
+	reportsDir file('build/test-results/junit5/') // this is the default
 	logManager 'org.apache.logging.log4j.jul.LogManager'
 	// includeTag 'fast'
 	excludeTag 'slow'
