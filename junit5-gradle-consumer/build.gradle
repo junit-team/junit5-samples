@@ -1,9 +1,9 @@
 buildscript {
 	repositories {
-		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
+		classpath 'org.junit:junit-gradle:5.0.0-ALPHA'
 	}
 }
 
@@ -21,7 +21,7 @@ ext.junit4Version = '4.12'
 ext.log4JVersion  = '2.5'
 
 junit5 {
-	version '5.0.0-SNAPSHOT'
+	version '5.0.0-ALPHA'
 	runJunit4 true
 	matchClassName '.*Test'
 	reportsDir file('build/test-results/junit5/') // this is the default
@@ -32,7 +32,6 @@ junit5 {
 
 repositories {
 	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 compileTestJava {
@@ -47,11 +46,6 @@ dependencies {
 
 	testRuntime("org.apache.logging.log4j:log4j-core:${log4JVersion}")
 	testRuntime("org.apache.logging.log4j:log4j-jul:${log4JVersion}")
-}
-
-configurations.all {
-	// Do NOT cache JUnit 5 snapshot JARs.
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
 eclipse {

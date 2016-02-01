@@ -10,10 +10,10 @@ To use the `JUnit5Plugin`, you first need to configure `build.gradle` as follows
 ```groovy
 buildscript {
 	repositories {
-		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
+		classpath 'org.junit:junit-gradle:5.0.0-ALPHA'
 	}
 }
 
@@ -26,10 +26,10 @@ Once the `JUnit5Plugin` has been applied, you can configure it as follows.
 
 ```groovy
 junit5 {
-	version '5.0.0-SNAPSHOT'
+	version '5.0.0-ALPHA'
 	runJunit4 true
 	matchClassName '.*Test'
-	// includeTag 'fast'
+	// requireTag 'fast'
 }
 
 ```
