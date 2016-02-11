@@ -16,8 +16,8 @@
 		<junit.gen5.surefire-provider.version>5.0.0-SNAPSHOT</junit.gen5.surefire-provider.version>
 	</properties>
 
-	<repositories>
-		<repository>
+	<pluginRepositories>
+		<pluginRepository>
 			<id>snapshots-repo</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 			<releases>
@@ -28,8 +28,8 @@
 				<updatePolicy>always</updatePolicy>
 				<enabled>true</enabled>
 			</snapshots>
-		</repository>
-	</repositories>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<build>
 		<plugins>
