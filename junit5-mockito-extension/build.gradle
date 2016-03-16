@@ -40,13 +40,6 @@ dependencies {
 	compile "org.junit:junit5-api:5.0.0-ALPHA"
 }
 
-eclipse {
-	classpath {
-		containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-		containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-	}
-}
-
 task wrapper(type: Wrapper) {
 	distributionUrl = 'https://services.gradle.org/distributions/gradle-2.12-all.zip'
 }
