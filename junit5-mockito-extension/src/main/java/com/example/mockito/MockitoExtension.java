@@ -34,26 +34,26 @@ import org.mockito.MockitoAnnotations;
  */
 public class MockitoExtension implements TestInstancePostProcessor, ParameterResolver {
 
-    private static final Namespace namespace = Namespace.of(MockitoExtension.class);
+	private static final Namespace namespace = Namespace.of(MockitoExtension.class);
 
-    @Override
-    public void postProcessTestInstance(Object testInstance, ExtensionContext context) {
-        MockitoAnnotations.initMocks(testInstance);
-    }
+	@Override
+	public void postProcessTestInstance(Object testInstance, ExtensionContext context) {
+		MockitoAnnotations.initMocks(testInstance);
+	}
 
-    @Override
-    public boolean supports(Parameter parameter, Optional<Object> target, ExtensionContext extensionContext) {
-        return parameter.isAnnotationPresent(InjectMock.class);
-    }
+	@Override
+	public boolean supports(Parameter parameter, Optional<Object> target, ExtensionContext extensionContext) {
+		return parameter.isAnnotationPresent(InjectMock.class);
+	}
 
-    @Override
-    public Object resolve(Parameter parameter, Optional<Object> target, ExtensionContext extensionContext) {
-        Store mocks = extensionContext.getStore(namespace);
-        return getMock(parameter.getType(), mocks);
-    }
+	@Override
+	public Object resolve(Parameter parameter, Optional<Object> target, ExtensionContext extensionContext) {
+		Store mocks = extensionContext.getStore(namespace);
+		return getMock(parameter.getType(), mocks);
+	}
 
-    private Object getMock(Class<?> mockType, Store mocks) {
-        return mocks.getOrComputeIfAbsent(mockType, type -> mock(mockType));
-    }
+	private Object getMock(Class<?> mockType, Store mocks) {
+		return mocks.getOrComputeIfAbsent(mockType, type -> mock(mockType));
+	}
 
 }
