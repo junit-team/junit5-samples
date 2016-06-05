@@ -1,6 +1,7 @@
 buildscript {
 	repositories {
 		mavenCentral()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
 		classpath 'org.junit:junit-gradle:5.0.0-ALPHA'
@@ -18,7 +19,7 @@ jar {
 }
 
 junit5 {
-	version '5.0.0-ALPHA'
+	version '5.0.0-SNAPSHOT'
 	runJunit4 false
 	matchClassName '.*Tests?'
 }
@@ -37,7 +38,7 @@ compileTestJava {
 dependencies {
 	//Needed as compile since we're building a junit5 extension here
 	compile "org.mockito:mockito-core:1.+"
-	compile "org.junit:junit5-api:5.0.0-ALPHA"
+	compile "org.junit:junit5-api:5.0.0-SNAPSHOT"
 }
 
 task wrapper(type: Wrapper) {

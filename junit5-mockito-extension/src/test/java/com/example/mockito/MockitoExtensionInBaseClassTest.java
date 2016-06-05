@@ -10,14 +10,14 @@
 
 package com.example.mockito;
 
-import static org.junit.gen5.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
 import org.junit.gen5.api.BeforeEach;
 import org.junit.gen5.api.Test;
 import org.junit.gen5.api.TestInfo;
 import org.junit.gen5.api.extension.ExtendWith;
 import org.mockito.Mock;
+
+import static org.junit.gen5.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * @see MockitoExtension
@@ -36,13 +36,13 @@ class MockitoExtensionInBaseClassTest {
 
 	@Test
 	void simpleTestWithInjectedMock(@InjectMock MyType myType) {
-		assertEquals("simpleTestWithInjectedMock", myType.getName());
+		assertEquals("simpleTestWithInjectedMock(MyType)", myType.getName());
 		assertEquals(42, numberGenerator.next());
 	}
 
 	@Test
 	void secondTestWithInjectedMock(@InjectMock MyType myType) {
-		assertEquals("secondTestWithInjectedMock", myType.getName());
+		assertEquals("secondTestWithInjectedMock(MyType)", myType.getName());
 		assertEquals(42, numberGenerator.next());
 	}
 
