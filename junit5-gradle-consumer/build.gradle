@@ -1,9 +1,10 @@
 buildscript {
 	repositories {
 		mavenCentral()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit:junit-gradle:5.0.0-ALPHA'
+		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
 	}
 }
 
@@ -21,7 +22,7 @@ ext.junit4Version = '4.12'
 ext.log4JVersion  = '2.5'
 
 junit5 {
-	version '5.0.0-ALPHA'
+	version '5.0.0-SNAPSHOT'
 	runJunit4 true
 	matchClassName '.*Test'
 	reportsDir file('build/test-results/junit5/') // this is the default
@@ -32,6 +33,7 @@ junit5 {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 compileTestJava {
