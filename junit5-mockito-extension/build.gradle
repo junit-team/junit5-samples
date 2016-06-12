@@ -42,5 +42,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-	distributionUrl = 'https://services.gradle.org/distributions/gradle-2.12-all.zip'
+	distributionUrl = 'https://services.gradle.org/distributions/gradle-2.13-all.zip'
 }
