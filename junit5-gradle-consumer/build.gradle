@@ -8,6 +8,15 @@ buildscript {
 	}
 }
 
+repositories {
+	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+ext.junit4Version = '4.12'
+ext.junit5Version = '5.0.0-SNAPSHOT'
+ext.log4JVersion  = '2.5'
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -18,35 +27,34 @@ jar {
 	version = '1.0.0-SNAPSHOT'
 }
 
-ext.junit4Version = '4.12'
-ext.log4JVersion  = '2.5'
-
-junit5 {
-	version '5.0.0-SNAPSHOT'
-	runJunit4 true
-	matchClassName '.*Test'
-	reportsDir file('build/test-results/junit5/') // this is the default
-	logManager 'org.apache.logging.log4j.jul.LogManager'
-	tags {
-		// include 'fast'
-		exclude 'slow'
-	}
-}
-
-repositories {
-	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-}
-
 compileTestJava {
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
 	options.compilerArgs += '-parameters'
 }
 
+junit5 {
+	version = junit5Version
+	engines {
+		include 'junit5', 'junit4'
+	}
+	tags {
+		// include 'fast'
+		exclude 'slow'
+	}
+	matchClassName '.*Test'
+	reportsDir file('build/test-results/junit5/') // this is the default
+	logManager 'org.apache.logging.log4j.jul.LogManager'
+}
+
 dependencies {
-	// If you also want JUnit4 tests
+	// JUnit 5 API and TestEngine implementation
+	testCompile("org.junit:junit5-api:${junit5Version}")
+	testRuntime("org.junit:junit5-engine:${junit5Version}")
+
+	// If you also want to support JUnit 3 and JUnit 4 tests
 	testCompile("junit:junit:${junit4Version}")
+	testRuntime("org.junit:junit4-engine:${junit5Version}")
 
 	testRuntime("org.apache.logging.log4j:log4j-core:${log4JVersion}")
 	testRuntime("org.apache.logging.log4j:log4j-jul:${log4JVersion}")

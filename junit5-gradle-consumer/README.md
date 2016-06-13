@@ -27,29 +27,54 @@ Once the JUnit Gradle plugin has been applied, you can configure it as follows.
 ```groovy
 junit5 {
 	version '5.0.0-SNAPSHOT'
-	runJunit4 true
 	matchClassName '.*Test'
+	engines {
+		// include 'junit5'
+		// exclude 'junit4'
+	}
 	tags {
 		// include 'fast'
 		// exclude 'slow'
 	}
 }
-
 ```
 
-Setting `runJunit4` to `true` instructs the JUnit Gradle plugin to run JUnit 4
-based tests as well. However, you will still need to configure a
-`testCompile` dependency on JUnit 4 in your project similar to the following.
+By default all engines and tags are included in the test plan.
+
+If you supply a _Test Engine ID_ via `engines {include ...}` or `engines {exclude ...}`,
+the JUnit Gradle plugin will only run tests for the desired test engines.
+
+If you supply a _tag_ via `tags {include ...}`, the JUnit Gradle plugin will only
+run tests that are _tagged_ accordingly (e.g., via the `@Tag` annotation for
+JUnit 5 based tests). Similarly, if you supply a _tag_ via `tags {exclude ...}`,
+the JUnit Gradle plugin will not run tests that are _tagged_ accordingly.
+
+## Configuring Test Engines
+
+In order to have the JUnit Gradle plugin run any tests at all, a TestEngine
+implementation must be on the classpath.
+
+To configure support for JUnit 5 based tests, configure a `testCompile` dependency
+on the JUnit 5 API and a `testRuntime` dependency on the JUnit 5 TestEngine
+implementation similar to the following.
 
 ```groovy
 dependencies {
-	testCompile('junit:junit:4.12')
+	testCompile("org.junit:junit5-api:5.0.0-SNAPSHOT")
+	testRuntime("org.junit:junit5-engine:5.0.0-SNAPSHOT")
 }
 ```
 
-If you supply a _tag_ via `tags {include ...}`, the JUnit Gradle plugin
-will only run JUnit 5 based tests that are _tagged_ accordingly via the `@Tag`
-annotation.
+The JUnit Gradle plugin can also run JUnit 4 based tests as long as you
+configure a `testCompile` dependency on JUnit 4 and a `testRuntime` dependency
+on the JUnit 4 TestEngine implementation similar to the following.
+
+```groovy
+dependencies {
+	testCompile("junit:junit:4.12")
+	testRuntime("org.junit:junit4-engine:5.0.0-SNAPSHOT")
+}
+```
 
 ## Executing JUnit 5 Tests
 

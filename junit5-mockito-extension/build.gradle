@@ -4,9 +4,16 @@ buildscript {
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit:junit-gradle:5.0.0-ALPHA'
+		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
 	}
 }
+
+repositories {
+	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+ext.junit5Version = '5.0.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -18,27 +25,26 @@ jar {
 	version = '1.0.0-SNAPSHOT'
 }
 
-junit5 {
-	version '5.0.0-SNAPSHOT'
-	runJunit4 false
-	matchClassName '.*Tests?'
-}
-
-repositories {
-	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-}
-
 compileTestJava {
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
 	options.compilerArgs += '-parameters'
 }
 
+junit5 {
+	version = junit5Version
+	engines {
+		include 'junit5'
+	}
+	matchClassName '.*Tests?'
+}
+
 dependencies {
-	//Needed as compile since we're building a junit5 extension here
-	compile "org.mockito:mockito-core:1.+"
-	compile "org.junit:junit5-api:5.0.0-SNAPSHOT"
+	// Needed as compile since we're building a JUnit 5 extension here
+	compile 'org.mockito:mockito-core:1.+'
+	compile "org.junit:junit5-api:${junit5Version}"
+
+	testRuntime "org.junit:junit5-engine:${junit5Version}"
 }
 
 task wrapper(type: Wrapper) {
