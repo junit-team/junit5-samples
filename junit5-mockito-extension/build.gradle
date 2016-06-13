@@ -44,9 +44,6 @@ dependencies {
 	compile "org.junit:junit5-api:${junit5Version}"
 
 	testRuntime "org.junit:junit5-engine:${junit5Version}"
-
-	// ConsoleRunner required by JUnit Gradle plugin
-	testRuntime("org.junit:junit-console:${junit5Version}")
 }
 
 task wrapper(type: Wrapper) {
