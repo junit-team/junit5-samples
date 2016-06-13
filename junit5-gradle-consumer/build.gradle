@@ -34,7 +34,6 @@ compileTestJava {
 }
 
 junit5 {
-	version = junit5Version
 	engines {
 		include 'junit5', 'junit4'
 	}
@@ -48,6 +47,9 @@ junit5 {
 }
 
 dependencies {
+	// ConsoleRunner required by JUnit Gradle plugin
+	testRuntime("org.junit:junit-console:${junit5Version}")
+
 	// JUnit 5 API and TestEngine implementation
 	testCompile("org.junit:junit5-api:${junit5Version}")
 	testRuntime("org.junit:junit5-engine:${junit5Version}")
