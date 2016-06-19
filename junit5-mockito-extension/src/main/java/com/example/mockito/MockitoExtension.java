@@ -23,7 +23,7 @@ import org.mockito.MockitoAnnotations;
 
 /**
  * {@code MockitoExtension} showcases the {@link TestInstancePostProcessor}
- * and {@link ParameterResolver} extension points of JUnit 5 by
+ * and {@link ParameterResolver} extension APIs of JUnit 5 by
  * providing dependency injection support at the field level via Mockito's
  * {@link Mock @Mock} annotation and at the method level via our demo
  * {@link InjectMock @InjectMock} annotation.
