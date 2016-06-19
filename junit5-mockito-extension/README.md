@@ -7,5 +7,6 @@ via Mockito's `@Mock` annotation and at the method level via the JUnit team's de
 
 See also:
 
+- [Mockito issue #390](https://github.com/mockito/mockito/issues/390)
 - [Mockito issue #438](https://github.com/mockito/mockito/issues/438)
 - [Mockito issue #445](https://github.com/mockito/mockito/issues/445)
