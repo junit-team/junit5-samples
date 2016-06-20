@@ -11,6 +11,8 @@
 package com.example.mockito;
 
 import static org.junit.gen5.api.Assertions.assertEquals;
+import static org.junit.gen5.api.Assertions.assertNotNull;
+import static org.junit.gen5.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import org.junit.gen5.api.BeforeEach;
@@ -44,6 +46,13 @@ class MockitoExtensionInBaseClassTest {
 	void secondTestWithInjectedMock(@InjectMock MyType myType) {
 		assertEquals("secondTestWithInjectedMock(MyType)", myType.getName());
 		assertEquals(42, numberGenerator.next());
+	}
+
+	@Test
+	void multipleInjectionsOfSameTypeTest(@InjectMock MyType myType1, @InjectMock MyType myType2) {
+		assertNotNull(myType1);
+		assertNotNull(myType2);
+		assertTrue(myType1 != myType2);
 	}
 
 }
