@@ -12,6 +12,8 @@ package com.example.mockito;
 
 import static org.mockito.Mockito.mock;
 
+import java.lang.reflect.Parameter;
+
 import org.junit.gen5.api.extension.ExtensionContext;
 import org.junit.gen5.api.extension.ExtensionContext.Namespace;
 import org.junit.gen5.api.extension.ExtensionContext.Store;
@@ -47,11 +49,14 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 	@Override
 	public Object resolve(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		Store mocks = extensionContext.getStore(namespace);
-		return getMock(parameterContext.getParameter().getType(), mocks);
+		return getMock(parameterContext.getParameter(), mocks);
 	}
 
-	private Object getMock(Class<?> mockType, Store mocks) {
-		return mocks.getOrComputeIfAbsent(mockType, type -> mock(mockType));
+	private Object getMock(Parameter parameter, Store mocks) {
+		Class<?> mockType = parameter.getType();
+		String mockName = parameter.getName();
+		String mockKey = mockType.getCanonicalName() + ":" + mockName;
+		return mocks.getOrComputeIfAbsent(mockKey, key -> mock(mockType));
 	}
 
 }
