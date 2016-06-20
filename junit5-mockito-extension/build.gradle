@@ -40,7 +40,7 @@ junit5 {
 
 dependencies {
 	// Needed as compile since we're building a JUnit 5 extension here
-	compile 'org.mockito:mockito-core:1.+'
+	compile 'org.mockito:mockito-core:2.+'
 	compile "org.junit:junit5-api:${junit5Version}"
 
 	testRuntime "org.junit:junit5-engine:${junit5Version}"

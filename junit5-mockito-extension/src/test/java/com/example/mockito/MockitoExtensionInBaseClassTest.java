@@ -11,6 +11,8 @@
 package com.example.mockito;
 
 import static org.junit.gen5.api.Assertions.assertEquals;
+import static org.junit.gen5.api.Assertions.assertNotNull;
+import static org.junit.gen5.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import org.junit.gen5.api.BeforeEach;
@@ -29,21 +31,35 @@ class MockitoExtensionInBaseClassTest {
 	private NumberGenerator numberGenerator;
 
 	@BeforeEach
-	void initialize(@InjectMock MyType myType, TestInfo testInfo) {
+	void initialize(@Mock MyType myType, TestInfo testInfo) {
 		when(myType.getName()).thenReturn(testInfo.getDisplayName());
 		when(numberGenerator.next()).thenReturn(42);
 	}
 
 	@Test
-	void firstTestWithInjectedMock(@InjectMock MyType myType) {
+	void firstTestWithInjectedMock(@Mock MyType myType) {
 		assertEquals("firstTestWithInjectedMock(MyType)", myType.getName());
 		assertEquals(42, numberGenerator.next());
 	}
 
 	@Test
-	void secondTestWithInjectedMock(@InjectMock MyType myType) {
+	void secondTestWithInjectedMock(@Mock MyType myType) {
 		assertEquals("secondTestWithInjectedMock(MyType)", myType.getName());
 		assertEquals(42, numberGenerator.next());
+	}
+
+	@Test
+	void multipleMockInjectionsOfSameTypeAreOneInstanceTest(@Mock MyType myType1, @Mock MyType myType2) {
+		assertNotNull(myType1);
+		assertNotNull(myType2);
+		assertTrue(myType1 == myType2);
+	}
+
+	@Test
+	void multipleNamedMockInjectionsOfSameTypeAreOneInstanceTest(@Mock(name = "1") MyType myType1, @Mock(name="2") MyType myType2) {
+		assertNotNull(myType1);
+		assertNotNull(myType2);
+		assertTrue(myType1 != myType2);
 	}
 
 }
