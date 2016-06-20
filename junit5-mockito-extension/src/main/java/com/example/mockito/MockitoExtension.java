@@ -43,7 +43,7 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 
 	@Override
 	public boolean supports(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return parameterContext.getParameter().isAnnotationPresent(InjectMock.class);
+		return parameterContext.getParameter().isAnnotationPresent(Mock.class);
 	}
 
 	@Override
@@ -54,8 +54,11 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 
 	private Object getMock(Parameter parameter, Store mocks) {
 		Class<?> mockType = parameter.getType();
-		String mockName = parameter.getName();
-		String mockKey = mockType.getCanonicalName() + ":" + mockName;
+		String mockName = parameter.getAnnotation(Mock.class).name();
+		String mockKey = mockType.getCanonicalName();
+		if (!"".equals(mockName)) {
+			mockKey += ":" + mockName;
+		}
 		return mocks.getOrComputeIfAbsent(mockKey, key -> mock(mockType));
 	}
 

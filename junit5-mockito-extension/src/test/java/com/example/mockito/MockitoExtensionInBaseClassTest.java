@@ -31,25 +31,32 @@ class MockitoExtensionInBaseClassTest {
 	private NumberGenerator numberGenerator;
 
 	@BeforeEach
-	void initialize(@InjectMock MyType myType, TestInfo testInfo) {
+	void initialize(@Mock MyType myType, TestInfo testInfo) {
 		when(myType.getName()).thenReturn(testInfo.getDisplayName());
 		when(numberGenerator.next()).thenReturn(42);
 	}
 
 	@Test
-	void firstTestWithInjectedMock(@InjectMock MyType myType) {
+	void firstTestWithInjectedMock(@Mock MyType myType) {
 		assertEquals("firstTestWithInjectedMock(MyType)", myType.getName());
 		assertEquals(42, numberGenerator.next());
 	}
 
 	@Test
-	void secondTestWithInjectedMock(@InjectMock MyType myType) {
+	void secondTestWithInjectedMock(@Mock MyType myType) {
 		assertEquals("secondTestWithInjectedMock(MyType)", myType.getName());
 		assertEquals(42, numberGenerator.next());
 	}
 
 	@Test
-	void multipleInjectionsOfSameTypeTest(@InjectMock MyType myType1, @InjectMock MyType myType2) {
+	void multipleMockInjectionsOfSameTypeAreOneInstanceTest(@Mock MyType myType1, @Mock MyType myType2) {
+		assertNotNull(myType1);
+		assertNotNull(myType2);
+		assertTrue(myType1 == myType2);
+	}
+
+	@Test
+	void multipleNamedMockInjectionsOfSameTypeAreOneInstanceTest(@Mock(name = "1") MyType myType1, @Mock(name="2") MyType myType2) {
 		assertNotNull(myType1);
 		assertNotNull(myType2);
 		assertTrue(myType1 != myType2);
