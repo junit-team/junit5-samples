@@ -14,11 +14,11 @@ buildscript {
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-SNAPSHOT'
 	}
 }
 
-apply plugin: 'org.junit.gen5.gradle'
+apply plugin: 'org.junit.platform.gradle.plugin'
 ```
 
 ## Configuring the JUnit Gradle Plugin
@@ -26,19 +26,20 @@ apply plugin: 'org.junit.gen5.gradle'
 Once the JUnit Gradle plugin has been applied, you can configure it as follows.
 
 ```groovy
-junit5 {
-	version '5.0.0-SNAPSHOT'
-	matchClassName '.*Test'
+junitPlatform {
+	// platformVersion '1.0.0-SNAPSHOT'
 	engines {
-		// include 'junit5'
-		// exclude 'junit4'
+		// include 'junit-jupiter', 'junit-vintage'
+		// exclude 'custom-engine'
 	}
 	tags {
 		// include 'fast'
-		// exclude 'slow'
+		exclude 'slow'
 	}
-	// disableStandardTestTask false
-	// reportsDir "build/test-results/junit5" // this is the default
+	includeClassNamePattern '.*Test'
+	// enableStandardTestTask true
+	// reportsDir "build/test-results/junit-platform" // this is the default
+	logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 ```
 
@@ -49,89 +50,87 @@ the JUnit Gradle plugin will only run tests for the desired test engines.
 
 If you supply a _tag_ via `tags {include ...}`, the JUnit Gradle plugin will only
 run tests that are _tagged_ accordingly (e.g., via the `@Tag` annotation for
-JUnit 5 based tests). Similarly, if you supply a _tag_ via `tags {exclude ...}`,
+JUnit Jupiter based tests). Similarly, if you supply a _tag_ via `tags {exclude ...}`,
 the JUnit Gradle plugin will not run tests that are _tagged_ accordingly.
 
 By default, the JUnit Gradle plugin disables the standard Gradle `test` task, but
-this be overridden via the `disableStandardTestTask` flag.
+this be overridden via the `enableStandardTestTask` flag.
 
 ## Configuring Test Engines
 
 In order to have the JUnit Gradle plugin run any tests at all, a TestEngine
 implementation must be on the classpath.
 
-To configure support for JUnit 5 based tests, configure a `testCompile` dependency
-on the JUnit 5 API and a `testRuntime` dependency on the JUnit 5 TestEngine
+To configure support for JUnit Jupiter based tests, configure a `testCompile` dependency
+on the JUnit Jupiter API and a `testRuntime` dependency on the JUnit Jupiter TestEngine
 implementation similar to the following.
 
 ```groovy
 dependencies {
-	testCompile("org.junit:junit5-api:5.0.0-SNAPSHOT")
-	testRuntime("org.junit:junit5-engine:5.0.0-SNAPSHOT")
+	testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0-SNAPSHOT")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-SNAPSHOT")
 }
 ```
 
-The JUnit Gradle plugin can also run JUnit 4 based tests as long as you
-configure a `testCompile` dependency on JUnit 4 and a `testRuntime` dependency
-on the JUnit 4 TestEngine implementation similar to the following.
+The JUnit Gradle plugin can also run JUnit 3 and JUnit 4 based tests as long as you
+configure a `testCompile` dependency on JUnit 4 and a `testRuntime` dependency on the
+JUnit Vintage TestEngine implementation similar to the following.
 
 ```groovy
 dependencies {
 	testCompile("junit:junit:4.12")
-	testRuntime("org.junit:junit4-engine:5.0.0-SNAPSHOT")
+	testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0-SNAPSHOT")
 }
 ```
 
-## Executing JUnit 5 Tests
+## Executing Tests on the JUnit Platform
 
 Once the JUnit Gradle plugin has been applied and configured, you have a new
-`junit5Test` task at your disposal.
+`junitPlatformTest` task at your disposal.
 
-Invoking `gradlew clean junit5Test` (or `gradlew clean check`) from the
-command line will execute all tests within the project whose class names
-match the pattern `.*Test`. This will result in output similar to the
-following:
+Invoking `gradlew clean junitPlatformTest` (or `gradlew clean test`) from the command
+line will execute all tests within the project whose class names match the pattern
+`.*Test`. This will result in output similar to the following:
 
 ```
-:junit5Test
+:junitPlatformTest
 
-Test run finished after 50 ms
+Test run finished after 115 ms
 [         3 tests found     ]
-[         2 tests started   ]
 [         1 tests skipped   ]
+[         2 tests started   ]
 [         0 tests aborted   ]
 [         2 tests successful]
 [         0 tests failed    ]
 
-BUILD SUCCESSFUL
-```
+BUILD SUCCESSFUL```
 
-If you comment out the `@Disabled` annotation on `SecondTest#mySecondTest()`, you
-will then see the build fail with output similar to the following:
+If you comment out the `@Disabled` annotation on `SecondTest#mySecondTest()`, you will
+then see the build fail with output similar to the following:
 
 ```
-:junit5Test
+:junitPlatformTest
 
 Test failures (1):
-  junit5:com.example.project.SecondTest:mySecondTest
-    com.example.project.SecondTest#mySecondTest
-    => Exception: 2 is not equal to 1 ==> expected:<2> but was:<1>
+  JUnit Jupiter:SecondTest:mySecondTest()
+    JavaMethodSource [javaClass = 'com.example.project.SecondTest', javaMethodName = 'mySecondTest', javaMethodParameterTypes = '']
+    => Exception: 2 is not equal to 1 ==> expected: <2> but was: <1>
 
-Test run finished after 50 ms
+Test run finished after 89 ms
 [         3 tests found     ]
-[         3 tests started   ]
 [         0 tests skipped   ]
+[         3 tests started   ]
 [         0 tests aborted   ]
 [         2 tests successful]
 [         1 tests failed    ]
 
-:junit5Test FAILED
+:junitPlatformTest FAILED
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':junit5Test'.
-> Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
+Execution failed for task ':junitPlatformTest'.
+> Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
 ```
 
 **Note**: the _exit value_ corresponds to the number of _tests failed_.

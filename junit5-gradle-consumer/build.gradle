@@ -4,7 +4,7 @@ buildscript {
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-SNAPSHOT'
 	}
 }
 
@@ -13,14 +13,16 @@ repositories {
 	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
-ext.junit4Version = '4.12'
-ext.junit5Version = '5.0.0-SNAPSHOT'
-ext.log4JVersion  = '2.5'
+ext.junit4Version        = '4.12'
+ext.junitVintageVersion  = '4.12.0-SNAPSHOT'
+ext.junitPlatformVersion = '1.0.0-SNAPSHOT'
+ext.junitJupiterVersion  = '5.0.0-SNAPSHOT'
+ext.log4JVersion         = '2.5'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'org.junit.gen5.gradle'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 jar {
 	baseName = 'junit5-gradle-consumer'
@@ -33,27 +35,30 @@ compileTestJava {
 	options.compilerArgs += '-parameters'
 }
 
-junit5 {
+junitPlatform {
+	// platformVersion '1.0.0-SNAPSHOT'
 	engines {
-		include 'junit5', 'junit4'
+		// include 'junit-jupiter', 'junit-vintage'
+		// exclude 'custom-engine'
 	}
 	tags {
 		// include 'fast'
 		exclude 'slow'
 	}
-	matchClassName '.*Test'
-	reportsDir file('build/test-results/junit5/') // this is the default
+	// includeClassNamePattern '.*Test'
+	// enableStandardTestTask true
+	// reportsDir "build/test-results/junit-platform" // this is the default
 	logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 
 dependencies {
-	// JUnit 5 API and TestEngine implementation
-	testCompile("org.junit:junit5-api:${junit5Version}")
-	testRuntime("org.junit:junit5-engine:${junit5Version}")
+	// JUnit Jupiter API and TestEngine implementation
+	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 
 	// If you also want to support JUnit 3 and JUnit 4 tests
 	testCompile("junit:junit:${junit4Version}")
-	testRuntime("org.junit:junit4-engine:${junit5Version}")
+	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
 
 	testRuntime("org.apache.logging.log4j:log4j-core:${log4JVersion}")
 	testRuntime("org.apache.logging.log4j:log4j-jul:${log4JVersion}")
