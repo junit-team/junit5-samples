@@ -33,8 +33,6 @@ import org.mockito.MockitoAnnotations;
  */
 public class MockitoExtension implements TestInstancePostProcessor, ParameterResolver {
 
-	private static final Namespace namespace = Namespace.of(MockitoExtension.class);
-
 	@Override
 	public void postProcessTestInstance(Object testInstance, ExtensionContext context) {
 		MockitoAnnotations.initMocks(testInstance);
@@ -47,18 +45,31 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 
 	@Override
 	public Object resolve(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		Store mocks = extensionContext.getStore(namespace);
-		return getMock(parameterContext.getParameter(), mocks);
+		return getMock(parameterContext.getParameter(), extensionContext);
 	}
 
-	private Object getMock(Parameter parameter, Store mocks) {
+	private Object getMock(Parameter parameter, ExtensionContext extensionContext) {
 		Class<?> mockType = parameter.getType();
-		String mockName = parameter.getAnnotation(Mock.class).name();
-		String mockKey = mockType.getCanonicalName();
-		if (!"".equals(mockName)) {
-			mockKey += ":" + mockName;
+		Store mocks = extensionContext.getStore(Namespace.of(MockitoExtension.class, mockType));
+		String mockName = getMockName(parameter);
+
+		if (mockName != null) {
+			return mocks.getOrComputeIfAbsent(mockName, key -> mock(mockType, mockName));
 		}
-		return mocks.getOrComputeIfAbsent(mockKey, key -> mock(mockType));
+		else {
+			return mocks.getOrComputeIfAbsent(mockType.getCanonicalName(), key -> mock(mockType));
+		}
+	}
+
+	private String getMockName(Parameter parameter) {
+		String explicitMockName = parameter.getAnnotation(Mock.class).name().trim();
+		if (!explicitMockName.isEmpty()) {
+			return explicitMockName;
+		}
+		else if (parameter.isNamePresent()) {
+			return parameter.getName();
+		}
+		return null;
 	}
 
 }
