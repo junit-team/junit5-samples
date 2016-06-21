@@ -19,19 +19,24 @@ import org.junit.gen5.api.BeforeEach;
 import org.junit.gen5.api.Nested;
 import org.junit.gen5.api.Test;
 import org.junit.gen5.api.extension.ExtendWith;
+import org.mockito.Mock;
 
+/**
+ * @since 5.0
+ * @see MockitoExtension
+ */
 @ExtendWith(MockitoExtension.class)
 class MockitoExtensionWithNestedTests {
 
 	boolean baseClassTestRun = false;
 
 	@BeforeEach
-	void initializeBaseClass(@InjectMock MyType myType) {
+	void initializeBaseClass(@Mock MyType myType) {
 		when(myType.getName()).thenReturn("base class");
 	}
 
 	@Test
-	void baseClassTest(@InjectMock MyType myType) {
+	void baseClassTest(@Mock MyType myType) {
 		assertEquals("base class", myType.getName());
 		baseClassTestRun = true;
 	}
@@ -40,13 +45,13 @@ class MockitoExtensionWithNestedTests {
 	class FirstContext {
 
 		@BeforeEach
-		void initializeFirstNesting(@InjectMock YourType yourType, @InjectMock MyType myType) {
+		void initializeFirstNesting(@Mock YourType yourType, @Mock MyType myType) {
 			when(yourType.getName()).thenReturn("first nesting");
 			assertEquals("base class", myType.getName());
 		}
 
 		@Test
-		void firstNestedTest(@InjectMock YourType yourType) {
+		void firstNestedTest(@Mock YourType yourType) {
 			assertEquals("first nesting", yourType.getName());
 		}
 
@@ -54,23 +59,21 @@ class MockitoExtensionWithNestedTests {
 		class SecondContext {
 
 			@BeforeEach
-			void initializeSecondNesting(@InjectMock YourType yourType, @InjectMock MyType myType,
-					@InjectMock TheirType theirType) {
+			void initializeSecondNesting(@Mock YourType yourType, @Mock MyType myType, @Mock TheirType theirType) {
 				when(theirType.getName()).thenReturn("second nesting");
 				assertEquals("base class", myType.getName());
 				assertEquals("first nesting", yourType.getName());
 			}
 
 			@Test
-			void secondContextTest(@InjectMock TheirType theirType) {
+			void secondContextTest(@Mock TheirType theirType) {
 				assertEquals("second nesting", theirType.getName());
 			}
 
 		}
 
 		@AfterEach
-		void afterFirstContext(@InjectMock YourType yourType, @InjectMock MyType myType,
-				@InjectMock TheirType theirType) {
+		void afterFirstContext(@Mock YourType yourType, @Mock MyType myType, @Mock TheirType theirType) {
 			assertEquals("base class", myType.getName());
 
 			if (baseClassTestRun) {

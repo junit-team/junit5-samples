@@ -12,6 +12,8 @@ package com.example.mockito;
 
 import static org.mockito.Mockito.mock;
 
+import java.lang.reflect.Parameter;
+
 import org.junit.gen5.api.extension.ExtensionContext;
 import org.junit.gen5.api.extension.ExtensionContext.Namespace;
 import org.junit.gen5.api.extension.ExtensionContext.Store;
@@ -23,10 +25,9 @@ import org.mockito.MockitoAnnotations;
 
 /**
  * {@code MockitoExtension} showcases the {@link TestInstancePostProcessor}
- * and {@link ParameterResolver} extension APIs of JUnit 5 by
- * providing dependency injection support at the field level via Mockito's
- * {@link Mock @Mock} annotation and at the method level via our demo
- * {@link InjectMock @InjectMock} annotation.
+ * and {@link ParameterResolver} extension APIs of JUnit 5 by providing
+ * dependency injection support at the field level and at the method parameter
+ * level via Mockito 2.x's {@link Mock @Mock} annotation.
  *
  * @since 5.0
  */
@@ -41,17 +42,23 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 
 	@Override
 	public boolean supports(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return parameterContext.getParameter().isAnnotationPresent(InjectMock.class);
+		return parameterContext.getParameter().isAnnotationPresent(Mock.class);
 	}
 
 	@Override
 	public Object resolve(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		Store mocks = extensionContext.getStore(namespace);
-		return getMock(parameterContext.getParameter().getType(), mocks);
+		return getMock(parameterContext.getParameter(), mocks);
 	}
 
-	private Object getMock(Class<?> mockType, Store mocks) {
-		return mocks.getOrComputeIfAbsent(mockType, type -> mock(mockType));
+	private Object getMock(Parameter parameter, Store mocks) {
+		Class<?> mockType = parameter.getType();
+		String mockName = parameter.getAnnotation(Mock.class).name();
+		String mockKey = mockType.getCanonicalName();
+		if (!"".equals(mockName)) {
+			mockKey += ":" + mockName;
+		}
+		return mocks.getOrComputeIfAbsent(mockKey, key -> mock(mockType));
 	}
 
 }

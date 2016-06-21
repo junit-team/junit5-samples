@@ -10,15 +10,17 @@
 
 package com.example.mockito;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.junit.gen5.junit4.runner.JUnit5;
+import org.junit.gen5.junit4.runner.Packages;
+import org.junit.runner.RunWith;
 
 /**
+ * Test suite for the {@link MockitoExtension}.
+ *
  * @since 5.0
+ * @see MockitoExtension
  */
-@Target(ElementType.PARAMETER)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface InjectMock {
+@RunWith(JUnit5.class)
+@Packages("com.example.mockito")
+public class MockitoExtensionTestSuite {
 }
