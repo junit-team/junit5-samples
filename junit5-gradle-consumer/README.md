@@ -103,7 +103,8 @@ Test run finished after 115 ms
 [         2 tests successful]
 [         0 tests failed    ]
 
-BUILD SUCCESSFUL```
+BUILD SUCCESSFUL
+```
 
 If you comment out the `@Disabled` annotation on `SecondTest#mySecondTest()`, you will
 then see the build fail with output similar to the following:
