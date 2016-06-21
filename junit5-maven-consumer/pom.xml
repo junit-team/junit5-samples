@@ -11,7 +11,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<junit.gen5.version>5.0.0-SNAPSHOT</junit.gen5.version>
+		<junit.jupiter.version>5.0.0-SNAPSHOT</junit.jupiter.version>
+		<junit.vintage.version>4.12.0-SNAPSHOT</junit.vintage.version>
+		<junit.platform.version>1.0.0-SNAPSHOT</junit.platform.version>
 	</properties>
 
 	<repositories>
@@ -22,8 +24,8 @@
 				<enabled>false</enabled>
 			</releases>
 			<snapshots>
-				<!-- Do NOT cache JUnit 5 snapshot JARs. -->
-				<updatePolicy>always</updatePolicy>
+				<!-- Do NOT cache JUnit 5 snapshot JARs more than 1 minute. -->
+				<updatePolicy>interval:1</updatePolicy>
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
@@ -37,8 +39,8 @@
 				<enabled>false</enabled>
 			</releases>
 			<snapshots>
-				<!-- Do NOT cache JUnit 5 snapshot JARs. -->
-				<updatePolicy>always</updatePolicy>
+				<!-- Do NOT cache JUnit 5 snapshot JARs more than 1 minute. -->
+				<updatePolicy>interval:1</updatePolicy>
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
@@ -59,9 +61,9 @@
 				<version>2.19</version>
 				<dependencies>
 					<dependency>
-						<groupId>org.junit</groupId>
-						<artifactId>surefire-junit5</artifactId>
-						<version>${junit.gen5.version}</version>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${junit.platform.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -70,15 +72,15 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.junit</groupId>
-			<artifactId>junit5-api</artifactId>
-			<version>${junit.gen5.version}</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit.vintage.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
