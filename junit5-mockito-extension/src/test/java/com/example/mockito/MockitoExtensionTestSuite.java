@@ -10,8 +10,8 @@
 
 package com.example.mockito;
 
-import org.junit.gen5.junit4.runner.JUnit5;
-import org.junit.gen5.junit4.runner.Packages;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.runner.SelectPackages;
 import org.junit.runner.RunWith;
 
 /**
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
  * @since 5.0
  * @see MockitoExtension
  */
-@RunWith(JUnit5.class)
-@Packages("com.example.mockito")
+@RunWith(JUnitPlatform.class)
+@SelectPackages("com.example.mockito")
 public class MockitoExtensionTestSuite {
 }

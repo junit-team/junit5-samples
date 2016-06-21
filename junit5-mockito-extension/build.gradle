@@ -4,7 +4,7 @@ buildscript {
 		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit:junit-gradle:5.0.0-SNAPSHOT'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-SNAPSHOT'
 	}
 }
 
@@ -13,12 +13,13 @@ repositories {
 	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
-ext.junit5Version = '5.0.0-SNAPSHOT'
+ext.junitPlatformVersion = '1.0.0-SNAPSHOT'
+ext.junitJupiterVersion = '5.0.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'org.junit.gen5.gradle'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 jar {
 	baseName = 'junit5-mockito-extension'
@@ -31,22 +32,15 @@ compileTestJava {
 	options.compilerArgs += '-parameters'
 }
 
-junit5 {
-	engines {
-		include 'junit5'
-	}
-	matchClassName '.*Tests?'
-}
-
 dependencies {
-	// Needed as compile since we're building a JUnit 5 extension here
+	// Needed as compile since we're building a JUnit Jupiter extension here
 	compile 'org.mockito:mockito-core:2.+'
-	compile "org.junit:junit5-api:${junit5Version}"
+	compile "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
 
-	// Needed for @RunWith(JUnit5.class) in the IDE
-	testCompile "org.junit:junit4-runner:${junit5Version}"
+	// Needed for @RunWith(JUnitPlatform.class) in the IDE
+	testCompile "org.junit.platform:junit-platform-runner:${junitPlatformVersion}"
 
-	testRuntime "org.junit:junit5-engine:${junit5Version}"
+	testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
 }
 
 task wrapper(type: Wrapper) {
