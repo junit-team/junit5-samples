@@ -43,6 +43,9 @@ dependencies {
 	compile 'org.mockito:mockito-core:2.+'
 	compile "org.junit:junit5-api:${junit5Version}"
 
+	// Needed for @RunWith(JUnit5.class) in the IDE
+	testCompile "org.junit:junit4-runner:${junit5Version}"
+
 	testRuntime "org.junit:junit5-engine:${junit5Version}"
 }
 

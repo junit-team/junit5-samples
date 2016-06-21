@@ -21,6 +21,10 @@ import org.junit.gen5.api.Test;
 import org.junit.gen5.api.extension.ExtendWith;
 import org.mockito.Mock;
 
+/**
+ * @since 5.0
+ * @see MockitoExtension
+ */
 @ExtendWith(MockitoExtension.class)
 class MockitoExtensionWithNestedTests {
 
@@ -55,8 +59,7 @@ class MockitoExtensionWithNestedTests {
 		class SecondContext {
 
 			@BeforeEach
-			void initializeSecondNesting(@Mock YourType yourType, @Mock MyType myType,
-					@Mock TheirType theirType) {
+			void initializeSecondNesting(@Mock YourType yourType, @Mock MyType myType, @Mock TheirType theirType) {
 				when(theirType.getName()).thenReturn("second nesting");
 				assertEquals("base class", myType.getName());
 				assertEquals("first nesting", yourType.getName());
@@ -70,8 +73,7 @@ class MockitoExtensionWithNestedTests {
 		}
 
 		@AfterEach
-		void afterFirstContext(@Mock YourType yourType, @Mock MyType myType,
-				@Mock TheirType theirType) {
+		void afterFirstContext(@Mock YourType yourType, @Mock MyType myType, @Mock TheirType theirType) {
 			assertEquals("base class", myType.getName());
 
 			if (baseClassTestRun) {

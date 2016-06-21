@@ -12,7 +12,8 @@ package com.example.mockito;
 
 import static org.junit.gen5.api.Assertions.assertEquals;
 import static org.junit.gen5.api.Assertions.assertNotNull;
-import static org.junit.gen5.api.Assertions.assertTrue;
+import static org.junit.gen5.api.Assertions.assertNotSame;
+import static org.junit.gen5.api.Assertions.assertSame;
 import static org.mockito.Mockito.when;
 
 import org.junit.gen5.api.BeforeEach;
@@ -22,6 +23,7 @@ import org.junit.gen5.api.extension.ExtendWith;
 import org.mockito.Mock;
 
 /**
+ * @since 5.0
  * @see MockitoExtension
  */
 @ExtendWith(MockitoExtension.class)
@@ -49,17 +51,19 @@ class MockitoExtensionInBaseClassTest {
 	}
 
 	@Test
-	void multipleMockInjectionsOfSameTypeAreOneInstanceTest(@Mock MyType myType1, @Mock MyType myType2) {
+	void multipleInjectedMocksOfSameTypeAreTheSameInstance(@Mock MyType myType1, @Mock MyType myType2) {
 		assertNotNull(myType1);
 		assertNotNull(myType2);
-		assertTrue(myType1 == myType2);
+		assertSame(myType1, myType2);
 	}
 
 	@Test
-	void multipleNamedMockInjectionsOfSameTypeAreOneInstanceTest(@Mock(name = "1") MyType myType1, @Mock(name="2") MyType myType2) {
+	void multipleNamedInjectedMocksOfSameTypeAreNotTheSameInstanceTest(@Mock(name = "1") MyType myType1,
+			@Mock(name = "2") MyType myType2) {
+
 		assertNotNull(myType1);
 		assertNotNull(myType2);
-		assertTrue(myType1 != myType2);
+		assertNotSame(myType1, myType2);
 	}
 
 }

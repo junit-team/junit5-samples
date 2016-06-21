@@ -25,10 +25,9 @@ import org.mockito.MockitoAnnotations;
 
 /**
  * {@code MockitoExtension} showcases the {@link TestInstancePostProcessor}
- * and {@link ParameterResolver} extension APIs of JUnit 5 by
- * providing dependency injection support at the field level via Mockito's
- * {@link Mock @Mock} annotation and at the method level via our demo
- * {@link InjectMock @InjectMock} annotation.
+ * and {@link ParameterResolver} extension APIs of JUnit 5 by providing
+ * dependency injection support at the field level and at the method parameter
+ * level via Mockito 2.x's {@link Mock @Mock} annotation.
  *
  * @since 5.0
  */
