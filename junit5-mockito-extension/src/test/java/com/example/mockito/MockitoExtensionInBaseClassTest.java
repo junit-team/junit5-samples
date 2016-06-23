@@ -57,8 +57,7 @@ class MockitoExtensionInBaseClassTest {
 		assertNotNull(myType1);
 		assertNotNull(myType2);
 
-		// The project must be compiled with -parameters in order for this to pass.
-		assertNotSame(myType1, myType2);
+		assertNotSame(myType1, myType2, "Make sure the project was compiled with -parameters");
 
 		assertTrue(myType1.toString().contains("myType1"));
 		assertTrue(myType2.toString().contains("myType2"));

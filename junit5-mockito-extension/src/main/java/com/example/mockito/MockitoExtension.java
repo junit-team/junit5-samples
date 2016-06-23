@@ -50,7 +50,7 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 
 	private Object getMock(Parameter parameter, ExtensionContext extensionContext) {
 		Class<?> mockType = parameter.getType();
-		Store mocks = extensionContext.getStore(Namespace.of(MockitoExtension.class, mockType));
+		Store mocks = extensionContext.getStore(Namespace.create(MockitoExtension.class, mockType));
 		String mockName = getMockName(parameter);
 
 		if (mockName != null) {
