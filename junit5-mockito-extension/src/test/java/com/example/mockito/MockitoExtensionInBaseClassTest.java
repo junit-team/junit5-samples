@@ -64,15 +64,15 @@ class MockitoExtensionInBaseClassTest {
 	}
 
 	@Test
-	void multipleExplicitlyNamedInjectedMocksOfSameTypeAreNotTheSameInstanceTest(@Mock(name = "1") MyType myType1,
-			@Mock(name = "2") MyType myType2) {
+	void multipleExplicitlyNamedInjectedMocksOfSameTypeAreNotTheSameInstanceTest(@Mock(name = "one") MyType myType1,
+			@Mock(name = "two") MyType myType2) {
 
 		assertNotNull(myType1);
 		assertNotNull(myType2);
 		assertNotSame(myType1, myType2);
 
-		assertTrue(myType1.toString().contains("1"));
-		assertTrue(myType2.toString().contains("2"));
+		assertTrue(myType1.toString().contains("one"));
+		assertTrue(myType2.toString().contains("two"));
 	}
 
 }
