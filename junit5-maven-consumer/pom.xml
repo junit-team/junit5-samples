@@ -11,37 +11,33 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<junit.jupiter.version>5.0.0-SNAPSHOT</junit.jupiter.version>
-		<junit.vintage.version>4.12.0-SNAPSHOT</junit.vintage.version>
-		<junit.platform.version>1.0.0-SNAPSHOT</junit.platform.version>
+		<junit.jupiter.version>5.0.0-M1</junit.jupiter.version>
+		<junit.vintage.version>4.12.0-M1</junit.vintage.version>
+		<junit.platform.version>1.0.0-M1</junit.platform.version>
 	</properties>
 
 	<repositories>
 		<repository>
-			<id>snapshots-repo</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>releases-repo</id>
+			<url>https://oss.sonatype.org/content/repositories/releases</url>
 			<releases>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<!-- Do NOT cache JUnit 5 snapshot JARs more than 1 minute. -->
-				<updatePolicy>interval:1</updatePolicy>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>snapshots-repo</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>releases-repo</id>
+			<url>https://oss.sonatype.org/content/repositories/releases</url>
 			<releases>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<!-- Do NOT cache JUnit 5 snapshot JARs more than 1 minute. -->
-				<updatePolicy>interval:1</updatePolicy>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>

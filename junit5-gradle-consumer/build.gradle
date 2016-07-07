@@ -1,22 +1,22 @@
 buildscript {
 	repositories {
 		mavenCentral()
-		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+		maven { url 'https://oss.sonatype.org/content/repositories/releases' }
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-SNAPSHOT'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M1'
 	}
 }
 
 repositories {
 	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	maven { url 'https://oss.sonatype.org/content/repositories/releases' }
 }
 
 ext.junit4Version        = '4.12'
-ext.junitVintageVersion  = '4.12.0-SNAPSHOT'
-ext.junitPlatformVersion = '1.0.0-SNAPSHOT'
-ext.junitJupiterVersion  = '5.0.0-SNAPSHOT'
+ext.junitVintageVersion  = '4.12.0-M1'
+ext.junitPlatformVersion = '1.0.0-M1'
+ext.junitJupiterVersion  = '5.0.0-M1'
 ext.log4JVersion         = '2.5'
 
 apply plugin: 'java'
