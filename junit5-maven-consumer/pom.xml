@@ -16,32 +16,6 @@
 		<junit.platform.version>1.0.0-M1</junit.platform.version>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>releases-repo</id>
-			<url>https://oss.sonatype.org/content/repositories/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>releases-repo</id>
-			<url>https://oss.sonatype.org/content/repositories/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<build>
 		<plugins>
 			<plugin>
