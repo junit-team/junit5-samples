@@ -11,10 +11,9 @@ To use the JUnit Gradle plugin, you first need to configure `build.gradle` as fo
 buildscript {
 	repositories {
 		mavenCentral()
-		maven { url 'https://oss.sonatype.org/content/repositories/releases' }
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-SNAPSHOT'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M1'
 	}
 }
 
@@ -67,8 +66,8 @@ implementation similar to the following.
 
 ```groovy
 dependencies {
-	testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0-SNAPSHOT")
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-SNAPSHOT")
+	testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0-M1")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-M1")
 }
 ```
 
@@ -79,7 +78,7 @@ JUnit Vintage TestEngine implementation similar to the following.
 ```groovy
 dependencies {
 	testCompile("junit:junit:4.12")
-	testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0-SNAPSHOT")
+	testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0-M1")
 }
 ```
 
