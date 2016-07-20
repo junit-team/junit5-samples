@@ -7,9 +7,9 @@ executed in the same run.
 ## Executing JUnit 4 and JUnit 5 Tests
 
 Invoking `mvn clean test` from the command line will execute all tests in the test source
-folder that follow one of
-[Surefire's default naming patterns](http://maven.apache.org/surefire/maven-surefire-plugin/examples/inclusion-exclusion.html)
-(`Test*`, `*Test`, or `*TestCase`), resulting in output similar to the following:
+folder that follow one of following patterns: `Test*`, `*Test`, `*Tests` or `*TestCase`.
+Note that [Surefire's default naming patterns](http://maven.apache.org/surefire/maven-surefire-plugin/examples/inclusion-exclusion.html) have been overridden in the pom.xml file.  Surefire's execution of
+the sample tests should result in output similar to the following:
 
 ```
 -------------------------------------------------------
@@ -17,6 +17,8 @@ folder that follow one of
 -------------------------------------------------------
 Running com.example.project.FirstTest
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 sec - in com.example.project.FirstTest
+Running com.example.project.OtherTests
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in com.example.project.OtherTests
 Running com.example.project.JUnit4Test
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in com.example.project.JUnit4Test
 Running com.example.project.SecondTest
