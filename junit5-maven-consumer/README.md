@@ -1,8 +1,9 @@
 # junit5-maven-consumer
 
 The `junit5-maven-consumer` project demonstrates how to execute tests based on JUnit 5
-snapshots using Maven. In addition, it showcases that existing JUnit 4 based tests can be
-executed in the same test suite.
+milestones using Maven. In addition, it showcases that existing JUnit 4 based tests can
+be executed in the same test suite as JUnit 5 based tests or any other tests supported on
+the JUnit Platform.
 
 In addition, this project uses the [Maven Wrapper](https://github.com/takari/maven-wrapper).
 To ensure that the correct version of Maven is used, invoke `mvnw` instead of `mvn`.
