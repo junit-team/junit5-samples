@@ -1,7 +1,6 @@
 buildscript {
 	repositories {
 		mavenCentral()
-		maven { url 'https://oss.sonatype.org/content/repositories/releases' }
 	}
 	dependencies {
 		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M2'
@@ -10,7 +9,6 @@ buildscript {
 
 repositories {
 	mavenCentral()
-	maven { url 'https://oss.sonatype.org/content/repositories/releases' }
 }
 
 ext.junitPlatformVersion = '1.0.0-M2'

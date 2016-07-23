@@ -11,7 +11,6 @@ To use the JUnit Gradle plugin, you first need to configure `build.gradle` as fo
 buildscript {
 	repositories {
 		mavenCentral()
-		maven { url 'https://oss.sonatype.org/content/repositories/releases' }
 	}
 	dependencies {
 		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M2'
