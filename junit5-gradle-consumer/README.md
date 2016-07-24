@@ -133,7 +133,7 @@ Execution failed for task ':junitPlatformTest'.
 > Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
 ```
 
-**Note**: the _exit value_ corresponds to the number of _tests failed_.
+**Note**: The _exit value_ is `1` if any containers or tests failed; otherwise, it is `0`.
 
 ### Current Limitations
 
