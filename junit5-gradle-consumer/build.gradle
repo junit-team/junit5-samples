@@ -63,5 +63,6 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-	distributionUrl = 'https://services.gradle.org/distributions/gradle-2.14.1-bin.zip'
+	description = 'Generates gradlew[.bat] scripts'
+	gradleVersion = '2.14.1'
 }
