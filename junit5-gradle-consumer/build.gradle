@@ -15,7 +15,7 @@ ext.junit4Version        = '4.12'
 ext.junitVintageVersion  = '4.12.0-M2'
 ext.junitPlatformVersion = '1.0.0-M2'
 ext.junitJupiterVersion  = '5.0.0-M2'
-ext.log4JVersion         = '2.5'
+ext.log4jVersion         = '2.6.2'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -34,7 +34,7 @@ compileTestJava {
 }
 
 junitPlatform {
-	// platformVersion '1.0.0-SNAPSHOT'
+	// platformVersion '1.0.0-M2'
 	engines {
 		// include 'junit-jupiter', 'junit-vintage'
 		// exclude 'custom-engine'
@@ -58,8 +58,8 @@ dependencies {
 	testCompile("junit:junit:${junit4Version}")
 	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
 
-	testRuntime("org.apache.logging.log4j:log4j-core:${log4JVersion}")
-	testRuntime("org.apache.logging.log4j:log4j-jul:${log4JVersion}")
+	testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
+	testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}")
 }
 
 task wrapper(type: Wrapper) {
