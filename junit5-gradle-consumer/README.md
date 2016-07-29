@@ -37,7 +37,7 @@ junitPlatform {
 	}
 	includeClassNamePattern '.*Test'
 	// enableStandardTestTask true
-	// reportsDir "build/test-results/junit-platform" // this is the default
+	// reportsDir file('build/test-results/junit-platform') // this is the default
 	logManager 'org.apache.logging.log4j.jul.LogManager'
 }
 ```
