@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M2'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
 	}
 }
 
@@ -12,9 +12,9 @@ repositories {
 }
 
 ext.junit4Version        = '4.12'
-ext.junitVintageVersion  = '4.12.0-M2'
-ext.junitPlatformVersion = '1.0.0-M2'
-ext.junitJupiterVersion  = '5.0.0-M2'
+ext.junitVintageVersion  = '4.12.0-M3'
+ext.junitPlatformVersion = '1.0.0-M3'
+ext.junitJupiterVersion  = '5.0.0-M3'
 ext.log4jVersion         = '2.6.2'
 
 apply plugin: 'java'
@@ -34,16 +34,18 @@ compileTestJava {
 }
 
 junitPlatform {
-	// platformVersion '1.0.0-M2'
-	engines {
-		// include 'junit-jupiter', 'junit-vintage'
-		// exclude 'custom-engine'
+	// platformVersion '1.0.0-M3'
+	filters {
+		engines {
+			// include 'junit-jupiter', 'junit-vintage'
+			// exclude 'custom-engine'
+		}
+		tags {
+			// include 'fast'
+			exclude 'slow'
+		}
+		// includeClassNamePattern '.*Test'
 	}
-	tags {
-		// include 'fast'
-		exclude 'slow'
-	}
-	// includeClassNamePattern '.*Test'
 	// enableStandardTestTask true
 	// reportsDir file('build/test-results/junit-platform') // this is the default
 	logManager 'org.apache.logging.log4j.jul.LogManager'
