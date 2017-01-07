@@ -2,7 +2,7 @@ A simple JUnit Jupiter extension to integrate Mockito into JUnit Jupiter tests s
 
 The `MockitoExtension` showcases the `TestInstancePostProcessor` and `ParameterResolver`
 extension APIs of JUnit Jupiter by providing dependency injection support at the field level
-and at the method parameter level via via Mockito 2.x's `@Mock` annotation.
+and at the method parameter level via Mockito 2.x's `@Mock` annotation.
 
 See also:
 
