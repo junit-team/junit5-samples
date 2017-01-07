@@ -5,8 +5,12 @@ milestones using Maven. In addition, it showcases that existing JUnit 4 based te
 be executed in the same test suite as JUnit 5 based tests or any other tests supported on
 the JUnit Platform.
 
-In addition, this project uses the [Maven Wrapper](https://github.com/takari/maven-wrapper).
-To ensure that the correct version of Maven is used, invoke `mvnw` instead of `mvn`.
+This sample project does not aim to demonstrate how to use the JUnit Jupiter APIs.
+For detailed  information on the JUnit Jupiter programming and extension models,
+please consult the [User Guide](http://junit.org/junit5/docs/current/user-guide/).
+
+Please note that this project uses the [Maven Wrapper](https://github.com/takari/maven-wrapper).
+Thus, to ensure that the correct version of Maven is used, invoke `mvnw` instead of `mvn`.
 
 ## Executing JUnit 4 and JUnit 5 Tests
 
