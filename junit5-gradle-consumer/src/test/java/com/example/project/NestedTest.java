@@ -35,13 +35,13 @@ public class NestedTest {
 
         @Test
         @DisplayName("Tests adding zero")
-        void testAddingZero() {
+        void addZero() {
             assertEquals(-2, calculator.add(-2, 0));
         }
 
         @Test
         @DisplayName("Tests adding two negative numbers")
-        void testAddingNegative() {
+        void addNegativeNumber() {
             assertEquals(-3, calculator.add(-1, -2));
         }
 
