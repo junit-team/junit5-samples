@@ -4,6 +4,10 @@ The `junit5-gradle-consumer` project demonstrates how to run tests based on
 JUnit Jupiter milestones using Gradle with the help of a very basic Gradle plugin
 for the JUnit Platform.
 
+This sample project does not aim to demonstrate how to use the JUnit Jupiter APIs.
+For detailed  information on the JUnit Jupiter programming and extension models,
+please consult the [User Guide](http://junit.org/junit5/docs/current/user-guide/).
+
 ## Enabling the JUnit Platform Gradle Plugin
 
 To use the JUnit Platform Gradle plugin, you first need to configure `build.gradle` as follows.
