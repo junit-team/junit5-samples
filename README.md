@@ -5,7 +5,7 @@ using JUnit Jupiter and the JUnit Platform.
 
 ## Build System Samples
 
-The following sample projects demonstrate how to set up a projects
+The following sample projects demonstrate how to set up projects
 that use the JUnit Platform for various build systems.
 
 - [Gradle](https://github.com/junit-team/junit5-samples/tree/master/junit5-gradle-consumer)
