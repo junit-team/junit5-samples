@@ -20,18 +20,20 @@ the sample tests should result in output similar to the following:
 -------------------------------------------------------
  T E S T S
 -------------------------------------------------------
+Jan 07, 2017 11:02:51 PM org.junit.platform.launcher.core.ServiceLoaderTestEngineRegistry loadTestEngines
+INFO: Discovered TestEngines with IDs: [junit-jupiter, junit-vintage]
 Running com.example.project.FirstTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 sec - in com.example.project.FirstTest
-Running com.example.project.OtherTests
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in com.example.project.OtherTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 sec - in com.example.project.FirstTest
 Running com.example.project.JUnit4Test
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in com.example.project.JUnit4Test
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in com.example.project.JUnit4Test
+Running com.example.project.OtherTests
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec - in com.example.project.OtherTests
 Running com.example.project.SecondTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.004 sec - in com.example.project.SecondTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.008 sec - in com.example.project.SecondTest
 
 Results :
 
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 1
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 1
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
@@ -45,23 +47,27 @@ then see the build fail with output similar to the following:
 -------------------------------------------------------
  T E S T S
 -------------------------------------------------------
+Jan 07, 2017 11:04:25 PM org.junit.platform.launcher.core.ServiceLoaderTestEngineRegistry loadTestEngines
+INFO: Discovered TestEngines with IDs: [junit-jupiter, junit-vintage]
 Running com.example.project.FirstTest
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 sec - in com.example.project.FirstTest
 Running com.example.project.JUnit4Test
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec - in com.example.project.JUnit4Test
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in com.example.project.JUnit4Test
+Running com.example.project.OtherTests
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec - in com.example.project.OtherTests
 Running com.example.project.SecondTest
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec <<< FAILURE! - in com.example.project.SecondTest
-mySecondTest()  Time elapsed: 0.01 sec  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec <<< FAILURE! - in com.example.project.SecondTest
+mySecondTest()  Time elapsed: 0.012 sec  <<< FAILURE!
 org.opentest4j.AssertionFailedError: 2 is not equal to 1 ==> expected: <2> but was: <1>
-	at com.example.project.SecondTest.mySecondTest(SecondTest.java:14)
+	at com.example.project.SecondTest.mySecondTest(SecondTest.java:23)
 
 
 Results :
 
 Failed tests:
-  SecondTest.mySecondTest:14 2 is not equal to 1 ==> expected: <2> but was: <1>
+  SecondTest.mySecondTest:23 2 is not equal to 1 ==> expected: <2> but was: <1>
 
-Tests run: 3, Failures: 1, Errors: 0, Skipped: 0
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 0
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
