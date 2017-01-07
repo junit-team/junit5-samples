@@ -27,6 +27,6 @@ class SecondTest {
 	@Test
 	@Tag("slow")
 	void aSlowTest() throws InterruptedException {
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 	}
 }

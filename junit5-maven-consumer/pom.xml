@@ -37,6 +37,10 @@
 						<include>**/*Tests.java</include>
 						<include>**/*TestCase.java</include>
 					</includes>
+					<properties>
+						<!-- <includeTags>fast</includeTags> -->
+						<excludeTags>slow</excludeTags>
+					</properties>
 				</configuration>
 				<dependencies>
 					<dependency>
