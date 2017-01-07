@@ -101,18 +101,18 @@ line will execute all tests within the project whose class names match the patte
 ```
 :junitPlatformTest
 
-Test run finished after 198 ms
-[         5 containers found      ]
+Test run finished after 86 ms
+[         6 containers found      ]
 [         0 containers skipped    ]
-[         5 containers started    ]
+[         6 containers started    ]
 [         0 containers aborted    ]
-[         5 containers successful ]
+[         6 containers successful ]
 [         0 containers failed     ]
-[         3 tests found           ]
+[         5 tests found           ]
 [         1 tests skipped         ]
-[         2 tests started         ]
+[         4 tests started         ]
 [         0 tests aborted         ]
-[         2 tests successful      ]
+[         4 tests successful      ]
 [         0 tests failed          ]
 
 :test SKIPPED
@@ -131,18 +131,18 @@ Failures (1):
     MethodSource [className = 'com.example.project.SecondTest', methodName = 'mySecondTest', methodParameterTypes = '']
     => org.opentest4j.AssertionFailedError: 2 is not equal to 1 ==> expected: <2> but was: <1>
 
-Test run finished after 104 ms
-[         5 containers found      ]
+Test run finished after 90 ms
+[         6 containers found      ]
 [         0 containers skipped    ]
-[         5 containers started    ]
+[         6 containers started    ]
 [         0 containers aborted    ]
-[         5 containers successful ]
+[         6 containers successful ]
 [         0 containers failed     ]
-[         3 tests found           ]
+[         5 tests found           ]
 [         0 tests skipped         ]
-[         3 tests started         ]
+[         5 tests started         ]
 [         0 tests aborted         ]
-[         2 tests successful      ]
+[         4 tests successful      ]
 [         1 tests failed          ]
 
 :junitPlatformTest FAILED
