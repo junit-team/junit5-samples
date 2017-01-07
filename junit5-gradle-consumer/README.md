@@ -97,13 +97,21 @@ line will execute all tests within the project whose class names match the patte
 ```
 :junitPlatformTest
 
-Test run finished after 115 ms
-[         3 tests found     ]
-[         1 tests skipped   ]
-[         2 tests started   ]
-[         0 tests aborted   ]
-[         2 tests successful]
-[         0 tests failed    ]
+Test run finished after 198 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[         3 tests found           ]
+[         1 tests skipped         ]
+[         2 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         0 tests failed          ]
+
+:test SKIPPED
 
 BUILD SUCCESSFUL
 ```
@@ -114,18 +122,24 @@ then see the build fail with output similar to the following:
 ```
 :junitPlatformTest
 
-Test failures (1):
+Failures (1):
   JUnit Jupiter:SecondTest:mySecondTest()
-    JavaMethodSource [javaClass = 'com.example.project.SecondTest', javaMethodName = 'mySecondTest', javaMethodParameterTypes = '']
-    => Exception: 2 is not equal to 1 ==> expected: <2> but was: <1>
+    MethodSource [className = 'com.example.project.SecondTest', methodName = 'mySecondTest', methodParameterTypes = '']
+    => org.opentest4j.AssertionFailedError: 2 is not equal to 1 ==> expected: <2> but was: <1>
 
-Test run finished after 89 ms
-[         3 tests found     ]
-[         0 tests skipped   ]
-[         3 tests started   ]
-[         0 tests aborted   ]
-[         2 tests successful]
-[         1 tests failed    ]
+Test run finished after 104 ms
+[         5 containers found      ]
+[         0 containers skipped    ]
+[         5 containers started    ]
+[         0 containers aborted    ]
+[         5 containers successful ]
+[         0 containers failed     ]
+[         3 tests found           ]
+[         0 tests skipped         ]
+[         3 tests started         ]
+[         0 tests aborted         ]
+[         2 tests successful      ]
+[         1 tests failed          ]
 
 :junitPlatformTest FAILED
 
@@ -133,7 +147,12 @@ FAILURE: Build failed with an exception.
 
 * What went wrong:
 Execution failed for task ':junitPlatformTest'.
-> Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
+> Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
 ```
 
 **Note**: The _exit value_ is `1` if any containers or tests failed; otherwise, it is `0`.
