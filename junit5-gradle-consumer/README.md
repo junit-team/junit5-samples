@@ -92,7 +92,7 @@ Once the JUnit Platform Gradle plugin has been applied and configured, you have 
 
 Invoking `gradlew clean junitPlatformTest` (or `gradlew clean test`) from the command
 line will execute all tests within the project whose class names match the pattern
-`.*Test`. This will result in output similar to the following:
+`^.*Tests?$`. This will result in output similar to the following:
 
 ```
 :junitPlatformTest
