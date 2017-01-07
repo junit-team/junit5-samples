@@ -42,7 +42,8 @@ junitPlatform {
 	// enableStandardTestTask true
 	// reportsDir file('build/test-results/junit-platform') // this is the default
 	logManager 'org.apache.logging.log4j.jul.LogManager'
-}```
+}
+```
 
 By default all engines and tags are included in the test plan.
 
