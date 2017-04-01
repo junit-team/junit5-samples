@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
 	}
 }
 
@@ -11,8 +11,8 @@ repositories {
 	mavenCentral()
 }
 
-ext.junitPlatformVersion = '1.0.0-M3'
-ext.junitJupiterVersion  = '5.0.0-M3'
+ext.junitPlatformVersion = '1.0.0-M4'
+ext.junitJupiterVersion  = '5.0.0-M4'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
