@@ -1,23 +1,25 @@
 buildscript {
 	repositories {
 		mavenCentral()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-SNAPSHOT'
 	}
 }
 
 repositories {
 	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
-ext.junitPlatformVersion = '1.0.0-M4'
-ext.junitJupiterVersion  = '5.0.0-M4'
+ext.junitPlatformVersion = '1.0.0-SNAPSHOT'
+ext.junitJupiterVersion  = '5.0.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'org.junit.platform.gradle.plugin'
+//apply plugin: 'org.junit.platform.gradle.plugin'
 
 jar {
 	baseName = 'junit5-mockito-extension'
@@ -43,5 +45,5 @@ dependencies {
 
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '3.0'
+	gradleVersion = '4.0'
 }

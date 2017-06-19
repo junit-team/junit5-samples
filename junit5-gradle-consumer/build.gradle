@@ -1,20 +1,22 @@
 buildscript {
 	repositories {
 		mavenCentral()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-SNAPSHOT'
 	}
 }
 
 repositories {
 	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 ext.junit4Version        = '4.12'
-ext.junitVintageVersion  = '4.12.0-M4'
-ext.junitPlatformVersion = '1.0.0-M4'
-ext.junitJupiterVersion  = '5.0.0-M4'
+ext.junitVintageVersion  = '4.12.0-SNAPSHOT'
+ext.junitPlatformVersion = '1.0.0-SNAPSHOT'
+ext.junitJupiterVersion  = '5.0.0-SNAPSHOT'
 ext.log4jVersion         = '2.6.2'
 
 apply plugin: 'java'
@@ -34,7 +36,7 @@ compileTestJava {
 }
 
 junitPlatform {
-	// platformVersion '1.0.0-M4'
+	// platformVersion '1.0.0-SNAPSHOT'
 	filters {
 		engines {
 			// include 'junit-jupiter', 'junit-vintage'
@@ -66,5 +68,5 @@ dependencies {
 
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '3.0'
+	gradleVersion = '4.0'
 }

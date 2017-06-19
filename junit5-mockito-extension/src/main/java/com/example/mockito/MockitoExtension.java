@@ -39,12 +39,12 @@ public class MockitoExtension implements TestInstancePostProcessor, ParameterRes
 	}
 
 	@Override
-	public boolean supports(ParameterContext parameterContext, ExtensionContext extensionContext) {
+	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		return parameterContext.getParameter().isAnnotationPresent(Mock.class);
 	}
 
 	@Override
-	public Object resolve(ParameterContext parameterContext, ExtensionContext extensionContext) {
+	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		return getMock(parameterContext.getParameter(), extensionContext);
 	}
 
