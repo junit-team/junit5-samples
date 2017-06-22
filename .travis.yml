@@ -19,8 +19,8 @@ cache:
 jobs:
   include:
     - stage: junit5-maven-consumer
-      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw clean test
+      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw clean test --update-snapshots
     - stage: junit5-gradle-consumer
-      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer &&./gradlew clean test
+      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer &&./gradlew clean test --refresh-dependencies
     - stage: junit5-mockito-extension
-      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension &&./gradlew clean test
+      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension &&./gradlew clean test --refresh-dependencies
