@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M5'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M6'
 	}
 }
 
@@ -12,9 +12,9 @@ repositories {
 }
 
 ext.junit4Version        = '4.12'
-ext.junitVintageVersion  = '4.12.0-M5'
-ext.junitPlatformVersion = '1.0.0-M5'
-ext.junitJupiterVersion  = '5.0.0-M5'
+ext.junitVintageVersion  = '4.12.0-M6'
+ext.junitPlatformVersion = '1.0.0-M6'
+ext.junitJupiterVersion  = '5.0.0-M6'
 ext.log4jVersion         = '2.6.2'
 
 apply plugin: 'java'
@@ -34,7 +34,7 @@ compileTestJava {
 }
 
 junitPlatform {
-	// platformVersion '1.0.0-M5'
+	// platformVersion '1.0.0-M6'
 	filters {
 		engines {
 			// include 'junit-jupiter', 'junit-vintage'
@@ -62,6 +62,9 @@ dependencies {
 
 	testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
 	testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}")
+
+	// Only needed to run tests in an (IntelliJ) IDE(A) that bundles an older version
+	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
 }
 
 task wrapper(type: Wrapper) {

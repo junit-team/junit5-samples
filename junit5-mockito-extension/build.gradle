@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M5'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M6'
 	}
 }
 
@@ -11,8 +11,8 @@ repositories {
 	mavenCentral()
 }
 
-ext.junitPlatformVersion = '1.0.0-M5'
-ext.junitJupiterVersion  = '5.0.0-M5'
+ext.junitPlatformVersion = '1.0.0-M6'
+ext.junitJupiterVersion  = '5.0.0-M6'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -39,6 +39,9 @@ dependencies {
 	testCompile "org.junit.platform:junit-platform-runner:${junitPlatformVersion}"
 
 	testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
+
+	// Only needed to run tests in an IDE that bundles an older version
+	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
 }
 
 task wrapper(type: Wrapper) {
