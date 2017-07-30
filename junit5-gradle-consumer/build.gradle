@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M6'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC1'
 	}
 }
 
@@ -12,9 +12,9 @@ repositories {
 }
 
 ext.junit4Version        = '4.12'
-ext.junitVintageVersion  = '4.12.0-M6'
-ext.junitPlatformVersion = '1.0.0-M6'
-ext.junitJupiterVersion  = '5.0.0-M6'
+ext.junitVintageVersion  = '4.12.0-RC1'
+ext.junitPlatformVersion = '1.0.0-RC1'
+ext.junitJupiterVersion  = '5.0.0-RC1'
 ext.log4jVersion         = '2.6.2'
 
 apply plugin: 'java'
@@ -34,7 +34,7 @@ compileTestJava {
 }
 
 junitPlatform {
-	// platformVersion '1.0.0-M6'
+	// platformVersion '1.0.0-RC1'
 	filters {
 		engines {
 			// include 'junit-jupiter', 'junit-vintage'
