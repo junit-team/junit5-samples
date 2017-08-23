@@ -40,6 +40,11 @@
 					<properties>
 						<!-- <includeTags>fast</includeTags> -->
 						<excludeTags>slow</excludeTags>
+						<!--
+						<configurationParameters>
+	                        junit.jupiter.conditions.deactivate = *
+	                    </configurationParameters>
+						-->
 					</properties>
 				</configuration>
 				<dependencies>
