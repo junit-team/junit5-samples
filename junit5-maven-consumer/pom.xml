@@ -83,12 +83,14 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- Only required to run tests in an IDE that bundles an older version -->
 		<dependency>
 			<groupId>org.junit.vintage</groupId>
 			<artifactId>junit-vintage-engine</artifactId>
 			<version>${junit.vintage.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
