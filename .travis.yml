@@ -1,26 +1,15 @@
-language: java
 sudo: false
 
-jdk:
-  - oraclejdk8
-
-os:
-  - linux
-
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.m2
+language: java
+jdk: oraclejdk8
 
 jobs:
   include:
     - stage: junit5-maven-consumer
-      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw clean test --update-snapshots
+      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
     - stage: junit5-gradle-consumer
-      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer &&./gradlew clean test --refresh-dependencies
+      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew test
     - stage: junit5-mockito-extension
-      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension &&./gradlew clean test --refresh-dependencies
+      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test
+    - stage: junit5-vanilla-gradle
+      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test

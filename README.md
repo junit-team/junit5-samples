@@ -3,7 +3,14 @@
 Welcome to _JUnit 5 Samples_, a collection of sample applications
 using JUnit Jupiter and the JUnit Platform.
 
-## Build System Samples
+## Vanilla Samples
+
+Just the bare minimum to get started with JUnit Jupiter on various build systems.
+
+- [Gradle Vanilla](https://github.com/junit-team/junit5-samples/tree/master/junit5-vanilla-gradle)
+<!-- [Maven Vanilla](https://github.com/junit-team/junit5-samples/tree/master/junit5-vanilla-maven) -->
+
+## Detailed Build System Samples
 
 The following sample projects demonstrate how to set up projects
 that use the JUnit Platform for various build systems.
