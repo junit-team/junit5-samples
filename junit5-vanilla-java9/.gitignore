@@ -1,0 +1,3 @@
+deps/
+mods/
+!src/build
