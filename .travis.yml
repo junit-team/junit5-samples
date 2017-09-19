@@ -12,4 +12,4 @@ jobs:
     - stage: junit5-mockito-extension
       script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test
     - stage: junit5-vanilla-gradle
-      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test
