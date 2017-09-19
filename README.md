@@ -5,22 +5,27 @@ using JUnit Jupiter and the JUnit Platform.
 
 ## Vanilla Samples
 
-Just the bare minimum to get started with JUnit Jupiter on various build systems.
+Just the bare minimum to get started with JUnit **Jupiter** on various build systems.
 
 - [Gradle Vanilla](https://github.com/junit-team/junit5-samples/tree/master/junit5-vanilla-gradle)
-<!-- [Maven Vanilla](https://github.com/junit-team/junit5-samples/tree/master/junit5-vanilla-maven) -->
+(Jupiter)
+- [Maven Vanilla](https://github.com/junit-team/junit5-samples/tree/master/junit5-vanilla-maven)
+(Jupiter)
 
 ## Detailed Build System Samples
 
 The following sample projects demonstrate how to set up projects
-that use the JUnit Platform for various build systems.
+that use the JUnit **Platform** for various build systems.
 
 - [Gradle](https://github.com/junit-team/junit5-samples/tree/master/junit5-gradle-consumer)
+(Platform, Jupiter, Vintage)
 - [Maven](https://github.com/junit-team/junit5-samples/tree/master/junit5-maven-consumer)
+(Platform, Jupiter, Vintage)
 
 ## Sample Extensions
 
 - [Mockito](https://github.com/junit-team/junit5-samples/tree/master/junit5-mockito-extension)
+(Platform, Jupiter)
 
 ## CI Builds
 
