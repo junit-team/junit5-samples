@@ -10,8 +10,8 @@
 
 package com.example.project;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTests {
@@ -19,7 +19,7 @@ class CalculatorTests {
 	@Test
 	void add() {
 		Calculator calculator = new Calculator();
-		Assertions.assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2");
+		assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2");
 	}
 
 }
