@@ -25,7 +25,7 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>${junit.jupiter.version}</version>
-			<scope>runtime</scope>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
