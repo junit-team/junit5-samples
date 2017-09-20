@@ -16,4 +16,6 @@ public class Calculator {
 		return a + b;
 	}
 
+	public int divide(int numerator, int denominator) { return numerator / denominator; }
+
 }
