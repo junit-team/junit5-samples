@@ -29,6 +29,6 @@ that use the JUnit **Platform** for various build systems.
 
 ## CI Builds
 
-CI builds for all sample projects are available on [Jenkins](https://junit.ci.cloudbees.com/job/JUnit%205%20Samples/) and [Travis](https://travis-ci.org/junit-team/junit5-samples).
+CI builds for all sample projects are available on [Jenkins](https://junit.ci.cloudbees.com/blue/organizations/jenkins/JUnit%205%20Samples/branches/) and [Travis](https://travis-ci.org/junit-team/junit5-samples).
 
 [![Build Status](https://travis-ci.org/junit-team/junit5-samples.svg?branch=master)](https://travis-ci.org/junit-team/junit5-samples)
