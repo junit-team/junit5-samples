@@ -19,3 +19,5 @@ gradle-app.setting
 
 # Misc
 *.log
+*.class
+*.jar
