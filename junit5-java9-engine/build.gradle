@@ -1,0 +1,53 @@
+apply plugin: 'java'
+
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.junit.platform:junit-platform-engine:1.1.0-SNAPSHOT")
+    compileOnly("org.apiguardian:apiguardian-api:1.0.0")
+    testRuntime("org.junit.platform:junit-platform-console:1.1.0-SNAPSHOT")
+}
+
+//
+// define global properties
+//
+ext.moduleName = 'ice.engine'
+ext.deps = buildDir.toPath().resolve('deps').toString()
+
+//
+// copy compile- and runtime dependencies to a single directory
+//
+task generateDependenciesDirectory(type: Copy) {
+    into deps
+    from configurations.compileClasspath
+    from configurations.testRuntimeClasspath
+}
+
+//
+// use module-path and module-version options of javac 9
+//
+compileJava {
+    options.compilerArgs = [
+            '--module-path', classpath.asPath,
+            '--module-version', '47.11'
+    ]
+    classpath = files()
+}
+
+//
+// execute console launcher on the module-path
+//
+task testIceMachine(type: Exec, dependsOn: generateDependenciesDirectory) {
+    executable = 'java'
+    args = [
+            '--module-path', files(deps, compileJava.destinationDir).asPath,
+            '--add-modules', moduleName,
+            '--module', 'org.junit.platform.console',
+            '--scan-class-path' // does nothing, just here to satisfy the console launcher
+    ]
+}
+
+check.dependsOn testIceMachine
