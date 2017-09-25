@@ -17,4 +17,4 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
     - stage: junit5-java9-engine
       jdk: oraclejdk9
-      script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew check
+      script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew --console plain test

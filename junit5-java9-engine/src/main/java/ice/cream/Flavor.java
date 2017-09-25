@@ -8,7 +8,7 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-package ice.engine;
+package ice.cream;
 
 enum Flavor {
 
