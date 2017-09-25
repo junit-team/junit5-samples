@@ -8,15 +8,15 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-package ice.engine;
+package ice.cream;
 
 import org.junit.platform.engine.UniqueId;
 import org.junit.platform.engine.support.descriptor.AbstractTestDescriptor;
 
-class FlavorDescriptor extends AbstractTestDescriptor {
+class Scoop extends AbstractTestDescriptor {
 
-  FlavorDescriptor(UniqueId uniqueId, Flavor flavor) {
-    super(uniqueId.append("Flavor", flavor.name()), flavor.name());
+  Scoop(UniqueId uniqueId, int counter, Flavor flavor) {
+    super(uniqueId.append("scoop", "#" + counter), flavor.name());
   }
 
   @Override
