@@ -20,52 +20,58 @@ import org.junit.platform.engine.TestExecutionResult;
 import org.junit.platform.engine.UniqueId;
 import org.junit.platform.engine.support.descriptor.EngineDescriptor;
 
-/** Simple test engine implementation. */
+/**
+ * Simple test engine implementation.
+ */
 public class Machine implements TestEngine {
 
-  @Override
-  public String getId() {
-    return "ice-cream-machine";
-  }
+	@Override
+	public String getId() {
+		return "ice-cream-machine";
+	}
 
-  /** Build caption used as the engine's display name. */
-  private String getCaption() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("Ice Cream Machine");
-    if (getVersion().isPresent()) {
-      builder.append(" ").append(getVersion().get());
-    }
-    if (getArtifactId().isPresent()) {
-      builder.append(" (").append(getArtifactId().get()).append(")");
-    }
-    return builder.toString();
-  }
+	/**
+	 * Build caption used as the engine's display name.
+	 */
+	private String getCaption() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Ice Cream Machine");
+		if (getVersion().isPresent()) {
+			builder.append(" ").append(getVersion().get());
+		}
+		if (getArtifactId().isPresent()) {
+			builder.append(" (").append(getArtifactId().get()).append(")");
+		}
+		return builder.toString();
+	}
 
-  /** Extract amount of scoops to generate. */
-  private int getScoops(EngineDiscoveryRequest discoveryRequest, int defaultScoops) {
-    ConfigurationParameters parameters = discoveryRequest.getConfigurationParameters();
-    String scoops = parameters.get("scoops").orElse(Integer.toString(defaultScoops));
-    return Integer.valueOf(scoops);
-  }
+	/**
+	 * Extract amount of scoops to generate.
+	 */
+	private int getScoops(EngineDiscoveryRequest discoveryRequest, int defaultScoops) {
+		ConfigurationParameters parameters = discoveryRequest.getConfigurationParameters();
+		String scoops = parameters.get("scoops").orElse(Integer.toString(defaultScoops));
+		return Integer.valueOf(scoops);
+	}
 
-  @Override
-  public TestDescriptor discover(EngineDiscoveryRequest discoveryRequest, UniqueId uniqueId) {
-    TestDescriptor engine = new EngineDescriptor(uniqueId, getCaption());
-    for (int i = 0; i < getScoops(discoveryRequest, 5); i++) {
-      engine.addChild(new Scoop(engine.getUniqueId(), i, Flavor.random()));
-    }
-    return engine;
-  }
+	@Override
+	public TestDescriptor discover(EngineDiscoveryRequest discoveryRequest, UniqueId uniqueId) {
+		TestDescriptor engine = new EngineDescriptor(uniqueId, getCaption());
+		for (int i = 0; i < getScoops(discoveryRequest, 5); i++) {
+			engine.addChild(new Scoop(engine.getUniqueId(), i, Flavor.random()));
+		}
+		return engine;
+	}
 
-  @Override
-  public void execute(ExecutionRequest request) {
-    TestDescriptor engine = request.getRootTestDescriptor();
-    EngineExecutionListener listener = request.getEngineExecutionListener();
-    listener.executionStarted(engine);
-    for (TestDescriptor child : engine.getChildren()) {
-      listener.executionStarted(child);
-      listener.executionFinished(child, TestExecutionResult.successful());
-    }
-    listener.executionFinished(engine, TestExecutionResult.successful());
-  }
+	@Override
+	public void execute(ExecutionRequest request) {
+		TestDescriptor engine = request.getRootTestDescriptor();
+		EngineExecutionListener listener = request.getEngineExecutionListener();
+		listener.executionStarted(engine);
+		for (TestDescriptor child : engine.getChildren()) {
+			listener.executionStarted(child);
+			listener.executionFinished(child, TestExecutionResult.successful());
+		}
+		listener.executionFinished(engine, TestExecutionResult.successful());
+	}
 }
