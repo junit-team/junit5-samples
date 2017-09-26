@@ -12,14 +12,14 @@ package ice.cream;
 
 enum Flavor {
 
-  Chocolate,
+	Chocolate,
 
-  Stracciatella,
+	Stracciatella,
 
-  Vanilla;
+	Vanilla;
 
-  static Flavor random() {
-    Flavor[] flavors = values();
-    return flavors[(int) (Math.random() * flavors.length)];
-  }
+	static Flavor random() {
+		Flavor[] flavors = values();
+		return flavors[(int) (Math.random() * flavors.length)];
+	}
 }

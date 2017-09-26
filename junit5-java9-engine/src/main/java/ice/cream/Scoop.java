@@ -15,12 +15,12 @@ import org.junit.platform.engine.support.descriptor.AbstractTestDescriptor;
 
 class Scoop extends AbstractTestDescriptor {
 
-  Scoop(UniqueId uniqueId, int counter, Flavor flavor) {
-    super(uniqueId.append("scoop", "#" + counter), flavor.name());
-  }
+	Scoop(UniqueId uniqueId, int counter, Flavor flavor) {
+		super(uniqueId.append("scoop", "#" + counter), flavor.name());
+	}
 
-  @Override
-  public Type getType() {
-    return Type.TEST;
-  }
+	@Override
+	public Type getType() {
+		return Type.TEST;
+	}
 }
