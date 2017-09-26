@@ -14,11 +14,11 @@ and
 
 
 ## Gradle Consumer
-![jdk-8](https://img.shields.io/badge/jdk-8-yellow.svg)
-![tool-gradle](https://img.shields.io/badge/tool-gradle-blue.svg)
-![junit-platform](https://img.shields.io/badge/junit-platform-brightgreen.svg)
-![junit-jupiter](https://img.shields.io/badge/junit-jupiter-green.svg)
-![junit-vintage](https://img.shields.io/badge/junit-vintage-yellowgreen.svg)
+![jdk-8][badge-jdk-8]
+![tool-gradle][badge-tool-gradle]
+![junit-platform][badge-junit-platform]
+![junit-jupiter][badge-junit-jupiter]
+![junit-vintage][badge-junit-vintage]
 
 The
 [junit5-gradle-consumer](https://github.com/junit-team/junit5-samples/tree/master/junit5-gradle-consumer)
@@ -27,11 +27,11 @@ demonstrates how to setup a Gradle project using JUnit Platform, JUnit Jupiter a
 
 
 ## Maven Consumer
-![jdk-8](https://img.shields.io/badge/jdk-8-yellow.svg)
-![tool-maven](https://img.shields.io/badge/tool-maven-2464af.svg)
-![junit-platform](https://img.shields.io/badge/junit-platform-brightgreen.svg)
-![junit-jupiter](https://img.shields.io/badge/junit-jupiter-green.svg)
-![junit-vintage](https://img.shields.io/badge/junit-vintage-yellowgreen.svg)
+![jdk-8][badge-jdk-8]
+![tool-maven][badge-tool-maven]
+![junit-platform][badge-junit-platform]
+![junit-jupiter][badge-junit-jupiter]
+![junit-vintage][badge-junit-vintage]
 
 The
 [junit5-maven-consumer](https://github.com/junit-team/junit5-samples/tree/master/junit5-maven-consumer)
@@ -40,9 +40,9 @@ demonstrates how to setup a Maven project using JUnit Platform, JUnit Jupiter an
 
 
 ## Vanilla Jupiter on Gradle
-![jdk-8](https://img.shields.io/badge/jdk-8-yellow.svg)
-![tool-gradle](https://img.shields.io/badge/tool-gradle-blue.svg)
-![junit-jupiter](https://img.shields.io/badge/junit-jupiter-green.svg)
+![jdk-8][badge-jdk-8]
+![tool-gradle][badge-tool-gradle]
+![junit-jupiter][badge-junit-jupiter]
 
 The
 [junit5-vanilla-gradle](https://github.com/junit-team/junit5-samples/tree/master/junit5-vanilla-gradle)
@@ -51,9 +51,9 @@ shows just the bare minimum to get started with JUnit Jupiter on Gradle.
 
 
 ## Vanilla Jupiter on Maven
-![jdk-8](https://img.shields.io/badge/jdk-8-yellow.svg)
-![tool-maven](https://img.shields.io/badge/tool-maven-2464af.svg)
-![junit-jupiter](https://img.shields.io/badge/junit-jupiter-green.svg)
+![jdk-8][badge-jdk-8]
+![tool-maven][badge-tool-maven]
+![junit-jupiter][badge-junit-jupiter]
 
 The
 [junit5-vanilla-maven](https://github.com/junit-team/junit5-samples/tree/master/junit5-vanilla-maven)
@@ -62,10 +62,10 @@ shows just the bare minimum to get started with JUnit Jupiter on Maven.
 
 
 ## Mockito Extension
-![jdk-8](https://img.shields.io/badge/jdk-8-yellow.svg)
-![tool-gradle](https://img.shields.io/badge/tool-gradle-blue.svg)
-![junit-platform](https://img.shields.io/badge/junit-platform-brightgreen.svg)
-![junit-jupiter](https://img.shields.io/badge/junit-jupiter-green.svg)
+![jdk-8][badge-jdk-8]
+![tool-gradle][badge-tool-gradle]
+![junit-platform][badge-junit-platform]
+![junit-jupiter][badge-junit-jupiter]
 
 The
 [junit5-mockito-extension](https://github.com/junit-team/junit5-samples/tree/master/junit5-mockito-extension)
@@ -74,12 +74,22 @@ shows how to integrate Mockito into JUnit Jupiter tests somewhat simpler.
 
 
 ## Ice Cream Machine 
-![jdk-9](https://img.shields.io/badge/jdk-9-orange.svg)
-![tool-gradle](https://img.shields.io/badge/tool-gradle-blue.svg)
-![junit-platform](https://img.shields.io/badge/junit-platform-brightgreen.svg)
+![jdk-9][badge-jdk-9]
+![tool-gradle][badge-tool-gradle]
+![junit-platform][badge-junit-platform]
 
 The
 [junit5-java9-engine](https://github.com/junit-team/junit5-samples/tree/master/junit5-java9-engine)
 sample demonstrates how to implement a custom
 [TestEngine](https://github.com/junit-team/junit5/blob/master/junit-platform-engine/src/main/java/org/junit/platform/engine/TestEngine.java)
 using the Java Platform Module System.
+
+
+
+[badge-jdk-8]: https://img.shields.io/badge/jdk-8-yellow.svg
+[badge-jdk-9]: https://img.shields.io/badge/jdk-9-orange.svg
+[badge-tool-gradle]: https://img.shields.io/badge/tool-gradle-blue.svg
+[badge-tool-maven]: https://img.shields.io/badge/tool-maven-0440af.svg
+[badge-junit-platform]: https://img.shields.io/badge/junit-platform-brightgreen.svg
+[badge-junit-jupiter]: https://img.shields.io/badge/junit-jupiter-green.svg
+[badge-junit-vintage]: https://img.shields.io/badge/junit-vintage-yellowgreen.svg
