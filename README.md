@@ -6,16 +6,6 @@ using JUnit Jupiter, JUnit Vintage, and the JUnit Platform on various build syst
 CI builds for sample projects are available on [Jenkins][ci-jenkins] and
 [Travis CI][ci-travis].
 
-## Gradle Consumer ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
-
-The [junit5-gradle-consumer] sample demonstrates how to set up a Gradle project
-using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
-
-## Maven Consumer ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
-
-The [junit5-maven-consumer] sample demonstrates how to set up a Maven project
-using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
-
 ## Vanilla Jupiter on Gradle ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
 
 The [junit5-vanilla-gradle] sample demonstrates just the bare minimum configuration for
@@ -25,6 +15,16 @@ getting started with JUnit Jupiter using the Gradle build system.
 
 The [junit5-vanilla-maven] sample demonstrates just the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
+
+## Gradle Consumer ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
+
+The [junit5-gradle-consumer] sample demonstrates how to set up a Gradle project
+using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
+
+## Maven Consumer ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
+
+The [junit5-maven-consumer] sample demonstrates how to set up a Maven project
+using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
 ## Mockito Extension ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
 
