@@ -8,12 +8,12 @@ CI builds for sample projects are available on [Jenkins][ci-jenkins] and
 
 ## Vanilla Jupiter on Gradle ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
 
-The [junit5-vanilla-gradle] sample demonstrates just the bare minimum configuration for
+The [junit5-vanilla-gradle] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Gradle build system.
 
 ## Vanilla Jupiter on Maven ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter]
 
-The [junit5-vanilla-maven] sample demonstrates just the bare minimum configuration for
+The [junit5-vanilla-maven] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
 
 ## Gradle Consumer ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
