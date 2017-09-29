@@ -42,8 +42,8 @@
 						<excludeTags>slow</excludeTags>
 						<!--
 						<configurationParameters>
-	                        junit.jupiter.conditions.deactivate = *
-	                    </configurationParameters>
+							junit.jupiter.conditions.deactivate = *
+						</configurationParameters>
 						-->
 					</properties>
 				</configuration>
