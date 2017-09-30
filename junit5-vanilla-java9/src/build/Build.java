@@ -112,7 +112,7 @@ class Build {
     args.add("--module-path").add(modulePath);
     args.add("--add-modules").add("ALL-MODULE-PATH");
     args.add("--module").add("org.junit.platform.console");
-    args.add("--scan-module-path");
+    args.add("--scan-class-path"); // TODO replace with "--scan-module-path"
     Util.run("java", args.list);
   }
 
@@ -123,18 +123,15 @@ class Build {
     String version = "1.0.0";
     resolve(repository + "org/apiguardian", "apiguardian-api", version);
     resolve(repository + "org/opentest4j", "opentest4j", version);
-    // branch "module", PR #1061
+    // branch "jigsaw"
     repository = "https://jitpack.io/com/github/junit-team/junit5/";
-    version = "module-r5.0.0-gb2081d7-20";
+    version = "jigsaw-r5.0.0-gbe104bb-69";
     resolve(repository, "junit-jupiter-api", version);
     resolve(repository, "junit-jupiter-engine", version);
     resolve(repository, "junit-platform-commons", version);
     resolve(repository, "junit-platform-console", version);
     resolve(repository, "junit-platform-engine", version);
     resolve(repository, "junit-platform-launcher", version);
-    // branch "jpms", PR #1057
-    version = "jpms-r5.0.0-geba6164-19";
-    resolve(repository, "junit-platform-commons-jpms", version);
   }
 
   /** Resolve dependency by downloading the associated jar file for the given coordinates. */
