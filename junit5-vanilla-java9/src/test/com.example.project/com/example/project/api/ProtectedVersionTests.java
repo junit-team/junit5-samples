@@ -18,5 +18,6 @@ class ProtectedVersionTests {
   @Test
   void versionEquals4711() {
     assertEquals("47.11", ProtectedVersion.VERSION);
+    // assertEquals("Project", Project.class.getSimpleName());
   }
 }

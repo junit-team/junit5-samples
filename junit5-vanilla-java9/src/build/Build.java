@@ -26,12 +26,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.spi.ToolProvider;
 import java.util.stream.Stream;
 
 @SuppressWarnings("ALL")
 class Build {
+
+  Predicate<Path> javaSourceFile = path -> path.getFileName().toString().endsWith(".java");
 
   Path deps = Paths.get("deps");
 
@@ -60,44 +63,34 @@ class Build {
 
   void compileMain() {
     Util.log.info("Compile main application modules");
-    Util.findDirectoryNames(mainSource).forEach(this::compileMain);
-  }
-
-  void compileMain(String module) {
     Args args = new Args();
     args.add("-d").add(mainTarget);
     args.add("--module-path").add(deps);
     args.add("--module-source-path").add(mainSource);
-    args.add("--module").add(module);
+    args.addAll(mainSource, javaSourceFile);
     Util.run("javac", args.list);
   }
 
   void compileTest() {
     Util.log.info("Compile test application modules");
-    Util.findDirectoryNames(testSource).forEach(this::compileTest);
-  }
-
-  void compileTest(String module) {
     Args args = new Args();
     args.add("-d").add(testTarget);
     args.add("--module-path").add(mainTarget, deps);
     args.add("--module-source-path").add(testSource);
-    args.add("--patch-module").add(module + "=" + mainSource.resolve(module));
-    args.add("--module").add(module);
+    Util.findDirectoryNames(testSource)
+            .forEach(module ->
+                    args.add("--patch-module").add(module + "=" + mainSource.resolve(module)));
+    args.addAll(testSource, javaSourceFile);
     Util.run("javac", args.list);
   }
 
   void compileUser() {
     Util.log.info("Compile user-view test integration modules");
-    Util.findDirectoryNames(userSource).forEach(this::compileUser);
-  }
-
-  void compileUser(String module) {
     Args args = new Args();
     args.add("-d").add(userTarget);
     args.add("--module-path").add(mainTarget, deps);
     args.add("--module-source-path").add(userSource);
-    args.add("--module").add(module);
+    args.addAll(userSource, javaSourceFile);
     Util.run("javac", args.list);
   }
 
@@ -105,14 +98,21 @@ class Build {
     Util.log.info("Launch test runs");
     test(testTarget, mainTarget, deps);
     test(userTarget, mainTarget, deps);
+    // TODO "Project not referred to..." test(testTarget, userTarget, mainTarget, deps);
   }
 
   void test(Path... modulePath) {
     Args args = new Args();
+    args.add("-Djava.util.logging.config.file=logging.properties");
     args.add("--module-path").add(modulePath);
     args.add("--add-modules").add("ALL-MODULE-PATH");
+    /*
+    Util.findDirectoryNames(mainTarget)
+            .forEach(module ->
+                    args.add("--patch-module").add(module + "=" + mainTarget.resolve(module)));
+    */
     args.add("--module").add("org.junit.platform.console");
-    args.add("--scan-class-path"); // TODO replace with "--scan-module-path"
+    args.add("--select-module").add("ALL-MODULES");
     Util.run("java", args.list);
   }
 
@@ -125,7 +125,7 @@ class Build {
     resolve(repository + "org/opentest4j", "opentest4j", version);
     // branch "jigsaw"
     repository = "https://jitpack.io/com/github/junit-team/junit5/";
-    version = "jigsaw-r5.0.0-gbe104bb-69";
+    version = "jigsaw-r5.0.0-gc1e1af8-73";
     resolve(repository, "junit-jupiter-api", version);
     resolve(repository, "junit-jupiter-engine", version);
     resolve(repository, "junit-platform-commons", version);
@@ -163,6 +163,15 @@ class Build {
       list.add(String.join(delimiter, stream.map(Object::toString).collect(toList())));
       return this;
     }
+
+    Args addAll(Path root, Predicate<Path> filter) {
+      try (Stream<Path> stream = Files.walk(root).filter(filter)) {
+        stream.map(Path::toString).forEach(list::add);
+      } catch (IOException e) {
+        throw new UncheckedIOException("addAll failed for: " + root, e);
+      }
+      return this;
+    }
   }
 
   /** Static helpers. */
@@ -175,12 +184,10 @@ class Build {
       if (Files.notExists(root)) {
         return;
       }
-      try {
-        try (Stream<Path> stream = Files.walk(root)) {
-          Stream<Path> selected = stream.sorted((p, q) -> -p.compareTo(q));
-          for (Path path : selected.collect(toList())) {
-            Files.deleteIfExists(path);
-          }
+      try (Stream<Path> stream = Files.walk(root)) {
+        Stream<Path> selected = stream.sorted((p, q) -> -p.compareTo(q));
+        for (Path path : selected.collect(toList())) {
+          Files.deleteIfExists(path);
         }
       } catch (IOException e) {
         throw new UncheckedIOException("clean failed for: " + root, e);
