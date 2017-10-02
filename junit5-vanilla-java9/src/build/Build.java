@@ -112,7 +112,7 @@ class Build {
                     args.add("--patch-module").add(module + "=" + mainTarget.resolve(module)));
     */
     args.add("--module").add("org.junit.platform.console");
-    args.add("--select-module").add("ALL-MODULES");
+    args.add("--scan-module-path"); // short-cut for add("--select-module").add("ALL-MODULES")
     Util.run("java", args.list);
   }
 
@@ -125,7 +125,7 @@ class Build {
     resolve(repository + "org/opentest4j", "opentest4j", version);
     // branch "jigsaw"
     repository = "https://jitpack.io/com/github/junit-team/junit5/";
-    version = "jigsaw-r5.0.0-gc1e1af8-73";
+    version = "jigsaw-r5.0.0-g8580457-74";
     resolve(repository, "junit-jupiter-api", version);
     resolve(repository, "junit-jupiter-engine", version);
     resolve(repository, "junit-platform-commons", version);
