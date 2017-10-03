@@ -9,6 +9,8 @@ dependencies {
 	compile("org.junit.platform:junit-platform-engine:1.1.0-SNAPSHOT")
 	compileOnly("org.apiguardian:apiguardian-api:1.0.0")
 	testRuntime("org.junit.platform:junit-platform-console:1.1.0-SNAPSHOT")
+	// To avoid compiler warnings about @API annotations in JUnit code
+	compileOnly('org.apiguardian:apiguardian-api:1.0.0')
 }
 
 //
