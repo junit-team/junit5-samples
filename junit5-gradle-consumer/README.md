@@ -18,7 +18,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
 	}
 }
 
@@ -31,7 +31,7 @@ Once the JUnit Platform Gradle plugin has been applied, you can configure it as 
 
 ```groovy
 junitPlatform {
-	// platformVersion '1.0.0'
+	// platformVersion '1.0.1'
 	filters {
 		engines {
 			// include 'junit-jupiter', 'junit-vintage'
