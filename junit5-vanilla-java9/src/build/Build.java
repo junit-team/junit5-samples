@@ -125,7 +125,7 @@ class Build {
     resolve(repository + "org/opentest4j", "opentest4j", version);
     // branch "jigsaw"
     repository = "https://jitpack.io/com/github/junit-team/junit5/";
-    version = "jigsaw-r5.0.0-g8580457-74";
+    version = "jigsaw-r5.0.0-g8581c50-96";
     resolve(repository, "junit-jupiter-api", version);
     resolve(repository, "junit-jupiter-engine", version);
     resolve(repository, "junit-platform-commons", version);
