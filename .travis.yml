@@ -8,13 +8,16 @@ jobs:
     - stage: junit5-maven-consumer
       script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
     - stage: junit5-gradle-consumer
-      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew test
+      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew test --console plain
     - stage: junit5-mockito-extension
-      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test
+      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test --console plain
     - stage: junit5-vanilla-gradle
-      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
     - stage: junit5-vanilla-maven
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
     - stage: junit5-java9-engine
       jdk: oraclejdk9
-      script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew --console plain test
+      script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew test --console plain
+    - stage: junit5-java9-modulepath
+      jdk: oraclejdk9
+      script: cd $TRAVIS_BUILD_DIR/junit5-java9-modulepath && ./gradlew test run --console plain
