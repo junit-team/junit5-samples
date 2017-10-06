@@ -18,3 +18,6 @@ jobs:
     - stage: junit5-java9-engine
       jdk: oraclejdk9
       script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew --console plain test
+    - stage: junit5-vanilla-java9
+      jdk: oraclejdk9
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-java9 && ./build.jsh
