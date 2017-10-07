@@ -8,6 +8,11 @@ pipeline {
       steps {
         sh 'cd junit5-gradle-consumer && ./gradlew --no-daemon clean build'
       }
+      post {
+        always {
+          junit 'junit5-gradle-consumer/build/test-results/junit-platform/*.xml'
+        }
+      }
     }
     stage('junit5-java9-engine') {
       tools {
@@ -15,6 +20,11 @@ pipeline {
       }
       steps {
         sh 'cd junit5-java9-engine && ./gradlew --no-daemon clean build'
+      }
+      post {
+        always {
+          junit 'junit5-java9-engine/build/test-results/junit-platform/*.xml'
+        }
       }
     }
     stage('junit5-maven-consumer') {
@@ -24,6 +34,11 @@ pipeline {
       steps {
         sh 'cd junit5-maven-consumer && ./mvnw -B clean verify'
       }
+      post {
+        always {
+          junit 'junit5-maven-consumer/target/surefire-reports/*.xml'
+        }
+      }
     }
     stage('junit5-mockito-extension') {
       tools {
@@ -31,6 +46,11 @@ pipeline {
       }
       steps {
         sh 'cd junit5-mockito-extension && ./gradlew --no-daemon clean build'
+      }
+      post {
+        always {
+          junit 'junit5-mockito-extension/build/test-results/junit-platform/*.xml'
+        }
       }
     }
     stage('junit5-vanilla-gradle') {
@@ -40,6 +60,11 @@ pipeline {
       steps {
         sh 'cd junit5-vanilla-gradle && ./gradlew --no-daemon clean build'
       }
+      post {
+        always {
+          junit 'junit5-vanilla-gradle/build/test-results/junit-platform/*.xml'
+        }
+      }
     }
     stage('junit5-vanilla-maven') {
       tools {
@@ -47,6 +72,11 @@ pipeline {
       }
       steps {
         sh 'cd junit5-vanilla-maven && ./mvnw -B clean verify'
+      }
+      post {
+        always {
+          junit 'junit5-vanilla-maven/target/surefire-reports/*.xml'
+        }
       }
     }
   }
