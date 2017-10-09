@@ -1,0 +1,89 @@
+plugins {
+	id 'java-library'
+	id 'application'
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	// To avoid compiler warnings about @API annotations in JUnit code.
+	compileOnly('org.apiguardian:apiguardian-api:1.0.0')
+
+	// 3rd-party library used in our "application".
+	implementation('org.apache.commons:commons-lang3:3.6')
+
+	// Using `@Test` from JUnit Jupiter API.
+	// Triggers download of "junit-platform-commons" and "opentest4j" as well.
+	testImplementation('com.github.junit-team.junit5:junit-jupiter-api:jigsaw-SNAPSHOT')
+
+	// Running JUnit Platform Console...
+	testRuntimeOnly('com.github.junit-team.junit5:junit-platform-console:jigsaw-SNAPSHOT')
+	// ...along with JUnit Jupiter engine!
+	testRuntimeOnly('com.github.junit-team.junit5:junit-jupiter-engine:jigsaw-SNAPSHOT')
+}
+
+//
+// Copy compile- and runtime dependencies to a single directory.
+//
+task deps(type: Copy) {
+	into "$buildDir/deps"
+	from configurations.compileClasspath
+	from configurations.testRuntimeClasspath
+}
+
+//
+// Compile application.
+//
+compileJava {
+	dependsOn deps
+	options.compilerArgs = [
+			'--module-path', deps.destinationDir
+	]
+	classpath = files()
+}
+
+//
+// Compile integration test.
+//
+compileTestJava {
+	dependsOn compileJava
+	options.compilerArgs = [
+			'--module-path', files(compileJava.destinationDir, deps.destinationDir).asPath
+	]
+	classpath = files()
+}
+
+//
+// Execute console launcher on the module-path.
+//
+task testOnModulePath(type: Exec, dependsOn: compileJava) {
+	executable = 'java'
+	args = [
+			'--module-path', files(compileTestJava.destinationDir, compileJava.destinationDir, deps.destinationDir).asPath,
+			'--add-modules', 'ALL-MODULE-PATH',
+			'--module', 'org.junit.platform.console',
+			'--scan-module-path',
+			'--reports-dir', "${buildDir}/test-results/junit-platform"
+	]
+}
+
+test.enabled = false
+test.dependsOn testOnModulePath
+
+//
+// Override defaults of 'application' plugin.
+//
+mainClassName = 'application/application.Main'
+run {
+	dependsOn deps
+	doFirst {
+		jvmArgs = [
+				'--module-path', files(deps.destinationDir, compileJava.destinationDir).asPath,
+				'--module', mainClassName
+		]
+		classpath = files()
+	}
+}

@@ -27,6 +27,19 @@ pipeline {
         }
       }
     }
+    stage('junit5-java9-modulepath') {
+      tools {
+        jdk 'Oracle JDK 9'
+      }
+      steps {
+        sh 'cd junit5-java9-modulepath && ./gradlew --no-daemon clean build'
+      }
+      post {
+        always {
+          junit 'junit5-java9-modulepath/build/test-results/junit-platform/*.xml'
+        }
+      }
+    }
     stage('junit5-maven-consumer') {
       tools {
         jdk 'Oracle JDK 8 (latest)'
