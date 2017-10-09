@@ -25,12 +25,6 @@ dependencies {
 	testRuntimeOnly('com.github.junit-team.junit5:junit-jupiter-engine:jigsaw-SNAPSHOT')
 }
 
-tasks.withType(JavaCompile).all {
-	sourceCompatibility = JavaVersion.VERSION_1_9
-	targetCompatibility = JavaVersion.VERSION_1_9
-	options.encoding = 'UTF-8'
-}
-
 //
 // Copy compile- and runtime dependencies to a single directory.
 //
@@ -71,7 +65,8 @@ task testOnModulePath(type: Exec, dependsOn: compileJava) {
 			'--module-path', files(compileTestJava.destinationDir, compileJava.destinationDir, deps.destinationDir).asPath,
 			'--add-modules', 'ALL-MODULE-PATH',
 			'--module', 'org.junit.platform.console',
-			'--scan-module-path'
+			'--scan-module-path',
+			'--reports-dir', "${buildDir}/test-results/junit-platform"
 	]
 }
 
