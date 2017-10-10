@@ -13,8 +13,12 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test --console plain
     - stage: junit5-vanilla-gradle
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
+    - stage: junit5-vanilla-gradle-SNAPSHOT
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
     - stage: junit5-vanilla-maven
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
+    - stage: junit5-vanilla-maven-SNAPSHOT
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
     - stage: junit5-java9-engine
       jdk: oraclejdk9
       script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew test --console plain
