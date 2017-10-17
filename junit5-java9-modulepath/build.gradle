@@ -5,7 +5,7 @@ plugins {
 
 repositories {
 	mavenCentral()
-	maven { url 'https://jitpack.io' }
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
@@ -17,12 +17,12 @@ dependencies {
 
 	// Using `@Test` from JUnit Jupiter API.
 	// Triggers download of "junit-platform-commons" and "opentest4j" as well.
-	testImplementation('com.github.junit-team.junit5:junit-jupiter-api:jigsaw-SNAPSHOT')
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.0-SNAPSHOT')
 
 	// Running JUnit Platform Console...
-	testRuntimeOnly('com.github.junit-team.junit5:junit-platform-console:jigsaw-SNAPSHOT')
+	testRuntimeOnly('org.junit.platform:junit-platform-console:1.1.0-SNAPSHOT')
 	// ...along with JUnit Jupiter engine!
-	testRuntimeOnly('com.github.junit-team.junit5:junit-jupiter-engine:jigsaw-SNAPSHOT')
+	testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.0-SNAPSHOT')
 }
 
 //
