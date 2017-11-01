@@ -33,7 +33,7 @@ public class Machine implements TestEngine {
 	/**
 	 * Build caption used as the engine's display name.
 	 */
-	private String getCaption() {
+	String getCaption() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Ice Cream Machine");
 		if (getVersion().isPresent()) {
@@ -48,7 +48,7 @@ public class Machine implements TestEngine {
 	/**
 	 * Extract amount of scoops to generate.
 	 */
-	private int getScoops(EngineDiscoveryRequest discoveryRequest, int defaultScoops) {
+	int getScoops(EngineDiscoveryRequest discoveryRequest, int defaultScoops) {
 		ConfigurationParameters parameters = discoveryRequest.getConfigurationParameters();
 		String scoops = parameters.get("scoops").orElse(Integer.toString(defaultScoops));
 		return Integer.valueOf(scoops);
