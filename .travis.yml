@@ -7,10 +7,13 @@ jobs:
   include:
     - stage: vanilla
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
+    - # vanilla
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
     - stage: consumer
       script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
+    - # consumer
       script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew test --console plain
+    - # consumer
       script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test --console plain
     - stage: java-9
       jdk: oraclejdk9
