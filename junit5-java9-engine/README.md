@@ -54,10 +54,10 @@ Sample command line to register and execute the ice.cream machine:
 ```
 java
 	-Dscoops=3
-	--module-path ...                   // mods;build/classes/java/main
-	--add-modules ice.cream             // resolve module 'ice.cream' by default
+	--module-path ...                   // main classes + test classes + "external modules"
+	--add-modules ALL-MODULE-PATH       // resolve all modules on the module-path by default
 	--module org.junit.platform.console // start the JUnit Platform Console module
-	--scan-class-path                   // does nothing, just here to satisfy the launcher
+	--scan-module-path                   // scan modules for tests
 
 ```
 
