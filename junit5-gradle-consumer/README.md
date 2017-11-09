@@ -73,8 +73,8 @@ implementation similar to the following.
 
 ```groovy
 dependencies {
-	testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0")
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0")
+	testCompile("org.junit.jupiter:junit-jupiter-api:5.0.1")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.")
 }
 ```
 
