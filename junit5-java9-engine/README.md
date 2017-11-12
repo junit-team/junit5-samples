@@ -57,7 +57,7 @@ java
 	--module-path ...                   // main classes + test classes + "external modules"
 	--add-modules ALL-MODULE-PATH       // resolve all modules on the module-path by default
 	--module org.junit.platform.console // start the JUnit Platform Console module
-	--scan-module-path                   // scan modules for tests
+	--scan-modules                      // scan resolved modules for tests
 
 ```
 

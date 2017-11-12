@@ -61,7 +61,7 @@ task testIceCreamMachine(type: Exec, dependsOn: compileTestJava) {
 			'--module-path', files(configurations.compileClasspath, configurations.testRuntimeClasspath, compileTestJava.destinationDir).asPath,
 			'--add-modules', 'ALL-MODULE-PATH',
 			'--module', 'org.junit.platform.console',
-			'--scan-module-path',
+			'--scan-modules',
 			'--reports-dir', "${buildDir}/test-results/junit-platform"
 	]
 }
