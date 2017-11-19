@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0-M1'
 	}
 }
 
@@ -15,8 +15,8 @@ repositories {
 }
 
 dependencies {
-	testCompile('org.junit.jupiter:junit-jupiter-api:5.0.2')
-	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.0.2')
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0-M1')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0-M1')
 	// To avoid compiler warnings about @API annotations in JUnit code
 	testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
 }
