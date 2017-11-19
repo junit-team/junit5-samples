@@ -68,3 +68,8 @@ task testIceCreamMachine(type: Exec, dependsOn: compileTestJava) {
 
 test.enabled = false
 check.dependsOn testIceCreamMachine
+
+task wrapper(type: Wrapper) {
+	description = 'Generates gradlew[.bat] scripts'
+	gradleVersion = '4.3.1'
+}
