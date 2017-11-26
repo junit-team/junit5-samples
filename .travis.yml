@@ -5,16 +5,24 @@ jdk: oraclejdk8
 
 jobs:
   include:
+# vanilla
     - stage: vanilla
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
-    - # vanilla
+    - stage: vanilla
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
+# consumer
     - stage: consumer
       script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
-    - # consumer
+    - stage: consumer
       script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew test --console plain
-    - # consumer
+    - stage: consumer
       script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test --console plain
+# java 9 and higher
     - stage: java-9
       jdk: oraclejdk9
       script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew check --console plain
+# snapshot -- use current junit master branch
+    - stage: snapshot
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
+    - stage: snapshot
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
