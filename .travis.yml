@@ -21,6 +21,9 @@ jobs:
     - stage: java-9
       jdk: oraclejdk9
       script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew check --console plain
+    - stage: java-9
+      jdk: oraclejdk9
+      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
 # snapshot -- use current junit master branch
     - stage: snapshot
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
