@@ -10,6 +10,7 @@ jobs:
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
     - stage: vanilla
+      env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
 # consumer
     - stage: consumer
