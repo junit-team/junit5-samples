@@ -1,7 +1,6 @@
 apply plugin: 'java'
 
 repositories {
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	mavenCentral()
 }
 
@@ -10,16 +9,16 @@ dependencies {
 	compile('org.apiguardian:apiguardian-api:1.0.0')
 
 	// We implement `TestEngine` interface.
-	compile('org.junit.platform:junit-platform-engine:1.1.0-SNAPSHOT')
+	compile('org.junit.platform:junit-platform-engine:1.1.0-M1')
 
 	// We use Jupiter API in our test implementations.
-	testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0-SNAPSHOT')
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0-M1')
 
 	// Needed to run JUnit Jupiter tests.
-	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0-SNAPSHOT')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0-M1')
 
 	// Needed to run JUnit Platform on the console.
-	testRuntime('org.junit.platform:junit-platform-console:1.1.0-SNAPSHOT')
+	testRuntime('org.junit.platform:junit-platform-console:1.1.0-M1')
 }
 
 //
@@ -68,3 +67,8 @@ task testIceCreamMachine(type: Exec, dependsOn: compileTestJava) {
 
 test.enabled = false
 check.dependsOn testIceCreamMachine
+
+task wrapper(type: Wrapper) {
+	description = 'Generates gradlew[.bat] scripts'
+	gradleVersion = '4.3.1'
+}
