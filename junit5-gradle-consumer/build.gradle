@@ -20,6 +20,7 @@ ext.log4jVersion         = '2.9.0'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'maven'
 apply plugin: 'org.junit.platform.gradle.plugin'
 
 jar {

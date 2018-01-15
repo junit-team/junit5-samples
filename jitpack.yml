@@ -1,0 +1,3 @@
+install:
+  - ./junit5-gradle-consumer/gradlew -b ./junit5-gradle-consumer/build.gradle install -Pgroup=$GROUP -Pversion=$VERSION --console plain
+  - ./junit5-mockito-extension/gradlew -b ./junit5-mockito-extension/build.gradle install -Pgroup=$GROUP -Pversion=$VERSION --console plain
