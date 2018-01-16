@@ -66,7 +66,7 @@ task testIceCreamMachine(type: Exec, dependsOn: compileTestJava) {
 	executable = 'java'
 	args = [
 			'-Dscoops=' + System.getProperty('scoops', '3'),
-			'--module-path', files(configurations.compileClasspath, configurations.testRuntimeClasspath, compileTestJava.destinationDir).asPath,
+			'--module-path', files(configurations.testRuntimeClasspath, compileTestJava.destinationDir).asPath,
 			'--add-modules', 'ALL-MODULE-PATH',
 			'--module', 'org.junit.platform.console',
 			'--scan-modules',
@@ -74,27 +74,17 @@ task testIceCreamMachine(type: Exec, dependsOn: compileTestJava) {
 	]
 }
 
-test.enabled = false
 check.dependsOn testIceCreamMachine
 
 //
 // Use JUnitPlatform Gradle Plugin in module-path mode.
 //
 junitPlatform {
-	enableModulePath true
+	modulepath = files(configurations.testRuntimeClasspath, compileTestJava.destinationDir)
 	details 'tree'
-}
-
-junitPlatformTest {
-	doFirst {
-		jvmArgs = [
-				'--module-path', files(configurations.compileClasspath, configurations.testRuntimeClasspath, compileTestJava.destinationDir).asPath,
-				'--add-modules', 'ALL-MODULE-PATH',
-		]
-	}
 }
 
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '4.3.1'
+	gradleVersion = '4.4.1'
 }
