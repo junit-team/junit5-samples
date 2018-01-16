@@ -1,24 +1,32 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	}
+	dependencies {
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0-SNAPSHOT'
+	}
+}
+
 apply plugin: 'java'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	// To avoid compiler warnings about @API annotations in JUnit code.
-	compile('org.apiguardian:apiguardian-api:1.0.0')
-
-	// We implement `TestEngine` interface.
-	compile('org.junit.platform:junit-platform-engine:1.1.0-M1')
+	// We implement the `TestEngine` interface.
+	compile('org.junit.platform:junit-platform-engine:1.1.0-SNAPSHOT')
 
 	// We use Jupiter API in our test implementations.
-	testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0-M1')
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0-SNAPSHOT')
 
 	// Needed to run JUnit Jupiter tests.
-	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0-M1')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0-SNAPSHOT')
 
 	// Needed to run JUnit Platform on the console.
-	testRuntime('org.junit.platform:junit-platform-console:1.1.0-M1')
+	testRuntime('org.junit.platform:junit-platform-console:1.1.0-SNAPSHOT')
 }
 
 //
@@ -67,6 +75,23 @@ task testIceCreamMachine(type: Exec, dependsOn: compileTestJava) {
 
 test.enabled = false
 check.dependsOn testIceCreamMachine
+
+//
+// Use JUnitPlatform Gradle Plugin in module-path mode.
+//
+junitPlatform {
+	enableModulePath true
+	details 'tree'
+}
+
+junitPlatformTest {
+	doFirst {
+		jvmArgs = [
+				'--module-path', files(configurations.compileClasspath, configurations.testRuntimeClasspath, compileTestJava.destinationDir).asPath,
+				'--add-modules', 'ALL-MODULE-PATH',
+		]
+	}
+}
 
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
