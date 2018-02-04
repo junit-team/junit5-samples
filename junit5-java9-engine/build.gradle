@@ -65,7 +65,7 @@ task testIceCreamMachine(type: Exec, dependsOn: compileTestJava) {
 	args = [
 			'-Dscoops=' + System.getProperty('scoops', '3'),
 			'--module-path', files(configurations.testRuntimeClasspath, compileTestJava.destinationDir).asPath,
-			'--add-modules', 'ALL-MODULE-PATH',
+			'--add-modules', 'ALL-MODULE-PATH,ALL-DEFAULT',
 			'--module', 'org.junit.platform.console',
 			'--scan-modules',
 			'--reports-dir', "${buildDir}/test-results/junit-platform"
