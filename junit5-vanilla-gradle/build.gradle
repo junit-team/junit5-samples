@@ -17,8 +17,6 @@ repositories {
 dependencies {
 	testCompile('org.junit.jupiter:junit-jupiter-api:5.0.3')
 	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.0.3')
-	// To avoid compiler warnings about @API annotations in JUnit code
-	testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
 }
 
 task wrapper(type: Wrapper) {

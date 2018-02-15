@@ -62,9 +62,6 @@ dependencies {
 	testCompile("junit:junit:${junit4Version}")
 	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
 
-	// To avoid compiler warnings about @API annotations in JUnit code
-	testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
-
 	// To use Log4J's LogManager
 	testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
 	testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}")

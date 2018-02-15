@@ -43,10 +43,6 @@ dependencies {
 
 	// Only needed to run tests in an IDE that bundles an older version
 	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
-
-	// To avoid compiler warnings about @API annotations in JUnit code
-	compileOnly('org.apiguardian:apiguardian-api:1.0.0')
-	testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
 }
 
 task wrapper(type: Wrapper) {
