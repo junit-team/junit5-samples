@@ -1,14 +1,4 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
-	}
-}
-
 apply plugin: 'java'
-apply plugin: 'org.junit.platform.gradle.plugin'
 
 repositories {
 	mavenCentral()
@@ -19,7 +9,15 @@ dependencies {
 	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0')
 }
 
+test {
+	useJUnitPlatform()
+
+	testLogging {
+		events "passed", "skipped", "failed", "standardOut", "standardError"
+	}
+}
+
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '4.3.1'
+	gradleVersion = '4.6'
 }

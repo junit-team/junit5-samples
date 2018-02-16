@@ -62,7 +62,7 @@ pipeline {
       }
       post {
         always {
-          junit 'junit5-vanilla-gradle/build/test-results/junit-platform/*.xml'
+          junit 'junit5-vanilla-gradle/build/test-results/test/*.xml'
         }
       }
     }
