@@ -9,7 +9,7 @@ gradle-app.setting
 /.classpath
 /.settings/
 /.project
-/bin/
+bin/
 
 # IntelliJ
 .idea
