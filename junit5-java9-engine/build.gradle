@@ -3,7 +3,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0-RC1'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
 	}
 }
 
@@ -16,16 +16,16 @@ repositories {
 
 dependencies {
 	// We implement the `TestEngine` interface.
-	compile('org.junit.platform:junit-platform-engine:1.1.0-RC1')
+	compile('org.junit.platform:junit-platform-engine:1.1.0')
 
 	// We use Jupiter API in our test implementations.
-	testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0-RC1')
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.1.0')
 
 	// Needed to run JUnit Jupiter tests.
-	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0-RC1')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.1.0')
 
 	// Needed to run JUnit Platform on the console.
-	testRuntime('org.junit.platform:junit-platform-console:1.1.0-RC1')
+	testRuntime('org.junit.platform:junit-platform-console:1.1.0')
 }
 
 //
