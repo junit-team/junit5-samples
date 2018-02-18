@@ -88,7 +88,7 @@ pipeline {
       }
       post {
         always {
-          junit 'junit5-vanilla-modules/build/test-results/junit-platform/*.xml'
+          junit 'junit5-vanilla-modules/bin/test-results/junit-platform/*.xml'
         }
       }
     }
