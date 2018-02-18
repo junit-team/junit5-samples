@@ -8,6 +8,7 @@ int run(String tool, String... args) {
 }
 
 int exec(String executable, String... args) throws Exception {
+  System.out.printf("[exec] %s %s%n", executable, List.of(args));
   ProcessBuilder processBuilder = new ProcessBuilder(executable);
   Arrays.stream(args).forEach(processBuilder.command()::add);
   processBuilder.redirectErrorStream(true);

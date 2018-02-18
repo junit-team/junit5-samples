@@ -26,7 +26,7 @@ load("lib", "org.opentest4j", "opentest4j", "1.0.0")
 // compile test modules
 List<String> args = new ArrayList<>()
 args.addAll(List.of("-d", "bin/test"))
-args.addAll(List.of("--module-path", "bin/main;lib"))
+args.addAll(List.of("--module-path", String.join(File.pathSeparator, "bin/main", "lib")))
 args.addAll(List.of("--patch-module", "org.openjdk.hello=src/main/org.openjdk.hello"))
 args.addAll(List.of("--patch-module", "org.openjdk.text=src/main/org.openjdk.text"))
 args.addAll(List.of("--module-source-path", "src/test"))
@@ -34,6 +34,12 @@ Files.walk(Paths.get("src/test")).filter(path -> path.getFileName().toString().e
 run("javac", args.toArray(new String[0]))
 
 // run tests
-exec("java", "--module-path", "bin/test;bin/main;lib", "--add-modules", "ALL-MODULE-PATH,ALL-DEFAULT", "--module", "org.junit.platform.console", "--scan-modules", "--reports-dir", "bin/test-results/junit-platform")
+args.clear()
+args.addAll(List.of("--module-path", String.join(File.pathSeparator, "bin/test", "bin/main","lib")))
+args.addAll(List.of("--add-modules", "ALL-MODULE-PATH,ALL-DEFAULT"))
+args.addAll(List.of("--module", "org.junit.platform.console"))
+args.add("--scan-modules")
+args.addAll(List.of("--reports-dir", "bin/test-results/junit-platform"))
+exec("java", args.toArray(new String[0]))
 
 /exit
