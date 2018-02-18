@@ -41,6 +41,9 @@ if (error == 0) {
 	error = run("junit5-vanilla-maven", "mvnw", "clean", "test");
 }
 if (error == 0) {
+	error = run("junit5-vanilla-modules", "jshell", "build.jsh");
+}
+if (error == 0) {
 	error = run("junit5-gradle-consumer", "gradlew", "clean", "test", "--no-daemon");
 }
 if (error == 0) {
@@ -52,9 +55,6 @@ if (error == 0) {
 if (error == 0) {
 	error = run("junit5-java9-engine", "gradlew", "clean", "test", "--no-daemon");
 }
-//if (error == 0) {
-//	error = run("junit5-vanilla-modules", "jshell", "build.jsh");
-//}
 
 System.out.printf("%n%n%n|%n| Done. (error = %d)%n|%n", error);
 

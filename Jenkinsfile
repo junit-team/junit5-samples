@@ -79,5 +79,18 @@ pipeline {
         }
       }
     }
+    stage('junit5-vanilla-modules') {
+      tools {
+        jdk 'Oracle JDK 9'
+      }
+      steps {
+        sh 'cd junit5-vanilla-modules && ./build.jsh'
+      }
+      post {
+        always {
+          junit 'junit5-vanilla-modules/bin/test-patch-compile-results/junit-platform/*.xml'
+        }
+      }
+    }
   }
 }
