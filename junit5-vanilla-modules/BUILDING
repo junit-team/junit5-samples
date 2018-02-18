@@ -1,0 +1,80 @@
+import java.nio.file.*
+import java.util.function.*
+import java.util.spi.*
+
+class Arguments {
+	List<String> list = new ArrayList<>();
+	Arguments add(Object o) {
+		list.add(String.valueOf(o));
+		return this;
+	}
+	Arguments addPath(Predicate<Path> predicate, String... roots) throws Exception {
+	    List<String> paths = new ArrayList<>();
+	    for (String root : roots) {
+	      Files.walk(Paths.get(root)).filter(predicate).map(Object::toString).forEach(paths::add);
+	    }
+	    add(String.join(File.pathSeparator, paths));
+	    return this;
+	}
+	Arguments addPath(String... paths) {
+		add(String.join(File.pathSeparator, paths));
+		return this;
+	}
+	Arguments addAllFiles(String root, String extension) throws Exception {
+	   return addAllFiles(root, path -> path.getFileName().toString().endsWith(extension));
+	}
+	Arguments addAllFiles(String root, Predicate<Path> predicate) throws Exception {
+		Files.walk(Paths.get(root)).filter(predicate).forEach(this::add);
+		return this;
+	}
+	String[] toArray() {
+		return list.toArray(new String[0]);
+	}
+}
+
+int run(String tool, String... args) {
+	System.out.printf("[run] %s %s%n", tool, List.of(args));
+	return ToolProvider.findFirst(tool).get().run(System.out, System.err, args);
+}
+
+int exe(String executable, String... args) throws Exception {
+	System.out.printf("[exe] %s %s%n", executable, List.of(args));
+	ProcessBuilder processBuilder = new ProcessBuilder(executable);
+	Arrays.stream(args).forEach(processBuilder.command()::add);
+	processBuilder.redirectErrorStream(true);
+	Process process = processBuilder.start();
+	process.getInputStream().transferTo(System.out);
+	return process.waitFor();
+}
+
+void del(String directory) throws Exception {
+	System.out.printf("[del] %s%n", directory);
+	Path root = Paths.get(directory);
+	if (Files.notExists(root)) {
+		return;
+	}
+	try (Stream<Path> stream = Files.walk(root)) {
+		Stream<Path> selected = stream.sorted((p, q) -> -p.compareTo(q));
+		for (Path path : selected.collect(Collectors.toList())) {
+			Files.deleteIfExists(path);
+		}
+	}
+}
+
+Path get(String directory, String group, String artifact, String version) throws Exception {
+	String repo = "http://central.maven.org/maven2";
+	String file = artifact + "-" + version + ".jar";
+	URI uri = URI.create(String.join("/", repo, group.replace('.', '/'), artifact, version, file));
+	URL url = uri.toURL();
+	Path folder = Paths.get(directory);
+	Path target = folder.resolve(file);
+	if (Files.exists(target)) {
+		return target;
+	}
+	System.out.printf("[get] %s%n", target);
+	Files.createDirectories(folder);
+	try (InputStream sourceStream = url.openStream(); OutputStream targetStream = Files.newOutputStream(target)) {
+		sourceStream.transferTo(targetStream);
+	}
+	return target;
+}
