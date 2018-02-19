@@ -2,52 +2,69 @@ import java.nio.file.*
 import java.util.function.*
 import java.util.spi.*
 
+class Arguments {
+	List<String> list = new ArrayList<>();
+	Arguments add(Object o) {
+		list.add(String.valueOf(o));
+		return this;
+	}
+	Arguments addAllJavaFiles(String root) throws Exception {
+		Files.walk(Paths.get(root))
+			.filter(path -> path.getFileName().toString().endsWith(".java"))
+			.forEach(this::add);
+		return this;
+	}
+	String[] toArray() {
+		return list.toArray(new String[0]);
+	}
+}
+
 int run(String tool, String... args) {
-  System.out.printf("[run] %s %s%n", tool, List.of(args));
-  return ToolProvider.findFirst(tool).get().run(System.out, System.err, args);
+	System.out.printf("[run] %s %s%n", tool, List.of(args));
+	return ToolProvider.findFirst(tool).get().run(System.out, System.err, args);
 }
 
 int exec(String executable, String... args) throws Exception {
-  System.out.printf("[exec] %s %s%n", executable, List.of(args));
-  ProcessBuilder processBuilder = new ProcessBuilder(executable);
-  Arrays.stream(args).forEach(processBuilder.command()::add);
-  processBuilder.redirectErrorStream(true);
-  Process process = processBuilder.start();
-  process.getInputStream().transferTo(System.out);
-  return process.waitFor();
+	System.out.printf("[exec] %s %s%n", executable, List.of(args));
+	ProcessBuilder processBuilder = new ProcessBuilder(executable);
+	Arrays.stream(args).forEach(processBuilder.command()::add);
+	processBuilder.redirectErrorStream(true);
+	Process process = processBuilder.start();
+	process.getInputStream().transferTo(System.out);
+	return process.waitFor();
 }
 
 void del(String root) throws Exception {
-  System.out.printf("[del] %s%n", root);
-  deleteTree(Paths.get(root), path -> true);
+	System.out.printf("[del] %s%n", root);
+	deleteTree(Paths.get(root), path -> true);
 }
 
 void deleteTree(Path root, Predicate<Path> filter) throws Exception {
-  if (Files.notExists(root)) {
-    return;
-  }
-  try (Stream<Path> stream = Files.walk(root)) {
-    Stream<Path> selected = stream.filter(filter).sorted((p, q) -> -p.compareTo(q));
-    for (Path path : selected.collect(Collectors.toList())) {
-      Files.deleteIfExists(path);
-    }
-  }
+	if (Files.notExists(root)) {
+		return;
+	}
+	try (Stream<Path> stream = Files.walk(root)) {
+		Stream<Path> selected = stream.filter(filter).sorted((p, q) -> -p.compareTo(q));
+		for (Path path : selected.collect(Collectors.toList())) {
+			Files.deleteIfExists(path);
+		}
+	}
 }
 
 Path load(String directory, String group, String artifact, String version) throws Exception {
-  String repo = "http://central.maven.org/maven2";
-  String file = artifact + "-" + version + ".jar";
-  URI uri = URI.create(String.join("/", repo, group.replace('.', '/'), artifact, version, file));
-  URL url = uri.toURL();
-  Path folder = Paths.get(directory);
-  Path target = folder.resolve(file);
-  if (Files.exists(target)) {
-    return target;
-  }
-  System.out.printf("[load] %s%n", target);
-  Files.createDirectories(folder);
-  try (InputStream sourceStream = url.openStream(); OutputStream targetStream = Files.newOutputStream(target)) {
-    sourceStream.transferTo(targetStream);
-  }
-  return target;
+	String repo = "http://central.maven.org/maven2";
+	String file = artifact + "-" + version + ".jar";
+	URI uri = URI.create(String.join("/", repo, group.replace('.', '/'), artifact, version, file));
+	URL url = uri.toURL();
+	Path folder = Paths.get(directory);
+	Path target = folder.resolve(file);
+	if (Files.exists(target)) {
+		return target;
+	}
+	System.out.printf("[load] %s%n", target);
+	Files.createDirectories(folder);
+	try (InputStream sourceStream = url.openStream(); OutputStream targetStream = Files.newOutputStream(target)) {
+		sourceStream.transferTo(targetStream);
+	}
+	return target;
 }

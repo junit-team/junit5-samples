@@ -1,6 +1,6 @@
 open module black.box {
 	//
-    // modules under test
+	// modules under test
 	//
 	requires org.openjdk.hello;
 	requires org.openjdk.text;
