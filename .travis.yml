@@ -12,6 +12,10 @@ jobs:
     - stage: vanilla
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
+    - stage: vanilla
+      jdk: oraclejdk9
+      env: TOPIC='Java Platform Module System'
+      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-modules && ./build.jsh
 # consumer
     - stage: consumer
       env: TOOL='Maven'
