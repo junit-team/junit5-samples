@@ -1,8 +1,8 @@
-open module org.openjdk.text {
+open module org.openjdk.hello {
 	//
 	// copied from "main" module
 	//
-	exports org.openjdk.text;
+	requires org.openjdk.text;
 
 	//
 	// test dependencies
