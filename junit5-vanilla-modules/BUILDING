@@ -8,9 +8,13 @@ class Arguments {
 		list.add(String.valueOf(o));
 		return this;
 	}
-	Arguments addAllJavaFiles(String root) throws Exception {
+	Arguments addPath(String... paths) {
+	    add(String.join(File.pathSeparator, paths));
+	    return this;
+	}
+	Arguments addAllFiles(String root, String extension) throws Exception {
 		Files.walk(Paths.get(root))
-			.filter(path -> path.getFileName().toString().endsWith(".java"))
+			.filter(path -> path.getFileName().toString().endsWith(extension))
 			.forEach(this::add);
 		return this;
 	}
