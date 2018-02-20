@@ -38,3 +38,8 @@ jobs:
     - stage: snapshot
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
+# all samples, one-shot
+    - stage: all
+      jdk: oraclejdk9
+      env: TOPIC='Build all samples'
+      script: ./build-all-samples.jsh
