@@ -6,7 +6,7 @@ int run(String directory, String executable, String... args) {
     try {
         System.out.printf("%n%n%n[ %s ] executable=%s args=%s%n%n", directory, executable, Arrays.asList(args));
         boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        ProcessBuilder processBuilder = new ProcessBuilder(isWindows ? "cmd.exe" : executable);
+        ProcessBuilder processBuilder = new ProcessBuilder(isWindows ? "cmd.exe" : "./" + executable);
         if (isWindows) {
             processBuilder.command().add("/C");
             processBuilder.command().add(executable);
