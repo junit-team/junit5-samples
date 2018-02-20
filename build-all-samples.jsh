@@ -4,7 +4,7 @@
 
 int run(String directory, String executable, String... args) {
     try {
-        System.out.printf("%n%n%n[ %s ] executable=%s args=%s%n", directory, executable, Arrays.asList(args));
+        System.out.printf("%n%n%n[ %s ] executable=%s args=%s%n%n", directory, executable, Arrays.asList(args));
         boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
         ProcessBuilder processBuilder = new ProcessBuilder(isWindows ? "cmd.exe" : executable);
         if (isWindows) {
@@ -18,7 +18,7 @@ int run(String directory, String executable, String... args) {
         process.getInputStream().transferTo(System.out);
         return process.waitFor();
     } catch (Throwable throwable) {
-        System.err.printf("%n%n%n[ %s ] failed to build!", directory);
+        System.err.printf("%n%n%n[ %s ] failed to build!%n", directory);
         throwable.printStackTrace(System.err);
         return 1;
     }
@@ -46,5 +46,7 @@ if (error == 0) {
 //if (error == 0) {
 //  error = run("junit5-vanilla-modules", "jshell", "build.jsh");
 //}
+
+System.out.printf("%n%n%n[ . ] Done. (error = %d)", error)
 
 /exit error
