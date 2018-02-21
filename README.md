@@ -16,7 +16,7 @@ getting started with JUnit Jupiter using the Gradle build system.
 The [junit5-vanilla-maven] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
 
-## Vanilla Jupiter on JShell ![badge-jdk-9] ![badge-tool-console] ![badge-junit-jupiter]
+## Vanilla Jupiter on JShell ![badge-jdk-10] ![badge-tool-console] ![badge-junit-jupiter]
 
 The [junit5-vanilla-modules] sample demonstrates how to test code organized in modules.
 
@@ -46,6 +46,7 @@ Platform Module System (a.k.a., _Project Jigsaw_ for Java 9).
 [junit5-maven-consumer]: junit5-maven-consumer
 [junit5-vanilla-gradle]: junit5-vanilla-gradle
 [junit5-vanilla-maven]: junit5-vanilla-maven
+[junit5-vanilla-modules]: junit5-vanilla-modules
 [junit5-mockito-extension]: junit5-mockito-extension
 [junit5-java9-engine]: junit5-java9-engine
 
