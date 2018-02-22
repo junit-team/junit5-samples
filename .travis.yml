@@ -45,4 +45,4 @@ jobs:
 # all samples, one-shot
     - stage: all
       env: TOPIC='Build all samples'
-      script: install: . ./src/install-jdk.sh && ./build-all-samples.jsh
+      script: . ./src/install-jdk.sh && ./build-all-samples.jsh
