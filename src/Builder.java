@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 class Builder {
 
 	public static void main(String[] args) {
-		int status = new Builder().build();
+		var status = new Builder().build();
 		if (status != 0) {
 			throw new AssertionError("Expected exit status of zero, but got: " + status);
 		}
@@ -53,14 +53,14 @@ class Builder {
 		}
 		System.out.printf("%n%n%n|%n| %s%n|%n", directory);
 		System.out.printf("| %s %s%n|%n", executable, String.join(" ", args));
-		Path path = Paths.get(directory);
-		boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+		var path = Paths.get(directory);
+		var isWindows = System.getProperty("os.name").toLowerCase().contains("win");
 		if (!isWindows) {
 			if (Files.isExecutable(path.resolve(executable))) {
 				executable = "./" + executable;
 			}
 		}
-		ProcessBuilder processBuilder = new ProcessBuilder(isWindows ? "cmd.exe" : executable);
+		var processBuilder = new ProcessBuilder(isWindows ? "cmd.exe" : executable);
 		if (isWindows) {
 			processBuilder.command().add("/C");
 			processBuilder.command().add(executable);
@@ -69,11 +69,11 @@ class Builder {
 		processBuilder.directory(path.toFile());
 		processBuilder.redirectErrorStream(true);
 		try {
-			Process process = processBuilder.start();
+			var process = processBuilder.start();
 			process.getInputStream().transferTo(System.out);
 			status = process.waitFor();
 		} catch (Exception exception) {
-			System.err.printf("%n%n%n| %s failed to build!%n", directory);
+			System.out.printf("%n%n%n| %s failed to build!%n", directory);
 			exception.printStackTrace(System.err);
 			status = 1;
 		}
@@ -83,31 +83,34 @@ class Builder {
 		if (status != 0) {
 			return;
 		}
+		System.out.printf("%n%n%n|%n| check license: %s%n|%n", blueprint);
 		try {
-			List<String> expected = Files.readAllLines(Paths.get(blueprint));
-			expected.forEach(System.out::println);
-			int count = 0;
-			List<Path> paths = Files.walk(Paths.get(".")).filter(path -> path.getFileName().toString().endsWith(extension)).collect(Collectors.toList());
-			for (Path path : paths) {
-				if (!checkLicense(path, expected)) {
-					System.err.printf("| %s%n", path);
-					count++;
+			var expected = Files.readAllLines(Paths.get(blueprint));
+			var errors = 0;
+			var paths = Files.walk(Paths.get("."))
+					.filter(path -> path.getFileName().toString().endsWith(extension))
+					.collect(Collectors.toList());
+			for (var path : paths) {
+				if (checkLicense(path, expected)) {
+					continue;
 				}
+				System.out.printf("| %s%n", path);
+				errors++;
 			}
-			if (count > 0) {
-				System.err.printf("| %d file(s) with no or false license.%n", count);
+			if (errors > 0) {
+				System.out.printf("| %d file(s) with no or false license.%n", errors);
 				status = 1;
 			}
 		}
 		catch (Exception exception) {
-			System.err.printf("%n%n%n| License `%s` check failed!%n", blueprint);
+			System.out.printf("%n%n%n| License `%s` check failed!%n", blueprint);
 			exception.printStackTrace(System.err);
 			status = 1;
 		}
 	}
 
 	boolean checkLicense(Path path, List<String> expected) throws Exception {
-		List<String> actual = Files.readAllLines(path);
+		var actual = Files.readAllLines(path);
 		if (actual.size() >= expected.size()) {
 			actual = actual.subList(0, expected.size());
 			return actual.equals(expected);
