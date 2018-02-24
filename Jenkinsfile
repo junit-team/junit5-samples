@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent { label 'hi-speed' }
   stages {
     stage('junit5-gradle-consumer') {
       tools {
