@@ -43,6 +43,6 @@ jobs:
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
 # all samples, one-shot
-    - stage: all
-      env: TOPIC='Build all samples'
-      script: . ./src/install-jdk.sh -F 10 && ./build-all-samples.jsh
+#    - stage: all
+#      env: TOPIC='Build all samples'
+#      script: . ./src/install-jdk.sh -F 10 && ./build-all-samples.jsh

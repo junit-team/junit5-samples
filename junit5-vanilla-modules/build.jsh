@@ -4,7 +4,7 @@
 
 exe("java", "--version")
 
-// del("bin")
+del("bin")
 
 exe("jshell", "compile.jsh")
 

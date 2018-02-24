@@ -6,41 +6,57 @@ using JUnit Jupiter, JUnit Vintage, and the JUnit Platform on various build syst
 CI builds for sample projects are available on [Jenkins][ci-jenkins] and
 [Travis CI][ci-travis].
 
-## Vanilla Jupiter on Gradle ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
+Using JDK 10's `jshell` tool, you may build all samples via the `build-all-samples.jsh`
+script.
+
+## Vanilla Samples
+
+_Basic setups showing how to get started._
+
+### Jupiter on Gradle ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
 
 The [junit5-vanilla-gradle] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Gradle build system.
 
-## Vanilla Jupiter on Maven ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter]
+### Jupiter on Maven ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter]
 
 The [junit5-vanilla-maven] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
 
-## Vanilla Jupiter on JShell ![badge-jdk-9] ![badge-tool-console] ![badge-junit-jupiter]
 
-The [junit5-vanilla-modules] sample demonstrates how to test code organized in modules.
+## Consumer Samples
 
-## Gradle Consumer ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
+_More complex setups how to integrate various parts of "JUnit 5"._ 
+
+### Gradle Consumer ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
 
 The [junit5-gradle-consumer] sample demonstrates how to set up a Gradle project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
-## Maven Consumer ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
+### Maven Consumer ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
 
 The [junit5-maven-consumer] sample demonstrates how to set up a Maven project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
-## Mockito Extension ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
+### Mockito Extension ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
 
 The [junit5-mockito-extension] sample provides a simple extension that demonstrates
 how one can integrate Mockito into JUnit Jupiter tests.
 
-## Ice Cream Machine ![badge-jdk-9] ![badge-tool-gradle] ![badge-junit-platform]
+
+## Java Platform Module System Samples
+
+_Living in the Modular World..._
+
+### Platform on JShell ![badge-jdk-9] ![badge-tool-console] ![badge-junit-platform]
+
+The [junit5-vanilla-modules] sample demonstrates how to test code organized in modules.
+
+### Ice Cream Machine ![badge-jdk-9] ![badge-tool-gradle] ![badge-junit-platform]
 
 The [junit5-java9-engine] sample demonstrates how to implement a custom
 [TestEngine][guide-custom-engine] for the JUnit Platform using the Java
-Platform Module System (a.k.a., _Project Jigsaw_ for Java 9).
-
+Platform Module System.
 
 [junit5-gradle-consumer]: junit5-gradle-consumer
 [junit5-maven-consumer]: junit5-maven-consumer
