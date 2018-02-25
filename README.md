@@ -48,7 +48,7 @@ how one can integrate Mockito into JUnit Jupiter tests.
 
 _Living in the Modular World..._
 
-### Platform on JShell ![badge-jdk-11] ![badge-tool-console] ![badge-junit-platform]
+### Platform on JShell ![badge-jdk-9] ![badge-jdk-10] ![badge-jdk-11] ![badge-tool-console] ![badge-junit-platform]
 
 The [junit5-vanilla-modules] sample demonstrates how to test code organized in modules.
 
@@ -66,10 +66,10 @@ Platform Module System.
 [junit5-mockito-extension]: junit5-mockito-extension
 [junit5-java9-engine]: junit5-java9-engine
 
-[badge-jdk-8]: https://img.shields.io/badge/jdk-8-yellow.svg "JDK-8"
-[badge-jdk-9]: https://img.shields.io/badge/jdk-9-orange.svg "JDK-9"
-[badge-jdk-10]: https://img.shields.io/badge/jdk-10-red.svg "JDK-10"
-[badge-jdk-11]: https://img.shields.io/badge/jdk-11-brown.svg "JDK-11 or higher"
+[badge-jdk-8]: https://img.shields.io/badge/jdk-8-lightgray.svg "JDK-8"
+[badge-jdk-9]: https://img.shields.io/badge/jdk-9-yellow.svg "JDK-9"
+[badge-jdk-10]: https://img.shields.io/badge/jdk-10-orange.svg "JDK-10"
+[badge-jdk-11]: https://img.shields.io/badge/jdk-11-red.svg "JDK-11 or higher"
 [badge-tool-gradle]: https://img.shields.io/badge/tool-gradle-blue.svg "Gradle wrapper included"
 [badge-tool-maven]: https://img.shields.io/badge/tool-maven-0440af.svg "Maven wrapper included"
 [badge-tool-console]: https://img.shields.io/badge/tool-console-022077.svg "Command line tools"
