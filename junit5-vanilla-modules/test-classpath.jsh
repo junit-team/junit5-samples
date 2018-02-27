@@ -18,8 +18,8 @@ run("javac", args.toArray())
 args = new Arguments()
 args.add("--class-path").addPath("bin/test-classpath", "bin/main-jars/*", "lib/*")
 args.add("org.junit.platform.console.ConsoleLauncher")
-args.add("--scan-class-path")
 args.add("--reports-dir").add("bin/test-classpath-results/junit-platform")
+args.add("--scan-class-path")
 exe("java", args.toArray())
 
 /exit

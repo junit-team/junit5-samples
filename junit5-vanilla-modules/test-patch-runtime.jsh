@@ -30,8 +30,8 @@ args.add("--add-opens").add("com.example.tool/com.example.tool=org.junit.platfor
 args.add("--add-reads").add("com.example.application=org.junit.jupiter.api")
 args.add("--add-reads").add("com.example.tool=org.junit.jupiter.api")
 args.add("--module").add("org.junit.platform.console")
-args.add("--scan-modules")
 args.add("--reports-dir").add("bin/test-patch-runtime-results/junit-platform")
+args.add("--scan-modules")
 exe("java", args.toArray())
 
 /exit

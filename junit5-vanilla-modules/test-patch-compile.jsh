@@ -22,8 +22,8 @@ args = new Arguments()
 args.add("--module-path").addPath("bin/test-patch-compile", "bin/main-jars", "lib")
 args.add("--add-modules").add("ALL-MODULE-PATH,ALL-DEFAULT")
 args.add("--module").add("org.junit.platform.console")
-args.add("--scan-modules")
 args.add("--reports-dir").add("bin/test-patch-compile-results/junit-platform")
+args.add("--scan-modules")
 exe("java", args.toArray())
 
 /exit

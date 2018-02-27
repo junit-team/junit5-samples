@@ -9,12 +9,12 @@ class Arguments {
 		return this;
 	}
 	Arguments addPath(Predicate<Path> predicate, String... roots) throws Exception {
-	    List<String> paths = new ArrayList<>();
-	    for (String root : roots) {
-	      Files.walk(Paths.get(root)).filter(predicate).map(Object::toString).forEach(paths::add);
-	    }
-	    add(String.join(File.pathSeparator, paths));
-	    return this;
+		List<String> paths = new ArrayList<>();
+		for (String root : roots) {
+			Files.walk(Paths.get(root)).filter(predicate).map(Object::toString).forEach(paths::add);
+		}
+		add(String.join(File.pathSeparator, paths));
+		return this;
 	}
 	Arguments addPath(String... paths) {
 		add(String.join(File.pathSeparator, paths));
@@ -33,22 +33,39 @@ class Arguments {
 }
 
 int run(String tool, String... args) {
-	System.out.printf("[run] %s with %d argument(s)%n", tool, args.length);
-	Arrays.stream(args).forEach(arg -> System.out.printf("%-"+(arg.startsWith("-")?8:10)+"s%s%n", "", arg));
-	System.out.println();
+	printCommandDetails("run", tool, args);
 	return ToolProvider.findFirst(tool).get().run(System.out, System.err, args);
 }
 
 int exe(String executable, String... args) throws Exception {
-	System.out.printf("[exe] %s with %d argument(s)%n", executable, args.length);
-	Arrays.stream(args).forEach(arg -> System.out.printf("%-"+(arg.startsWith("-")?8:10)+"s%s%n", "", arg));
-	System.out.println();
+	printCommandDetails("exe", executable, args);
 	ProcessBuilder processBuilder = new ProcessBuilder(executable);
 	Arrays.stream(args).forEach(processBuilder.command()::add);
 	processBuilder.redirectErrorStream(true);
 	Process process = processBuilder.start();
 	process.getInputStream().transferTo(System.out);
 	return process.waitFor();
+}
+
+void printCommandDetails(String context, String command, String... args) {
+	System.out.printf("[%s] %s with %d argument(s)%n", context, command, args.length);
+	boolean simple = true;
+	int indent = 8;
+	for (String arg : args) {
+		indent = simple ? 8 : arg.startsWith("-") ? 8 : 10;
+		simple = !arg.startsWith("-");
+		if (arg.length() > 100) {
+			if (arg.contains(File.pathSeparator)) {
+				for (String path : arg.split(File.pathSeparator)) {
+					System.out.printf("%-10s%s%n", "", path);
+				}
+				continue;
+			}
+			arg = arg.substring(0, 96) + "[...]";
+		}
+		System.out.printf("%-" + indent + "s%s%n", "", arg);
+	}
+	System.out.println();
 }
 
 void del(String directory) throws Exception {
