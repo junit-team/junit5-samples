@@ -48,7 +48,12 @@ int exe(String executable, String... args) throws Exception {
 }
 
 void printCommandDetails(String context, String command, String... args) {
-	System.out.printf("[%s] %s with %d argument(s)%n", context, command, args.length);
+	if (args.length < 2) {
+		System.out.printf("[%s] %s%s%n", context, command, (args.length == 1 ? " " + args[0] : ""));
+		System.out.println();
+		return;
+	}
+	System.out.printf("[%s] %s with %d arguments%n", context, command, args.length);
 	boolean simple = true;
 	int indent = 8;
 	for (String arg : args) {
