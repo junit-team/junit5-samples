@@ -33,12 +33,16 @@ class Arguments {
 }
 
 int run(String tool, String... args) {
-	System.out.printf("[run] %s %s%n", tool, List.of(args));
+	System.out.printf("[run] %s with %d argument(s)%n", tool, args.length);
+	Arrays.stream(args).forEach(arg -> System.out.printf("%-"+(arg.startsWith("-")?8:10)+"s%s%n", "", arg));
+	System.out.println();
 	return ToolProvider.findFirst(tool).get().run(System.out, System.err, args);
 }
 
 int exe(String executable, String... args) throws Exception {
-	System.out.printf("[exe] %s %s%n", executable, List.of(args));
+	System.out.printf("[exe] %s with %d argument(s)%n", executable, args.length);
+	Arrays.stream(args).forEach(arg -> System.out.printf("%-"+(arg.startsWith("-")?8:10)+"s%s%n", "", arg));
+	System.out.println();
 	ProcessBuilder processBuilder = new ProcessBuilder(executable);
 	Arrays.stream(args).forEach(processBuilder.command()::add);
 	processBuilder.redirectErrorStream(true);

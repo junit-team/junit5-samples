@@ -16,7 +16,7 @@ import org.junit.*;
 public class GoodOldTest {
 
 	@Test
-	public void eightteenEqualsNineAndNine() {
+	public void eighteenEqualsNineAndNine() {
 		Assert.assertEquals(18, new Calculator().add(9, 9));
 	}
 }
