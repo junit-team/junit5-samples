@@ -80,9 +80,24 @@ check.dependsOn testIceCreamMachine
 junitPlatform {
 	modulepath = files(configurations.testRuntimeClasspath, compileTestJava.destinationDir)
 	details 'tree'
+	enableStandardTestTask = false
 }
+
+//test {
+//	useJUnitPlatform()
+//
+//	inputs.property("moduleName", moduleName)
+//	doFirst {
+//		jvmArgs = [
+//				'--module-path', files(configurations.testRuntimeClasspath, compileTestJava.destinationDir).asPath,
+//				'--add-modules', 'ALL-MODULE-PATH,ALL-DEFAULT',
+//				'--patch-module', "$moduleName=" + files(sourceSets.test.java.outputDir).asPath,
+//		]
+//		classpath = files()
+//	}
+//}
 
 task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '4.4.1'
+	gradleVersion = '4.6'
 }
