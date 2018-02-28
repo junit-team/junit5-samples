@@ -47,16 +47,14 @@ dependencies {
 	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
 	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 
-	// If you also want to support JUnit 3 and JUnit 4 tests
 	testCompile("junit:junit:${junit4Version}")
-	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
+	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
+		because 'allows JUnit 3 and JUnit 4 tests to run'
+	}
 
-	// To use Log4J's LogManager
-	testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
-	testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}")
-
-	// Only needed to run tests in an (IntelliJ) IDE(A) that bundles an older version
-	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
+	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
+		because 'allows tests to run from IDEs that bundle older version of launcher'
+	}
 }
 
 task wrapper(type: Wrapper) {
