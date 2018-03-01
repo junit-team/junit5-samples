@@ -8,8 +8,10 @@ ext.junitPlatformVersion = '1.1.0'
 ext.junitJupiterVersion  = '5.1.0'
 ext.log4jVersion         = '2.9.0'
 
+int javaVersion = Integer.valueOf((String) JavaVersion.current().getMajorVersion())
+
 apply plugin: 'java'
-apply plugin: 'jacoco'
+if (javaVersion < 10) apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven'
@@ -42,7 +44,7 @@ test {
 		html.enabled = true
 	}
 
-	finalizedBy jacocoTestReport
+	if (javaVersion < 10) finalizedBy jacocoTestReport
 }
 
 dependencies {
