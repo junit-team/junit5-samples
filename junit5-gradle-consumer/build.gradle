@@ -9,6 +9,7 @@ ext.junitJupiterVersion  = '5.1.0'
 ext.log4jVersion         = '2.9.0'
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven'
@@ -61,3 +62,5 @@ task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
 	gradleVersion = '4.6'
 }
+
+build.dependsOn jacocoTestReport

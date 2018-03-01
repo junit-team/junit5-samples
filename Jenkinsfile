@@ -10,7 +10,7 @@ pipeline {
       }
       post {
         always {
-          junit 'junit5-gradle-consumer/build/test-results/junit-platform/*.xml'
+          junit 'junit5-gradle-consumer/build/test-results/test/*.xml'
         }
       }
     }
