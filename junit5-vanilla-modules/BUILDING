@@ -87,20 +87,26 @@ void del(String directory) throws Exception {
 	}
 }
 
+Path get(String directory, URI uri) throws Exception {
+    String uriPath = uri.getPath();
+    int begin = uriPath.lastIndexOf('/') + 1;
+    String file = uriPath.substring(begin).split("\\?")[0].split("#")[0];
+    Path folder = Paths.get(directory);
+    Path target = folder.resolve(file);
+    if (Files.exists(target)) {
+        return target;
+    }
+    System.out.printf("[get] %s%n", target);
+    Files.createDirectories(folder);
+    try (InputStream sourceStream = uri.toURL().openStream(); OutputStream targetStream = Files.newOutputStream(target)) {
+        sourceStream.transferTo(targetStream);
+    }
+    return target;
+}
+
 Path get(String directory, String group, String artifact, String version) throws Exception {
 	String repo = "http://central.maven.org/maven2";
 	String file = artifact + "-" + version + ".jar";
 	URI uri = URI.create(String.join("/", repo, group.replace('.', '/'), artifact, version, file));
-	URL url = uri.toURL();
-	Path folder = Paths.get(directory);
-	Path target = folder.resolve(file);
-	if (Files.exists(target)) {
-		return target;
-	}
-	System.out.printf("[get] %s%n", target);
-	Files.createDirectories(folder);
-	try (InputStream sourceStream = url.openStream(); OutputStream targetStream = Files.newOutputStream(target)) {
-		sourceStream.transferTo(targetStream);
-	}
-	return target;
+	return get(directory, uri);
 }

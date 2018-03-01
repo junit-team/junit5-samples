@@ -20,6 +20,8 @@ get("lib", "org.junit.vintage", "junit-vintage-engine", vintageVersion)
 get("lib", "junit", "junit", "4.12")
 get("lib", "org.hamcrest", "hamcrest-core", "1.3")
 
+get("lib", URI.create("https://oss.sonatype.org/content/repositories/snapshots/net/jqwik/jqwik/0.8.5-SNAPSHOT/jqwik-0.8.5-20180301.181313-3.jar"))
+
 //
 // compile and package main modules
 //

@@ -8,17 +8,21 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-open module black.box {
-	//
-	// modules under test
-	//
-	requires com.example.application;
-	requires com.example.tool;
+package black.box;
 
-	//
-	// test framework api
-	//
-	requires org.junit.jupiter.api;
-	requires junit; // JUnit 4 "automatic module"
-	requires net.jqwik;
+import com.example.tool.*;
+import net.jqwik.api.*;
+
+class JQwikTests {
+
+	@Example
+	boolean exampleFor1And3Equals4() {
+		return new Calculator().add(1, 3) == 4;
+	}
+
+	@Property
+	boolean propertyAdd(@ForAll int a, @ForAll int b) {
+		return new Calculator().add(a, b) == a + b;
+	}
+
 }
