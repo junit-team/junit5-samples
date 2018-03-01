@@ -41,6 +41,8 @@ test {
 	reports {
 		html.enabled = true
 	}
+
+	finalizedBy jacocoTestReport
 }
 
 dependencies {
@@ -62,5 +64,3 @@ task wrapper(type: Wrapper) {
 	description = 'Generates gradlew[.bat] scripts'
 	gradleVersion = '4.6'
 }
-
-build.dependsOn jacocoTestReport
