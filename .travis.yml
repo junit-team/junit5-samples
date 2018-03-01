@@ -25,7 +25,7 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
     - stage: consumer
       env: TOOL='Gradle'
-      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew test --console plain
+      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew build --console plain --scan
     - stage: consumer
       env: TOPIC='Mockito Extension'
       script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test --console plain
