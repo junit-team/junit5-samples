@@ -3,9 +3,9 @@ sudo: false
 language: java
 jdk: oraclejdk8
 
-# https://github.com/travis-ci/travis-ci/issues/8408
 before_install:
   - unset _JAVA_OPTIONS
+  - wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh
 
 jobs:
   include:
@@ -18,7 +18,7 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
     - stage: vanilla
       env: TOPIC='Java Platform Module System'
-      script: . ./src/install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-vanilla-modules && ./build.jsh
+      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-vanilla-modules && ./build.jsh
 # consumer
     - stage: consumer
       env: TOOL='Maven'
@@ -48,4 +48,4 @@ jobs:
 # all samples, one-shot
 #    - stage: all
 #      env: TOPIC='Build all samples'
-#      script: . ./src/install-jdk.sh -F 10 && ./build-all-samples.jsh
+#      script: . ./install-jdk.sh -F 10 && ./build-all-samples.jsh
