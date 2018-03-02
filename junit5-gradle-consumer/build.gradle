@@ -1,30 +1,27 @@
-repositories {
-	mavenCentral()
+plugins {
+	id 'com.gradle.build-scan' version '1.12.1'
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+	id 'maven'
+}
+
+buildScan {
+	licenseAgreementUrl = "https://gradle.com/terms-of-service"
+	licenseAgree = "yes"
 }
 
 ext.junit4Version        = '4.12'
 ext.junitVintageVersion  = '5.1.0'
 ext.junitPlatformVersion = '1.1.0'
 ext.junitJupiterVersion  = '5.1.0'
-ext.log4jVersion         = '2.9.0'
 
 int javaVersion = Integer.valueOf((String) JavaVersion.current().getMajorVersion())
-
-apply plugin: 'java'
 if (javaVersion < 10) apply plugin: 'jacoco'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'maven'
 
 jar {
 	baseName = 'junit5-gradle-consumer'
 	version = '1.0.0-SNAPSHOT'
-}
-
-compileTestJava {
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
-	options.compilerArgs += '-parameters'
 }
 
 test {
@@ -47,6 +44,10 @@ test {
 	if (javaVersion < 10) finalizedBy jacocoTestReport
 }
 
+repositories {
+	mavenCentral()
+}
+
 dependencies {
 	// JUnit Jupiter API and TestEngine implementation
 	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
@@ -60,11 +61,6 @@ dependencies {
 	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
 		because 'allows tests to run from IDEs that bundle older version of launcher'
 	}
-}
-
-buildScan {
-	licenseAgreementUrl = "https://gradle.com/terms-of-service"
-	licenseAgree = "yes"
 }
 
 task wrapper(type: Wrapper) {
