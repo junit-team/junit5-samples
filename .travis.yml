@@ -18,7 +18,7 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
     - stage: vanilla
       env: TOPIC='Java Platform Module System'
-      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-vanilla-modules && ./build.jsh
+      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
 # consumer
     - stage: consumer
       env: TOOL='Maven'

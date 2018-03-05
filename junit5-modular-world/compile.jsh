@@ -33,6 +33,13 @@ run("jar", "--create", "--file", "bin/main-jars/com.example.application.jar", "-
 run("jar", "--describe-module", "--file", "bin/main-jars/com.example.application.jar")
 
 //
+//
+//
+run("javac", "-d", "bin/main", "--module-path", "lib", "--module-source-path", "src/main", "--module", "ice.cream")
+run("jar", "--create", "--file", "bin/main-jars/ice.cream.jar", "-C", "bin/main/ice.cream", ".")
+run("jar", "--describe-module", "--file", "bin/main-jars/ice.cream.jar")
+
+//
 // run application
 //
 exe("java", "--module-path", "bin/main-jars", "--module", "com.example.application", "3", "4")

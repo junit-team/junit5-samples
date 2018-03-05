@@ -1,4 +1,4 @@
-# junit5-vanilla-modules
+# junit5-modular-world
 
 The project layout structure and command line tools usages are based on proposals
 introduced by the [**Module System Quick-Start Guide**](http://openjdk.java.net/projects/jigsaw/quick-start).

@@ -79,16 +79,16 @@ pipeline {
         }
       }
     }
-    stage('junit5-vanilla-modules') {
+    stage('junit5-modular-world') {
       tools {
         jdk 'Oracle JDK 9'
       }
       steps {
-        sh 'cd junit5-vanilla-modules && ./build.jsh'
+        sh 'cd junit5-modular-world && ./build.jsh'
       }
       post {
         always {
-          junit 'junit5-vanilla-modules/bin/test-patch-compile-results/junit-platform/*.xml'
+          junit 'junit5-modular-world/bin/test-patch-compile-results/junit-platform/*.xml'
         }
       }
     }
