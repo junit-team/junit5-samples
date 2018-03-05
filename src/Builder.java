@@ -38,11 +38,10 @@ class Builder {
 		checkLicense("src/eclipse-public-license-2.0.java", ".java");
 		run("junit5-vanilla-gradle", "gradlew", "clean", "test");
 		run("junit5-vanilla-maven", "mvnw", "clean", "test");
-		run("junit5-modular-world", "jshell", "build.jsh");
 		run("junit5-gradle-consumer", "gradlew", "clean", "test");
 		run("junit5-maven-consumer", "mvnw", "clean", "test");
 		run("junit5-mockito-extension", "gradlew", "clean", "test");
-		run("junit5-java9-engine", "gradlew", "clean", "test");
+		run("junit5-modular-world", "jshell", "build.jsh");
 		System.out.printf("%n%n%n|%n| Done. Build exits with status = %d.%n|%n", status);
 		return status;
 	}
