@@ -51,12 +51,8 @@ _Living in the Modular World..._
 ### Platform on JShell ![badge-jdk-9] ![badge-jdk-10] ![badge-jdk-11] ![badge-tool-console] ![badge-junit-platform]
 
 The [junit5-modular-world] sample demonstrates how to test code organized in modules.
-
-### Ice Cream Machine ![badge-jdk-9] ![badge-tool-gradle] ![badge-junit-platform]
-
-The [junit5-java9-engine] sample demonstrates how to implement a custom
-[TestEngine][guide-custom-engine] for the JUnit Platform using the Java
-Platform Module System.
+This sample also demonstrates how to implement a custom [TestEngine][guide-custom-engine]
+for the JUnit Platform using the Java Platform Module System.
 
 [junit5-gradle-consumer]: junit5-gradle-consumer
 [junit5-maven-consumer]: junit5-maven-consumer
@@ -64,7 +60,6 @@ Platform Module System.
 [junit5-vanilla-maven]: junit5-vanilla-maven
 [junit5-modular-world]: junit5-modular-world
 [junit5-mockito-extension]: junit5-mockito-extension
-[junit5-java9-engine]: junit5-java9-engine
 
 [badge-jdk-8]: https://img.shields.io/badge/jdk-8-lightgray.svg "JDK-8"
 [badge-jdk-9]: https://img.shields.io/badge/jdk-9-yellow.svg "JDK-9"

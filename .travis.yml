@@ -32,10 +32,6 @@ jobs:
 # java 9 and higher
     - stage: java-9
       jdk: oraclejdk9
-      env: TOPIC='Ice Cream Machine'
-      script: cd $TRAVIS_BUILD_DIR/junit5-java9-engine && ./gradlew check --console plain
-    - stage: java-9
-      jdk: oraclejdk9
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
 # snapshot -- use current junit master branch
