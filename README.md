@@ -50,7 +50,7 @@ _Living in the Modular World..._
 
 ### Platform on JShell ![badge-jdk-9] ![badge-jdk-10] ![badge-jdk-11] ![badge-tool-console] ![badge-junit-platform]
 
-The [junit5-vanilla-modules] sample demonstrates how to test code organized in modules.
+The [junit5-modular-world] sample demonstrates how to test code organized in modules.
 
 ### Ice Cream Machine ![badge-jdk-9] ![badge-tool-gradle] ![badge-junit-platform]
 
@@ -62,7 +62,7 @@ Platform Module System.
 [junit5-maven-consumer]: junit5-maven-consumer
 [junit5-vanilla-gradle]: junit5-vanilla-gradle
 [junit5-vanilla-maven]: junit5-vanilla-maven
-[junit5-vanilla-modules]: junit5-vanilla-modules
+[junit5-modular-world]: junit5-modular-world
 [junit5-mockito-extension]: junit5-mockito-extension
 [junit5-java9-engine]: junit5-java9-engine
 
