@@ -24,6 +24,41 @@ It tests the exported packages and types of the main modules.
 
 Main binaries are compiled and packaged using `./compile.jsh`.
 
+For example, here are the commands to compile and package the `com.example.tool` module.
+This and the `com.example.application` module don't need external module dependencies.
+```
+javac
+    -d bin/main
+    --module-source-path src/main
+    --module com.example.tool
+```
+```
+jar
+    --create
+    --file bin/main-jars/com.example.tool.jar
+    -C bin/main/com.example.tool
+    .
+```
+
+The `ice.cream` modules needs external modules to compile and is packaged with an explicit module version:
+```
+javac
+    -d bin/main
+    --module-path lib
+    --module-source-path src/main
+    --module ice.cream
+```
+```
+jar
+    --create
+    --file bin/main-jars/ice.cream.jar
+    --module-version 47.11
+    -C bin/main/ice.cream
+    .
+```
+
+Here is the partly expanded tree of the `bin/` directory after running `./compile.jsh`:
+
 ![junit5-modular-world/bin](doc/screenshot-bin.png)
 
 
