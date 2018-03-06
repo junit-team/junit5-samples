@@ -21,22 +21,27 @@ get("lib", "org.apiguardian", "apiguardian-api", "1.0.0")
 get("lib", "org.opentest4j", "opentest4j", "1.0.0")
 get("lib", "net.jqwik", "jqwik", "0.8.5")
 
+// create target directories
+Files.createDirectories(Paths.get("bin/main-jars"))
+
 //
-// compile and package main modules
+// compile and package tool module
 //
 run("javac", "-d", "bin/main", "--module-source-path", "src/main", "--module", "com.example.tool")
-run("javac", "-d", "bin/main", "--module-source-path", "src/main", "--module", "com.example.application")
-
-Files.createDirectories(Paths.get("bin/main-jars"))
 run("jar", "--create", "--file", "bin/main-jars/com.example.tool.jar", "-C", "bin/main/com.example.tool", ".")
+
+//
+// compile and package application module
+//
+run("javac", "-d", "bin/main", "--module-source-path", "src/main", "--module", "com.example.application")
 run("jar", "--create", "--file", "bin/main-jars/com.example.application.jar", "--main-class", "com.example.application.Main", "-C", "bin/main/com.example.application", ".")
 run("jar", "--describe-module", "--file", "bin/main-jars/com.example.application.jar")
 
 //
-//
+// compile and package "ice.cream" module
 //
 run("javac", "-d", "bin/main", "--module-path", "lib", "--module-source-path", "src/main", "--module", "ice.cream")
-run("jar", "--create", "--file", "bin/main-jars/ice.cream.jar", "-C", "bin/main/ice.cream", ".")
+run("jar", "--create", "--file", "bin/main-jars/ice.cream.jar", "--module-version", "47.11", "-C", "bin/main/ice.cream", ".")
 run("jar", "--describe-module", "--file", "bin/main-jars/ice.cream.jar")
 
 //
