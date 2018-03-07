@@ -24,6 +24,7 @@ args.add("--module-path").addPath("bin/test-patch-compile", "bin/main-jars", "li
 args.add("--add-modules").add("ALL-MODULE-PATH,ALL-DEFAULT")
 args.add("--module").add("org.junit.platform.console")
 args.add("--reports-dir").add("bin/test-patch-compile-results/junit-platform")
+args.add("--config").add("junit.jupiter.execution.parallel.enabled=true")
 args.add("--scan-modules")
 exe("java", args.toArray())
 

@@ -13,7 +13,6 @@ package black.box;
 // import com.example.application.*; "package is declared in module com.example.application, which does not export it"
 import com.example.tool.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.*;
 
 @DisplayName("black.box/black.box.BlackBoxTests")
 class BlackBoxTests {
@@ -37,5 +36,10 @@ class BlackBoxTests {
 		int actual = new Calculator().add(a, b);
 		int expected = a + b;
 		Assertions.assertEquals(expected, actual);
+	}
+
+	@Test
+	void wait500() throws Exception {
+		Thread.sleep(500);
 	}
 }
