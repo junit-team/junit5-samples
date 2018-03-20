@@ -37,10 +37,10 @@ jobs:
 # snapshot -- use current junit master branch
     - stage: snapshot
       env: TOOL='Gradle'
-      script: . ./install-jdk.sh -F 10 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
+      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
     - stage: snapshot
       env: TOOL='Maven'
-      script: . ./install-jdk.sh -F 10 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
+      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
 # all samples, one-shot
 #    - stage: all
 #      env: TOPIC='Build all samples'
