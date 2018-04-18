@@ -27,8 +27,8 @@ jobs:
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew build --console plain --scan
     - stage: consumer
-      env: TOPIC='Mockito Extension'
-      script: cd $TRAVIS_BUILD_DIR/junit5-mockito-extension && ./gradlew test --console plain
+      env: TOPIC='Sample Extensions'
+      script: cd $TRAVIS_BUILD_DIR/junit5-sample-extensions && ./gradlew test --console plain
 # java 9 and higher
     - stage: java-9
       jdk: oraclejdk9

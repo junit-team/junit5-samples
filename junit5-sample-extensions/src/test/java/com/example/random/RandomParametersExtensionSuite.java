@@ -8,19 +8,19 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-package com.example.mockito;
+package com.example.random;
 
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.runner.RunWith;
 
 /**
- * Test suite for the {@link MockitoExtension}.
+ * Test suite for the {@link RandomParametersExtension}.
  *
- * @since 5.0
- * @see MockitoExtension
+ * @since 5.2
+ * @see RandomParametersExtension
  */
 @RunWith(JUnitPlatform.class)
-@SelectPackages("com.example.mockito")
-public class MockitoExtensionTestSuite {
+@SelectPackages("com.example.random")
+public class RandomParametersExtensionSuite {
 }

@@ -26,7 +26,7 @@ getting started with JUnit Jupiter using the Maven build system.
 
 ## Consumer Samples
 
-_More complex setups how to integrate various parts of "JUnit 5"._ 
+_More complex setups how to integrate various parts of "JUnit 5"._
 
 ### Gradle Consumer ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
 
@@ -38,10 +38,10 @@ using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 The [junit5-maven-consumer] sample demonstrates how to set up a Maven project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
-### Mockito Extension ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
+### Sample Extensions ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
 
-The [junit5-mockito-extension] sample provides a simple extension that demonstrates
-how one can integrate Mockito into JUnit Jupiter tests.
+The [junit5-sample-extensions] sample demonstrates how one can implement custom
+JUnit Jupiter extensions and use them in tests.
 
 
 ## Java Platform Module System Samples
@@ -59,7 +59,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-vanilla-gradle]: junit5-vanilla-gradle
 [junit5-vanilla-maven]: junit5-vanilla-maven
 [junit5-modular-world]: junit5-modular-world
-[junit5-mockito-extension]: junit5-mockito-extension
+[junit5-sample-extensions]: junit5-sample-extensions
 
 [badge-jdk-8]: https://img.shields.io/badge/jdk-8-lightgray.svg "JDK-8"
 [badge-jdk-9]: https://img.shields.io/badge/jdk-9-yellow.svg "JDK-9"
