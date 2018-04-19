@@ -1,11 +1,12 @@
-A simple JUnit Jupiter extension to integrate Mockito into JUnit Jupiter tests somewhat simpler.
+# junit5-jupiter-extensions
 
-The `MockitoExtension` showcases the `TestInstancePostProcessor` and `ParameterResolver`
-extension APIs of JUnit Jupiter by providing dependency injection support at the field level
-and at the method parameter level via Mockito 2.x's `@Mock` annotation.
+A collection of JUnit Jupiter sample extensions.
 
-See also:
+* The `RandomParametersExtension` showcases the `ParameterResolver` extension
+  API by providing injection support for random values at the method parameter
+  level.
 
-- [Mockito issue #390](https://github.com/mockito/mockito/issues/390)
-- [Mockito issue #438](https://github.com/mockito/mockito/issues/438)
-- [Mockito issue #445](https://github.com/mockito/mockito/issues/445)
+For real-world usage examples of the JUnit Jupiter Extension APIs, check out the
+list of [third-party extensions], e.g. the ones provided by Spring and Mockito.
+
+[third-party extensions]: https://github.com/junit-team/junit5/wiki/Third-party-Extensions
