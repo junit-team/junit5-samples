@@ -6,6 +6,7 @@ jdk: oraclejdk8
 before_install:
   - unset _JAVA_OPTIONS
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+  - chmod u+x $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant/build.sh
 
 jobs:
   include:
@@ -13,6 +14,9 @@ jobs:
     - stage: vanilla
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
+    - stage: vanilla
+      env: TOOL='Ant'
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant && ./build.sh
     - stage: vanilla
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
