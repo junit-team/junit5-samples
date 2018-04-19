@@ -27,16 +27,16 @@ pipeline {
         }
       }
     }
-    stage('junit5-mockito-extension') {
+    stage('junit5-jupiter-extensions') {
       tools {
         jdk 'Oracle JDK 8 (latest)'
       }
       steps {
-        sh 'cd junit5-mockito-extension && ./gradlew --no-daemon clean build'
+        sh 'cd junit5-jupiter-extensions && ./gradlew --no-daemon clean build'
       }
       post {
         always {
-          junit 'junit5-mockito-extension/build/test-results/junit-platform/*.xml'
+          junit 'junit5-jupiter-extensions/build/test-results/junit-platform/*.xml'
         }
       }
     }
