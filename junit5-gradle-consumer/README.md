@@ -18,7 +18,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.1'
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.2.0-M1'
 	}
 }
 
@@ -31,7 +31,7 @@ Once the JUnit Platform Gradle plugin has been applied, you can configure it as 
 
 ```groovy
 junitPlatform {
-	// platformVersion '1.1.1'
+	// platformVersion '1.2.0-M1'
 	filters {
 		engines {
 			// include 'junit-jupiter', 'junit-vintage'
@@ -73,8 +73,8 @@ implementation similar to the following.
 
 ```groovy
 dependencies {
-	testCompile("org.junit.jupiter:junit-jupiter-api:5.1.1")
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.1.1")
+	testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0-M1")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0-M1")
 }
 ```
 
@@ -85,7 +85,7 @@ JUnit Vintage TestEngine implementation similar to the following.
 ```groovy
 dependencies {
 	testCompile("junit:junit:4.12")
-	testRuntime("org.junit.vintage:junit-vintage-engine:5.1.1")
+	testRuntime("org.junit.vintage:junit-vintage-engine:5.2.0-M1")
 }
 ```
 
