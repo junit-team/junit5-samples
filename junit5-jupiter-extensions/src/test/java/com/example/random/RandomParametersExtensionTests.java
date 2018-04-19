@@ -30,8 +30,8 @@ class RandomParametersExtensionTests {
 	}
 
 	@Test
-	void injectsDouble(@Random double myType) {
-		assertEquals(0.0, myType, 1.0);
+	void injectsDouble(@Random double d) {
+		assertEquals(0.0, d, 1.0);
 	}
 
 }
