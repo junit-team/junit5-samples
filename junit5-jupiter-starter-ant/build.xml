@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="junit5-jupiter-starter-ant" default="test" basedir=".">
+
+    <fail message="Ant 1.10.3+ is required!">
+        <condition>
+            <not>
+                <antversion atleast="1.10.3"/>
+            </not>
+        </condition>
+    </fail>
+
+    <path id="test.classpath">
+        <pathelement path="build/test"/>
+        <pathelement path="build/main"/>
+    </path>
+
+    <target name="clean" description="clean up">
+        <delete dir="build"/>
+    </target>
+
+    <target name="init">
+        <mkdir dir="build/main"/>
+        <mkdir dir="build/test"/>
+        <mkdir dir="build/test-report"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac destdir="build/main" srcdir="src/main/java" includeantruntime="false"/>
+        <javac destdir="build/test" classpathref="test.classpath" srcdir="src/test/java" includeantruntime="true"/>
+    </target>
+
+    <target name="test" depends="compile">
+        <junitlauncher haltOnFailure="true">
+            <classpath refid="test.classpath"/>
+            <testclasses outputdir="build/test-report">
+                <fileset dir="build/test">
+                    <include name="**/*Tests.class"/>
+                </fileset>
+                <listener type="legacy-xml" sendSysOut="true" sendSysErr="true"/>
+                <listener type="legacy-plain" sendSysOut="true" />
+                <listener classname="com.example.project.SummaryPrintingListener"/>
+            </testclasses>
+        </junitlauncher>
+        <loadfile property="summary" srcFile="build/test-summary.txt"/>
+        <echo>${summary}</echo>
+    </target>
+
+</project>
