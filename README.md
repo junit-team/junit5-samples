@@ -40,7 +40,7 @@ using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
 ### Sample Extensions ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
 
-The [junit5-sample-extensions] sample demonstrates how one can implement custom
+The [junit5-jupiter-extensions] sample demonstrates how one can implement custom
 JUnit Jupiter extensions and use them in tests.
 
 
@@ -59,7 +59,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-vanilla-gradle]: junit5-vanilla-gradle
 [junit5-vanilla-maven]: junit5-vanilla-maven
 [junit5-modular-world]: junit5-modular-world
-[junit5-sample-extensions]: junit5-sample-extensions
+[junit5-jupiter-extensions]: junit5-jupiter-extensions
 
 [badge-jdk-8]: https://img.shields.io/badge/jdk-8-lightgray.svg "JDK-8"
 [badge-jdk-9]: https://img.shields.io/badge/jdk-9-yellow.svg "JDK-9"

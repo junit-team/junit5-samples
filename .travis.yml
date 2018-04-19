@@ -28,7 +28,7 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew build --console plain --scan
     - stage: consumer
       env: TOPIC='Sample Extensions'
-      script: cd $TRAVIS_BUILD_DIR/junit5-sample-extensions && ./gradlew test --console plain
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
 # java 9 and higher
     - stage: java-9
       jdk: oraclejdk9
