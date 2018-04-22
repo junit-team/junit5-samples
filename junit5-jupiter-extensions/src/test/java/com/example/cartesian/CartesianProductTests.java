@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.TestInfo;
 
 class CartesianProductTests {
 
@@ -25,10 +27,12 @@ class CartesianProductTests {
 	}
 
 	@CartesianProductTest
-	void multiType(String string, Class<?> type, TimeUnit unit) {
+	@DisplayName("S ⨯ T ⨯ U")
+	void multiType(String string, Class<?> type, TimeUnit unit, TestInfo info) {
 		assertTrue(string.endsWith("a"));
 		assertTrue(type.isInterface());
-    	assertTrue(unit.name().endsWith("S"));
+		assertTrue(unit.name().endsWith("S"));
+		assertTrue(info.getTags().isEmpty());
 	}
 
 	static List<List<?>> multiType() {

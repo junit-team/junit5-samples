@@ -42,9 +42,16 @@ public class CartesianProductProvider implements TestTemplateInvocationContextPr
 			String name = context.getRequiredTestMethod().getName();
 			Optional<Method> optionalMethod = ReflectionUtils.findMethod(type, name);
 			if (!optionalMethod.isPresent()) {
-				throw new IllegalArgumentException("Method `List<List<?>> "+name+"()` not found");
+				throw new IllegalArgumentException("Method `List<List<?>> " + name + "()` not found");
 			}
-			lists = (List<List<?>>) ReflectionUtils.invokeMethod(optionalMethod.get(), null);
+			Method method = optionalMethod.get();
+			if (!ReflectionUtils.isStatic(method)) {
+				throw new IllegalArgumentException("Method `" + method + "` must be static");
+			}
+			if (!List.class.isAssignableFrom(method.getReturnType())) {
+				throw new IllegalArgumentException("Method `" + method + "` must return ``List<List<?>>`");
+			}
+			lists = (List<List<?>>) ReflectionUtils.invokeMethod(method, null);
 		}
 
 		List<TestTemplateInvocationContext> contexts = new ArrayList<>();
@@ -62,10 +69,10 @@ public class CartesianProductProvider implements TestTemplateInvocationContextPr
 		}
 		List<?> firstList = lists.get(0);
 		List<List<?>> remainingLists = cartesianProduct(lists.subList(1, lists.size()));
-		for (Object condition : firstList) {
+		for (Object item : firstList) {
 			for (List<?> remainingList : remainingLists) {
 				ArrayList<Object> resultList = new ArrayList<>();
-				resultList.add(condition);
+				resultList.add(item);
 				resultList.addAll(remainingList);
 				resultLists.add(resultList);
 			}
