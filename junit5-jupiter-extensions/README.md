@@ -9,4 +9,4 @@ A collection of JUnit Jupiter sample extensions.
 For real-world usage examples of the JUnit Jupiter Extension APIs, check out the
 list of [third-party extensions], e.g. the ones provided by Spring and Mockito.
 
-[third-party extensions]: https://github.com/junit-team/junit5/wiki/Third-party-Extensions
+[third-party extensions]: https://github.com/junit-team/junit5/wiki/Third-party-Extensions#junit-jupiter-extensions
