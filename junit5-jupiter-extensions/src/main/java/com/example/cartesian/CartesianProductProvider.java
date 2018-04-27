@@ -10,6 +10,10 @@
 
 package com.example.cartesian;
 
+import static org.junit.platform.commons.support.AnnotationSupport.findAnnotation;
+import static org.junit.platform.commons.support.ReflectionSupport.findMethod;
+import static org.junit.platform.commons.support.ReflectionSupport.invokeMethod;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -20,13 +24,12 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
-import org.junit.platform.commons.support.ReflectionSupport;
 
 public class CartesianProductProvider implements TestTemplateInvocationContextProvider {
 
 	@Override
 	public boolean supportsTestTemplate(ExtensionContext context) {
-		return context.getRequiredTestMethod().isAnnotationPresent(CartesianProductTest.class);
+		return findAnnotation(context.getTestMethod(), CartesianProductTest.class).isPresent();
 	}
 
 	@Override
@@ -36,7 +39,9 @@ public class CartesianProductProvider implements TestTemplateInvocationContextPr
 	}
 
 	private List<List<?>> computeSets(Method testMethod) {
-		String[] value = testMethod.getAnnotation(CartesianProductTest.class).value();
+		String[] value = findAnnotation(testMethod, CartesianProductTest.class)
+				.orElseThrow(() -> new AssertionError("@CartesianProductTest not found"))
+				.value();
 		// Compute A ⨯ A ⨯ ... ⨯ A from single source "set"
 		if (value.length > 0) {
 			List<String> strings = Arrays.asList(value);
@@ -53,15 +58,19 @@ public class CartesianProductProvider implements TestTemplateInvocationContextPr
 	private CartesianProductTest.Sets invokeSetsFactory(Method testMethod) {
 		Class<?> declaringClass = testMethod.getDeclaringClass();
 		String name = testMethod.getName();
-		Method factory = ReflectionSupport.findMethod(declaringClass, name)
-				.orElseThrow(() -> new IllegalStateException("Method `CartesianProductTest.Sets " + name + "()` not found in " + declaringClass));
+		Method factory = findMethod(declaringClass, name)
+				.orElseThrow(() -> new IllegalStateException("Method `CartesianProductTest.Sets "
+						+ name + "()` not found in " + declaringClass));
 		if (!Modifier.isStatic(factory.getModifiers())) {
-			throw new IllegalArgumentException("Method `" + factory + "` must be static");
+			throw new AssertionError("Method `" + factory + "` must be static");
 		}
 		if (!CartesianProductTest.Sets.class.isAssignableFrom(factory.getReturnType())) {
-			throw new IllegalArgumentException("Method `" + factory + "` must return `CartesianProductTest.Sets`");
+			throw new AssertionError("Method `" + factory + "` must return `CartesianProductTest.Sets`");
 		}
-		return (CartesianProductTest.Sets) ReflectionSupport.invokeMethod(factory, null);
+		if (factory.getParameterCount() != 0) {
+			throw new AssertionError("Method `" + factory + "` must not have parameters");
+		}
+		return (CartesianProductTest.Sets) invokeMethod(factory, null);
 	}
 
 	private static List<List<?>> cartesianProduct(List<List<?>> lists) {
