@@ -22,7 +22,7 @@ public class CartesianProductContext implements TestTemplateInvocationContext, P
 
 	private final List<?> parameters;
 
-	public CartesianProductContext(List<?> parameters) {
+	CartesianProductContext(List<?> parameters) {
 		this.parameters = parameters;
 	}
 

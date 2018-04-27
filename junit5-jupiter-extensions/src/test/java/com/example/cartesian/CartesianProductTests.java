@@ -12,8 +12,6 @@ package com.example.cartesian;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInfo;
@@ -21,26 +19,25 @@ import org.junit.jupiter.api.TestInfo;
 class CartesianProductTests {
 
 	@CartesianProductTest({"0", "1"})
-	void fourBits(String a, String b, String c, String d) {
-		int value = Integer.parseUnsignedInt(a + b + c + d, 2);
-		assertTrue((0B0000 <= value) && (value <= 0B1111));
+	void threeBits(String a, String b, String c) {
+		int value = Integer.parseUnsignedInt(a + b + c, 2);
+		assertTrue((0b000 <= value) && (value <= 0b111));
 	}
 
 	@CartesianProductTest
 	@DisplayName("S ⨯ T ⨯ U")
-	void multiType(String string, Class<?> type, TimeUnit unit, TestInfo info) {
+	void nFold(String string, Class<?> type, TimeUnit unit, TestInfo info) {
 		assertTrue(string.endsWith("a"));
 		assertTrue(type.isInterface());
 		assertTrue(unit.name().endsWith("S"));
 		assertTrue(info.getTags().isEmpty());
 	}
 
-	static List<List<?>> multiType() {
-		return Arrays.asList(
-				Arrays.asList("Alpha", "Omega"),
-				Arrays.asList(Runnable.class, Comparable.class),
-				Arrays.asList(TimeUnit.DAYS, TimeUnit.HOURS, TimeUnit.MINUTES)
-		);
+	static CartesianProductTest.Sets nFold() {
+		return new CartesianProductTest.Sets()
+				.add("Alpha", "Omega")
+				.add(Runnable.class, Comparable.class, TestInfo.class)
+				.add(TimeUnit.DAYS, TimeUnit.HOURS);
 	}
 
 }
