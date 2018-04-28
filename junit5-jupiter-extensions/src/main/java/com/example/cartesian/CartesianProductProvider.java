@@ -25,7 +25,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
 
-public class CartesianProductProvider implements TestTemplateInvocationContextProvider {
+class CartesianProductProvider implements TestTemplateInvocationContextProvider {
 
 	@Override
 	public boolean supportsTestTemplate(ExtensionContext context) {
@@ -46,7 +46,7 @@ public class CartesianProductProvider implements TestTemplateInvocationContextPr
 		if (value.length > 0) {
 			List<String> strings = Arrays.asList(value);
 			List<List<?>> sets = new ArrayList<>();
-			for(int i = 0; i < testMethod.getParameterTypes().length; i++) {
+			for (int i = 0; i < testMethod.getParameterTypes().length; i++) {
 				sets.add(strings);
 			}
 			return sets;
@@ -59,7 +59,7 @@ public class CartesianProductProvider implements TestTemplateInvocationContextPr
 		Class<?> declaringClass = testMethod.getDeclaringClass();
 		String name = testMethod.getName();
 		Method factory = findMethod(declaringClass, name)
-				.orElseThrow(() -> new IllegalStateException("Method `CartesianProductTest.Sets "
+				.orElseThrow(() -> new AssertionError("Method `CartesianProductTest.Sets "
 						+ name + "()` not found in " + declaringClass));
 		if (!Modifier.isStatic(factory.getModifiers())) {
 			throw new AssertionError("Method `" + factory + "` must be static");

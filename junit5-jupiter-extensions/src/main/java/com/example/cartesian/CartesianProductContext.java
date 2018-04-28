@@ -13,12 +13,9 @@ package com.example.cartesian;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.extension.Extension;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.ParameterContext;
-import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
 
-public class CartesianProductContext implements TestTemplateInvocationContext, ParameterResolver {
+class CartesianProductContext implements TestTemplateInvocationContext {
 
 	private final List<?> parameters;
 
@@ -28,22 +25,12 @@ public class CartesianProductContext implements TestTemplateInvocationContext, P
 
 	@Override
 	public String getDisplayName(int invocationIndex) {
-		return invocationIndex + ": " + parameters.toString();
+		return invocationIndex + ": " + parameters;
 	}
 
 	@Override
 	public List<Extension> getAdditionalExtensions() {
-		return Collections.singletonList(this);
-	}
-
-	@Override
-	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return parameterContext.getIndex() < parameters.size();
-	}
-
-	@Override
-	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return parameters.get(parameterContext.getIndex());
+		return Collections.singletonList(new CartesianProductResolver(parameters));
 	}
 
 }
