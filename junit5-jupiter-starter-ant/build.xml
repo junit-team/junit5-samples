@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="junit5-jupiter-starter-ant" default="test" basedir=".">
+<project name="junit5-jupiter-starter-ant" default="build" basedir=".">
 
     <fail message="Ant 1.10.3+ is required!">
         <condition>
@@ -12,9 +12,12 @@
     <path id="test.classpath">
         <pathelement path="build/test"/>
         <pathelement path="build/main"/>
+        <fileset dir="${ant.home}/lib" includes="*.jar" />
     </path>
 
-    <target name="clean" description="clean up">
+    <target name="build" description="clean build" depends="clean, test" />
+
+    <target name="clean">
         <delete dir="build"/>
     </target>
 
@@ -26,10 +29,11 @@
 
     <target name="compile" depends="init">
         <javac destdir="build/main" srcdir="src/main/java" includeantruntime="false"/>
-        <javac destdir="build/test" classpathref="test.classpath" srcdir="src/test/java" includeantruntime="true"/>
+        <javac destdir="build/test" classpathref="test.classpath" srcdir="src/test/java" includeantruntime="false"/>
     </target>
 
-    <target name="test" depends="compile">
+    <!-- https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-ant -->
+    <target name="test.junit.launcher" depends="compile">
         <junitlauncher haltOnFailure="true">
             <classpath refid="test.classpath"/>
             <testclasses outputdir="build/test-report">
@@ -44,5 +48,14 @@
         <loadfile property="summary" srcFile="build/test-summary.txt"/>
         <echo>${summary}</echo>
     </target>
+
+    <!-- https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher -->
+    <target name="test.console.launcher" depends="compile">
+        <java classpathref="test.classpath" classname="org.junit.platform.console.ConsoleLauncher" fork="true">
+            <arg value="--scan-classpath"/>
+        </java>
+    </target>
+
+    <target name="test" depends="test.junit.launcher, test.console.launcher" />
 
 </project>

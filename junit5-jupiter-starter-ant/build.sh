@@ -11,13 +11,13 @@ ant_archive="${ant_folder}-bin.tar.gz"
 #
 # Load and extract Apache Ant.
 #
-wget "http://www.us.apache.org/dist/ant/binaries/${ant_archive}"
-tar --extract --auto-compress --exclude '.*/manual' --file "${ant_archive}"
+wget --timestamping --continue "http://www.us.apache.org/dist/ant/binaries/${ant_archive}"
+tar --extract --auto-compress --exclude "${ant_folder}/manual" --file "${ant_archive}"
 
 #
 # Load and store junit-platform-console-standalone jar in ${ANT_HOME}/lib.
 #
-wget --directory-prefix "${ant_folder}/lib" "http://central.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit_platform_version}/junit-platform-console-standalone-${junit_platform_version}.jar"
+wget --timestamping --continue --directory-prefix "${ant_folder}/lib" "http://central.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit_platform_version}/junit-platform-console-standalone-${junit_platform_version}.jar"
 
 #
 # Finally, let Ant do its work...
