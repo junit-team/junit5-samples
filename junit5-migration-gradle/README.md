@@ -1,6 +1,6 @@
-# junit5-gradle-consumer
+# junit5-migration-gradle
 
-The `junit5-gradle-consumer` project demonstrates how to run tests based on
+The `junit5-migration-gradle` project demonstrates how to run tests based on
 JUnit Jupiter milestones using Gradle with the help of a very basic Gradle plugin
 for the JUnit Platform.
 

@@ -35,18 +35,19 @@ The [junit5-jupiter-extensions] sample demonstrates how one can implement custom
 JUnit Jupiter extensions and use them in tests.
 
 
-## Consumer Samples
+## Migration Samples
 
-_More complex setups how to integrate various parts of "JUnit 5"._
+_More complex setups how to integrate various parts of "JUnit 5" including a
+possible migration path for JUnit 3 or 4 based projects._
 
-### Gradle Consumer ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
+### Gradle Migration ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
 
-The [junit5-gradle-consumer] sample demonstrates how to set up a Gradle project
+The [junit5-migration-gradle] sample demonstrates how to set up a Gradle project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
-### Maven Consumer ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
+### Maven Migration ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage]
 
-The [junit5-maven-consumer] sample demonstrates how to set up a Maven project
+The [junit5-migration-maven] sample demonstrates how to set up a Maven project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
 
@@ -60,13 +61,13 @@ The [junit5-modular-world] sample demonstrates how to test code organized in mod
 This sample also demonstrates how to implement a custom [TestEngine][guide-custom-engine]
 for the JUnit Platform using the Java Platform Module System.
 
-[junit5-gradle-consumer]: junit5-gradle-consumer
-[junit5-maven-consumer]: junit5-maven-consumer
+[junit5-jupiter-extensions]: junit5-jupiter-extensions
 [junit5-jupiter-starter-ant]: junit5-jupiter-starter-ant
 [junit5-jupiter-starter-gradle]: junit5-jupiter-starter-gradle
 [junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
+[junit5-migration-gradle]: junit5-migration-gradle
+[junit5-migration-maven]: junit5-migration-maven
 [junit5-modular-world]: junit5-modular-world
-[junit5-jupiter-extensions]: junit5-jupiter-extensions
 
 [badge-jdk-8]: https://img.shields.io/badge/jdk-8-lightgray.svg "JDK-8"
 [badge-jdk-9]: https://img.shields.io/badge/jdk-9-yellow.svg "JDK-9"

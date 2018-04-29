@@ -20,7 +20,7 @@ int javaVersion = Integer.valueOf((String) JavaVersion.current().getMajorVersion
 if (javaVersion < 10) apply plugin: 'jacoco'
 
 jar {
-	baseName = 'junit5-gradle-consumer'
+	baseName = 'junit5-migration-gradle'
 	version = '1.0.0-SNAPSHOT'
 }
 
