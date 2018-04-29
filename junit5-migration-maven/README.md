@@ -1,6 +1,6 @@
-# junit5-maven-consumer
+# junit5-migration-maven
 
-The `junit5-maven-consumer` project demonstrates how to execute tests based on JUnit 5
+The `junit5-migration-maven` project demonstrates how to execute tests based on JUnit 5
 milestones using Maven. In addition, it showcases that existing JUnit 4 based tests can
 be executed in the same test suite as JUnit 5 based tests or any other tests supported on
 the JUnit Platform.

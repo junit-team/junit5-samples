@@ -46,8 +46,8 @@ class Builder {
 		run("junit5-jupiter-extensions", "gradlew", "clean", "test");
 
 		// migration
-		run("junit5-gradle-consumer", "gradlew", "clean", "test");
-		run("junit5-maven-consumer", "mvnw", "clean", "test");
+		run("junit5-migration-gradle", "gradlew", "clean", "test");
+		run("junit5-migration-maven", "mvnw", "clean", "test");
 
 		// modular
 		run("junit5-modular-world", "jshell", "build.jsh");

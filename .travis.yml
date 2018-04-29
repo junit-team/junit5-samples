@@ -22,18 +22,18 @@ jobs:
     - stage: starter
       env: TOPIC='Sample Extensions'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
-# consumer
-    - stage: consumer
-      env: TOOL='Maven'
-      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
-    - stage: consumer
+# migration
+    - stage: migration
       env: TOOL='Gradle'
-      script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew build --console plain --scan
+      script: cd $TRAVIS_BUILD_DIR/junit5-migration-gradle && ./gradlew build --console plain --scan
+    - stage: migration
+      env: TOOL='Maven'
+      script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
 # java 9 and higher
     - stage: java-9
       jdk: oraclejdk9
       env: TOOL='Maven'
-      script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
+      script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
     - stage: java-9
       env: TOPIC='Java Platform Module System'
       script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
