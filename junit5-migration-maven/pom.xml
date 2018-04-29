@@ -12,9 +12,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>
-		<junit.jupiter.version>5.1.1</junit.jupiter.version>
-		<junit.vintage.version>5.1.1</junit.vintage.version>
-		<junit.platform.version>1.1.1</junit.platform.version>
+		<junit.jupiter.version>5.2.0</junit.jupiter.version>
+		<junit.vintage.version>5.2.0</junit.vintage.version>
+		<junit.platform.version>1.2.0</junit.platform.version>
 	</properties>
 
 	<build>
@@ -29,14 +29,8 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
+				<version>2.21.0</version>
 				<configuration>
-					<includes>
-						<include>**/Test*.java</include>
-						<include>**/*Test.java</include>
-						<include>**/*Tests.java</include>
-						<include>**/*TestCase.java</include>
-					</includes>
 					<properties>
 						<!-- <includeTags>fast</includeTags> -->
 						<excludeTags>slow</excludeTags>

@@ -6,8 +6,8 @@ repositories {
 }
 
 dependencies {
-	testCompile('org.junit.jupiter:junit-jupiter-api:5.2.0-SNAPSHOT')
-	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.2.0-SNAPSHOT')
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.3.0-SNAPSHOT')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.0-SNAPSHOT')
 }
 
 test {

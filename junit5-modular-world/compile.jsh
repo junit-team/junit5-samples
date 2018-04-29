@@ -5,9 +5,9 @@
 //
 // download main and test dependencies
 //
-String platformVersion = "1.1.1"
-String jupiterVersion = "5.1.1"
-String vintageVersion = "5.1.1"
+String platformVersion = "1.2.0"
+String jupiterVersion = "5.2.0"
+String vintageVersion = "5.2.0"
 get("lib", "org.junit.platform", "junit-platform-commons", platformVersion)
 get("lib", "org.junit.platform", "junit-platform-console", platformVersion)
 get("lib", "org.junit.platform", "junit-platform-engine", platformVersion)
@@ -18,7 +18,7 @@ get("lib", "org.junit.vintage", "junit-vintage-engine", vintageVersion)
 get("lib", "junit", "junit", "4.12")
 get("lib", "org.hamcrest", "hamcrest-core", "1.3")
 get("lib", "org.apiguardian", "apiguardian-api", "1.0.0")
-get("lib", "org.opentest4j", "opentest4j", "1.0.0")
+get("lib", "org.opentest4j", "opentest4j", "1.1.0")
 get("lib", "net.jqwik", "jqwik", "0.8.5")
 
 // create target directories

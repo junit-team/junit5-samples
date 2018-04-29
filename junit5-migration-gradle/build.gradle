@@ -12,9 +12,9 @@ buildScan {
 }
 
 ext.junit4Version        = '4.12'
-ext.junitVintageVersion  = '5.1.1'
-ext.junitPlatformVersion = '1.1.1'
-ext.junitJupiterVersion  = '5.1.1'
+ext.junitVintageVersion  = '5.2.0'
+ext.junitPlatformVersion = '1.2.0'
+ext.junitJupiterVersion  = '5.2.0'
 
 int javaVersion = Integer.valueOf((String) JavaVersion.current().getMajorVersion())
 if (javaVersion < 10) apply plugin: 'jacoco'
