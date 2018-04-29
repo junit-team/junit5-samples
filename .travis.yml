@@ -10,19 +10,19 @@ before_install:
 
 jobs:
   include:
-# vanilla
-    - stage: vanilla
-      env: TOOL='Maven'
-      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test
-    - stage: vanilla
+# starter
+    - stage: starter
       env: TOOL='Ant'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant && ./build.sh
-    - stage: vanilla
+    - stage: starter
       env: TOOL='Gradle'
-      script: cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain
-    - stage: vanilla
-      env: TOPIC='Java Platform Module System'
-      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain
+    - stage: starter
+      env: TOOL='Maven'
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test
+    - stage: starter
+      env: TOPIC='Sample Extensions'
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
 # consumer
     - stage: consumer
       env: TOOL='Maven'
@@ -30,21 +30,21 @@ jobs:
     - stage: consumer
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-gradle-consumer && ./gradlew build --console plain --scan
-    - stage: consumer
-      env: TOPIC='Sample Extensions'
-      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
 # java 9 and higher
     - stage: java-9
       jdk: oraclejdk9
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-maven-consumer && ./mvnw test
+    - stage: java-9
+      env: TOPIC='Java Platform Module System'
+      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
 # snapshot -- use current junit master branch
     - stage: snapshot
       env: TOOL='Gradle'
-      script: . ./install-jdk.sh -F 10 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-vanilla-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
+      script: . ./install-jdk.sh -F 10 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
     - stage: snapshot
       env: TOOL='Maven'
-      script: . ./install-jdk.sh -F 11 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-vanilla-maven && ./mvnw test --file pom-SNAPSHOT.xml
+      script: . ./install-jdk.sh -F 11 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test --file pom-SNAPSHOT.xml
 # all samples, one-shot
 #    - stage: all
 #      env: TOPIC='Build all samples'

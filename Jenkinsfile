@@ -40,29 +40,29 @@ pipeline {
         }
       }
     }
-    stage('junit5-vanilla-gradle') {
+    stage('junit5-jupiter-starter-gradle') {
       tools {
         jdk 'Oracle JDK 8 (latest)'
       }
       steps {
-        sh 'cd junit5-vanilla-gradle && ./gradlew --no-daemon clean build'
+        sh 'cd junit5-jupiter-starter-gradle && ./gradlew --no-daemon clean build'
       }
       post {
         always {
-          junit 'junit5-vanilla-gradle/build/test-results/test/*.xml'
+          junit 'junit5-jupiter-starter-gradle/build/test-results/test/*.xml'
         }
       }
     }
-    stage('junit5-vanilla-maven') {
+    stage('junit5-jupiter-starter-maven') {
       tools {
         jdk 'Oracle JDK 8 (latest)'
       }
       steps {
-        sh 'cd junit5-vanilla-maven && ./mvnw -B clean verify'
+        sh 'cd junit5-jupiter-starter-maven && ./mvnw -B clean verify'
       }
       post {
         always {
-          junit 'junit5-vanilla-maven/target/surefire-reports/*.xml'
+          junit 'junit5-jupiter-starter-maven/target/surefire-reports/*.xml'
         }
       }
     }
