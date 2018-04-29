@@ -4,12 +4,10 @@ Welcome to _JUnit 5 Samples_, a collection of sample applications and extensions
 using JUnit Jupiter, JUnit Vintage, and the JUnit Platform on various build systems.
 
 CI builds for sample projects are available on [Jenkins][ci-jenkins] and
-[Travis CI][ci-travis].
+[Travis CI][ci-travis]. Using JDK 10's `jshell` tool, you may build all samples via
+the `build-all-samples.jsh` script.
 
-Using JDK 10's `jshell` tool, you may build all samples via the `build-all-samples.jsh`
-script.
-
-## Starter Samples
+## Jupiter Starter Samples
 
 _Basic setups showing how to get started._
 
@@ -29,9 +27,9 @@ The [junit5-jupiter-starter-maven] sample demonstrates the bare minimum configur
 getting started with JUnit Jupiter using the Maven build system.
 
 
-## Extending Jupiter Samples
+## Jupiter Feature Samples
 
-### Sample Extensions ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
+### Sample Extensions ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
 
 The [junit5-jupiter-extensions] sample demonstrates how one can implement custom
 JUnit Jupiter extensions and use them in tests.
@@ -64,6 +62,7 @@ for the JUnit Platform using the Java Platform Module System.
 
 [junit5-gradle-consumer]: junit5-gradle-consumer
 [junit5-maven-consumer]: junit5-maven-consumer
+[junit5-jupiter-starter-ant]: junit5-jupiter-starter-ant
 [junit5-jupiter-starter-gradle]: junit5-jupiter-starter-gradle
 [junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
 [junit5-modular-world]: junit5-modular-world
