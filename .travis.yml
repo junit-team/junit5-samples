@@ -6,7 +6,6 @@ jdk: oraclejdk8
 before_install:
   - unset _JAVA_OPTIONS
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-  - chmod u+x $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant/build.sh
 
 jobs:
   include:
