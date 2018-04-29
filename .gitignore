@@ -21,6 +21,5 @@ out
 # Misc
 *.log
 *.class
-*.jar
 .jqwik-database
 install-jdk.sh

@@ -36,12 +36,22 @@ class Builder {
 		System.out.printf("|%n| Building all samples...%n|%n");
 		run(".", "java", "--version");
 		checkLicense("src/eclipse-public-license-2.0.java", ".java");
-		run("junit5-vanilla-gradle", "gradlew", "clean", "test");
-		run("junit5-vanilla-maven", "mvnw", "clean", "test");
+
+		// jupiter-starter
+		// TODO run("junit5-jupiter-starter-ant", "antw"); https://github.com/junit-team/junit5-samples/issues/66
+		run("junit5-jupiter-starter-gradle", "gradlew", "clean", "test");
+		run("junit5-jupiter-starter-maven", "mvnw", "clean", "test");
+
+		// jupiter-extensions
+		run("junit5-jupiter-extensions", "gradlew", "clean", "test");
+
+		// migration
 		run("junit5-gradle-consumer", "gradlew", "clean", "test");
 		run("junit5-maven-consumer", "mvnw", "clean", "test");
-		run("junit5-jupiter-extensions", "gradlew", "clean", "test");
+
+		// modular
 		run("junit5-modular-world", "jshell", "build.jsh");
+
 		System.out.printf("%n%n%n|%n| Done. Build exits with status = %d.%n|%n", status);
 		return status;
 	}

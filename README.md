@@ -9,19 +9,32 @@ CI builds for sample projects are available on [Jenkins][ci-jenkins] and
 Using JDK 10's `jshell` tool, you may build all samples via the `build-all-samples.jsh`
 script.
 
-## Vanilla Samples
+## Starter Samples
 
 _Basic setups showing how to get started._
 
+### Jupiter on Gradle ![badge-jdk-8] ![badge-tool-ant] ![badge-junit-jupiter]
+
+The [junit5-jupiter-starter-ant] sample demonstrates the bare minimum configuration for
+getting started with JUnit Jupiter using the Ant build system.
+
 ### Jupiter on Gradle ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
 
-The [junit5-vanilla-gradle] sample demonstrates the bare minimum configuration for
+The [junit5-jupiter-starter-gradle] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Gradle build system.
 
 ### Jupiter on Maven ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter]
 
-The [junit5-vanilla-maven] sample demonstrates the bare minimum configuration for
+The [junit5-jupiter-starter-maven] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
+
+
+## Extending Jupiter Samples
+
+### Sample Extensions ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
+
+The [junit5-jupiter-extensions] sample demonstrates how one can implement custom
+JUnit Jupiter extensions and use them in tests.
 
 
 ## Consumer Samples
@@ -38,11 +51,6 @@ using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 The [junit5-maven-consumer] sample demonstrates how to set up a Maven project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
-### Sample Extensions ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter]
-
-The [junit5-jupiter-extensions] sample demonstrates how one can implement custom
-JUnit Jupiter extensions and use them in tests.
-
 
 ## Java Platform Module System Samples
 
@@ -56,8 +64,8 @@ for the JUnit Platform using the Java Platform Module System.
 
 [junit5-gradle-consumer]: junit5-gradle-consumer
 [junit5-maven-consumer]: junit5-maven-consumer
-[junit5-vanilla-gradle]: junit5-vanilla-gradle
-[junit5-vanilla-maven]: junit5-vanilla-maven
+[junit5-jupiter-starter-gradle]: junit5-jupiter-starter-gradle
+[junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
 [junit5-modular-world]: junit5-modular-world
 [junit5-jupiter-extensions]: junit5-jupiter-extensions
 
@@ -65,6 +73,7 @@ for the JUnit Platform using the Java Platform Module System.
 [badge-jdk-9]: https://img.shields.io/badge/jdk-9-yellow.svg "JDK-9"
 [badge-jdk-10]: https://img.shields.io/badge/jdk-10-orange.svg "JDK-10"
 [badge-jdk-11]: https://img.shields.io/badge/jdk-11-red.svg "JDK-11 or higher"
+[badge-tool-ant]: https://img.shields.io/badge/tool-ant-10f0f0.svg "Ant"
 [badge-tool-gradle]: https://img.shields.io/badge/tool-gradle-blue.svg "Gradle wrapper included"
 [badge-tool-maven]: https://img.shields.io/badge/tool-maven-0440af.svg "Maven wrapper included"
 [badge-tool-console]: https://img.shields.io/badge/tool-console-022077.svg "Command line tools"
