@@ -12,7 +12,7 @@ ant_archive="${ant_folder}-bin.tar.gz"
 # Load and extract Apache Ant.
 #
 wget --timestamping --continue "http://www.us.apache.org/dist/ant/binaries/${ant_archive}"
-tar --extract --auto-compress --exclude "${ant_folder}/manual" --file "${ant_archive}"
+tar --extract -z --exclude "${ant_folder}/manual" --file "${ant_archive}"
 
 #
 # Load and store junit-platform-console-standalone jar in ${ANT_HOME}/lib.
@@ -22,4 +22,4 @@ wget --timestamping --continue --directory-prefix "${ant_folder}/lib" "http://ce
 #
 # Finally, let Ant do its work...
 #
-"${ant_folder}/bin/ant"
+ANT_HOME=${ant_folder} "./${ant_folder}/bin/ant"
