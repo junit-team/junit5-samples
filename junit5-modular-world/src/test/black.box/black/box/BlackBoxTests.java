@@ -11,6 +11,8 @@
 package black.box;
 
 // import com.example.application.*; "package is declared in module com.example.application, which does not export it"
+// import com.example.tool.internal.*; "package is declared in module com.example.tool, which does not export it"
+
 import com.example.tool.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;

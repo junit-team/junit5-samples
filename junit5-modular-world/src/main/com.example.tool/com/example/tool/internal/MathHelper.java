@@ -8,22 +8,12 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-package com.example.tool;
+package com.example.tool.internal;
 
-import com.example.tool.internal.MathHelper;
+public class MathHelper {
 
-public class Calculator {
-
-	public int add(int a, int b) {
-		return a + b;
-	}
-
-	protected int mul(int a, int b) {
-		return a * b;
-	}
-
-	int pow(int a, int b) {
-		return MathHelper.pow(a, b);
+	public static int pow(int a, int b) {
+		return (int) Math.pow(a, b);
 	}
 
 }

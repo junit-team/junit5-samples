@@ -33,6 +33,7 @@ args.add("--patch-module").add("com.example.tool=bin/test-patch-runtime/com.exam
 args.add("--patch-module").add("ice.cream=bin/test-patch-runtime/ice.cream")
 args.add("--add-opens").add("com.example.application/com.example.application=org.junit.platform.commons")
 args.add("--add-opens").add("com.example.tool/com.example.tool=org.junit.platform.commons")
+args.add("--add-opens").add("com.example.tool/com.example.tool.internal=org.junit.platform.commons")
 args.add("--add-opens").add("ice.cream/ice.cream=org.junit.platform.commons")
 args.add("--add-reads").add("com.example.application=org.junit.jupiter.api")
 args.add("--add-reads").add("com.example.tool=org.junit.jupiter.api")

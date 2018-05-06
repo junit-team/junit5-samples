@@ -18,4 +18,5 @@ open module com.example.tool {
 	// test dependencies
 	//
 	requires org.junit.jupiter.api;
+	requires org.junit.jupiter.params;
 }
