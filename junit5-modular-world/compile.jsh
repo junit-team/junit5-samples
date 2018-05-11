@@ -30,6 +30,7 @@ Files.createDirectories(Paths.get("bin/main-jars"))
 //
 run("javac", "-d", "bin/main", "--module-source-path", "src/main", "--module", "com.example.tool")
 run("jar", "--create", "--file", "bin/main-jars/com.example.tool.jar", "-C", "bin/main/com.example.tool", ".")
+run("jar", "--describe-module", "--file", "bin/main-jars/com.example.tool.jar")
 
 //
 // compile and package application module
