@@ -8,13 +8,15 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
+import org.junit.platform.engine.TestEngine;
+
 open module ice.cream {
 	//
 	// copied from "main"
 	//
 	requires org.junit.platform.engine;
 
-	provides org.junit.platform.engine.TestEngine with ice.cream.Machine;
+	provides TestEngine with ice.cream.Machine;
 
 	//
 	// test dependencies
