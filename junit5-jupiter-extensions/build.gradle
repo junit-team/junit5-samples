@@ -1,24 +1,10 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.2.0'
-	}
-}
-
 repositories {
 	mavenCentral()
 }
 
-ext.junitPlatformVersion = '1.2.0'
 ext.junitJupiterVersion  = '5.2.0'
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'maven'
-apply plugin: 'org.junit.platform.gradle.plugin'
 
 jar {
 	baseName = 'junit5-jupiter-extensions'
@@ -32,20 +18,20 @@ compileTestJava {
 }
 
 dependencies {
-	// Needed as compile since we're building a JUnit Jupiter extension here
-	compile('org.mockito:mockito-core:2.+')
-	compile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+	compile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}") {
+        because 'building extensions in "main" using JUnit Jupiter API'
+    }
 
-	// Needed for @RunWith(JUnitPlatform.class) in the IDE
-	testCompile("org.junit.platform:junit-platform-runner:${junitPlatformVersion}")
-
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-
-	// Only needed to run tests in an IDE that bundles an older version
-	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}") {
+        because 'at least one engine is needed at test runtime'
+    }
 }
 
-task wrapper(type: Wrapper) {
+test {
+    useJUnitPlatform()
+}
+
+wrapper {
 	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '4.3.1'
+	gradleVersion = '4.8-rc-1'
 }
