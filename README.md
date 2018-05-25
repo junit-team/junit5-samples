@@ -21,6 +21,12 @@ getting started with JUnit Jupiter using the Ant build system.
 The [junit5-jupiter-starter-gradle] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Gradle build system.
 
+### Jupiter on Gradle using Kotlin ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
+
+The [junit5-jupiter-starter-gradle-kotlin] sample demonstrates the bare minimum
+configuration for getting started with JUnit Jupiter using the Gradle build system and the
+Kotlin programming language.
+
 ### Jupiter on Maven ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter]
 
 The [junit5-jupiter-starter-maven] sample demonstrates the bare minimum configuration for
@@ -64,6 +70,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-jupiter-extensions]: junit5-jupiter-extensions
 [junit5-jupiter-starter-ant]: junit5-jupiter-starter-ant
 [junit5-jupiter-starter-gradle]: junit5-jupiter-starter-gradle
+[junit5-jupiter-starter-gradle-kotlin]: junit5-jupiter-starter-gradle-kotlin
 [junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
 [junit5-migration-gradle]: junit5-migration-gradle
 [junit5-migration-maven]: junit5-migration-maven
