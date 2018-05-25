@@ -1,12 +1,12 @@
 # junit5-migration-maven
 
 The `junit5-migration-maven` project demonstrates how to execute tests based on JUnit 5
-milestones using Maven. In addition, it showcases that existing JUnit 4 based tests can
-be executed in the same test suite as JUnit 5 based tests or any other tests supported on
+using Maven. In addition, it showcases that existing JUnit 4 based tests can be executed
+in the same test suite as JUnit Jupiter based tests or any other tests supported on
 the JUnit Platform.
 
 This sample project does not aim to demonstrate how to use the JUnit Jupiter APIs.
-For detailed  information on the JUnit Jupiter programming and extension models,
+For detailed information on the JUnit Jupiter programming and extension models,
 please consult the [User Guide](http://junit.org/junit5/docs/current/user-guide/).
 
 Please note that this project uses the [Maven Wrapper](https://github.com/takari/maven-wrapper).
