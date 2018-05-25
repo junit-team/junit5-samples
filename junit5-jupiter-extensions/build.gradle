@@ -32,6 +32,5 @@ test {
 }
 
 wrapper {
-	description = 'Generates gradlew[.bat] scripts'
-	gradleVersion = '4.8-rc-1'
+	gradleVersion = '4.7'
 }
