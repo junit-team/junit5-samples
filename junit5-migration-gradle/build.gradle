@@ -1,7 +1,9 @@
 plugins {
 	id 'com.gradle.build-scan' version '1.13.4'
 	id 'java'
-	id 'jacoco'
+	id 'jacoco' // to showcase how to generate code coverage
+	id 'eclipse' // optional (to generate Eclipse project files)
+	id 'idea' // optional (to generate IntelliJ IDEA project files)
 }
 
 buildScan {
