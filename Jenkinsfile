@@ -36,7 +36,7 @@ pipeline {
       }
       post {
         always {
-          junit 'junit5-jupiter-extensions/build/test-results/junit-platform/*.xml'
+          junit 'junit5-jupiter-extensions/build/test-results/test/*.xml'
         }
       }
     }
