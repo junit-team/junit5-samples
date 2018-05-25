@@ -1,9 +1,7 @@
 plugins {
-	id 'com.gradle.build-scan' version '1.12.1'
+	id 'com.gradle.build-scan' version '1.13.4'
 	id 'java'
-	id 'eclipse'
-	id 'idea'
-	id 'maven'
+	id 'jacoco'
 }
 
 buildScan {
@@ -11,17 +9,32 @@ buildScan {
 	licenseAgree = "yes"
 }
 
-ext.junit4Version        = '4.12'
-ext.junitVintageVersion  = '5.2.0'
-ext.junitPlatformVersion = '1.2.0'
-ext.junitJupiterVersion  = '5.2.0'
+repositories {
+	mavenCentral()
+}
 
-int javaVersion = Integer.valueOf((String) JavaVersion.current().getMajorVersion())
-if (javaVersion < 10) apply plugin: 'jacoco'
+dependencies {
+	def junit4Version        = '4.12'
+	def junitVintageVersion  = '5.2.0'
+	def junitJupiterVersion  = '5.2.0'
+	def junitPlatformVersion = '1.2.0'
 
-jar {
-	baseName = 'junit5-migration-gradle'
-	version = '1.0.0-SNAPSHOT'
+	// JUnit Jupiter API and TestEngine implementation
+	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+
+	testCompile("junit:junit:${junit4Version}")
+	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
+		because 'allows JUnit 3 and JUnit 4 tests to run'
+	}
+
+	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
+		because 'allows tests to run from IDEs that bundle older version of launcher'
+	}
+}
+
+jacoco {
+	toolVersion = '0.8.1'
 }
 
 test {
@@ -37,30 +50,7 @@ test {
 		events 'passed', 'skipped', 'failed'
 	}
 
-	reports {
-		html.enabled = true
-	}
-
-	if (javaVersion < 10) finalizedBy jacocoTestReport
-}
-
-repositories {
-	mavenCentral()
-}
-
-dependencies {
-	// JUnit Jupiter API and TestEngine implementation
-	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-
-	testCompile("junit:junit:${junit4Version}")
-	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
-		because 'allows JUnit 3 and JUnit 4 tests to run'
-	}
-
-	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
-		because 'allows tests to run from IDEs that bundle older version of launcher'
-	}
+	finalizedBy jacocoTestReport
 }
 
 wrapper {
