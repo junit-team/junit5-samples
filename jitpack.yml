@@ -1,2 +1,0 @@
-install:
-  - ./junit5-migration-gradle/gradlew -b ./junit5-migration-gradle/build.gradle install -Pgroup=$GROUP -Pversion=$VERSION --console plain
