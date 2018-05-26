@@ -1,70 +1,56 @@
 # junit5-migration-gradle
 
-The `junit5-migration-gradle` project demonstrates how to run tests based on
-JUnit Jupiter milestones using Gradle with the help of a very basic Gradle plugin
-for the JUnit Platform.
+The `junit5-migration-maven` project demonstrates how to execute tests based on JUnit 5
+using Gradle. In addition, it showcases that existing JUnit 4 based tests can be executed
+in the same test suite as JUnit Jupiter based tests or any other tests supported on
+the JUnit Platform.
 
 This sample project does not aim to demonstrate how to use the JUnit Jupiter APIs.
-For detailed  information on the JUnit Jupiter programming and extension models,
+For detailed information on the JUnit Jupiter programming and extension models,
 please consult the [User Guide](http://junit.org/junit5/docs/current/user-guide/).
 
-## Enabling the JUnit Platform Gradle Plugin
+## Enabling the JUnit Platform
 
-To use the JUnit Platform Gradle plugin, you first need to configure `build.gradle` as follows.
+To use the JUnit Platform with Gradle, you need to configure `build.gradle` as follows.
 
 ```groovy
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.2.0'
-	}
+test {
+	useJUnitPlatform()
 }
-
-apply plugin: 'org.junit.platform.gradle.plugin'
 ```
 
-## Configuring the JUnit Platform Gradle Plugin
+## Configuring the Test task
 
-Once the JUnit Platform Gradle plugin has been applied, you can configure it as follows.
+Optionally, you can configure the `test` task as follows.
 
 ```groovy
-junitPlatform {
-	// platformVersion '1.2.0'
-	filters {
-		engines {
-			// include 'junit-jupiter', 'junit-vintage'
-			// exclude 'custom-engine'
-		}
-		tags {
-			// include 'fast'
-			exclude 'slow'
-		}
-		// includeClassNamePattern '.*Test'
+test {
+	useJUnitPlatform {
+		// includeEngines 'junit-jupiter', 'junit-vintage'
+		// excludeEngines 'custom-engine'
+
+		// includeTags 'fast'
+		excludeTags 'slow'
 	}
-	// enableStandardTestTask true
-	// reportsDir file('build/test-results/junit-platform') // this is the default
-	logManager 'org.apache.logging.log4j.jul.LogManager'
+	testLogging {
+		events 'passed', 'skipped', 'failed'
+	}
 }
 ```
 
 By default all engines and tags are included in the test plan.
 
-If you supply a _Test Engine ID_ via `engines {include ...}` or `engines {exclude ...}`,
-the JUnit Platform Gradle plugin will only run tests for the desired test engines.
+If you supply a _Test Engine ID_ via `includeEngines(...)` or `excludeEngines(...)`,
+Gradle will only run tests for the desired test engines.
 
-If you supply a _tag_ via `tags {include ...}`, the JUnit Platform Gradle plugin will only
+If you supply a _tag_ via `includeTags(...)`, Gradle will only
 run tests that are _tagged_ accordingly (e.g., via the `@Tag` annotation for
-JUnit Jupiter based tests). Similarly, if you supply a _tag_ via `tags {exclude ...}`,
-the JUnit Platform Gradle plugin will not run tests that are _tagged_ accordingly.
-
-By default, the JUnit Platform Gradle plugin disables the standard Gradle `test` task, but
-this be overridden via the `enableStandardTestTask` flag.
+JUnit Jupiter based tests). Similarly, if you supply a _tag_ via `excludeTags(...)`,
+Gradle will not run tests that are _tagged_ accordingly.
 
 ## Configuring Test Engines
 
-In order to have the JUnit Platform Gradle plugin run any tests at all, a TestEngine
+In order to have Gradle's `test` task run any tests at all, a `TestEngine`
 implementation must be on the classpath.
 
 To configure support for JUnit Jupiter based tests, configure a `testCompile` dependency
@@ -78,7 +64,7 @@ dependencies {
 }
 ```
 
-The JUnit Platform Gradle plugin can also run JUnit 3 and JUnit 4 based tests as long as you
+Gradle can also run JUnit 3 and JUnit 4 based tests as long as you
 configure a `testCompile` dependency on JUnit 4 and a `testRuntime` dependency on the
 JUnit Vintage TestEngine implementation similar to the following.
 
@@ -91,78 +77,63 @@ dependencies {
 
 ## Executing Tests on the JUnit Platform
 
-Once the JUnit Platform Gradle plugin has been applied and configured, you have a new
-`junitPlatformTest` task at your disposal.
+Once the JUnit Platform Gradle plugin has been applied and configured, you can use the
+standard `test` task as usual.
 
-Invoking `gradlew clean junitPlatformTest` (or `gradlew clean test`) from the command
-line will execute all tests within the project whose class names match the pattern
-`^.*Tests?$`. This will result in output similar to the following:
+Invoking `gradlew clean test` from the command line will execute all tests within the
+project. This will result in output similar to the following:
 
 ```
-:junitPlatformTest
+> Task :test
 
-Test run finished after 86 ms
-[         6 containers found      ]
-[         0 containers skipped    ]
-[         6 containers started    ]
-[         0 containers aborted    ]
-[         6 containers successful ]
-[         0 containers failed     ]
-[         5 tests found           ]
-[         1 tests skipped         ]
-[         4 tests started         ]
-[         0 tests aborted         ]
-[         4 tests successful      ]
-[         0 tests failed          ]
+com.example.project.SecondTest > mySecondTest() SKIPPED
 
-:test SKIPPED
+com.example.project.OtherTests > testThisThing() PASSED
 
-BUILD SUCCESSFUL
+com.example.project.OtherTests > testThisOtherThing() PASSED
+
+com.example.project.FirstTest > myFirstTest(TestInfo) PASSED
+
+com.example.project.JUnit4Test > test PASSED
+
+BUILD SUCCESSFUL in 2s
+4 actionable tasks: 3 executed, 1 up-to-date
 ```
 
 If you comment out the `@Disabled` annotation on `SecondTest#mySecondTest()`, you will
 then see the build fail with output similar to the following:
 
 ```
-:junitPlatformTest
+> Task :test FAILED
 
-Failures (1):
-  JUnit Jupiter:SecondTest:mySecondTest()
-    MethodSource [className = 'com.example.project.SecondTest', methodName = 'mySecondTest', methodParameterTypes = '']
-    => org.opentest4j.AssertionFailedError: 2 is not equal to 1 ==> expected: <2> but was: <1>
+com.example.project.OtherTests > testThisThing() PASSED
 
-Test run finished after 90 ms
-[         6 containers found      ]
-[         0 containers skipped    ]
-[         6 containers started    ]
-[         0 containers aborted    ]
-[         6 containers successful ]
-[         0 containers failed     ]
-[         5 tests found           ]
-[         0 tests skipped         ]
-[         5 tests started         ]
-[         0 tests aborted         ]
-[         4 tests successful      ]
-[         1 tests failed          ]
+com.example.project.OtherTests > testThisOtherThing() PASSED
 
-:junitPlatformTest FAILED
+com.example.project.FirstTest > myFirstTest(TestInfo) PASSED
+
+com.example.project.SecondTest > mySecondTest() FAILED
+    org.opentest4j.AssertionFailedError at SecondTest.java:24
+
+com.example.project.JUnit4Test > test PASSED
+
+5 tests completed, 1 failed
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':junitPlatformTest'.
-> Process 'command '/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///Users/marc/Repositories/junit5-samples/junit5-migration-gradle/build/reports/tests/test/index.html
 
 * Try:
-Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
 
-BUILD FAILED
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 2s
+4 actionable tasks: 3 executed, 1 up-to-date
 ```
 
-**Note**: The _exit value_ is `1` if any containers or tests failed; otherwise, it is `0`.
+### Test Reports
 
-### Current Limitations
-
-- The results of any tests run via the JUnit Platform Gradle plugin will not be included
-  in the standard test report generated by Gradle; however, the test results
-  can typically be aggregated by your CI server software. See the `reportsDir` property of the plugin.
+Gradle writes XML test reports to `build/test-results/test` and HTML test reports to `reports/tests/test`.
