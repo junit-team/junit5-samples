@@ -40,6 +40,7 @@ class Builder {
 		// jupiter-starter
 		// TODO run("junit5-jupiter-starter-ant", "antw"); https://github.com/junit-team/junit5-samples/issues/66
 		run("junit5-jupiter-starter-gradle", "gradlew", "clean", "test");
+		run("junit5-jupiter-starter-gradle-kotlin", "gradlew", "clean", "test");
 		run("junit5-jupiter-starter-maven", "mvnw", "clean", "test");
 
 		// jupiter-extensions
