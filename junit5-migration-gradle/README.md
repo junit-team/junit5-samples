@@ -136,4 +136,4 @@ BUILD FAILED in 2s
 
 ### Test Reports
 
-Gradle writes XML test reports to `build/test-results/test` and HTML test reports to `reports/tests/test`.
+Gradle writes XML test reports to `build/test-results/test` and HTML test reports to `build/reports/tests/test`.
