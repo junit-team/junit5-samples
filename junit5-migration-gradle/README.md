@@ -123,7 +123,7 @@ FAILURE: Build failed with an exception.
 
 * What went wrong:
 Execution failed for task ':test'.
-> There were failing tests. See the report at: file:///Users/marc/Repositories/junit5-samples/junit5-migration-gradle/build/reports/tests/test/index.html
+> There were failing tests. See the report at: file:///Users/junit-team/junit5-samples/junit5-migration-gradle/build/reports/tests/test/index.html
 
 * Try:
 Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
