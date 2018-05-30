@@ -5,7 +5,6 @@ jdk: oraclejdk8
 
 before_install:
   - unset _JAVA_OPTIONS
-  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 
 jobs:
   include:
@@ -29,22 +28,26 @@ jobs:
     - stage: migration
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
-# java 9 and higher
-    - stage: java-9
-      jdk: oraclejdk9
+# java 10 and higher
+    - stage: java-10
+      jdk: openjdk10
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
-    - stage: java-9
+    - stage: java-10
+      jdk: openjdk-ea
       env: TOPIC='Java Platform Module System'
-      script: . ./install-jdk.sh -F 11 -L GPL && cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
+      script: cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
 # snapshot -- use current junit master branch
     - stage: snapshot
+      jdk: oraclejdk10
       env: TOOL='Gradle'
-      script: . ./install-jdk.sh -F 10 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
     - stage: snapshot
+      jdk: oraclejdk10
       env: TOOL='Maven'
-      script: . ./install-jdk.sh -F 11 -L GPL -C && cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test --file pom-SNAPSHOT.xml
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test --file pom-SNAPSHOT.xml
 # all samples, one-shot
 #    - stage: all
+#      jdk: openjdk-ea
 #      env: TOPIC='Build all samples'
-#      script: . ./install-jdk.sh -F 10 && ./build-all-samples.jsh
+#      script: ./build-all-samples.jsh
