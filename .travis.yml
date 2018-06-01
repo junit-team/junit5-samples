@@ -34,7 +34,7 @@ jobs:
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
     - stage: java-10
-      jdk: openjdk-ea
+      jdk: openjdk10
       env: TOPIC='Java Platform Module System'
       script: cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
 # snapshot -- use current junit master branch
