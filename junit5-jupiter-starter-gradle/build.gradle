@@ -22,5 +22,5 @@ test {
 }
 
 wrapper {
-	gradleVersion = '4.7'
+	gradleVersion = '4.8'
 }
