@@ -16,6 +16,14 @@ jobs:
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain
     - stage: starter
+      env: TOOL='Gradle'
+      env: TOPIC='Kotlin'
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle-kotlin && ./gradlew test --console plain
+    - stage: starter
+      env: TOOL='Gradle'
+      env: TOPIC='Groovy'
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle-groovy && ./gradlew test --console plain
+    - stage: starter
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test
     - stage: starter

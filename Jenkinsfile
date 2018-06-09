@@ -53,6 +53,32 @@ pipeline {
         }
       }
     }
+    stage('junit5-jupiter-starter-gradle-kotlin') {
+      tools {
+        jdk 'Oracle JDK 8 (latest)'
+      }
+      steps {
+        sh 'cd junit5-jupiter-starter-gradle-kotlin && ./gradlew --no-daemon clean build'
+      }
+      post {
+        always {
+          junit 'junit5-jupiter-starter-gradle-kotlin/build/test-results/test/*.xml'
+        }
+      }
+    }
+    stage('junit5-jupiter-starter-gradle-groovy') {
+      tools {
+        jdk 'Oracle JDK 8 (latest)'
+      }
+      steps {
+        sh 'cd junit5-jupiter-starter-gradle-groovy && ./gradlew --no-daemon clean build'
+      }
+      post {
+        always {
+          junit 'junit5-jupiter-starter-gradle-groovy/build/test-results/test/*.xml'
+        }
+      }
+    }
     stage('junit5-jupiter-starter-maven') {
       tools {
         jdk 'Oracle JDK 8 (latest)'
