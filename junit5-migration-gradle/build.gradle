@@ -1,9 +1,13 @@
 plugins {
 	id 'com.gradle.build-scan' version '1.13.4'
 	id 'java'
-	id 'jacoco' // to showcase how to generate code coverage
 	id 'eclipse' // optional (to generate Eclipse project files)
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
+}
+
+int javaVersion = Integer.valueOf(JavaVersion.current().getMajorVersion())
+if (javaVersion < 9) {
+    apply plugin: 'jacoco'
 }
 
 buildScan {
@@ -35,8 +39,10 @@ dependencies {
 	}
 }
 
-jacoco {
-	toolVersion = '0.8.1'
+if (project.plugins.findPlugin('jacoco')) {
+    jacoco {
+        toolVersion = '0.8.1'
+    }
 }
 
 test {
@@ -52,7 +58,9 @@ test {
 		events 'passed', 'skipped', 'failed'
 	}
 
-	finalizedBy jacocoTestReport
+    if (project.plugins.findPlugin('jacoco')) {
+        finalizedBy jacocoTestReport
+    }
 }
 
 wrapper {
