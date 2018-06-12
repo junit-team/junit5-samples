@@ -17,6 +17,14 @@
 		<junit.platform.version>1.2.0</junit.platform.version>
 	</properties>
 
+	<!-- only needed until "maven-surefire-plugin" 2.22.0 is published... -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>staged-releases</id>
+			<url>https://repository.apache.org/content/repositories/maven-1436</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -29,11 +37,11 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.21.0</version>
+				<version>2.22.0</version>
 				<configuration>
+					<!--<groups>fast</groups>-->
+					<excludedGroups>slow</excludedGroups>
 					<properties>
-						<!-- <includeTags>fast</includeTags> -->
-						<excludeTags>slow</excludeTags>
 						<!--
 						<configurationParameters>
 							junit.jupiter.conditions.deactivate = *
@@ -41,13 +49,6 @@
 						-->
 					</properties>
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.junit.platform</groupId>
-						<artifactId>junit-platform-surefire-provider</artifactId>
-						<version>${junit.platform.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
