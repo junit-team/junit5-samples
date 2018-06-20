@@ -1,0 +1,25 @@
+plugins {
+	id 'java'
+}
+
+ext.jitpackGroup = 'com.github.junit-team.junit5'
+ext.jitpackVersion = 'master-SNAPSHOT'
+// ext.jitpackVersion = 'experiments~parallel-execution-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+	testCompile("${jitpackGroup}:junit-jupiter-api:${jitpackVersion}")
+	testCompile("${jitpackGroup}:junit-jupiter-params:${jitpackVersion}")
+    testRuntime("${jitpackGroup}:junit-jupiter-engine:${jitpackVersion}")
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
