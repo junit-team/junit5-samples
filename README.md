@@ -11,7 +11,7 @@ the `build-all-samples.jsh` script.
 
 _Basic setups showing how to get started._
 
-### Jupiter on Gradle ![badge-jdk-8] ![badge-tool-ant] ![badge-junit-jupiter]
+### Jupiter on Ant ![badge-jdk-8] ![badge-tool-ant] ![badge-junit-jupiter]
 
 The [junit5-jupiter-starter-ant] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Ant build system.
