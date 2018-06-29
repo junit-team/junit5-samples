@@ -10,7 +10,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+
 		<junit.version>4.12</junit.version>
 		<junit.jupiter.version>5.2.0</junit.jupiter.version>
 		<junit.vintage.version>5.2.0</junit.vintage.version>
@@ -19,15 +21,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
-
 			<!-- Junit 5 requires Surefire version 2.22.0 or higher -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
