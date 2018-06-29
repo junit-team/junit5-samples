@@ -34,7 +34,7 @@
 
     <!-- https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-ant -->
     <target name="test.junit.launcher" depends="compile">
-        <junitlauncher haltOnFailure="true">
+        <junitlauncher haltOnFailure="true" printSummary="true">
             <classpath refid="test.classpath"/>
             <testclasses outputdir="build/test-report">
                 <fileset dir="build/test">
@@ -45,8 +45,6 @@
                 <listener classname="com.example.project.SummaryPrintingListener"/>
             </testclasses>
         </junitlauncher>
-        <loadfile property="summary" srcFile="build/test-summary.txt"/>
-        <echo>${summary}</echo>
     </target>
 
     <!-- https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher -->
