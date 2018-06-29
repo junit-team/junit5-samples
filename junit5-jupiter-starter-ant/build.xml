@@ -42,7 +42,6 @@
                 </fileset>
                 <listener type="legacy-xml" sendSysOut="true" sendSysErr="true"/>
                 <listener type="legacy-plain" sendSysOut="true" />
-                <listener classname="com.example.project.SummaryPrintingListener"/>
             </testclasses>
         </junitlauncher>
     </target>
