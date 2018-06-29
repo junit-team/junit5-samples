@@ -45,6 +45,8 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+
+			<!-- Junit 5 requires Surefire version 2.22.0 or higher -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.0</version>
