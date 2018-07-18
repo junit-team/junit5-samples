@@ -10,52 +10,60 @@ jobs:
   include:
 # starter
     - stage: starter
-      name: "Jupiter Starter Samples"
+      name: "Jupiter Starter Sample: Ant"
       env: TOOL='Ant'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant && ./build.sh
     - stage: starter
+      name: "Jupiter Starter Sample: Gradle & Java"
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain
     - stage: starter
+      name: "Jupiter Starter Sample: Gradle & Kotlin"
       env: TOOL='Gradle'
       env: TOPIC='Kotlin'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle-kotlin && ./gradlew test --console plain
     - stage: starter
+      name: "Jupiter Starter Sample: Gradle & Groovy"
       env: TOOL='Gradle'
       env: TOPIC='Groovy'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle-groovy && ./gradlew test --console plain
     - stage: starter
+      name: "Jupiter Starter Sample: Maven"
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test
     - stage: starter
+      name: "Jupiter Extension Samples"
       env: TOPIC='Sample Extensions'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
 # migration
     - stage: migration
-      name: "Migration Samples"
+      name: "Migration Samples: Gradle"
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-gradle && ./gradlew build --console plain --scan
     - stage: migration
+      name: "Migration Samples: Maven"
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
 # java 10 and higher
     - stage: java-10
-      name: "Running on Java 10+"
+      name: "Running on JDK 10"
       jdk: openjdk10
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
     - stage: java-10
+      name: "Living in the Modular World..."
       jdk: openjdk10
       env: TOPIC='Java Platform Module System'
       script: cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
 # snapshot -- use current junit master branch
     - stage: snapshot
-      name: "Using our own snapshot builds..."
-      jdk: opendjdk11
+      name: "JUnit 5 SNAPSHOT build: Gradle"
+      jdk: openjdk11
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
     - stage: snapshot
-      jdk: opendjdk11
+      name: "JUnit 5 SNAPSHOT build: Maven"
+      jdk: openjdk11
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test --file pom-SNAPSHOT.xml
 # all samples, one-shot
