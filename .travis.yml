@@ -10,6 +10,7 @@ jobs:
   include:
 # starter
     - stage: starter
+      name: "Jupiter Starter Samples"
       env: TOOL='Ant'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant && ./build.sh
     - stage: starter
@@ -31,6 +32,7 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
 # migration
     - stage: migration
+      name: "Migration Samples"
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-gradle && ./gradlew build --console plain --scan
     - stage: migration
@@ -38,6 +40,7 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
 # java 10 and higher
     - stage: java-10
+      name: "Running on Java 10+"
       jdk: openjdk10
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
@@ -47,11 +50,12 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
 # snapshot -- use current junit master branch
     - stage: snapshot
-      jdk: oraclejdk10
+      name: "Using our own snapshot builds..."
+      jdk: opendjdk11
       env: TOOL='Gradle'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
     - stage: snapshot
-      jdk: oraclejdk10
+      jdk: opendjdk11
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test --file pom-SNAPSHOT.xml
 # all samples, one-shot
