@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'eclipse' // optional (to generate Eclipse project files)
+    id 'idea' // optional (to generate IntelliJ IDEA project files)
+    id 'org.jetbrains.kotlin.jvm' version '1.2.40'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def junit4Version = '4.12'
+    def junitVintageVersion = '5.2.0'
+    def junitJupiterVersion = '5.2.0'
+    def junitPlatformVersion = '1.2.0'
+
+    // JUnit Jupiter
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}") {
+        because 'allows JUnit 5 tests to run'
+    }
+
+    // JUnit Vintage
+    testCompile("junit:junit:${junit4Version}")
+    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
+        because 'allows JUnit 3 and JUnit 4 tests to run'
+    }
+
+    // JUnit Platform Launcher + Console
+    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
+        because 'allows tests to run from IDEs that bundle older version of launcher'
+    }
+    testRuntime("org.junit.platform:junit-platform-console:${junitPlatformVersion}") {
+        because 'needed to launch the JUnit Platform Console program'
+    }
+
+    // Brahms - Maingine and Single-File Source-Code Test Engine
+    testRuntime("de.sormuras:brahms:0.0.10") {
+        because 'executes programs "public static void main(String...args)" as tests'
+    }
+
+    // JQwik
+    testCompile('net.jqwik:jqwik:0.8.14')
+
+    // Spek
+    testCompile('org.jetbrains.spek:spek-api:1.1.5')
+    testRuntime('org.jetbrains.spek:spek-junit-platform-engine:1.1.5')
+    testCompile('org.jetbrains.kotlin:kotlin-stdlib')
+    testCompile('org.jetbrains.kotlin:kotlin-reflect')
+
+    // KotlinTest
+    testCompile 'io.kotlintest:kotlintest-runner-junit5:3.1.9'
+}
+
+task consoleLauncherTest(type: JavaExec) {
+    dependsOn testClasses
+    def reportsDir = file("$buildDir/test-results")
+    outputs.dir reportsDir
+    classpath sourceSets.test.runtimeClasspath
+    main 'org.junit.platform.console.ConsoleLauncher'
+    args '--scan-classpath'
+    args '--details', 'tree'
+    args '--reports-dir', reportsDir
+}
+
+test {
+    // useJUnitPlatform() ... https://github.com/gradle/gradle/issues/4912
+    dependsOn consoleLauncherTest
+    exclude '**/*'
+}
+
+wrapper {
+    gradleVersion = '4.9'
+}
