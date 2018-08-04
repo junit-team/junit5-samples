@@ -44,6 +44,11 @@ jobs:
       name: "Migration Samples: Maven"
       env: TOOL='Maven'
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
+    - stage: migration
+      name: "JUnit Platform running multiple TestEngine implementations"
+      jdk: openjdk11
+      env: TOOL='Gradle'
+      script: cd $TRAVIS_BUILD_DIR/junit5-multiple-engines && ./gradlew test --console plain
 # java 10 and higher
     - stage: java-10
       name: "Running on JDK 10"
