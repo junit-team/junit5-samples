@@ -51,7 +51,9 @@ dependencies {
     testCompile('org.jetbrains.kotlin:kotlin-reflect')
 
     // KotlinTest
-    testCompile 'io.kotlintest:kotlintest-runner-junit5:3.1.9'
+    testCompile('io.kotlintest:kotlintest-runner-junit5:3.1.9')
+    testRuntime('org.slf4j:slf4j-nop:1.7.25')
+    // testRuntime('org.slf4j:slf4j-simple:1.7.25')
 }
 
 task consoleLauncherTest(type: JavaExec) {

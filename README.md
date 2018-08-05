@@ -9,7 +9,7 @@ the `build-all-samples.jsh` script.
 
 ## Jupiter Starter Samples
 
-_Basic setups showing how to get started._
+_Basic setups showing how to get started with JUnit Jupiter._
 
 ### Jupiter on Ant ![badge-jdk-8] ![badge-tool-ant] ![badge-junit-jupiter]
 
@@ -41,6 +41,8 @@ getting started with JUnit Jupiter using the Maven build system.
 
 ## Jupiter Feature Samples
 
+_Extending JUnit Jupiter using its `Extension` API._
+
 ### Sample Extensions ![badge-jdk-8] ![badge-tool-gradle] ![badge-junit-jupiter]
 
 The [junit5-jupiter-extensions] sample demonstrates how one can implement custom
@@ -63,11 +65,15 @@ The [junit5-migration-maven] sample demonstrates how to set up a Maven project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
 
-## Java Platform Module System Samples
+## Platform Samples
+_Showing basic features of the JUnit Platform._
 
-_Living in the Modular World..._
+### Multiple Engines ![badge-jdk-11] ![badge-tool-gradle] ![badge-junit-platform] ![badge-junit-jupiter] ![badge-junit-vintage] ...
 
-### Platform on JShell ![badge-jdk-9] ![badge-jdk-10] ![badge-jdk-11] ![badge-tool-console] ![badge-junit-platform]
+The [junit5-multiple-engines] sample demonstrates how to set up a Gradle project
+using the JUnit Platform with various [TestEngine][guide-custom-engine] implementations.
+
+### Living in the Modular World ![badge-jdk-11] ![badge-tool-console] ![badge-junit-platform]
 
 The [junit5-modular-world] sample demonstrates how to test code organized in modules.
 This sample also demonstrates how to implement a custom [TestEngine][guide-custom-engine]
@@ -81,6 +87,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
 [junit5-migration-gradle]: junit5-migration-gradle
 [junit5-migration-maven]: junit5-migration-maven
+[junit5-multiple-engines]: junit5-multiple-engines
 [junit5-modular-world]: junit5-modular-world
 
 [badge-jdk-8]: https://img.shields.io/badge/jdk-8-lightgray.svg "JDK-8"
