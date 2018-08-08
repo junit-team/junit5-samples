@@ -16,4 +16,10 @@ using the JUnit Platform with various [TestEngine][guide-custom-engine] implemen
  * [KotlinTest](https://github.com/kotlintest/kotlintest)
  * [Spek](https://github.com/spekframework/spek)
 
+## More engines
+
+See https://github.com/junit-team/junit5/wiki/Third-party-Extensions#junit-platform-test-engines
+for even more test engine implementations and feel free to add minimal working samples of other
+engines to this project and the wiki page.
+
 [guide-custom-engine]: http://junit.org/junit5/docs/current/user-guide/#launcher-api-engines-custom "Plugging in Your Own Test Engine"
