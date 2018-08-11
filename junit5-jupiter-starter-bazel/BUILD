@@ -1,19 +1,19 @@
 load("//:junit5.bzl", "java_junit5_test")
 
 java_library(
-    name = "calculator",
-    srcs = [
-        "src/main/java/com/example/project/Calculator.java",
-    ],
+    name = "junit5-jupiter-starter-bazel",
+    srcs = glob([
+        "src/main/java/**/*.java",
+    ]),
 )
 
 java_junit5_test(
-    name = "CalculatorTests",
-    srcs = [
-        "src/test/java/com/example/project/CalculatorTests.java",
-    ],
-    #test_class = "com.example.project.CalculatorTests",
+    name = "junit5-jupiter-starter-bazel-test",
+    srcs = glob([
+        "src/test/java/**/*.java",
+    ]),
+    test_class = "com.example.project.CalculatorTests",
     deps = [
-        ":calculator",
+        ":junit5-jupiter-starter-bazel",
     ],
 )
