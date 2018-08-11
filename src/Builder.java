@@ -43,6 +43,8 @@ class Builder {
 		run("junit5-jupiter-starter-gradle-groovy", "gradlew", "clean", "test");
 		run("junit5-jupiter-starter-gradle-kotlin", "gradlew", "clean", "test");
 		run("junit5-jupiter-starter-maven", "mvnw", "clean", "test");
+		// TODO bootstrap bazel
+		// TODO run("junit5-jupiter-starter-bazel", "bazel", "test", "//...");
 
 		// jupiter-extensions
 		run("junit5-jupiter-extensions", "gradlew", "clean", "test");

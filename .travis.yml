@@ -1,10 +1,20 @@
-sudo: false
+sudo: true
 
 language: java
 jdk: oraclejdk8
 
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - wget
+      - pkg-config
+
 before_install:
   - unset _JAVA_OPTIONS
+  - wget https://github.com/bazelbuild/bazel/releases/download/0.16.0/bazel_0.16.0-linux-x86_64.deb
+  - sudo dpkg -i bazel_0.16.0-linux-x86_64.deb
 
 jobs:
   include:
@@ -24,6 +34,9 @@ jobs:
     - stage: starter
       name: "Jupiter Starter Sample: Maven"
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test
+    - stage: starter
+      name: "Jupiter Starter Sample: Bazel"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-bazel && bazel test //...
     - stage: starter
       name: "Jupiter Extension Samples"
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
