@@ -65,9 +65,7 @@ def java_junit5_test(name, srcs, test_class=None, deps=[], runtime_deps=[], **kw
     if test_class:
         junit_console_args += ["--select-class", test_class]
     else:
-        junit_console_args += ["--include-classname", name]
-        for filename in srcs:
-            junit_console_args += ["--select-file", filename]
+        fail("must specific 'test_class'")
 
     native.java_test(
         name=name,
