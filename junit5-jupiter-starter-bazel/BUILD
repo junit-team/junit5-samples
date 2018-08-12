@@ -7,6 +7,7 @@ java_library(
     ]),
 )
 
+# Use java_test after bazel officially support junit5
 java_junit5_test(
     name = "junit5-jupiter-starter-bazel-test",
     srcs = glob([
