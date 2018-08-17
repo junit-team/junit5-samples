@@ -21,36 +21,39 @@ JUNIT_EXTRA_DEPENDENCIES = [
     ("org.opentest4j", "opentest4j", "1.1.0"),
 ]
 
-
 def junit_jupiter_java_repositories(
-        version="5.2.0"):
+        version = "5.2.0"):
     """Imports dependencies for JUnit Jupiter"""
     for artifact_id in JUNIT_JUPITER_ARTIFACT_ID_LIST:
         native.maven_jar(
-            name=_format_maven_jar_name(JUNIT_JUPITER_GROUP_ID, artifact_id),
-            artifact="%s:%s:%s" % (
-                JUNIT_JUPITER_GROUP_ID, artifact_id, version)
+            name = _format_maven_jar_name(JUNIT_JUPITER_GROUP_ID, artifact_id),
+            artifact = "%s:%s:%s" % (
+                JUNIT_JUPITER_GROUP_ID,
+                artifact_id,
+                version,
+            ),
         )
-    
+
     for t in JUNIT_EXTRA_DEPENDENCIES:
         native.maven_jar(
-            name=_format_maven_jar_name(t[0], t[1]),
-            artifact="%s:%s:%s" % t
+            name = _format_maven_jar_name(t[0], t[1]),
+            artifact = "%s:%s:%s" % t,
         )
 
-
 def junit_platform_java_repositories(
-        version="1.2.0"):
+        version = "1.2.0"):
     """Imports dependencies for JUnit Platform"""
     for artifact_id in JUNIT_PLATFORM_ARTIFACT_ID_LIST:
         native.maven_jar(
-            name=_format_maven_jar_name(JUNIT_PLATFORM_GROUP_ID, artifact_id),
-            artifact="%s:%s:%s" % (
-                JUNIT_PLATFORM_GROUP_ID, artifact_id, version)
+            name = _format_maven_jar_name(JUNIT_PLATFORM_GROUP_ID, artifact_id),
+            artifact = "%s:%s:%s" % (
+                JUNIT_PLATFORM_GROUP_ID,
+                artifact_id,
+                version,
+            ),
         )
 
-
-def java_junit5_test(name, srcs, test_class=None, deps=[], runtime_deps=[], **kwargs):
+def java_junit5_test(name, srcs, test_class = None, deps = [], runtime_deps = [], **kwargs):
     FILTER_KWARGS = [
         "main_class",
         "use_testrunner",
@@ -68,33 +71,29 @@ def java_junit5_test(name, srcs, test_class=None, deps=[], runtime_deps=[], **kw
         fail("must specific 'test_class'")
 
     native.java_test(
-        name=name,
-        srcs=srcs,
-        use_testrunner=False,
-        main_class="org.junit.platform.console.ConsoleLauncher",
-        args=junit_console_args,
-        deps=deps + [
+        name = name,
+        srcs = srcs,
+        use_testrunner = False,
+        main_class = "org.junit.platform.console.ConsoleLauncher",
+        args = junit_console_args,
+        deps = deps + [
             _format_maven_jar_dep_name(JUNIT_JUPITER_GROUP_ID, artifact_id)
             for artifact_id in JUNIT_JUPITER_ARTIFACT_ID_LIST
         ] + [
-            _format_maven_jar_dep_name(JUNIT_PLATFORM_GROUP_ID, "junit-platform-suite-api")
+            _format_maven_jar_dep_name(JUNIT_PLATFORM_GROUP_ID, "junit-platform-suite-api"),
         ] + [
             _format_maven_jar_dep_name(t[0], t[1])
             for t in JUNIT_EXTRA_DEPENDENCIES
         ],
-        runtime_deps=runtime_deps + [
+        runtime_deps = runtime_deps + [
             _format_maven_jar_dep_name(JUNIT_PLATFORM_GROUP_ID, artifact_id)
             for artifact_id in JUNIT_PLATFORM_ARTIFACT_ID_LIST
         ],
         **kwargs
     )
 
-
 def _format_maven_jar_name(group_id, artifact_id):
-    return ("%s_%s" % (group_id, artifact_id)) \
-        .replace(".", "_") \
-        .replace("-", "_")
-
+    return ("%s_%s" % (group_id, artifact_id)).replace(".", "_").replace("-", "_")
 
 def _format_maven_jar_dep_name(group_id, artifact_id):
     return "@%s//jar" % _format_maven_jar_name(group_id, artifact_id)
