@@ -1,6 +1,6 @@
 # junit5-migration-gradle
 
-The `junit5-migration-maven` project demonstrates how to execute tests based on JUnit 5
+The `junit5-migration-gradle` project demonstrates how to execute tests based on JUnit 5
 using Gradle. In addition, it showcases that existing JUnit 4 based tests can be executed
 in the same test suite as JUnit Jupiter based tests or any other tests supported on
 the JUnit Platform.
