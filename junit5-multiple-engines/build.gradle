@@ -7,6 +7,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -45,8 +46,8 @@ dependencies {
     testCompile('net.jqwik:jqwik:0.8.14')
 
     // Spek
-    testCompile('org.jetbrains.spek:spek-api:1.1.5')
-    testRuntime('org.jetbrains.spek:spek-junit-platform-engine:1.1.5')
+    testCompile('org.jetbrains.spek:spek-api:1.2.1')
+    testRuntime('org.jetbrains.spek:spek-junit-platform-engine:1.2.1')
     testCompile('org.jetbrains.kotlin:kotlin-stdlib')
     testCompile('org.jetbrains.kotlin:kotlin-reflect')
 
