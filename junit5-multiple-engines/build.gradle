@@ -38,12 +38,12 @@ dependencies {
     }
 
     // Brahms - Maingine and Single-File Source-Code Test Engine
-    testRuntime("de.sormuras:brahms:0.0.10") {
+    testRuntime("de.sormuras:brahms:0.0.13") {
         because 'executes programs "public static void main(String...args)" as tests'
     }
 
     // JQwik
-    testCompile('net.jqwik:jqwik:0.8.14')
+    testCompile('net.jqwik:jqwik:0.8.15')
 
     // Spek
     testCompile('org.jetbrains.spek:spek-api:1.2.1')
