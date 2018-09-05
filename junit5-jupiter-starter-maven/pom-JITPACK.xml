@@ -27,6 +27,11 @@
 			<version>${junit.jitpack.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.github.junit-team.junit5</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jitpack.version}</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -35,13 +40,6 @@
 			<url>https://jitpack.io</url>
 		</repository>
 	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<build>
 		<plugins>
@@ -66,13 +64,6 @@
 						<!--</configurationParameters>-->
 					<!--</properties>-->
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.github.junit-team.junit5</groupId>
-						<artifactId>junit-jupiter-engine</artifactId>
-						<version>${junit.jitpack.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
