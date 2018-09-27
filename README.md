@@ -3,8 +3,7 @@
 Welcome to _JUnit 5 Samples_, a collection of sample applications and extensions
 using JUnit Jupiter, JUnit Vintage, and the JUnit Platform on various build systems.
 
-CI builds for sample projects are available on [Jenkins][ci-jenkins] and
-[Travis CI][ci-travis]. Using JDK 10's `jshell` tool, you may build all samples via
+CI builds for sample projects are available on [Travis CI][ci-travis]. Using JDK 10's `jshell` tool, you may build all samples via
 the `build-all-samples.jsh` script.
 
 ## Jupiter Starter Samples
@@ -104,6 +103,5 @@ for the JUnit Platform using the Java Platform Module System.
 
 [ci-badge]: https://travis-ci.org/junit-team/junit5-samples.svg "Travis CI build status"
 [ci-travis]: https://travis-ci.org/junit-team/junit5-samples
-[ci-jenkins]: https://junit.ci.cloudbees.com/blue/organizations/jenkins/JUnit%205%20Samples/branches/
 
 [guide-custom-engine]: http://junit.org/junit5/docs/current/user-guide/#launcher-api-engines-custom "Plugging in Your Own Test Engine"
