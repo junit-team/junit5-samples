@@ -17,10 +17,10 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-	compile("org.junit.jupiter:junit-jupiter-api:5.3.1") {
+	implementation("org.junit.jupiter:junit-jupiter-api:5.3.1") {
         because 'building extensions in "main" using JUnit Jupiter API'
     }
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.3.1") {
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1") {
         because 'at least one engine is needed at test runtime'
     }
 }
@@ -30,5 +30,5 @@ test {
 }
 
 wrapper {
-	gradleVersion = '4.8'
+	gradleVersion = '4.10.2'
 }
