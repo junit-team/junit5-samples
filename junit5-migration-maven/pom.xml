@@ -46,10 +46,10 @@
 
 	<build>
 		<plugins>
-			<!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
+			<!-- JUnit 5 requires Surefire version 2.22.1 or higher -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
+				<version>2.22.1</version>
 				<configuration>
 					<!--<groups>fast</groups>-->
 					<excludedGroups>slow</excludedGroups>
