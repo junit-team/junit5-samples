@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'eclipse' // optional (to generate Eclipse project files)
     id 'idea' // optional (to generate IntelliJ IDEA project files)
-    id 'org.jetbrains.kotlin.jvm' version '1.2.40'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.71'
 }
 
 repositories {
@@ -38,12 +38,12 @@ dependencies {
     }
 
     // Brahms - Maingine and Single-File Source-Code Test Engine
-    testRuntime("de.sormuras:brahms:0.0.13") {
+    testRuntime("de.sormuras:brahms:0.0.14") {
         because 'executes programs "public static void main(String...args)" as tests'
     }
 
     // JQwik
-    testCompile('net.jqwik:jqwik:0.8.15')
+    testCompile('net.jqwik:jqwik:0.9.0')
 
     // Spek
     testCompile('org.jetbrains.spek:spek-api:1.2.1')
@@ -52,7 +52,7 @@ dependencies {
     testCompile('org.jetbrains.kotlin:kotlin-reflect')
 
     // KotlinTest
-    testCompile('io.kotlintest:kotlintest-runner-junit5:3.1.9')
+    testCompile('io.kotlintest:kotlintest-runner-junit5:3.1.10')
     testRuntime('org.slf4j:slf4j-nop:1.7.25')
     // testRuntime('org.slf4j:slf4j-simple:1.7.25')
 }
