@@ -12,6 +12,7 @@ package com.example.singleton;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.example.singleton.SingletonExtension.New;
 import com.example.singleton.SingletonExtension.Singleton;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,16 +27,19 @@ class SingletonExtensionTests {
 	@Test
 	void test1(@Singleton(Builder123.class) StringBuilder builder) {
 		assertEquals("123", builder.toString());
+		System.out.println("test1: " + System.identityHashCode(builder));
 	}
 
 	@Test
 	void test2(@Singleton(Builder123.class) StringBuilder builder) {
 		assertEquals("123", builder.toString());
+		System.out.println("test2: " + System.identityHashCode(builder));
 	}
 
 	@Test
-	void test3(@Singleton(Builder123.class) StringBuilder builder) {
+	void test3(@New(Builder123.class) StringBuilder builder) {
 		assertEquals("123", builder.toString());
+		System.out.println("test3: " + System.identityHashCode(builder));
 	}
 
 }
