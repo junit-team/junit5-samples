@@ -10,13 +10,11 @@
 
 package com.example.singleton;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.example.singleton.SingletonExtension.Singleton;
-import java.util.function.Supplier;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @since 5.4
@@ -25,24 +23,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SingletonExtension.class)
 class SingletonExtensionTests {
 
-	static class Builder123 implements AutoCloseable, Supplier<StringBuilder> {
-
-		private final StringBuilder builder = new StringBuilder("123");
-
-		@Override
-		public void close() {
-			builder.setLength(0);
-		}
-
-		@Override
-		public StringBuilder get() {
-			return builder;
-		}
+	@Test
+	void test1(@Singleton(Builder123.class) StringBuilder builder) {
+		assertEquals("123", builder.toString());
 	}
 
 	@Test
-	@Disabled("[WIP]")
-	void injectsInteger(@Singleton(Builder123.class) StringBuilder builder) {
+	void test2(@Singleton(Builder123.class) StringBuilder builder) {
+		assertEquals("123", builder.toString());
+	}
+
+	@Test
+	void test3(@Singleton(Builder123.class) StringBuilder builder) {
 		assertEquals("123", builder.toString());
 	}
 
