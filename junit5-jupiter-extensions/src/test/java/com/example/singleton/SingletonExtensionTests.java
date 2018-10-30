@@ -10,9 +10,10 @@
 
 package com.example.singleton;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static com.example.singleton.SingletonExtension.Layer.CONTAINER;
+import static com.example.singleton.SingletonExtension.Layer.GLOBAL;
+import static com.example.singleton.SingletonExtension.Layer.TEST;
 
-import com.example.singleton.SingletonExtension.New;
 import com.example.singleton.SingletonExtension.Singleton;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,22 +25,39 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(SingletonExtension.class)
 class SingletonExtensionTests {
 
+	private void log(String message, StringBuilder builder) {
+		String identity = "0x" + Integer.toHexString(System.identityHashCode(builder)).toUpperCase();
+		System.out.println(identity + ": " + message);
+	}
+
 	@Test
 	void test1(@Singleton(Builder123.class) StringBuilder builder) {
-		assertEquals("123", builder.toString());
-		System.out.println("test1: " + System.identityHashCode(builder));
+		log("test1", builder);
 	}
 
 	@Test
-	void test2(@Singleton(Builder123.class) StringBuilder builder) {
-		assertEquals("123", builder.toString());
-		System.out.println("test2: " + System.identityHashCode(builder));
+	void test2(@Singleton(value = Builder123.class, layer = GLOBAL) StringBuilder builder) {
+		log("test2", builder);
 	}
 
 	@Test
-	void test3(@New(Builder123.class) StringBuilder builder) {
-		assertEquals("123", builder.toString());
-		System.out.println("test3: " + System.identityHashCode(builder));
+	void test3(@Singleton(value = Builder123.class, layer = CONTAINER) StringBuilder builder) {
+		log("test3", builder);
+	}
+
+	@Test
+	void test4(@Singleton(value = Builder123.class, layer = CONTAINER) Builder123 resource) {
+		log("test4", resource.getInstance());
+	}
+
+	@Test
+	void test5(@Singleton(value = Builder123.class, layer = TEST) StringBuilder builder) {
+		log("test5", builder);
+	}
+
+	@Test
+	void test6(@Singleton(value = Builder123.class, layer = TEST) StringBuilder builder) {
+		log("test6", builder);
 	}
 
 }

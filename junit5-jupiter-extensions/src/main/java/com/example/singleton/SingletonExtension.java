@@ -4,7 +4,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.function.Supplier;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
@@ -15,61 +14,76 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 
 public class SingletonExtension implements ParameterResolver {
 
-	private static final Namespace NAMESPACE = Namespace.create(SingletonExtension.class);
-
-	public static class Resource<T> implements CloseableResource, Supplier<T> {
-
-		private final T instance;
-
-		public Resource(T instance) {
-			this.instance = instance;
-		}
+	public interface Resource<T> extends CloseableResource {
 
 		@Override
-		public void close() throws Exception {
+		default void close() throws Exception {
+			T instance = getInstance();
 			if (instance instanceof AutoCloseable) {
 				((AutoCloseable) instance).close();
 			}
 		}
 
-		@Override
-		public T get() {
-			return instance;
-		}
+		T getInstance();
 	}
 
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.PARAMETER)
-	public @interface New {
-		Class<? extends Resource<?>> value();
+	public enum Layer {
+		GLOBAL, CONTAINER, TEST
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.PARAMETER)
 	public @interface Singleton {
-		Class<? extends Resource<?>> value();
+		Class<? extends Resource> value();
+		Layer layer() default Layer.GLOBAL;
 	}
+
+	private static final Namespace NAMESPACE = Namespace.create(SingletonExtension.class);
 
 	@Override
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return parameterContext.isAnnotated(Singleton.class) ^ parameterContext.isAnnotated(New.class);
+		return parameterContext.isAnnotated(Singleton.class);
 	}
 
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		if (parameterContext.isAnnotated(Singleton.class)) {
-			Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
-			ExtensionContext engineContext = extensionContext.getRoot();
-			Store store = engineContext.getStore(NAMESPACE);
-			Resource<?> resource = store.getOrComputeIfAbsent(singleton.value());
-			return resource.get();
+		Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
+		Class<? extends Resource> type = singleton.value();
+		Object key = singleton.layer() + type.getName();
+		Store store = getStore(singleton.layer(), extensionContext);
+		Resource resource = store.getOrComputeIfAbsent(key, k -> newResource(type, extensionContext), Resource.class);
+		if (Resource.class.isAssignableFrom(parameterContext.getParameter().getType())) {
+			return resource;
 		}
-		if (parameterContext.isAnnotated(New.class)) {
-			New annotation = parameterContext.findAnnotation(New.class).orElseThrow(AssertionError::new);
-			Store store = extensionContext.getStore(NAMESPACE);
-			Resource<?> resource = store.getOrComputeIfAbsent(annotation.value());
-			return resource.get();
+		return resource.getInstance();
+	}
+
+	private Store getStore(Layer context, ExtensionContext extensionContext) {
+		return getContext(context, extensionContext).getStore(NAMESPACE);
+	}
+
+	private ExtensionContext getContext(Layer context, ExtensionContext extensionContext) {
+		switch (context) {
+			case GLOBAL: return extensionContext.getRoot();
+			case CONTAINER: return extensionContext.getParent().orElseThrow(AssertionError::new);
+			case TEST: return extensionContext;
+			default: throw new ParameterResolutionException("Can't get context for: " + context);
 		}
-		throw new ParameterResolutionException("Expected annotation not present?!");
+	}
+
+	private Resource newResource(Class<? extends Resource> resourceClass, ExtensionContext extensionContext) {
+		try {
+			try {
+				// prefer constructor that takes an extension context argument
+				return resourceClass.getConstructor(ExtensionContext.class).newInstance(extensionContext);
+			}
+			catch (NoSuchMethodException e) {
+				// fall-back to no-arg constructor
+				return resourceClass.getConstructor().newInstance();
+			}
+		}
+		catch (ReflectiveOperationException e) {
+			throw new AssertionError("Creating instance of resource " + resourceClass + " failed", e);
+		}
 	}
 }
