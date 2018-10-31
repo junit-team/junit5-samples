@@ -10,10 +10,8 @@
 
 package com.example.singleton;
 
-import static com.example.singleton.SingletonExtension.Layer.ANY;
-import static com.example.singleton.SingletonExtension.Layer.CLASS;
-import static com.example.singleton.SingletonExtension.Layer.GLOBAL;
-import static com.example.singleton.SingletonExtension.Layer.TEST;
+import static com.example.singleton.SingletonExtension.StorageLayer.CLASS;
+import static com.example.singleton.SingletonExtension.StorageLayer.METHOD;
 
 import com.example.singleton.SingletonExtension.Singleton;
 import org.junit.jupiter.api.Nested;
@@ -38,28 +36,23 @@ class SingletonExtensionTests {
 	}
 
 	@Test
-	void test2(@Singleton(value = Builder123.class, layer = GLOBAL) StringBuilder builder) {
+	void test2(@Singleton(Builder123.class) StringBuilder builder) {
 		log("test2", builder);
 	}
 
 	@Test
-	void test3(@Singleton(value = Builder123.class, layer = CLASS) StringBuilder builder) {
+	void test3(@Singleton(value = Builder123.class, id = "T3", layer = METHOD) StringBuilder builder) {
 		log("test3", builder);
 	}
 
 	@Test
-	void test4(@Singleton(value = Builder123.class, layer = CLASS) Builder123 resource) {
+	void test4(@Singleton(value = Builder123.class, id = "T45", layer = CLASS) Builder123 resource) {
 		log("test4", resource.getInstance());
 	}
 
 	@Test
-	void test5(@Singleton(value = Builder123.class, layer = TEST) StringBuilder builder) {
+	void test5(@Singleton(value = Builder123.class, id = "T45", layer = CLASS) StringBuilder builder) {
 		log("test5", builder);
-	}
-
-	@Test
-	void test6(@Singleton(value = Builder123.class, layer = TEST) StringBuilder builder) {
-		log("test6", builder);
 	}
 
 	@Nested
@@ -68,12 +61,12 @@ class SingletonExtensionTests {
 		@Nested
 		class N2 {
 			@Test
-			void n1(@Singleton(value = Builder123.class, layer = ANY, parents = 3) StringBuilder builder) {
+			void n1(@Singleton(Builder123.class) StringBuilder builder) {
 				log("n1 (class)", builder);
 			}
 
 			@Test
-			void n2(@Singleton(value = Builder123.class, layer = ANY, parents = 4) Builder123 resource) {
+			void n2(@Singleton(value = Builder123.class, id = "T45"/*, layer = OUTERMOST_CLASS */) Builder123 resource) {
 				log("n2 (global)", resource.getInstance());
 			}
 		}
