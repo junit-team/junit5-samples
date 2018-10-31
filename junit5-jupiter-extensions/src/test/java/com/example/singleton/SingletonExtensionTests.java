@@ -10,6 +10,7 @@
 
 package com.example.singleton;
 
+import com.example.singleton.SingletonExtension.New;
 import com.example.singleton.SingletonExtension.Singleton;
 import java.lang.reflect.Method;
 import org.junit.jupiter.api.Nested;
@@ -40,11 +41,8 @@ class SingletonExtensionTests {
 	}
 
 	@Test
-	void test3(TestInfo info) {
-		try (Builder123 local = new Builder123()) {
-			StringBuilder builder = local.getInstance();
-			log("LOCAL ", builder, info);
-		}
+	void test3(@New(Builder123.class) StringBuilder builder, TestInfo info) {
+		log("METHOD", builder, info);
 	}
 
 	@Test
@@ -62,13 +60,19 @@ class SingletonExtensionTests {
 
 		@Nested
 		class N {
+
 			@Test
-			void n1(@Singleton(value = Builder123.class, id = "T4") Builder123 resource, TestInfo info) {
+			void n1(@Singleton(value = Builder123.class, id = "M") Builder123 resource, TestInfo info) {
+				log("M     ", resource.getInstance(), info);
+			}
+
+			@Test
+			void n2(@Singleton(value = Builder123.class, id = "T4") Builder123 resource, TestInfo info) {
 				log("T4    ", resource.getInstance(), info);
 			}
 
 			@Test
-			void n2(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
+			void n3(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
 				log("GLOBAL", builder, info);
 			}
 		}

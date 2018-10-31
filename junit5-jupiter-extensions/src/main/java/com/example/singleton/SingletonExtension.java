@@ -4,6 +4,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Optional;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
@@ -33,21 +34,44 @@ public class SingletonExtension implements ParameterResolver {
 		String id() default "";
 	}
 
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target(ElementType.PARAMETER)
+	public @interface New {
+		Class<? extends Resource> value();
+	}
+
 	private static final Namespace NAMESPACE = Namespace.create(SingletonExtension.class);
 
 	@Override
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return parameterContext.isAnnotated(Singleton.class);
+		// TODO Check parameter type...
+		return parameterContext.isAnnotated(Singleton.class) ^ parameterContext.isAnnotated(New.class);
 	}
 
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
-		Resource resource = getOrCreateResource(singleton, extensionContext);
+		Resource resource = getOrCreateResource(parameterContext, extensionContext);
 		if (Resource.class.isAssignableFrom(parameterContext.getParameter().getType())) {
 			return resource;
 		}
 		return resource.getInstance();
+	}
+
+	private Resource getOrCreateResource(ParameterContext parameterContext, ExtensionContext extensionContext) {
+		Optional<New> methodResource = parameterContext.findAnnotation(New.class);
+		if (methodResource.isPresent()) {
+			return createMethodResource(methodResource.get(), extensionContext);
+		}
+		Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
+		return getOrCreateResource(singleton, extensionContext);
+	}
+
+	private Resource createMethodResource(New methodResource, ExtensionContext extensionContext) {
+		Class<? extends Resource> type = methodResource.value();
+		Store store = extensionContext.getStore(NAMESPACE);
+		Resource resource = createResource(type, extensionContext);
+		store.put(type.getName(), resource);
+		return resource;
 	}
 
 	private Resource getOrCreateResource(Singleton singleton, ExtensionContext extensionContext) {
@@ -58,12 +82,15 @@ public class SingletonExtension implements ParameterResolver {
 			return resource;
 		}
 		Store store = extensionContext.getRoot().getStore(NAMESPACE);
-		return store.getOrComputeIfAbsent(key, k -> newResource(singleton, extensionContext), Resource.class);
+		return store.getOrComputeIfAbsent(key, k -> createResource(singleton, extensionContext), Resource.class);
+	}
+
+	private Resource createResource(Singleton singleton, ExtensionContext extensionContext) {
+		return createResource(singleton.value(), extensionContext);
 	}
 
 	// TODO Use ReflectionSupport...
-	private Resource newResource(Singleton singleton, ExtensionContext extensionContext) {
-		Class<? extends Resource> resourceClass = singleton.value();
+	private Resource createResource(Class<? extends Resource> resourceClass, ExtensionContext extensionContext) {
 		try {
 			try {
 				// prefer constructor that takes an extension context argument
