@@ -10,8 +10,8 @@
 
 package com.example.singleton;
 
-import com.example.singleton.SingletonExtension.New;
-import com.example.singleton.SingletonExtension.Singleton;
+import com.example.singleton.SingletonParameterResolver.New;
+import com.example.singleton.SingletonParameterResolver.Singleton;
 import java.lang.reflect.Method;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
  * @since 5.4
- * @see SingletonExtension
+ * @see SingletonParameterResolver
  */
-@ExtendWith(SingletonExtension.class)
-class SingletonExtensionTests {
+@ExtendWith(SingletonParameterResolver.class)
+class SingletonParameterResolverTests {
 
 	private void log(String message, StringBuilder builder, TestInfo info) {
 		String identity = "0x" + Integer.toHexString(System.identityHashCode(builder)).toUpperCase();
@@ -41,8 +41,9 @@ class SingletonExtensionTests {
 	}
 
 	@Test
-	void test3(@New(Builder123.class) StringBuilder builder, TestInfo info) {
-		log("METHOD", builder, info);
+	void test3(@New(Builder123.class) StringBuilder new1, @New(Builder123.class) StringBuilder new2, TestInfo info) {
+		log("METHOD", new1, info);
+		log("METHOD", new2, info);
 	}
 
 	@Test

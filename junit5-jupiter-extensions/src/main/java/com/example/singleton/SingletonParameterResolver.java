@@ -10,9 +10,10 @@ import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.junit.jupiter.api.extension.ExtensionContext.Store.CloseableResource;
 import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-public class SingletonExtension implements ParameterResolver {
+public class SingletonParameterResolver implements ParameterResolver {
 
 	public interface Resource<T> extends AutoCloseable, CloseableResource {
 
@@ -40,37 +41,42 @@ public class SingletonExtension implements ParameterResolver {
 		Class<? extends Resource> value();
 	}
 
-	private static final Namespace NAMESPACE = Namespace.create(SingletonExtension.class);
+	private static final Namespace NAMESPACE = Namespace.create(SingletonParameterResolver.class);
 
 	@Override
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		// TODO Check parameter type...
 		return parameterContext.isAnnotated(Singleton.class) ^ parameterContext.isAnnotated(New.class);
 	}
 
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
+		Class<?> targetClass = parameterContext.getParameter().getType();
 		Resource resource = getOrCreateResource(parameterContext, extensionContext);
-		if (Resource.class.isAssignableFrom(parameterContext.getParameter().getType())) {
+		if (Resource.class.isAssignableFrom(targetClass)) {
 			return resource;
 		}
-		return resource.getInstance();
+		Object instance = resource.getInstance();
+		if (instance.getClass().isAssignableFrom(targetClass)) {
+			return instance;
+		}
+		throw new ParameterResolutionException("Parameter type isn't compatible: " + targetClass
+				+ " cannot be assigned to " + Resource.class + " nor " + instance.getClass());
 	}
 
 	private Resource getOrCreateResource(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		Optional<New> methodResource = parameterContext.findAnnotation(New.class);
 		if (methodResource.isPresent()) {
-			return createMethodResource(methodResource.get(), extensionContext);
+			return createMethodResource(methodResource.get(), parameterContext.getIndex(), extensionContext);
 		}
 		Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
 		return getOrCreateResource(singleton, extensionContext);
 	}
 
-	private Resource createMethodResource(New methodResource, ExtensionContext extensionContext) {
+	private Resource createMethodResource(New methodResource, int index, ExtensionContext extensionContext) {
 		Class<? extends Resource> type = methodResource.value();
 		Store store = extensionContext.getStore(NAMESPACE);
 		Resource resource = createResource(type, extensionContext);
-		store.put(type.getName(), resource);
+		store.put(type.getName() + "@" + index, resource);
 		return resource;
 	}
 
