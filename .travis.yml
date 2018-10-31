@@ -1,6 +1,15 @@
 language: java
 jdk: oraclejdk8
 
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - sourceline: 'deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8'
+        key_url: 'https://bazel.build/bazel-release.pub.gpg'
+    packages:
+      - bazel
+
 jobs:
   include:
 # starter
@@ -19,6 +28,9 @@ jobs:
     - stage: starter
       name: "Jupiter Starter Sample: Maven"
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test
+    - stage: starter
+      name: "Jupiter Starter Sample: Bazel"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-bazel && bazel test //...
     - stage: starter
       name: "Jupiter Extension Samples"
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain

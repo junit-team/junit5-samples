@@ -37,6 +37,9 @@ Groovy programming language.
 The [junit5-jupiter-starter-maven] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
 
+### Jupiter on Bazel ![badge-jdk-8] ![badge-tool-bazel] ![badge-junit-jupiter]
+
+The [junit5-jupiter-starter-bazel] sample demonstrates the bare minimum configuration for getting started with JUnit Jupiter using the Bazel build system.
 
 ## Jupiter Feature Samples
 
@@ -84,6 +87,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-jupiter-starter-gradle-groovy]: junit5-jupiter-starter-gradle-groovy
 [junit5-jupiter-starter-gradle-kotlin]: junit5-jupiter-starter-gradle-kotlin
 [junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
+[junit5-jupiter-starter-bazel]: junit5-jupiter-starter-bazel
 [junit5-migration-gradle]: junit5-migration-gradle
 [junit5-migration-maven]: junit5-migration-maven
 [junit5-multiple-engines]: junit5-multiple-engines
@@ -96,6 +100,7 @@ for the JUnit Platform using the Java Platform Module System.
 [badge-tool-ant]: https://img.shields.io/badge/tool-ant-10f0f0.svg "Ant"
 [badge-tool-gradle]: https://img.shields.io/badge/tool-gradle-blue.svg "Gradle wrapper included"
 [badge-tool-maven]: https://img.shields.io/badge/tool-maven-0440af.svg "Maven wrapper included"
+[badge-tool-bazel]: https://img.shields.io/badge/tool-bazel-43a047.svg "Bazel"
 [badge-tool-console]: https://img.shields.io/badge/tool-console-022077.svg "Command line tools"
 [badge-junit-platform]: https://img.shields.io/badge/junit-platform-brightgreen.svg "JUnit Platform"
 [badge-junit-jupiter]: https://img.shields.io/badge/junit-jupiter-green.svg "JUnit Jupiter Engine"
