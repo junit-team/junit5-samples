@@ -23,7 +23,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * @see SingletonParameterResolver
  */
 @ExtendWith(SingletonParameterResolver.class)
-class SingletonParameterResolverTests {
+class SingletonParameterDemoTests {
 
 	private void log(String message, StringBuilder builder, TestInfo info) {
 		String identity = "0x" + Integer.toHexString(System.identityHashCode(builder)).toUpperCase();
