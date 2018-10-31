@@ -1,6 +1,6 @@
 package com.example.singleton;
 
-import com.example.singleton.SingletonParameterResolver.Resource;
+import com.example.singleton.ResourceParameterResolver.Resource;
 
 abstract class AbstractStringBuilderResource implements Resource<StringBuilder> {
 

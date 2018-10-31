@@ -10,8 +10,9 @@
 
 package com.example.singleton;
 
-import com.example.singleton.SingletonParameterResolver.New;
-import com.example.singleton.SingletonParameterResolver.Singleton;
+import com.example.singleton.ResourceParameterResolver.ClassResource;
+import com.example.singleton.ResourceParameterResolver.GlobalResource;
+import com.example.singleton.ResourceParameterResolver.MethodResource;
 import java.lang.reflect.Method;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,9 +21,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
  * @since 5.4
- * @see SingletonParameterResolver
+ * @see ResourceParameterResolver
  */
-@ExtendWith(SingletonParameterResolver.class)
+@ExtendWith(ResourceParameterResolver.class)
 class SingletonParameterDemoTests {
 
 	private void log(String message, StringBuilder builder, TestInfo info) {
@@ -31,23 +32,23 @@ class SingletonParameterDemoTests {
 	}
 
 	@Test
-	void test1(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
+	void test1(@GlobalResource(Builder123.class) StringBuilder builder, TestInfo info) {
 		log("GLOBAL" , builder, info);
 	}
 
 	@Test
-	void test2(@Singleton(Builder123.class) Builder123 resource, TestInfo info) {
+	void test2(@GlobalResource(Builder123.class) Builder123 resource, TestInfo info) {
 		log("GLOBAL", resource.getInstance(), info);
 	}
 
 	@Test
-	void test3(@New(Builder123.class) StringBuilder new1, @New(Builder123.class) StringBuilder new2, TestInfo info) {
+	void test3(@MethodResource(Builder123.class) StringBuilder new1, @MethodResource(Builder123.class) StringBuilder new2, TestInfo info) {
 		log("METHOD", new1, info);
 		log("METHOD", new2, info);
 	}
 
 	@Test
-	void test4(@Singleton(value = Builder123.class, id = "T4") StringBuilder builder, TestInfo info) {
+	void test4(@GlobalResource(value = Builder123.class, id = "T4") StringBuilder builder, TestInfo info) {
 		log("T4    ", builder, info);
 	}
 
@@ -55,7 +56,7 @@ class SingletonParameterDemoTests {
 	class M {
 
 		@Test
-		void m(@Singleton(value = Builder123.class, id = "M") StringBuilder builder, TestInfo info) {
+		void m(@ClassResource(value = Builder123.class, id = "M") StringBuilder builder, TestInfo info) {
 			log("M     ", builder, info);
 		}
 
@@ -63,17 +64,17 @@ class SingletonParameterDemoTests {
 		class N {
 
 			@Test
-			void n1(@Singleton(value = Builder123.class, id = "M") Builder123 resource, TestInfo info) {
+			void n1(@GlobalResource(value = Builder123.class, id = "M") Builder123 resource, TestInfo info) {
 				log("M     ", resource.getInstance(), info);
 			}
 
 			@Test
-			void n2(@Singleton(value = Builder123.class, id = "T4") Builder123 resource, TestInfo info) {
+			void n2(@GlobalResource(value = Builder123.class, id = "T4") Builder123 resource, TestInfo info) {
 				log("T4    ", resource.getInstance(), info);
 			}
 
 			@Test
-			void n3(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
+			void n3(@GlobalResource(Builder123.class) StringBuilder builder, TestInfo info) {
 				log("GLOBAL", builder, info);
 			}
 		}
