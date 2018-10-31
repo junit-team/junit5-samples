@@ -13,7 +13,7 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 
 public class SingletonExtension implements ParameterResolver {
 
-	public interface Resource<T> extends CloseableResource {
+	public interface Resource<T> extends AutoCloseable, CloseableResource {
 
 		@Override
 		default void close() throws Exception {
@@ -30,8 +30,7 @@ public class SingletonExtension implements ParameterResolver {
 	@Target(ElementType.PARAMETER)
 	public @interface Singleton {
 		Class<? extends Resource> value();
-		String id() default "DEFAULT";
-		boolean local() default false;
+		String id() default "";
 	}
 
 	private static final Namespace NAMESPACE = Namespace.create(SingletonExtension.class);
@@ -44,16 +43,22 @@ public class SingletonExtension implements ParameterResolver {
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
-		Object key = singleton.value().getName() + '/' + singleton.id() + '/' + singleton.local();
-		Resource resource = extensionContext.getStore(NAMESPACE).get(key, Resource.class);
-		if (resource == null) {
-			Store store = (singleton.local() ? extensionContext : extensionContext.getRoot()).getStore(NAMESPACE);
-			resource = store.getOrComputeIfAbsent(key, k -> newResource(singleton, extensionContext), Resource.class);
-		}
+		Resource resource = getOrCreateResource(singleton, extensionContext);
 		if (Resource.class.isAssignableFrom(parameterContext.getParameter().getType())) {
 			return resource;
 		}
 		return resource.getInstance();
+	}
+
+	private Resource getOrCreateResource(Singleton singleton, ExtensionContext extensionContext) {
+		String id = singleton.id();
+		Object key = singleton.value().getName() + (id.isEmpty() ? "" : '/' + id);
+		Resource resource = extensionContext.getStore(NAMESPACE).get(key, Resource.class);
+		if (resource != null) {
+			return resource;
+		}
+		Store store = extensionContext.getRoot().getStore(NAMESPACE);
+		return store.getOrComputeIfAbsent(key, k -> newResource(singleton, extensionContext), Resource.class);
 	}
 
 	// TODO Use ReflectionSupport...

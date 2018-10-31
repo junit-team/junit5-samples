@@ -35,33 +35,36 @@ class SingletonExtensionTests {
 	}
 
 	@Test
-	void test2(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
-		log("GLOBAL", builder, info);
+	void test2(@Singleton(Builder123.class) Builder123 resource, TestInfo info) {
+		log("GLOBAL", resource.getInstance(), info);
 	}
 
 	@Test
-	void test3(@Singleton(value = Builder123.class, local = true) StringBuilder builder, TestInfo info) {
-		log("LOCAL ", builder, info);
+	void test3(TestInfo info) {
+		try (Builder123 local = new Builder123()) {
+			StringBuilder builder = local.getInstance();
+			log("LOCAL ", builder, info);
+		}
 	}
 
 	@Test
-	void test4(@Singleton(value = Builder123.class, id = "T45") Builder123 resource, TestInfo info) {
-		log("T45   ", resource.getInstance(), info);
-	}
-
-	@Test
-	void test5(@Singleton(value = Builder123.class, id = "T45") StringBuilder builder, TestInfo info) {
-		log("T45   ", builder, info);
+	void test4(@Singleton(value = Builder123.class, id = "T4") StringBuilder builder, TestInfo info) {
+		log("T4    ", builder, info);
 	}
 
 	@Nested
-	class N1 {
+	class M {
+
+		@Test
+		void m(@Singleton(value = Builder123.class, id = "M") StringBuilder builder, TestInfo info) {
+			log("M     ", builder, info);
+		}
 
 		@Nested
-		class N2 {
+		class N {
 			@Test
-			void n1(@Singleton(value = Builder123.class, id = "T45") Builder123 resource, TestInfo info) {
-				log("T45   ", resource.getInstance(), info);
+			void n1(@Singleton(value = Builder123.class, id = "T4") Builder123 resource, TestInfo info) {
+				log("T4    ", resource.getInstance(), info);
 			}
 
 			@Test
