@@ -1,5 +1,3 @@
-sudo: false
-
 language: java
 jdk: oraclejdk8
 
@@ -11,9 +9,6 @@ addons:
         key_url: 'https://bazel.build/bazel-release.pub.gpg'
     packages:
       - bazel
-
-before_install:
-  - unset _JAVA_OPTIONS
 
 jobs:
   include:
