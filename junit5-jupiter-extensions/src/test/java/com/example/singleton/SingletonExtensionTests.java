@@ -10,11 +10,13 @@
 
 package com.example.singleton;
 
-import static com.example.singleton.SingletonExtension.Layer.CONTAINER;
+import static com.example.singleton.SingletonExtension.Layer.ANY;
+import static com.example.singleton.SingletonExtension.Layer.CLASS;
 import static com.example.singleton.SingletonExtension.Layer.GLOBAL;
 import static com.example.singleton.SingletonExtension.Layer.TEST;
 
 import com.example.singleton.SingletonExtension.Singleton;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -41,12 +43,12 @@ class SingletonExtensionTests {
 	}
 
 	@Test
-	void test3(@Singleton(value = Builder123.class, layer = CONTAINER) StringBuilder builder) {
+	void test3(@Singleton(value = Builder123.class, layer = CLASS) StringBuilder builder) {
 		log("test3", builder);
 	}
 
 	@Test
-	void test4(@Singleton(value = Builder123.class, layer = CONTAINER) Builder123 resource) {
+	void test4(@Singleton(value = Builder123.class, layer = CLASS) Builder123 resource) {
 		log("test4", resource.getInstance());
 	}
 
@@ -60,4 +62,20 @@ class SingletonExtensionTests {
 		log("test6", builder);
 	}
 
+	@Nested
+	class N1 {
+
+		@Nested
+		class N2 {
+			@Test
+			void n1(@Singleton(value = Builder123.class, layer = ANY, parents = 3) StringBuilder builder) {
+				log("n1 (class)", builder);
+			}
+
+			@Test
+			void n2(@Singleton(value = Builder123.class, layer = ANY, parents = 4) Builder123 resource) {
+				log("n2 (global)", resource.getInstance());
+			}
+		}
+	}
 }

@@ -28,7 +28,7 @@ public class SingletonExtension implements ParameterResolver {
 	}
 
 	public enum Layer {
-		GLOBAL, CONTAINER, TEST
+		GLOBAL, CLASS, TEST, ANY
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
@@ -36,6 +36,7 @@ public class SingletonExtension implements ParameterResolver {
 	public @interface Singleton {
 		Class<? extends Resource> value();
 		Layer layer() default Layer.GLOBAL;
+		int parents() default 0;
 	}
 
 	private static final Namespace NAMESPACE = Namespace.create(SingletonExtension.class);
@@ -48,30 +49,37 @@ public class SingletonExtension implements ParameterResolver {
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
-		Class<? extends Resource> type = singleton.value();
-		Object key = singleton.layer() + type.getName();
-		Store store = getStore(singleton.layer(), extensionContext);
-		Resource resource = store.getOrComputeIfAbsent(key, k -> newResource(type, extensionContext), Resource.class);
+		ExtensionContext context = context(singleton, extensionContext);
+		Store store = context.getStore(NAMESPACE);
+		Object key = context.getUniqueId() + '+' + singleton.value().getName();
+		Resource resource = store.getOrComputeIfAbsent(key, k -> newResource(singleton, extensionContext), Resource.class);
 		if (Resource.class.isAssignableFrom(parameterContext.getParameter().getType())) {
 			return resource;
 		}
 		return resource.getInstance();
 	}
 
-	private Store getStore(Layer context, ExtensionContext extensionContext) {
-		return getContext(context, extensionContext).getStore(NAMESPACE);
-	}
-
-	private ExtensionContext getContext(Layer context, ExtensionContext extensionContext) {
-		switch (context) {
+	private ExtensionContext context(Singleton singleton, ExtensionContext extensionContext) {
+		switch (singleton.layer()) {
 			case GLOBAL: return extensionContext.getRoot();
-			case CONTAINER: return extensionContext.getParent().orElseThrow(AssertionError::new);
+			case CLASS: return extensionContext.getParent().orElseThrow(AssertionError::new);
 			case TEST: return extensionContext;
-			default: throw new ParameterResolutionException("Can't get context for: " + context);
+			case ANY: return walkParents(singleton.parents(), extensionContext);
+			default: throw new ParameterResolutionException("Can't get context for: " + singleton);
 		}
 	}
 
-	private Resource newResource(Class<? extends Resource> resourceClass, ExtensionContext extensionContext) {
+	private ExtensionContext walkParents(int parents, ExtensionContext extensionContext) {
+		ExtensionContext current = extensionContext;
+		for (int i = 0; i < parents; i++) {
+			current = current.getParent().orElseThrow(AssertionError::new);
+		}
+		return current;
+	}
+
+	// TODO Use ReflectionSupport...
+	private Resource newResource(Singleton singleton, ExtensionContext extensionContext) {
+		Class<? extends Resource> resourceClass = singleton.value();
 		try {
 			try {
 				// prefer constructor that takes an extension context argument
