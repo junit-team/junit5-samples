@@ -10,12 +10,11 @@
 
 package com.example.singleton;
 
-import static com.example.singleton.SingletonExtension.StorageLayer.CLASS;
-import static com.example.singleton.SingletonExtension.StorageLayer.METHOD;
-
 import com.example.singleton.SingletonExtension.Singleton;
+import java.lang.reflect.Method;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
@@ -25,34 +24,34 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(SingletonExtension.class)
 class SingletonExtensionTests {
 
-	private void log(String message, StringBuilder builder) {
+	private void log(String message, StringBuilder builder, TestInfo info) {
 		String identity = "0x" + Integer.toHexString(System.identityHashCode(builder)).toUpperCase();
-		System.out.println(identity + ": " + message);
+		System.out.println(identity + ":   " + message + " // " + info.getTestMethod().map(Method::getName).orElse("?"));
 	}
 
 	@Test
-	void test1(@Singleton(Builder123.class) StringBuilder builder) {
-		log("test1", builder);
+	void test1(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
+		log("GLOBAL" , builder, info);
 	}
 
 	@Test
-	void test2(@Singleton(Builder123.class) StringBuilder builder) {
-		log("test2", builder);
+	void test2(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
+		log("GLOBAL", builder, info);
 	}
 
 	@Test
-	void test3(@Singleton(value = Builder123.class, id = "T3", layer = METHOD) StringBuilder builder) {
-		log("test3", builder);
+	void test3(@Singleton(value = Builder123.class, local = true) StringBuilder builder, TestInfo info) {
+		log("LOCAL ", builder, info);
 	}
 
 	@Test
-	void test4(@Singleton(value = Builder123.class, id = "T45", layer = CLASS) Builder123 resource) {
-		log("test4", resource.getInstance());
+	void test4(@Singleton(value = Builder123.class, id = "T45") Builder123 resource, TestInfo info) {
+		log("T45   ", resource.getInstance(), info);
 	}
 
 	@Test
-	void test5(@Singleton(value = Builder123.class, id = "T45", layer = CLASS) StringBuilder builder) {
-		log("test5", builder);
+	void test5(@Singleton(value = Builder123.class, id = "T45") StringBuilder builder, TestInfo info) {
+		log("T45   ", builder, info);
 	}
 
 	@Nested
@@ -61,13 +60,13 @@ class SingletonExtensionTests {
 		@Nested
 		class N2 {
 			@Test
-			void n1(@Singleton(Builder123.class) StringBuilder builder) {
-				log("n1 (class)", builder);
+			void n1(@Singleton(value = Builder123.class, id = "T45") Builder123 resource, TestInfo info) {
+				log("T45   ", resource.getInstance(), info);
 			}
 
 			@Test
-			void n2(@Singleton(value = Builder123.class, id = "T45"/*, layer = OUTERMOST_CLASS */) Builder123 resource) {
-				log("n2 (global)", resource.getInstance());
+			void n2(@Singleton(Builder123.class) StringBuilder builder, TestInfo info) {
+				log("GLOBAL", builder, info);
 			}
 		}
 	}

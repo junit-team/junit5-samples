@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.junit.jupiter.api.extension.ExtensionContext.Store.CloseableResource;
 import org.junit.jupiter.api.extension.ParameterContext;
-import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
 public class SingletonExtension implements ParameterResolver {
@@ -27,16 +26,12 @@ public class SingletonExtension implements ParameterResolver {
 		T getInstance();
 	}
 
-	public enum StorageLayer {
-		GLOBAL, CLASS, METHOD
-	}
-
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.PARAMETER)
 	public @interface Singleton {
 		Class<? extends Resource> value();
 		String id() default "DEFAULT";
-		StorageLayer layer() default StorageLayer.GLOBAL;
+		boolean local() default false;
 	}
 
 	private static final Namespace NAMESPACE = Namespace.create(SingletonExtension.class);
@@ -49,25 +44,16 @@ public class SingletonExtension implements ParameterResolver {
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
 		Singleton singleton = parameterContext.findAnnotation(Singleton.class).orElseThrow(AssertionError::new);
-		Object key = singleton.value().getName() + '/' + singleton.id();
+		Object key = singleton.value().getName() + '/' + singleton.id() + '/' + singleton.local();
 		Resource resource = extensionContext.getStore(NAMESPACE).get(key, Resource.class);
 		if (resource == null) {
-			Store store = context(singleton, extensionContext).getStore(NAMESPACE);
+			Store store = (singleton.local() ? extensionContext : extensionContext.getRoot()).getStore(NAMESPACE);
 			resource = store.getOrComputeIfAbsent(key, k -> newResource(singleton, extensionContext), Resource.class);
 		}
 		if (Resource.class.isAssignableFrom(parameterContext.getParameter().getType())) {
 			return resource;
 		}
 		return resource.getInstance();
-	}
-
-	private ExtensionContext context(Singleton singleton, ExtensionContext extensionContext) {
-		switch (singleton.layer()) {
-			case GLOBAL: return extensionContext.getRoot();
-			case CLASS: return extensionContext.getParent().orElseThrow(AssertionError::new);
-			case METHOD: return extensionContext;
-			default: throw new ParameterResolutionException("Can't get context for: " + singleton);
-		}
 	}
 
 	// TODO Use ReflectionSupport...
