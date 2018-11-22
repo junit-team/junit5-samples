@@ -53,7 +53,8 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.1</version>
+        <!-- latest Maven support fix; https://github.com/junit-team/junit5-samples/issues/89 -->
+        <version>3.0.0-M1</version>
 				<configuration>
 					<junitPlatformArtifactName>com.github.junit-team.junit5:junit-platform-engine</junitPlatformArtifactName>
 					<!--<properties>-->
