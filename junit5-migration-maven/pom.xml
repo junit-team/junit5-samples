@@ -48,7 +48,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-        <!-- latest Maven support fix; https://github.com/junit-team/junit5-samples/issues/89 -->
+	<!-- latest Maven support fix; https://github.com/junit-team/junit5-samples/issues/89 -->
 				<version>3.0.0-M1</version>
 				<configuration>
 					<!--<groups>fast</groups>-->
