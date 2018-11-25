@@ -18,11 +18,11 @@ JUNIT_PLATFORM_ARTIFACT_ID_LIST = [
 
 JUNIT_EXTRA_DEPENDENCIES = [
     ("org.apiguardian", "apiguardian-api", "1.0.0"),
-    ("org.opentest4j", "opentest4j", "1.1.0"),
+    ("org.opentest4j", "opentest4j", "1.1.1"),
 ]
 
 def junit_jupiter_java_repositories(
-        version = "5.2.0"):
+        version = "5.3.2"):
     """Imports dependencies for JUnit Jupiter"""
     for artifact_id in JUNIT_JUPITER_ARTIFACT_ID_LIST:
         native.maven_jar(
@@ -41,7 +41,7 @@ def junit_jupiter_java_repositories(
         )
 
 def junit_platform_java_repositories(
-        version = "1.2.0"):
+        version = "1.3.2"):
     """Imports dependencies for JUnit Platform"""
     for artifact_id in JUNIT_PLATFORM_ARTIFACT_ID_LIST:
         native.maven_jar(
