@@ -10,7 +10,6 @@ repositories {
 dependencies {
 	testCompile('org.junit.jupiter:junit-jupiter-api:5.4.0-SNAPSHOT')
 	testCompile('org.junit.jupiter:junit-jupiter-params:5.4.0-SNAPSHOT')
-	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.0-SNAPSHOT')
 }
 
 test {
