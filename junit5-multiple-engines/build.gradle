@@ -8,6 +8,7 @@ plugins {
 repositories {
     mavenCentral()
     jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -42,6 +43,11 @@ dependencies {
         because 'executes programs "public static void main(String...args)" as tests'
     }
 
+    // Mainrunner - Engine
+    testCompile("com.github.sormuras.mainrunner:mainrunner:1.0.0-M3") {
+        because 'executes Java programs as tests, contains dedicated Java 8 and 11 implementations'
+    }
+
     // JQwik
     testCompile('net.jqwik:jqwik:0.9.0')
 
@@ -72,8 +78,4 @@ test {
     // useJUnitPlatform() ... https://github.com/gradle/gradle/issues/4912
     dependsOn consoleLauncherTest
     exclude '**/*'
-}
-
-wrapper {
-    gradleVersion = '4.9'
 }
