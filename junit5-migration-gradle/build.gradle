@@ -1,5 +1,5 @@
 plugins {
-	id 'com.gradle.build-scan' version '1.13.4'
+	id 'com.gradle.build-scan' version '2.0.2'
 	id 'java'
 	id 'eclipse' // optional (to generate Eclipse project files)
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
@@ -11,8 +11,8 @@ if (javaVersion < 9) {
 }
 
 buildScan {
-	licenseAgreementUrl = "https://gradle.com/terms-of-service"
-	licenseAgree = "yes"
+	termsOfServiceUrl = "https://gradle.com/terms-of-service"
+	termsOfServiceAgree = "yes"
 }
 
 repositories {
