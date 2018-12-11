@@ -44,7 +44,7 @@ dependencies {
     }
 
     // Mainrunner
-    testCompile("com.github.sormuras.mainrunner:mainrunner:1.0.0-M4") {
+    testCompile("com.github.sormuras.mainrunner:mainrunner:1.0.0-M5") {
         because 'executes Java programs as tests, contains dedicated Java 8 and 11 implementations'
     }
 
