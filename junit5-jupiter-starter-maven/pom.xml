@@ -12,7 +12,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
-		<junit.jupiter.version>5.3.2</junit.jupiter.version>
+		<junit.jupiter.version>5.4.0-M1</junit.jupiter.version>
 	</properties>
 
 	<dependencies>
