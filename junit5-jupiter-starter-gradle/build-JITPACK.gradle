@@ -12,9 +12,7 @@ repositories {
 }
 
 dependencies {
-	testCompile("${jitpackGroup}:junit-jupiter-api:${jitpackVersion}")
-	testCompile("${jitpackGroup}:junit-jupiter-params:${jitpackVersion}")
-	testRuntime("${jitpackGroup}:junit-jupiter-engine:${jitpackVersion}")
+	testImplementation("${jitpackGroup}:junit-jupiter:${jitpackVersion}")
 }
 
 test {

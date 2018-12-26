@@ -23,11 +23,7 @@ dependencies {
     }
 
     // JUnit Jupiter
-    testImplementation('org.junit.jupiter:junit-jupiter-api')
-    testImplementation('org.junit.jupiter:junit-jupiter-params')
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine') {
-        because 'allows JUnit 5 (read Jupiter) tests to run'
-    }
+    testImplementation('org.junit.jupiter:junit-jupiter')
 
     // JUnit Vintage
     testImplementation("junit:junit:${junit4Version}")
