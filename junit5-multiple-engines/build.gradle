@@ -18,11 +18,7 @@ dependencies {
     def junitPlatformVersion = '1.4.0-M1'
 
     // JUnit Jupiter
-    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}") {
-        because 'allows JUnit 5 tests to run'
-    }
+    testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
 
     // JUnit Vintage
     testCompile("junit:junit:${junit4Version}")
