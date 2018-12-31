@@ -53,5 +53,5 @@ jobs:
 # all samples, one-shot
     - stage: all
       name: "Build all samples"
-      jdk: openjdk-ea
+      jdk: openjdk11
       script: ./build-all-samples.jsh
