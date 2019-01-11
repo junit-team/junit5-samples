@@ -49,10 +49,10 @@ dependencies {
     }
 
     // jqwik
-	testCompile('net.jqwik:jqwik-api:1.0.0')
-	testRuntime('net.jqwik:jqwik-engine:1.0.0') {
-		because 'allows jqwik properties to run'
-	}
+    testCompile('net.jqwik:jqwik-api:1.0.0')
+    testRuntime('net.jqwik:jqwik-engine:1.0.0') {
+        because 'allows jqwik properties to run'
+    }
 
     // Spek
     testCompile('org.jetbrains.spek:spek-api:1.2.1')
