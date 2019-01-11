@@ -10,13 +10,12 @@
 
 package jqwik;
 
-import net.jqwik.api.Example;
-import net.jqwik.api.Label;
+import net.jqwik.api.*;
 
 class JQwikTest {
-	@Example
+	@Property(tries = 10)
 	@Label("Hello from JQwik!")
-	boolean helloFromJQwik() {
+	boolean helloFromJQwik(@ForAll int aNumber) {
 		return true;
 	}
 }

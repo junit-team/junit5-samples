@@ -48,8 +48,11 @@ dependencies {
         because 'executes Java programs as tests, contains dedicated Java 8 and 11 implementations'
     }
 
-    // JQwik
-    testCompile('net.jqwik:jqwik:0.9.0')
+    // jqwik
+    testCompile('net.jqwik:jqwik-api:1.0.0')
+    testRuntime('net.jqwik:jqwik-engine:1.0.0') {
+        because 'allows jqwik properties to run'
+    }
 
     // Spek
     testCompile('org.jetbrains.spek:spek-api:1.2.1')
