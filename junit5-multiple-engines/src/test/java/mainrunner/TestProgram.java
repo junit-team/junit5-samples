@@ -8,10 +8,10 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-package brahms;
+package mainrunner;
 
-public class MaingineTest {
+public class TestProgram {
 	public static void main(String... args) {
-		System.out.println("brahms.MaingineTest");
+		// empty on purpose
 	}
 }
