@@ -17,6 +17,7 @@ out
 *.iml
 *.ipr
 *.iws
+.ijwb/
 
 # Misc
 *.log
