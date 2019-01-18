@@ -7,8 +7,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    jcenter()
-    maven { url 'https://jitpack.io' }
+    jcenter() // needed for "spek"
 }
 
 dependencies {
@@ -44,7 +43,7 @@ dependencies {
     }
 
     // Mainrunner
-    testCompile("com.github.sormuras.mainrunner:mainrunner:1.0.0-M5") {
+    testCompile("de.sormuras.mainrunner:mainrunner:1.0.0") {
         because 'executes Java programs as tests, contains dedicated Java 8 and 11 implementations'
     }
 
