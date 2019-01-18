@@ -2,67 +2,69 @@ plugins {
     id 'java'
     id 'eclipse' // optional (to generate Eclipse project files)
     id 'idea' // optional (to generate IntelliJ IDEA project files)
-    id 'org.jetbrains.kotlin.jvm' version '1.2.71'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.11'
 }
 
 repositories {
     mavenCentral()
-    jcenter() // needed for "spek"
+    jcenter() // needed for "Spek2"
 }
 
 dependencies {
     def junit4Version = '4.12'
-    def junitVintageVersion = '5.3.2'
-    def junitJupiterVersion = '5.3.2'
-    def junitPlatformVersion = '1.3.2'
+    def junit5Version = '5.3.2'
+
+    // Using multiple engines in a single project may lead to different JUnit
+    // Platform artifact versions being pulled in via transitive dependencies.
+    // Gradle allows you to enforce usage of fixed set of versions that match.
+    // https://docs.gradle.org/current/userguide/managing_transitive_dependencies.html#sec:bom_import
+    implementation(enforcedPlatform("org.junit:junit-bom:${junit5Version}")) {
+        because 'enforce matching Platform, Jupiter, and Vintage versions'
+    }
 
     // JUnit Jupiter
-    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}") {
-        because 'allows JUnit 5 tests to run'
+    testImplementation('org.junit.jupiter:junit-jupiter-api')
+    testImplementation('org.junit.jupiter:junit-jupiter-params')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine') {
+        because 'allows JUnit 5 (read Jupiter) tests to run'
     }
 
     // JUnit Vintage
-    testCompile("junit:junit:${junit4Version}")
-    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
+    testImplementation("junit:junit:${junit4Version}")
+    testRuntimeOnly('org.junit.vintage:junit-vintage-engine') {
         because 'allows JUnit 3 and JUnit 4 tests to run'
     }
 
     // JUnit Platform Launcher + Console
-    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher') {
         because 'allows tests to run from IDEs that bundle older version of launcher'
     }
-    testRuntime("org.junit.platform:junit-platform-console:${junitPlatformVersion}") {
+    testRuntimeOnly('org.junit.platform:junit-platform-console') {
         because 'needed to launch the JUnit Platform Console program'
     }
 
-    // Brahms - Maingine and Single-File Source-Code Test Engine
-    testRuntime("de.sormuras:brahms:0.0.14") {
-        because 'executes programs "public static void main(String...args)" as tests'
-    }
-
     // Mainrunner
-    testCompile("de.sormuras.mainrunner:mainrunner:1.0.0") {
+    testImplementation("de.sormuras.mainrunner:mainrunner:1.0.0") {
         because 'executes Java programs as tests, contains dedicated Java 8 and 11 implementations'
     }
 
     // jqwik
-    testCompile('net.jqwik:jqwik-api:1.0.0')
-    testRuntime('net.jqwik:jqwik-engine:1.0.0') {
+    testImplementation('net.jqwik:jqwik:1.0.0') {
         because 'allows jqwik properties to run'
     }
 
-    // Spek
-    testCompile('org.jetbrains.spek:spek-api:1.2.1')
-    testRuntime('org.jetbrains.spek:spek-junit-platform-engine:1.2.1')
-    testCompile('org.jetbrains.kotlin:kotlin-stdlib')
-    testCompile('org.jetbrains.kotlin:kotlin-reflect')
+    // Spek2
+    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.0-rc.1')
+    testImplementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.11') // TODO Why is this needed?
+    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.0-rc.1') {
+        because 'allows Spek2 tests to be found and executed'
+    }
 
     // KotlinTest
-    testCompile('io.kotlintest:kotlintest-runner-junit5:3.1.10')
-    testRuntime('org.slf4j:slf4j-nop:1.7.25')
-    // testRuntime('org.slf4j:slf4j-simple:1.7.25')
+    testImplementation('io.kotlintest:kotlintest-runner-junit5:3.2.0')
+    testRuntimeOnly('org.slf4j:slf4j-nop:1.7.25') {
+        because 'defaulting to no-operation (NOP) logger implementation'
+    }
 }
 
 task consoleLauncherTest(type: JavaExec) {
