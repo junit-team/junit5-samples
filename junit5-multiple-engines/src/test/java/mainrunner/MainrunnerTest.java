@@ -10,7 +10,7 @@
 
 package mainrunner;
 
-public class TestProgram {
+public class MainrunnerTest {
 	public static void main(String... args) {
 		// empty on purpose
 	}
