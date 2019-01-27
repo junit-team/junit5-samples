@@ -13,6 +13,7 @@ package com.example.project
 import org.junit.jupiter.api.Assertions.assertEquals
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -36,5 +37,14 @@ class CalculatorTests {
         assertEquals(expectedResult, calculator.add(first, second)) {
             "$first + $second should equal $expectedResult"
         }
+    }
+
+    @Test
+    fun divisionByZeroError() {
+        val calculator = Calculator()
+        val exception = assertThrows<AssertionError> {
+            calculator.div(1, 0)
+        }
+        assertEquals("Division by Zero", exception.message)
     }
 }
