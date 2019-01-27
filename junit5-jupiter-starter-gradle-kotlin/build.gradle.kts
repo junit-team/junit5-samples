@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
 	kotlin("jvm") version "1.3.20"
 }
@@ -23,4 +25,9 @@ tasks.withType<Test> {
 
 tasks.withType<Wrapper> {
 	gradleVersion = "5.0"
+}
+
+// config JVM target to 1.8 for kotlin compilation tasks
+tasks.withType<KotlinCompile> {
+	kotlinOptions.jvmTarget = "1.8"
 }
