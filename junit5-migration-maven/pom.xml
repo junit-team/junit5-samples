@@ -14,8 +14,8 @@
 		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
 		<junit.version>4.12</junit.version>
-		<junit.jupiter.version>5.4.0-RC2</junit.jupiter.version>
-		<junit.vintage.version>5.4.0-RC2</junit.vintage.version>
+		<junit.jupiter.version>5.4.0</junit.jupiter.version>
+		<junit.vintage.version>5.4.0</junit.vintage.version>
 	</properties>
 
 	<dependencies>

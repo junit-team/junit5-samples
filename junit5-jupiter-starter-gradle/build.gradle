@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation('org.junit.jupiter:junit-jupiter:5.4.0-RC2')
+	testImplementation('org.junit.jupiter:junit-jupiter:5.4.0')
 }
 
 test {

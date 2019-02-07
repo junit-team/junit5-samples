@@ -21,9 +21,9 @@ repositories {
 
 dependencies {
 	def junit4Version        = '4.12'
-	def junitVintageVersion  = '5.4.0-RC2'
-	def junitJupiterVersion  = '5.4.0-RC2'
-	def junitPlatformVersion = '1.4.0-RC2'
+	def junitVintageVersion  = '5.4.0'
+	def junitJupiterVersion  = '5.4.0'
+	def junitPlatformVersion = '1.4.0'
 
 	// JUnit Jupiter API and TestEngine implementation
 	testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
