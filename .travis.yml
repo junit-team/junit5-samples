@@ -51,7 +51,7 @@ jobs:
       jdk: openjdk11
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test --file pom-SNAPSHOT.xml
 # all samples, one-shot
-    - stage: all
-      name: "Build all samples"
-      jdk: openjdk11
-      script: ./build-all-samples.jsh
+#    - stage: all
+#      name: "Build all samples"
+#      jdk: openjdk11
+#      script: ./build-all-samples.jsh
