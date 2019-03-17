@@ -11,7 +11,7 @@ repositories {
 dependencies {
 	implementation(kotlin("stdlib-jdk8"))
 	// or compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.4.1")
 }
 
 tasks.withType<Test> {

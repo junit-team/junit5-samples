@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
     def junit4Version = '4.12'
-    def junit5Version = '5.4.0'
+    def junit5Version = '5.4.1'
 
     // Using multiple engines in a single project may lead to different JUnit
     // Platform artifact versions being pulled in via transitive dependencies.

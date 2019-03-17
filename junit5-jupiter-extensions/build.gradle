@@ -17,10 +17,10 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-	compile("org.junit.jupiter:junit-jupiter-api:5.4.0") {
+	compile("org.junit.jupiter:junit-jupiter-api:5.4.1") {
         because 'building extensions in "main" using JUnit Jupiter API'
     }
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.0") {
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.1") {
         because 'at least one engine is needed at test runtime'
     }
 }
