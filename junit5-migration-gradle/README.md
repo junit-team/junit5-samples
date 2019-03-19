@@ -59,8 +59,8 @@ implementation similar to the following.
 
 ```groovy
 dependencies {
-	testCompile("org.junit.jupiter:junit-jupiter-api:5.4.1")
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.1")
+	testCompile("org.junit.jupiter:junit-jupiter-api:5.5.0-M1")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.5.0-M1")
 }
 ```
 
@@ -71,7 +71,7 @@ JUnit Vintage TestEngine implementation similar to the following.
 ```groovy
 dependencies {
 	testCompile("junit:junit:4.12")
-	testRuntime("org.junit.vintage:junit-vintage-engine:5.4.1")
+	testRuntime("org.junit.vintage:junit-vintage-engine:5.5.0-M1")
 }
 ```
 
