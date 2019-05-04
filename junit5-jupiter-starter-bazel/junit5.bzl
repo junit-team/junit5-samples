@@ -53,7 +53,7 @@ def junit_platform_java_repositories(
             ),
         )
 
-def java_junit5_test(name, srcs, test_class = None, deps = [], runtime_deps = [], **kwargs):
+def java_junit5_test(name, srcs, test_package, deps = [], runtime_deps = [], **kwargs):
     FILTER_KWARGS = [
         "main_class",
         "use_testrunner",
@@ -65,10 +65,10 @@ def java_junit5_test(name, srcs, test_class = None, deps = [], runtime_deps = []
             kwargs.pop(arg)
 
     junit_console_args = []
-    if test_class:
-        junit_console_args += ["--select-class", test_class]
+    if test_package:
+        junit_console_args += ["--select-package", test_package]
     else:
-        fail("must specific 'test_class'")
+        fail("must specify 'test_package'")
 
     native.java_test(
         name = name,

@@ -10,7 +10,7 @@ java_junit5_test(
     srcs = glob([
         "CalculatorTests.java",
     ]),
-    test_class = "com.example.project.CalculatorTests",
+    test_package = "com.example.project",
     deps = [
         "//src/main/java/com/example/project:junit5-jupiter-starter-bazel",
     ],
