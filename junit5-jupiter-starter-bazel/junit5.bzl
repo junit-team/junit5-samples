@@ -53,7 +53,7 @@ def junit_platform_java_repositories(
             ),
         )
 
-def java_junit5_test(name, srcs, test_package = None, deps = [], runtime_deps = [], **kwargs):
+def java_junit5_test(name, srcs, test_package, deps = [], runtime_deps = [], **kwargs):
     FILTER_KWARGS = [
         "main_class",
         "use_testrunner",
