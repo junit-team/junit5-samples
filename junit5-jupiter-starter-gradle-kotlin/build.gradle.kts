@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.3.20"
+	kotlin("jvm") version "1.3.31"
 }
 
 repositories {
@@ -10,11 +10,10 @@ repositories {
 
 dependencies {
 	implementation(kotlin("stdlib-jdk8"))
-	// or compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
 }
 
-tasks.withType<Test> {
+tasks.test {
 	useJUnitPlatform()
 	testLogging {
 		events("passed", "skipped", "failed")
@@ -22,6 +21,6 @@ tasks.withType<Test> {
 }
 
 // config JVM target to 1.8 for kotlin compilation tasks
-tasks.withType<KotlinCompile> {
+tasks.withType<KotlinCompile>().configureEach {
 	kotlinOptions.jvmTarget = "1.8"
 }
