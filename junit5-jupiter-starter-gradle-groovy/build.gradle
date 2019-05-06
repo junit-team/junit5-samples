@@ -19,7 +19,3 @@ test {
 		events "passed", "skipped", "failed"
 	}
 }
-
-wrapper {
-	gradleVersion = '5.0'
-}

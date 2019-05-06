@@ -21,10 +21,6 @@ tasks.withType<Test> {
 	}
 }
 
-tasks.withType<Wrapper> {
-	gradleVersion = "5.0"
-}
-
 // config JVM target to 1.8 for kotlin compilation tasks
 tasks.withType<KotlinCompile> {
 	kotlinOptions.jvmTarget = "1.8"
