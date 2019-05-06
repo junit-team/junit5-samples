@@ -3,11 +3,7 @@ plugins {
 	id 'java'
 	id 'eclipse' // optional (to generate Eclipse project files)
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
-}
-
-int javaVersion = Integer.valueOf(JavaVersion.current().getMajorVersion())
-if (javaVersion < 9) {
-    apply plugin: 'jacoco'
+	id 'jacoco'
 }
 
 buildScan {
@@ -20,28 +16,22 @@ repositories {
 }
 
 dependencies {
-	def junit4Version        = '4.12'
-	def junitVintageVersion  = '5.4.2'
-	def junitJupiterVersion  = '5.4.2'
-	def junitPlatformVersion = '1.4.2'
+	def junit4Version   = '4.12'
+	def junitBomVersion = '5.4.2'
+
+	testImplementation(platform("org.junit:junit-bom:$junitBomVersion"))
 
 	// JUnit Jupiter API and TestEngine implementation
-	testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
+	testImplementation("org.junit.jupiter:junit-jupiter")
 
 	testCompile("junit:junit:${junit4Version}")
-	testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
+	testRuntime("org.junit.vintage:junit-vintage-engine") {
 		because 'allows JUnit 3 and JUnit 4 tests to run'
 	}
 
-	testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
+	testRuntime("org.junit.platform:junit-platform-launcher") {
 		because 'allows tests to run from IDEs that bundle older version of launcher'
 	}
-}
-
-if (project.plugins.findPlugin('jacoco')) {
-    jacoco {
-        toolVersion = '0.8.1'
-    }
 }
 
 test {
@@ -57,11 +47,5 @@ test {
 		events 'passed', 'skipped', 'failed'
 	}
 
-    if (project.plugins.findPlugin('jacoco')) {
-        finalizedBy jacocoTestReport
-    }
-}
-
-wrapper {
-	gradleVersion = '5.0'
+	finalizedBy(jacocoTestReport)
 }
