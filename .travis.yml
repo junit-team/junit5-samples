@@ -1,0 +1,64 @@
+language: java
+jdk: oraclejdk8
+
+jobs:
+  include:
+# starter
+    - stage: starter
+      name: "Jupiter Starter Sample: Ant"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant && ./build.sh
+    - stage: starter
+      name: "Jupiter Starter Sample: Gradle & Java"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain
+    - stage: starter
+      name: "Jupiter Starter Sample: Gradle & Kotlin"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle-kotlin && ./gradlew test --console plain
+    - stage: starter
+      name: "Jupiter Starter Sample: Gradle & Groovy"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle-groovy && ./gradlew test --console plain
+    - stage: starter
+      name: "Jupiter Starter Sample: Maven"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test
+    - stage: starter
+      name: "Jupiter Starter Sample: Maven & Kotlin (JDK 1.8)"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven-kotlin && ./mvnw -f ./pom-java8.xml test
+    - stage: starter
+      name: "Jupiter Starter Sample: Maven & Kotlin (JDK 11)"
+      jdk: openjdk11
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven-kotlin && ./mvnw test
+    - stage: starter
+      name: "Jupiter Starter Sample: Bazel"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-bazel && python ./bazelisk.py test //...
+    - stage: starter
+      name: "Jupiter Extension Samples"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-extensions && ./gradlew test --console plain
+# migration
+    - stage: migration
+      name: "Migration Samples: Gradle"
+      script: cd $TRAVIS_BUILD_DIR/junit5-migration-gradle && ./gradlew build --console plain --scan
+    - stage: migration
+      name: "Migration Samples: Maven"
+      script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
+# platform
+    - stage: platform
+      name: "JUnit Platform running multiple TestEngine implementations"
+      jdk: openjdk11
+      script: cd $TRAVIS_BUILD_DIR/junit5-multiple-engines && ./gradlew test --console plain
+    - stage: platform
+      name: "Living in the Modular World..."
+      jdk: openjdk11
+      script: cd $TRAVIS_BUILD_DIR/junit5-modular-world && ./build.jsh
+# snapshot -- use current junit master branch
+    - stage: snapshot
+      name: "JUnit 5 SNAPSHOT build: Gradle"
+      jdk: openjdk11
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
+    - stage: snapshot
+      name: "JUnit 5 SNAPSHOT build: Maven"
+      jdk: openjdk11
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven && ./mvnw test --file pom-SNAPSHOT.xml
+# all samples, one-shot
+#    - stage: all
+#      name: "Build all samples"
+#      jdk: openjdk11
+#      script: ./build-all-samples.jsh

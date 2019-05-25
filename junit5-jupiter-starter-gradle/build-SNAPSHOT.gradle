@@ -1,0 +1,19 @@
+plugins {
+	id 'java'
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+	testImplementation('org.junit.jupiter:junit-jupiter:5.5.0-SNAPSHOT')
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}

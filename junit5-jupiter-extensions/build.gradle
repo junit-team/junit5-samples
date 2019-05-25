@@ -1,0 +1,30 @@
+plugins {
+	id 'java'
+	id 'eclipse' // optional (to generate Eclipse project files)
+	id 'idea' // optional (to generate IntelliJ IDEA project files)
+}
+
+repositories {
+	mavenCentral()
+}
+
+version = '1.0.0-SNAPSHOT'
+
+tasks.withType(JavaCompile) {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	options.compilerArgs += '-parameters'
+}
+
+dependencies {
+	compile("org.junit.jupiter:junit-jupiter-api:5.4.2") {
+        because 'building extensions in "main" using JUnit Jupiter API'
+    }
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2") {
+        because 'at least one engine is needed at test runtime'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
