@@ -1,5 +1,5 @@
 plugins {
-	id 'java'
+	id 'java-library'
 	id 'eclipse' // optional (to generate Eclipse project files)
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
 }
@@ -17,10 +17,10 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-	compile("org.junit.jupiter:junit-jupiter-api:5.4.2") {
+	api("org.junit.jupiter:junit-jupiter-api:5.4.2") {
         because 'building extensions in "main" using JUnit Jupiter API'
     }
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2") {
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2") {
         because 'at least one engine is needed at test runtime'
     }
 }

@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-	compile localGroovy()
+	implementation(localGroovy())
 	testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
 }
 

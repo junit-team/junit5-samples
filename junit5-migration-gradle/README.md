@@ -26,14 +26,14 @@ Optionally, you can configure the `test` task as follows.
 ```groovy
 test {
 	useJUnitPlatform {
-		// includeEngines 'junit-jupiter', 'junit-vintage'
-		// excludeEngines 'custom-engine'
+		// includeEngines("junit-jupiter", "junit-vintage")
+		// excludeEngines("custom-engine")
 
-		// includeTags 'fast'
-		excludeTags 'slow'
+		// includeTags("fast")
+		excludeTags("slow")
 	}
 	testLogging {
-		events 'passed', 'skipped', 'failed'
+		events("passed", "skipped", "failed")
 	}
 }
 ```
@@ -53,25 +53,25 @@ Gradle will not run tests that are _tagged_ accordingly.
 In order to have Gradle's `test` task run any tests at all, a `TestEngine`
 implementation must be on the classpath.
 
-To configure support for JUnit Jupiter based tests, configure a `testCompile` dependency
-on the JUnit Jupiter API and a `testRuntime` dependency on the JUnit Jupiter TestEngine
-implementation similar to the following.
+To configure support for JUnit Jupiter based tests, configure a `testImplementation`
+dependency on the `junit-jupiter` artifact. That will cause `testImplementation`
+dependency on the JUnit Jupiter API and a `testRuntimeOnly` dependency on the JUnit
+Jupiter TestEngine.
 
 ```groovy
 dependencies {
-	testCompile("org.junit.jupiter:junit-jupiter-api:5.4.2")
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
 }
 ```
 
 Gradle can also run JUnit 3 and JUnit 4 based tests as long as you
-configure a `testCompile` dependency on JUnit 4 and a `testRuntime` dependency on the
-JUnit Vintage TestEngine implementation similar to the following.
+configure a `testImplementation` dependency on JUnit 4 and a `testRuntimeOnly` dependency
+on the JUnit Vintage TestEngine implementation similar to the following.
 
 ```groovy
 dependencies {
-	testCompile("junit:junit:4.12")
-	testRuntime("org.junit.vintage:junit-vintage-engine:5.4.2")
+	testImplementation("junit:junit:4.12")
+	testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.4.2")
 }
 ```
 
