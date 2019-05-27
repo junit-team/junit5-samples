@@ -3,8 +3,8 @@
 Welcome to _JUnit 5 Samples_, a collection of sample applications and extensions
 using JUnit Jupiter, JUnit Vintage, and the JUnit Platform on various build systems.
 
-CI builds for sample projects are available on [Travis CI][ci-travis]. Using JDK 10's `jshell` tool, you may build all samples via
-the `build-all-samples.jsh` script.
+CI builds for sample projects are available on [Travis CI][ci-travis]. Using JDK 11's
+`jshell` tool, you may build all samples via the `build-all-samples.jsh` script.
 
 ## Jupiter Starter Samples
 
@@ -37,15 +37,16 @@ Groovy programming language.
 The [junit5-jupiter-starter-maven] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
 
-### Jupiter on Maven using Kotlin ![badge-jdk-8] ![badge-jdk-11] ![badge-tool-maven] ![badge-junit-jupiter] ![badge-junit-vintage]
+### Jupiter on Maven using Kotlin ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter] ![badge-junit-vintage]
 
 The [junit5-jupiter-starter-maven-kotlin] sample demonstrates the bare minimum configuration for
-getting started with mixed JUnit Jupiter and JUnit Vintage Java project using Maven build system
-and Kotlin programming language.
+getting started with JUnit Jupiter and JUnit Vintage project using Maven build system and Kotlin
+programming language.
 
 ### Jupiter on Bazel ![badge-jdk-8] ![badge-tool-bazel] ![badge-junit-jupiter]
 
-The [junit5-jupiter-starter-bazel] sample demonstrates the bare minimum configuration for getting started with JUnit Jupiter using the Bazel build system.
+The [junit5-jupiter-starter-bazel] sample demonstrates the bare minimum configuration for
+getting started with JUnit Jupiter using the Bazel build system.
 
 ## Jupiter Feature Samples
 
