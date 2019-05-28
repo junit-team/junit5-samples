@@ -23,6 +23,9 @@ jobs:
       name: "Jupiter Starter Sample: Maven & Kotlin"
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven-kotlin && ./mvnw test
     - stage: starter
+      name: "Jupiter Starter Sample: Maven & Scala"
+      script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-maven-scala && ./mvnw test
+    - stage: starter
       name: "Jupiter Starter Sample: Bazel"
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-bazel && python ./bazelisk.py test //...
     - stage: starter
