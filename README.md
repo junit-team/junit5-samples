@@ -73,6 +73,12 @@ using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 The [junit5-migration-maven] sample demonstrates how to set up a Maven project
 using the JUnit Platform, JUnit Jupiter, and JUnit Vintage.
 
+### Maven & Kotlin Migration ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter] ![badge-junit-vintage]
+
+The [junit5-migration-maven-kotlin] sample demonstrates how to execute tests written in Java and Kotlin
+based on JUnit 5 using Maven. In addition, it showcases that existing JUnit 4 based tests can be executed
+in the same test suite as JUnit Jupiter based tests or any other tests supported on the JUnit Platform.
+
 
 ## Platform Samples
 _Showing basic features of the JUnit Platform._
@@ -98,6 +104,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-jupiter-starter-bazel]: junit5-jupiter-starter-bazel
 [junit5-migration-gradle]: junit5-migration-gradle
 [junit5-migration-maven]: junit5-migration-maven
+[junit5-migration-maven-kotlin]: junit5-migration-maven-kotlin
 [junit5-multiple-engines]: junit5-multiple-engines
 [junit5-modular-world]: junit5-modular-world
 
