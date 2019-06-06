@@ -37,11 +37,10 @@ Groovy programming language.
 The [junit5-jupiter-starter-maven] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Maven build system.
 
-### Jupiter on Maven using Kotlin ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter] ![badge-junit-vintage]
+### Jupiter on Maven using Kotlin ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter]
 
 The [junit5-jupiter-starter-maven-kotlin] sample demonstrates the bare minimum configuration for
-getting started with JUnit Jupiter and JUnit Vintage project using Maven build system and Kotlin
-programming language.
+getting started with JUnit Jupiter project using Maven build system and Kotlin programming language.
 
 ### Jupiter on Bazel ![badge-jdk-8] ![badge-tool-bazel] ![badge-junit-jupiter]
 
