@@ -20,5 +20,5 @@ open module black.box {
 	//
 	requires org.junit.jupiter.api;
 	requires junit; // JUnit 4 "automatic module"
-	requires net.jqwik;
+	requires net.jqwik.api;
 }
