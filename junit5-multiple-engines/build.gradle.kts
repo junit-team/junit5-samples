@@ -44,8 +44,8 @@ dependencies {
     }
 
     // Mainrunner
-    testImplementation("de.sormuras.mainrunner:mainrunner:1.1.0") {
-        because("executes Java programs as tests, contains dedicated Java 8 and 11 implementations")
+    testImplementation("de.sormuras.mainrunner:de.sormuras.mainrunner.engine:2.0.2") {
+        because("executes Java programs as tests")
     }
 
     // jqwik
