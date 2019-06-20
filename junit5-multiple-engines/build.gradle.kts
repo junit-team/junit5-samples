@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     val junit4Version = "4.12"
-    val junitBomVersion = "5.5.0-RC1"
+    val junitBomVersion = "5.5.0-RC2"
 
     // Using multiple engines in a single project may lead to different JUnit
     // Platform artifact versions being pulled in via transitive dependencies.

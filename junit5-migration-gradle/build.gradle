@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
 	def junit4Version   = '4.12'
-	def junitBomVersion = '5.5.0-RC1'
+	def junitBomVersion = '5.5.0-RC2'
 
 	testImplementation(platform("org.junit:junit-bom:$junitBomVersion"))
 
