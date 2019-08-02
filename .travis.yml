@@ -1,12 +1,11 @@
 language: java
-# jdk: oraclejdk8 # use default JDK
+jdk: openjdk8
 
 jobs:
   include:
 # starter
     - stage: starter
       name: "Jupiter Starter Sample: Ant"
-      before_script: jdk_switcher use openjdk8
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant && ./build.sh
     - stage: starter
       name: "Jupiter Starter Sample: Gradle & Java"
