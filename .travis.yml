@@ -6,7 +6,7 @@ jobs:
 # starter
     - stage: starter
       name: "Jupiter Starter Sample: Ant"
-      before_script: jdk_switcher use oraclejdk8
+      before_script: jdk_switcher use openjdk8
       script: cd $TRAVIS_BUILD_DIR/junit5-jupiter-starter-ant && ./build.sh
     - stage: starter
       name: "Jupiter Starter Sample: Gradle & Java"
