@@ -1,5 +1,5 @@
 language: java
-# jdk: oraclejdk8 # use default JDK
+jdk: openjdk8
 
 jobs:
   include:
