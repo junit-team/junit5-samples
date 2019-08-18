@@ -42,6 +42,11 @@ getting started with JUnit Jupiter using the Maven build system.
 The [junit5-jupiter-starter-maven-kotlin] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter project using Maven build system and Kotlin programming language.
 
+### Jupiter on Maven using Scala ![badge-jdk-8] ![badge-tool-maven] ![badge-junit-jupiter]
+
+The [junit5-jupiter-starter-maven-scala] sample demonstrates the bare minimum configuration for
+getting started with JUnit Jupiter project using Maven build system and Scala programming language.
+
 ### Jupiter on Bazel ![badge-jdk-8] ![badge-tool-bazel] ![badge-junit-jupiter]
 
 The [junit5-jupiter-starter-bazel] sample demonstrates the bare minimum configuration for
@@ -94,6 +99,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-jupiter-starter-gradle-kotlin]: junit5-jupiter-starter-gradle-kotlin
 [junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
 [junit5-jupiter-starter-maven-kotlin]: junit5-jupiter-starter-maven-kotlin
+[junit5-jupiter-starter-maven-scala]: junit5-jupiter-starter-maven-scala
 [junit5-jupiter-starter-bazel]: junit5-jupiter-starter-bazel
 [junit5-migration-gradle]: junit5-migration-gradle
 [junit5-migration-maven]: junit5-migration-maven
