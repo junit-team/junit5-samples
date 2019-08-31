@@ -35,6 +35,9 @@ jobs:
     - stage: migration
       name: "Migration Samples: Maven"
       script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven && ./mvnw test
+    - stage: migration
+      name: "Migration Samples: Maven & Kotlin"
+      script: cd $TRAVIS_BUILD_DIR/junit5-migration-maven-kotlin && ./mvnw test
 # platform
     - stage: platform
       name: "JUnit Platform running multiple TestEngine implementations"
