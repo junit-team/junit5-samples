@@ -66,6 +66,14 @@ dependencies {
     testRuntimeOnly("org.slf4j:slf4j-nop:1.7.25") {
         because("defaulting to no-operation (NOP) logger implementation")
     }
+
+    // TestNG
+    testImplementation("org.testng:testng:7.0.0") {
+        because("allows TestNG tests to run")
+    }
+    testRuntimeOnly("com.github.testng-team:testng-junit5:0.0.1") {
+        because("allows TestNG tests to run")
+    }
 }
 
 tasks {

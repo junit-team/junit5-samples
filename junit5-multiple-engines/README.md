@@ -14,6 +14,7 @@ using the JUnit Platform with various [TestEngine][guide-custom-engine] implemen
  * [KotlinTest](https://github.com/kotlintest/kotlintest)
  * [MAINRUNNER](https://github.com/sormuras/mainrunner)
  * [Spek](https://spekframework.org)
+ * [TestNG](https://github.com/testng-team/testng-junit5)
 
 ## More engines
 
