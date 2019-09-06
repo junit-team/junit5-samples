@@ -42,9 +42,9 @@ class Builder {
 		run("junit5-jupiter-starter-gradle", "gradlew", "clean", "test");
 		run("junit5-jupiter-starter-gradle-groovy", "gradlew", "clean", "test");
 		run("junit5-jupiter-starter-gradle-kotlin", "gradlew", "clean", "test");
-		run("junit5-jupiter-starter-maven", "mvnw", "clean", "test");
-		run("junit5-jupiter-starter-maven-kotlin", "mvnw", "clean", "test");
-		run("junit5-jupiter-starter-bazel", "python", "bazelisk.py", "test", "//...");
+		run("junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", "test");
+		run("junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", "test");
+		// TODO run("junit5-jupiter-starter-bazel", "python", "bazelisk.py", "test", "//...");
 
 		// jupiter-extensions
 		run("junit5-jupiter-extensions", "gradlew", "clean", "test");
