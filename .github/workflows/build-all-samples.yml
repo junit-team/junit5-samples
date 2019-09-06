@@ -4,12 +4,12 @@ jobs:
   linux:
     name: Linux
     runs-on: ubuntu-latest
-    container: openjdk:11
     steps:
-      - name: 'Print Java version'
-        run: java --version
       - uses: actions/checkout@v1
       - name: 'Build Ant starter'
         run: cd ${GITHUB_WORKSPACE}/junit5-jupiter-starter-ant && ./build.sh
       - name: 'Build all samples using JShell'
-        run: jshell build-all-samples.jsh
+        run: |
+          JAVA_HOME=${JAVA_HOME_11_X64}
+          PATH=${JAVA_HOME}/bin:${PATH}
+          jshell build-all-samples.jsh
