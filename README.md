@@ -3,7 +3,7 @@
 Welcome to _JUnit 5 Samples_, a collection of sample applications and extensions
 using JUnit Jupiter, JUnit Vintage, and the JUnit Platform on various build systems.
 
-CI builds for sample projects are available on [Travis CI][ci-travis]. Using JDK 11's
+CI builds for sample projects are available on [Travis CI][ci-travis]. Using JDK 11+'s
 `jshell` tool, you may build all samples via the `build-all-samples.jsh` script.
 
 ## Jupiter Starter Samples
@@ -101,8 +101,6 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-modular-world]: junit5-modular-world
 
 [badge-jdk-8]: https://img.shields.io/badge/jdk-8-lightgray.svg "JDK-8"
-[badge-jdk-9]: https://img.shields.io/badge/jdk-9-yellow.svg "JDK-9"
-[badge-jdk-10]: https://img.shields.io/badge/jdk-10-orange.svg "JDK-10"
 [badge-jdk-11]: https://img.shields.io/badge/jdk-11-red.svg "JDK-11 or higher"
 [badge-tool-ant]: https://img.shields.io/badge/tool-ant-10f0f0.svg "Ant"
 [badge-tool-gradle]: https://img.shields.io/badge/tool-gradle-blue.svg "Gradle wrapper included"
