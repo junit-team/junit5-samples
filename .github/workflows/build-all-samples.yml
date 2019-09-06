@@ -6,8 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     container: junitteam/build:latest
     steps:
-      - name: Print Java version
+      - name: 'Print Java version'
         run: java --version
       - uses: actions/checkout@v1
-      - name: Build all samples using JShell
+      - name: 'Build Ant starter'
+        run: cd ${GITHUB_WORKSPACE}/junit5-jupiter-starter-ant && ./build.sh
+      - name: 'Build all samples using JShell'
         run: jshell build-all-samples.jsh
