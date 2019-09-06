@@ -1,5 +1,5 @@
 name: Build all samples
-on: [push]
+on: push
 jobs:
   linux:
     name: Linux
