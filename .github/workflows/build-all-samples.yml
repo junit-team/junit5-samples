@@ -1,0 +1,15 @@
+name: Build all samples
+
+on: [push]
+
+jobs:
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    container: junitteam/build:latest
+    steps:
+      - name: Print Java version
+        run: java --version
+      - uses: actions/checkout@v1
+      - name: Build all samples using JShell
+        run: jshell build-all-samples.jsh
