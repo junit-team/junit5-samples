@@ -4,7 +4,6 @@ jobs:
   linux:
     name: Linux
     runs-on: ubuntu-latest
-    container: junitteam/build:latest
     steps:
       - uses: actions/checkout@v1
       - name: 'JUnit 5 SNAPSHOT build: Gradle'

@@ -4,7 +4,6 @@ jobs:
   linux:
     name: Linux
     runs-on: ubuntu-latest
-    container: junitteam/build:latest
     steps:
       - name: 'Print Java version'
         run: java --version
