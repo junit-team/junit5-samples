@@ -2,7 +2,7 @@ plugins {
     java
     eclipse // optional (to generate Eclipse project files)
     idea // optional (to generate IntelliJ IDEA project files)
-    kotlin("jvm") version "1.3.11"
+    kotlin("jvm") version "1.3.50"
 }
 
 repositories {
@@ -44,20 +44,20 @@ dependencies {
     }
 
     // Mainrunner
-    testImplementation("de.sormuras.mainrunner:de.sormuras.mainrunner.engine:2.0.2") {
+    testImplementation("de.sormuras.mainrunner:de.sormuras.mainrunner.engine:2.0.5") {
         because("executes Java programs as tests")
     }
 
     // jqwik
-    testImplementation("net.jqwik:jqwik:1.0.0") {
+    testImplementation("net.jqwik:jqwik:1.2.0") {
         because("allows jqwik properties to run")
     }
 
     // Spek2
-    testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.0-rc.1") {
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.3") {
         exclude(module = "kotlin-stdlib-jdk8").because("we want to override the Kotlin version")
     }
-    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:2.0.0-rc.1") {
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:2.0.3") {
         because("allows Spek2 tests to be found and executed")
     }
 
