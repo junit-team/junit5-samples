@@ -44,7 +44,7 @@ dependencies {
     }
 
     // Mainrunner
-    testImplementation("de.sormuras.mainrunner:de.sormuras.mainrunner.engine:2.0.5") {
+    testImplementation("de.sormuras.mainrunner:de.sormuras.mainrunner.engine:2.1.3") {
         because("executes Java programs as tests")
     }
 
