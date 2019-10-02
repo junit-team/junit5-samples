@@ -33,7 +33,7 @@
     </target>
 
     <!-- https://junit.org/junit5/docs/snapshot/user-guide/#running-tests-build-ant -->
-    <target name="test.junit.launcher" depends="compile">
+    <target name="test" depends="compile">
         <junitlauncher haltOnFailure="true" printSummary="true">
             <classpath refid="test.classpath"/>
             <testclasses outputdir="build/test-report">
@@ -45,21 +45,5 @@
             </testclasses>
         </junitlauncher>
     </target>
-
-    <!-- https://junit.org/junit5/docs/current/user-guide/#running-tests-console-launcher -->
-    <target name="test.console.launcher" depends="compile">
-        <java classpathref="test.classpath" classname="org.junit.platform.console.ConsoleLauncher" fork="true" failonerror="true">
-            <arg value="--scan-classpath"/>
-            <arg line="--reports-dir build/test-report"/>
-        </java>
-        <junitreport todir="build/test-report">
-            <fileset dir="build/test-report">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="build/test-report/html"/>
-        </junitreport>
-    </target>
-
-    <target name="test" depends="test.junit.launcher, test.console.launcher" />
 
 </project>
