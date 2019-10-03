@@ -1,6 +1,7 @@
 # Ant
 apache-ant-*
 build
+lib
 
 # Ignore Gradle GUI config
 gradle-app.setting
