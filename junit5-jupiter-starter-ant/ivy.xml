@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
-  <info organisation="com.example" module="junit5-jupiter-starter-ant"/>
-  <dependencies>
-    <dependency org="org.junit.platform" name="junit-platform-launcher" rev="1.5.2"/>
-    <dependency org="org.junit.jupiter" name="junit-jupiter" rev="5.5.2"/>
-  </dependencies>
+    <info organisation="com.example" module="junit5-jupiter-starter-ant"/>
+    <dependencies>
+        <dependency org="org.junit.platform" name="junit-platform-launcher" rev="1.5.2"/>
+        <dependency org="org.junit.jupiter" name="junit-jupiter" rev="5.5.2"/>
+    </dependencies>
 </ivy-module>
