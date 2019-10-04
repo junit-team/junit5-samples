@@ -31,6 +31,7 @@ class CalculatorTests {
 			"0,    1,   1",
 			"1,    2,   3",
 			"49,  51, 100",
+			"49,  51, 101",
 			"1,  100, 101"
 	})
 	void add(int first, int second, int expectedResult) {
