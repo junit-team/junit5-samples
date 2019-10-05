@@ -3,7 +3,7 @@
 #
 # Set constants.
 #
-ivy_version='2.5.0-rc1'
+ivy_version='2.4.0'
 ant_version='1.10.7'
 ant_folder="apache-ant-${ant_version}"
 ant_archive="${ant_folder}-bin.tar.gz"
