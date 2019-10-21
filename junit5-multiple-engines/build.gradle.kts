@@ -18,12 +18,10 @@ dependencies {
     val junit4Version = "4.12"
     val junitBomVersion = "5.5.2"
 
-    // Using multiple engines in a single project may lead to different JUnit
-    // Platform artifact versions being pulled in via transitive dependencies.
-    // Gradle allows you to enforce usage of fixed set of versions that match.
+    // Use junit-bom to align versions
     // https://docs.gradle.org/current/userguide/managing_transitive_dependencies.html#sec:bom_import
-    implementation(enforcedPlatform("org.junit:junit-bom:$junitBomVersion")) {
-        because("enforce matching Platform, Jupiter, and Vintage versions")
+    implementation(platform("org.junit:junit-bom:$junitBomVersion")) {
+        because("Platform, Jupiter, and Vintage versions should match")
     }
 
     // JUnit Jupiter
