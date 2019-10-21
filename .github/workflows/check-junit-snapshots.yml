@@ -11,5 +11,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: 'JUnit 5 SNAPSHOT build: Gradle'
         run: cd ${GITHUB_WORKSPACE}/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
+        if: false # disable due to Gradle issue for now
       - name: 'JUnit 5 SNAPSHOT build: Maven'
         run: cd ${GITHUB_WORKSPACE}/junit5-jupiter-starter-maven && ./mvnw test --batch-mode --file pom-SNAPSHOT.xml
