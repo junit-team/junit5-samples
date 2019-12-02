@@ -3,7 +3,7 @@ load(":junit5.bzl", "junit_jupiter_java_repositories", "junit_platform_java_repo
 
 maven_server(
     name = "default",
-    url = "http://central.maven.org/maven2/",
+    url = "https://repo1.maven.org/maven2/",
 )
 
 JUNIT_JUPITER_VERSION = "5.5.2"
