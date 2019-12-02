@@ -103,6 +103,7 @@ class Builder {
 			var errors = 0;
 			var paths = Files.walk(Paths.get("."))
 					.filter(path -> path.getFileName().toString().endsWith(extension))
+					.filter(path -> !path.getFileName().toString().equals("MavenWrapperDownloader.java"))
 					.collect(Collectors.toList());
 			for (var path : paths) {
 				if (checkLicense(path, expected)) {
