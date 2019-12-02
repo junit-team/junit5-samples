@@ -1,14 +1,8 @@
 plugins {
-	id 'com.gradle.build-scan' version '2.0.2'
 	id 'java'
 	id 'eclipse' // optional (to generate Eclipse project files)
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
 	id 'jacoco'
-}
-
-buildScan {
-	termsOfServiceUrl = "https://gradle.com/terms-of-service"
-	termsOfServiceAgree = "yes"
 }
 
 repositories {
