@@ -70,7 +70,7 @@ on the JUnit Vintage TestEngine implementation similar to the following.
 
 ```groovy
 dependencies {
-	testImplementation("junit:junit:4.12")
+	testImplementation("junit:junit:4.13")
 	testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.5.2")
 }
 ```
