@@ -105,7 +105,7 @@ Path get(String directory, URI uri) throws Exception {
 }
 
 Path get(String directory, String group, String artifact, String version) throws Exception {
-	String repo = "http://central.maven.org/maven2";
+	String repo = "https://repo1.maven.org/maven2";
 	String file = artifact + "-" + version + ".jar";
 	URI uri = URI.create(String.join("/", repo, group.replace('.', '/'), artifact, version, file));
 	return get(directory, uri);

@@ -17,7 +17,7 @@ tar --extract -z --exclude "${ant_folder}/manual" --file "${ant_archive}"
 #
 # Load and store junit-platform-console-standalone jar into ${ANT_HOME}/lib.
 #
-(cd "${ant_folder}/lib" && curl --remote-name  "http://central.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit_platform_version}/junit-platform-console-standalone-${junit_platform_version}.jar")
+(cd "${ant_folder}/lib" && curl --remote-name  "https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit_platform_version}/junit-platform-console-standalone-${junit_platform_version}.jar")
 
 #
 # Finally, let Ant do its work...
