@@ -32,6 +32,10 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>
+<!--				<configuration>-->
+<!--					 suspend=y时 jvm会等调试器连上之后再继续 -->
+<!--					<argLine>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8888</argLine>-->
+<!--				</configuration>-->
 			</plugin>
 		</plugins>
 	</build>
