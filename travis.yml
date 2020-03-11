@@ -1,0 +1,22 @@
+dist: xenial
+
+language: java
+install: true
+
+matrix: 
+  include: 
+  - jdk: oraclejdk9
+
+script: 
+  - git config --global push.default simple
+  - export GIT_TAG=$TRAVIS_BRANCH.$TRAVIS_BUILD_NUMBER
+  - gradle clean build
+
+  skip_cleanup: true  
+  on:
+    tags: false
+    all_branches: true
+    
+
+    
+
