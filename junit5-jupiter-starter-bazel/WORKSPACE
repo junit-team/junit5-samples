@@ -6,9 +6,9 @@ maven_server(
     url = "https://repo1.maven.org/maven2/",
 )
 
-JUNIT_JUPITER_VERSION = "5.6.0"
+JUNIT_JUPITER_VERSION = "5.6.1"
 
-JUNIT_PLATFORM_VERSION = "1.6.0"
+JUNIT_PLATFORM_VERSION = "1.6.1"
 
 junit_jupiter_java_repositories(
     version = JUNIT_JUPITER_VERSION,
