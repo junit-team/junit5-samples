@@ -26,4 +26,8 @@ public class Calculator {
 		return MathHelper.pow(a, b);
 	}
 
+	public int sub(int a, int b) {
+		return a - b;
+}
+
 }

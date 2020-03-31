@@ -38,4 +38,17 @@ class CalculatorTests {
 		assertEquals(expectedResult, calculator.add(first, second),
 				() -> first + " + " + second + " should equal " + expectedResult);
 	}
+	@Test
+	@DisplayName("2 - 1 = 1")
+	void subsTwoNumbers() {
+		Calculator calculator = new Calculator();
+		assertEquals(1, calculator.sub(2, 1), "2 - 1 should equal 1");
+	}
+	
+	@Test
+	@DisplayName("2 - 2 = 0")
+	void sub_TwoNumbers() {
+		Calculator calculator = new Calculator();
+		assertEquals(0, calculator.sub(2, 2), "2 - 2 should equal 0");
+	}
 }
