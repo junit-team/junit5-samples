@@ -60,7 +60,7 @@ Jupiter TestEngine.
 
 ```groovy
 dependencies {
-	testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.7.0-M1")
 }
 ```
 
@@ -71,7 +71,7 @@ on the JUnit Vintage TestEngine implementation similar to the following.
 ```groovy
 dependencies {
 	testImplementation("junit:junit:4.13")
-	testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
+	testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.0-M1")
 }
 ```
 
