@@ -1,6 +1,14 @@
 name: Bazel starter example validation
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - .github/workflows/bazel-starter-validation.yml
+      - junit5-jupiter-starter-bazel
+  pull_request:
+    paths:
+      - .github/workflows/bazel-starter-validation.yml
+      - junit5-jupiter-starter-bazel
 
 jobs:
   validation:
