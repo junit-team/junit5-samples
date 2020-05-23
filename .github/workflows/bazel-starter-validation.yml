@@ -1,0 +1,13 @@
+name: Bazel starter example validation
+
+on: [push, pull_request]
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: regression test bazel-starter example
+        run: |
+          cd junit5-jupiter-starter-bazel
+          ./bazelisk.py test //...
