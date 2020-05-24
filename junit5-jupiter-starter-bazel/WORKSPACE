@@ -1,10 +1,4 @@
-load("@bazel_tools//tools/build_defs/repo:maven_rules.bzl", "maven_dependency_plugin", "maven_jar")
 load(":junit5.bzl", "junit_jupiter_java_repositories", "junit_platform_java_repositories")
-
-maven_server(
-    name = "default",
-    url = "https://repo1.maven.org/maven2/",
-)
 
 JUNIT_JUPITER_VERSION = "5.6.2"
 
