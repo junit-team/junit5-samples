@@ -17,8 +17,8 @@ import com.example.tool.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 
-@DisplayName("black.box/black.box.BlackBoxTests")
-class BlackBoxTests {
+@DisplayName("extra.modular/extra.modular.ExtraModularTests")
+class ExtraModularTests {
 
 	@Test
 	void packageName() {

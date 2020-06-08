@@ -14,7 +14,7 @@ please consult the [User Guide](http://junit.org/junit5/docs/current/user-guide/
 This project hosts three main modules with their associated test modules.
 Their names are `com.example.application`, `com.example.tool` and `ice.cream`.
 
-In addition to the main modules there's a test module named `black.box`.
+In addition to the main modules there's a test module named `extra.modular`.
 It tests the exported packages and types of the main modules.
 
 ![junit5-modular-world/src](doc/screenshot-src.png)
@@ -81,10 +81,10 @@ Compiling and running tests is achieved by calling the following test scripts:
 │              checks = `1000`
 │              seed = `-3387297467304298077`
 ├─ JUnit Vintage ✔
-│  └─ black.box.GoodOldTest ✔
+│  └─ extra.modular.GoodOldTest ✔
 │     └─ eighteenEqualsNineAndNine ✔
 ├─ JUnit Jupiter ✔
-│  ├─ black.box/black.box.BlackBoxTests ✔
+│  ├─ extra.modular/extra.modular.ExtraModularTests ✔
 │  │  ├─ moduleName() ✔
 │  │  ├─ add(RepetitionInfo) ✔
 │  │  │  ├─ 1 + 5 ✔

@@ -8,7 +8,7 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-open module black.box {
+open module extra.modular {
 	//
 	// modules under test
 	//

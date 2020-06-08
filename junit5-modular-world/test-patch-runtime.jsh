@@ -26,7 +26,7 @@ args.addAllFiles("src/test/ice.cream", path -> { String name = path.getFileName(
 run("javac", args.toArray())
 
 args = new Arguments()
-args.add("--module-path").addPath("bin/main-jars", "lib", "bin/test-patch-compile/black.box") // re-use compiled "black.box" module here
+args.add("--module-path").addPath("bin/main-jars", "lib", "bin/test-patch-compile/extra.modular") // re-use compiled "extra.modular" module here
 args.add("--add-modules").add("ALL-MODULE-PATH,ALL-DEFAULT")
 args.add("--patch-module").add("com.example.application=bin/test-patch-runtime/com.example.application")
 args.add("--patch-module").add("com.example.tool=bin/test-patch-runtime/com.example.tool")
