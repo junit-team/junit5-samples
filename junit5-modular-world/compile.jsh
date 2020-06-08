@@ -21,8 +21,8 @@ get("lib", "junit", "junit", "4.13")
 get("lib", "org.hamcrest", "hamcrest-core", "1.3")
 get("lib", "org.apiguardian", "apiguardian-api", "1.1.0")
 get("lib", "org.opentest4j", "opentest4j", "1.2.0")
-get("lib", "net.jqwik", "jqwik-api", "1.1.5")
-get("lib", "net.jqwik", "jqwik-engine", "1.1.5")
+get("lib", "net.jqwik", "jqwik-api", "1.3.0")
+get("lib", "net.jqwik", "jqwik-engine", "1.3.0")
 
 // create target directories
 Files.createDirectories(Paths.get("bin/main-jars"))
