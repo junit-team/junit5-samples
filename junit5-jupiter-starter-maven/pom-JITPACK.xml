@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<junit.jitpack.version>master-SNAPSHOT</junit.jitpack.version>
+		<junit.jitpack.version>main-SNAPSHOT</junit.jitpack.version>
 		<!--<junit.jitpack.version>experiments~parallel-execution-SNAPSHOT</junit.jitpack.version>-->
 	</properties>
 

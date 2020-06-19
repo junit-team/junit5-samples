@@ -3,7 +3,7 @@ plugins {
 }
 
 ext.jitpackGroup = 'com.github.junit-team.junit5'
-ext.jitpackVersion = 'master-SNAPSHOT'
+ext.jitpackVersion = 'main-SNAPSHOT'
 // ext.jitpackVersion = 'experiments~parallel-execution-SNAPSHOT'
 
 repositories {
