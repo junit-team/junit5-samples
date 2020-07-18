@@ -1,4 +1,5 @@
 load(":junit5.bzl", "junit_jupiter_java_repositories", "junit_platform_java_repositories")
+load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
 
 JUNIT_JUPITER_VERSION = "5.6.2"
 
@@ -10,4 +11,52 @@ junit_jupiter_java_repositories(
 
 junit_platform_java_repositories(
     version = JUNIT_PLATFORM_VERSION,
+)
+
+jvm_maven_import_external(
+    name = "commons_logging",
+    artifact = "%s:%s:%s" % (
+        "commons-logging",
+        "commons-logging",
+        "1.2",
+    ),
+    server_urls = ["https://repo1.maven.org/maven2"],
+    licenses = ["notice"], # EPL 2.0 License
+    fetch_sources = True,
+)
+
+jvm_maven_import_external(
+    name = "org_assertj_assertj_core",
+    artifact = "%s:%s:%s" % (
+        "org.assertj",
+        "assertj-core",
+        "3.16.1",
+    ),
+    server_urls = ["https://repo1.maven.org/maven2"],
+    licenses = ["notice"], # EPL 2.0 License
+    fetch_sources = True,
+)
+
+jvm_maven_import_external(
+    name = "org_springframework_spring_core",
+    artifact = "%s:%s:%s" % (
+        "org.springframework",
+        "spring-core",
+        "5.2.7.RELEASE",
+    ),
+    server_urls = ["https://repo1.maven.org/maven2"],
+    licenses = ["notice"], # EPL 2.0 License
+    fetch_sources = True,
+)
+
+jvm_maven_import_external(
+    name = "org_springframework_spring_test",
+    artifact = "%s:%s:%s" % (
+        "org.springframework",
+        "spring-test",
+        "5.2.7.RELEASE",
+    ),
+    server_urls = ["https://repo1.maven.org/maven2"],
+    licenses = ["notice"], # EPL 2.0 License
+    fetch_sources = True,
 )

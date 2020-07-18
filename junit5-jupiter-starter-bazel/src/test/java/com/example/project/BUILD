@@ -10,8 +10,10 @@ java_junit5_test(
     srcs = glob([
         "CalculatorTests.java",
     ]),
+    main_class = "com.flexport.bazeljunit5.BazelJUnit5ConsoleLauncher",
     test_package = "com.example.project",
     deps = [
+        "//bazeljunit5/src/main/java/com/flexport/bazeljunit5:bazeljunit5",
         "//src/main/java/com/example/project:junit5-jupiter-starter-bazel",
     ],
 )
