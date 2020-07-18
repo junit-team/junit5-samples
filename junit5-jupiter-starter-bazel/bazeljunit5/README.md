@@ -13,7 +13,7 @@ bazel test //...:test "--test_arg=--select-method=test.package.TestClass#testMet
 ```
 This breaks your agile development in a big project.
 
-* Actually Bazel invokes your tests in JUnit4's style by a specific environment variable:
+* Bazel invokes your tests in JUnit4's style by a specific environment variable:
 ```shell script
 TESTBRIDGE_TEST_ONLY=test.package.TestClass#testMethod # test by select-method
 TESTBRIDGE_TEST_ONLY=test.package.TestClass # test by select-class
@@ -30,6 +30,8 @@ TESTBRIDGE_TEST_ONLY=test.package # test by select-package
 ### How
 * Set the main_class and deps for java_junit5_test
 ```python
+load("//:junit5.bzl", "java_junit5_test")
+
 java_junit5_test(
     # ...
     main_class = "com.flexport.bazeljunit5.BazelJUnit5ConsoleLauncher",
@@ -44,4 +46,4 @@ java_junit5_test(
   ```shell script
   bazel test //...:test "--test_filter=com.example.MyTest#test"
   ```
-  * or click run a single test in your IDE(e.g. IntelliJ IDEA)
+  * or right click  on a single test in a `*Test.java` file and and select "Run ..." in your IDE (e.g. IntelliJ IDEA).
