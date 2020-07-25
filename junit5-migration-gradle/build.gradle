@@ -10,15 +10,13 @@ repositories {
 }
 
 dependencies {
-	def junit4Version   = '4.13'
-	def junitBomVersion = '5.6.2'
+	testImplementation(platform("org.junit:junit-bom:5.6.2"))
 
-	testImplementation(platform("org.junit:junit-bom:$junitBomVersion"))
+	testImplementation("org.junit.jupiter:junit-jupiter") {
+		because 'allows to write and run Jupiter tests'
+	}
 
-	// JUnit Jupiter API and TestEngine implementation
-	testImplementation("org.junit.jupiter:junit-jupiter")
-
-	testImplementation("junit:junit:${junit4Version}")
+	testImplementation("junit:junit:4.13")
 	testRuntimeOnly("org.junit.vintage:junit-vintage-engine") {
 		because 'allows JUnit 3 and JUnit 4 tests to run'
 	}

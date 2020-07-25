@@ -10,17 +10,18 @@ repositories {
 
 version = '1.0.0-SNAPSHOT'
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
 	options.compilerArgs += '-parameters'
 }
 
 dependencies {
-	api("org.junit.jupiter:junit-jupiter-api:5.6.2") {
+	api(platform("org.junit:junit-bom:5.6.2"))
+	api("org.junit.jupiter:junit-jupiter-api") {
         because 'building extensions in "main" using JUnit Jupiter API'
     }
-	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2") {
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine") {
         because 'at least one engine is needed at test runtime'
     }
 }

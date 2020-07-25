@@ -12,7 +12,8 @@ repositories {
 }
 
 dependencies {
-	testImplementation("${jitpackGroup}:junit-jupiter:${jitpackVersion}")
+	testImplementation(platform("${jitpackGroup}:junit-bom:${jitpackVersion}"))
+	testImplementation("${jitpackGroup}:junit-jupiter")
 }
 
 test {
