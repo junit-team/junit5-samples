@@ -15,6 +15,7 @@ JUNIT_PLATFORM_ARTIFACT_ID_LIST = [
     "junit-platform-console",
     "junit-platform-engine",
     "junit-platform-launcher",
+    "junit-platform-reporting",
     "junit-platform-suite-api",
 ]
 
