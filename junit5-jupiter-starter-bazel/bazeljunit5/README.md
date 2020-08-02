@@ -1,9 +1,11 @@
 A ConsoleLauncher adapter between Bazel and JUnit5
 ---
 
-### Why
-* [Bazel does not work with JUnit5](https://github.com/bazelbuild/bazel/issues/6681)
-When you specify the JUnit4 option `--test_filter`, it actually runs all tests, and also you can not specify the JUnit5 option `--test_args`.
+## Why
+[Bazel does not work with JUnit5](https://github.com/bazelbuild/bazel/issues/6681)
+### TESTBRIDGE_TEST_ONLY and `--test_arg`
+* When you specify the JUnit4 option `--test_filter`, it actually runs all tests,
+and also you can not specify the JUnit5 option `--test_args`.
 ```shell script
 # in JUnit4 style, would run all tests
 bazel test //...:test "--test_filter=test.package.TestClass#testMethod"
@@ -26,6 +28,14 @@ TESTBRIDGE_TEST_ONLY=test.package # test by select-package
 --test_arg=--select-class=test.package.TestClass
 --test_arg=--select-package=test.package
 ```
+
+### XML_OUTPUT_FILE to `--reports-dir`
+* When your IDE specifies XML_OUTPUT_FILE to get the XML test report,
+it will get nothing because JUnit5 expects an argument `--reports-dir`
+and put the XML test report in a file `TEST-*.xml` in the reports dir.
+
+* We will specify the `--reports-dir` according to XML_OUTPUT_FILE,
+and rename the file `TEST-*.xml` to XML_OUTPUT_FILE.
 
 ### How
 * Set the main_class and deps for java_junit5_test
