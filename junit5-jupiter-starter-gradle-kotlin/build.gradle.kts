@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
 	implementation(kotlin("stdlib-jdk8"))
-	testImplementation(platform("org.junit:junit-bom:5.6.2"))
+	testImplementation(platform("org.junit:junit-bom:5.7.0-RC1"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
