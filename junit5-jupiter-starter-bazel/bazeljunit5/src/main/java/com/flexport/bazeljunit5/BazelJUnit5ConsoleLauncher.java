@@ -142,10 +142,25 @@ public class BazelJUnit5ConsoleLauncher {
     for (int i = 0; i < nodeList.getLength(); i++) {
       Node node = nodeList.item(i);
       Node nameAttribute = node.getAttributes().getNamedItem("name");
-      String testCaseName = nameAttribute.getNodeValue().split("\\(")[0];
+      String testCaseName =
+          nameAttribute.getNodeValue().split("\\(")[0];
+      String testDisplayName = getTestCaseDisplayName(node);
+      if (testDisplayName.trim().startsWith("[")) {
+        testCaseName += testDisplayName;
+      }
+
       nameAttribute.setNodeValue(testCaseName);
       System.out.println(node.getNodeName());
     }
+  }
+
+  private static String getTestCaseDisplayName(Node testCase) {
+    String systemOutText = testCase.getFirstChild().getNextSibling().getFirstChild().getNodeValue();
+    final String displayNameTag = "display-name:";
+    String displayName = systemOutText
+        .substring(systemOutText.indexOf(displayNameTag) + displayNameTag.length());
+    displayName = displayName.replaceAll("\\(,\\)", "");
+    return displayName;
   }
 
   private static void writeXmlOutputToFile(Document xmlDocument, String fileName)
