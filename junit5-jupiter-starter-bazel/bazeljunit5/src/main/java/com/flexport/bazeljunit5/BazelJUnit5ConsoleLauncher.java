@@ -20,10 +20,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.junit.platform.console.ConsoleLauncher;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
-/** A ConsoleLauncher to transform a test into JUnit5 fashion for Bazel. */
+/**
+ * A ConsoleLauncher to transform a test into JUnit5 fashion for Bazel.
+ */
 public class BazelJUnit5ConsoleLauncher {
 
   private static final String SELECT_PACKAGE = "--select-package";
@@ -35,7 +44,9 @@ public class BazelJUnit5ConsoleLauncher {
   // https://github.com/junit-team/junit5/blob/37e0f559277f0065f8057cc465a1e8eb91563af6/junit-platform-reporting/src/main/java/org/junit/platform/reporting/legacy/xml/LegacyXmlReportGeneratingListener.java#L116
   private static final String XML_OUTPUT_FILE_PATTERN = "^TEST-.*\\.xml$";
 
-  /** Transform args and invoke the real implementation. */
+  /**
+   * Transform args and invoke the real implementation.
+   */
   public static void main(String... args) {
     int exitCode =
         ConsoleLauncher.execute(System.out, System.err, transformArgs(args)).getExitCode();
@@ -44,7 +55,9 @@ public class BazelJUnit5ConsoleLauncher {
     System.exit(exitCode);
   }
 
-  /** Move the generated reports to where they should be. */
+  /**
+   * Move the generated reports to where they should be.
+   */
   public static void afterExecute(int exitCode) {
     fixXmlOutputFile(System.getenv("XML_OUTPUT_FILE"));
   }
@@ -70,13 +83,29 @@ public class BazelJUnit5ConsoleLauncher {
     }
 
     try {
+      parseXmlResults(files);
+    } catch (ParserConfigurationException | IOException | SAXException e) {
+      e.printStackTrace();
+    }
+
+    try {
       Files.move(files[0].toPath(), requiredPath);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  /** Transform args into JUnit5 fashion. */
+  private static void parseXmlResults(File[] files)
+      throws ParserConfigurationException, IOException, SAXException {
+    for (File file : files) {
+      DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+      Document document = documentBuilder.parse(file);
+    }
+  }
+
+  /**
+   * Transform args into JUnit5 fashion.
+   */
   public static String[] transformArgs(String[] args) {
     return transformArgsForXmlOutputFile(
         transformArgsForTestBridgeTestOnly(
