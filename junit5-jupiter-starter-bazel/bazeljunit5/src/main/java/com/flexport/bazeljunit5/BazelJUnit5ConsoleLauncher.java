@@ -12,7 +12,6 @@ package com.flexport.bazeljunit5;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,10 +23,18 @@ import java.util.stream.Collectors;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.junit.platform.console.ConsoleLauncher;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -83,24 +90,70 @@ public class BazelJUnit5ConsoleLauncher {
     }
 
     try {
-      parseXmlResults(files);
-    } catch (ParserConfigurationException | IOException | SAXException e) {
-      e.printStackTrace();
-    }
-
-    try {
-      Files.move(files[0].toPath(), requiredPath);
-    } catch (IOException e) {
+      Document mergedXmlOutput = mergeTestResultXmls(files);
+      writeXmlOutputToFile(mergedXmlOutput, requiredPath.toString());
+    } catch (ParserConfigurationException | IOException | SAXException | TransformerException e) {
       e.printStackTrace();
     }
   }
 
-  private static void parseXmlResults(File[] files)
+  /**
+   * Merges multiple JUnit test result xmls into a single one by grouping <testsuite> from individual
+   * files under <testsuites> in the final output file. Useful if ConsoleLauncher generates test result
+   * xmls for both 'JUnit Jupiter' and 'JUnit Vintage'
+   */
+  private static Document mergeTestResultXmls(File[] files)
       throws ParserConfigurationException, IOException, SAXException {
+    List<Document> xmlDocuments = new ArrayList<>();
     for (File file : files) {
-      DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-      Document document = documentBuilder.parse(file);
+      Document xmlDocument = loadXmlDocument(file);
+      removeParanthesesFromTestCaseNames(xmlDocument);
+      xmlDocuments.add(xmlDocument);
     }
+
+    Document mergedXmlOutput = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        .newDocument();
+    Element rootElement = mergedXmlOutput.createElement("testsuites");
+    mergedXmlOutput.appendChild(rootElement);
+
+    for (Document xmlDocument : xmlDocuments) {
+      NodeList testSuites = xmlDocument.getElementsByTagName("testsuite");
+      for (int i = 0; i < testSuites.getLength(); i++) {
+        rootElement.appendChild(mergedXmlOutput.importNode(testSuites.item(i), true));
+      }
+    }
+
+    return mergedXmlOutput;
+  }
+
+  private static Document loadXmlDocument(File file)
+      throws ParserConfigurationException, IOException, SAXException {
+    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    Document document = documentBuilder.parse(file);
+    return document;
+  }
+
+  /**
+   * Having parantheses in the test case names seems to cause issues in IntelliJ - `jump to source` doesn't work in test explorer.
+   * This method simply trims everything following the test method name.
+   */
+  private static void removeParanthesesFromTestCaseNames(Document document) {
+    NodeList nodeList = document.getElementsByTagName("testcase");
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      Node node = nodeList.item(i);
+      Node nameAttribute = node.getAttributes().getNamedItem("name");
+      String testCaseName = nameAttribute.getNodeValue().split("\\(")[0];
+      nameAttribute.setNodeValue(testCaseName);
+      System.out.println(node.getNodeName());
+    }
+  }
+
+  private static void writeXmlOutputToFile(Document xmlDocument, String fileName)
+      throws TransformerException {
+    Transformer transformer = TransformerFactory.newInstance().newTransformer();
+    DOMSource source = new DOMSource(xmlDocument);
+    StreamResult streamResult = new StreamResult(new File(fileName));
+    transformer.transform(source, streamResult);
   }
 
   /**
