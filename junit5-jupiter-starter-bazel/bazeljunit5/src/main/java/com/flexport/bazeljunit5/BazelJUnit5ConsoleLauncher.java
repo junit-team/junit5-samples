@@ -171,7 +171,8 @@ public class BazelJUnit5ConsoleLauncher {
    * in individual runs of the test-case.
    */
   private static String getTestCaseDisplayName(Node testCase) {
-    String systemOutText = testCase.getFirstChild().getNextSibling().getFirstChild().getNodeValue();
+    String systemOutText = ((Element) testCase).getElementsByTagName("system-out").item(0)
+        .getFirstChild().getNodeValue();
     final String displayNameTag = "display-name:";
     String displayName = systemOutText
         .substring(systemOutText.indexOf(displayNameTag) + displayNameTag.length());
@@ -257,16 +258,7 @@ public class BazelJUnit5ConsoleLauncher {
     if (testBridgeTestOnly.contains("#")) {
       String[] splits = testBridgeTestOnly.split("#");
       String className = splits[0];
-      HashSet<String> methodNames = new HashSet<String>();
-      Collections.addAll(methodNames, splits[1].split(","));
-
-      // already in format test.package.TestClass#testMethod(...)
-      if (methodNames.size() == 1) {
-        String methodName = methodNames.iterator().next();
-        if (methodName.matches(".*\\(.*\\)")) {
-          return Arrays.asList(SELECT_METHOD + "=" + testBridgeTestOnly);
-        }
-      }
+      HashSet<String> methodNames = getMethodNames(splits[1]);
 
       Class<?> klass;
       try {
@@ -291,6 +283,24 @@ public class BazelJUnit5ConsoleLauncher {
       // should be a package
       return Arrays.asList(SELECT_PACKAGE + "=" + testBridgeTestOnly);
     }
+  }
+
+  /**
+   * bazel --test_filter seems to pass multiple method names in different ways
+   * 1. method1,method2,method3
+   * 2. (method1|method2|method3)
+   * <p>
+   * Also in the case of parameterized tests, split on whitespace, '[' or '\' to get only the method name.
+   */
+  private static HashSet<String> getMethodNames(String testFilterMethodsSubstring) {
+    testFilterMethodsSubstring = testFilterMethodsSubstring.replace("(", "").replace(")", "");
+    HashSet<String> methodNames = new HashSet<>();
+    Collections.addAll(methodNames,
+        Arrays.stream(testFilterMethodsSubstring.split("[,|]")).distinct()
+            .map(s -> s.split("[ \\[\\\\]")[0])
+            .collect(
+                Collectors.joining()));
+    return methodNames;
   }
 
   /**

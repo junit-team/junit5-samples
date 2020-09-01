@@ -147,7 +147,6 @@ class BazelJUnit5ConsoleLauncherTest {
               + "--select-method={class}#testMethod()|"
               + "--select-method={class}#testMethod(int)|"
               + "--select-method={class}#testMethod(int, java.lang.Integer)",
-          "{class}#testMethod(); --select-method={class}#testMethod()",
           "{class}#testMethod1; --select-method={class}#testMethod1()",
       },
       delimiter = ';')
