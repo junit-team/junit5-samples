@@ -157,6 +157,10 @@ public class BazelJUnit5ConsoleLauncher {
     }
   }
 
+  /**
+   * Adds an empty 'message' attribute to failure nodes in test cases. This was needed to get
+   * IntelliJ to show failed tests correctly.
+   */
   private static void addMessageAttributeToFailureNodes(NodeList failureNodes) {
     for (int i = 0; i < failureNodes.getLength(); ++i) {
       Node node = failureNodes.item(i);
