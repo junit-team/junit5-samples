@@ -134,8 +134,8 @@ public class BazelJUnit5ConsoleLauncher {
   }
 
   /**
-   * Having parantheses in the test case names seems to cause issues in IntelliJ - `jump to source` doesn't work in test explorer.
-   * This method simply trims everything following the test method name.
+   * Having parantheses in the test case names seems to cause issues in IntelliJ - `jump to source`
+   * doesn't work in test explorer. This method simply trims everything following the test method name.
    */
   private static void removeParanthesesFromTestCaseNames(Document document) {
     NodeList nodeList = document.getElementsByTagName("testcase");
@@ -144,6 +144,8 @@ public class BazelJUnit5ConsoleLauncher {
       Node nameAttribute = node.getAttributes().getNamedItem("name");
       String testCaseName =
           nameAttribute.getNodeValue().split("\\(")[0];
+
+      // Appends display name to test case name in the case of parameterized tests (a bit hacky)
       String testDisplayName = getTestCaseDisplayName(node);
       if (testDisplayName.trim().startsWith("[")) {
         testCaseName += testDisplayName;
@@ -154,6 +156,11 @@ public class BazelJUnit5ConsoleLauncher {
     }
   }
 
+  /**
+   * Every <testcase> node in the xml has a <system-out> node which has some additional info including
+   * a friendly 'display-name'. This is useful especially for parameterized tests to show the params used
+   * in individual runs of the test-case.
+   */
   private static String getTestCaseDisplayName(Node testCase) {
     String systemOutText = testCase.getFirstChild().getNextSibling().getFirstChild().getNodeValue();
     final String displayNameTag = "display-name:";
