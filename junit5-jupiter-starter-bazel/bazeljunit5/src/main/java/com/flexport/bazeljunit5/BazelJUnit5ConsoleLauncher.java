@@ -16,7 +16,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -308,12 +307,8 @@ public class BazelJUnit5ConsoleLauncher {
    */
   private static HashSet<String> getMethodNames(String testFilterMethodsSubstring) {
     testFilterMethodsSubstring = testFilterMethodsSubstring.replace("(", "").replace(")", "");
-    HashSet<String> methodNames = new HashSet<>();
-    Collections.addAll(methodNames,
-        Arrays.stream(testFilterMethodsSubstring.split("[,|]")).distinct()
-            .map(s -> s.split("[ \\[\\\\]")[0])
-            .collect(
-                Collectors.joining()));
+    HashSet<String> methodNames = Arrays.stream(testFilterMethodsSubstring.split("[,|]")).distinct()
+        .map(s -> s.split("[ \\[\\\\]")[0]).collect(Collectors.toCollection(HashSet::new));
     return methodNames;
   }
 
