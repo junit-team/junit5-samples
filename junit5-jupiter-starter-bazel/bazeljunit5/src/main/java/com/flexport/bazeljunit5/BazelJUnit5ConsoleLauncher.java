@@ -118,7 +118,8 @@ public class BazelJUnit5ConsoleLauncher {
       }
     }
 
-    addMessageAttributeToFailureNodes(mergedXmlOutput.getElementsByTagName("failure"));
+    addEmptyMessageAttributeToNodes(mergedXmlOutput.getElementsByTagName("failure"));
+    addEmptyMessageAttributeToNodes(mergedXmlOutput.getElementsByTagName("skipped"));
     return mergedXmlOutput;
   }
 
@@ -152,10 +153,10 @@ public class BazelJUnit5ConsoleLauncher {
   }
 
   /**
-   * Adds an empty 'message' attribute to failure nodes in test cases. This was needed to get
-   * IntelliJ to show failed tests correctly.
+   * Adds an empty 'message' attribute to specified nodes in test cases. This was needed to get
+   * IntelliJ to show failed/ignored tests correctly.
    */
-  private static void addMessageAttributeToFailureNodes(NodeList failureNodes) {
+  private static void addEmptyMessageAttributeToNodes(NodeList failureNodes) {
     for (int i = 0; i < failureNodes.getLength(); ++i) {
       Node node = failureNodes.item(i);
       ((Element) node).setAttribute("message", "");
