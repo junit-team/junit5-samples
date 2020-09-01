@@ -153,7 +153,6 @@ public class BazelJUnit5ConsoleLauncher {
       }
 
       nameAttribute.setNodeValue(testCaseName);
-      System.out.println(node.getNodeName());
     }
   }
 
