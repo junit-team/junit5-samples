@@ -16,6 +16,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -255,11 +257,15 @@ public class BazelJUnit5ConsoleLauncher {
     if (testBridgeTestOnly.contains("#")) {
       String[] splits = testBridgeTestOnly.split("#");
       String className = splits[0];
-      String methodName = splits[1];
+      HashSet<String> methodNames = new HashSet<String>();
+      Collections.addAll(methodNames, splits[1].split(","));
 
       // already in format test.package.TestClass#testMethod(...)
-      if (methodName.matches(".*\\(.*\\)")) {
-        return Arrays.asList(SELECT_METHOD + "=" + testBridgeTestOnly);
+      if (methodNames.size() == 1) {
+        String methodName = methodNames.iterator().next();
+        if (methodName.matches(".*\\(.*\\)")) {
+          return Arrays.asList(SELECT_METHOD + "=" + testBridgeTestOnly);
+        }
       }
 
       Class<?> klass;
@@ -271,7 +277,7 @@ public class BazelJUnit5ConsoleLauncher {
 
       // pick all overloaded methods
       return Arrays.stream(klass.getDeclaredMethods())
-          .filter(method -> method.getName().equals(methodName))
+          .filter(method -> methodNames.contains(method.getName()))
           .map(
               method ->
                   SELECT_METHOD + "=" + ReflectionUtils.getFullyQualifiedMethodName(klass, method))

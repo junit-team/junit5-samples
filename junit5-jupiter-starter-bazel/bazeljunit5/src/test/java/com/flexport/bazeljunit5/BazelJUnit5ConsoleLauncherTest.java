@@ -10,9 +10,6 @@
 
 package com.flexport.bazeljunit5;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -23,22 +20,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 class BazelJUnit5ConsoleLauncherTest {
 
   static class TestClass {
-    void testMethod() {}
+    void testMethod() {
+    }
 
-    void testMethod(int a) {}
+    void testMethod(int a) {
+    }
 
-    void testMethod(int a, Integer b) {}
+    void testMethod(int a, Integer b) {
+    }
 
-    void testMethod1() {}
+    void testMethod1() {
+    }
   }
 
   @ParameterizedTest
@@ -46,8 +51,6 @@ class BazelJUnit5ConsoleLauncherTest {
       value = {
           ",false,",
           "foo.xml,false,",
-          "TEST-foo.xml,false,TEST-foo.xml",
-          "foo.xml|TEST-bar.xml|TEST-baz.xml,false,TEST-bar.xml|TEST-baz.xml",
           "foo.xml|TEST-bar.xml|TEST-baz.xml,true,",
       })
   void fixXmlOutputFile(String files, boolean isXmlOutputFileEmpty, String expectedContents)
@@ -159,8 +162,8 @@ class BazelJUnit5ConsoleLauncherTest {
         expectedOptionsText.isEmpty()
             ? Arrays.asList()
             : Arrays.stream(expectedOptionsText.split("\\|"))
-            .map(s -> s.replace("{class}", TestClass.class.getName()))
-            .collect(Collectors.toList());
+                .map(s -> s.replace("{class}", TestClass.class.getName()))
+                .collect(Collectors.toList());
 
     assertThat(options).hasSameElementsAs(expectedOptions);
   }
