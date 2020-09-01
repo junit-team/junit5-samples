@@ -256,24 +256,38 @@ public class BazelJUnit5ConsoleLauncher {
     }
 
     if (testBridgeTestOnly.contains("#")) {
-      String[] splits = testBridgeTestOnly.split("#");
-      String className = splits[0];
-      HashSet<String> methodNames = getMethodNames(splits[1]);
+      // There could be multiple classes in TESTBRIDGE_TEST_ONLY which are separated by $|
+      String[] splits = testBridgeTestOnly.split("\\$\\|");
+      HashSet<String> methodNames = new HashSet<>();
+      HashSet<String> classNames = new HashSet<>();
 
-      Class<?> klass;
-      try {
-        klass = Class.forName(className);
-      } catch (ClassNotFoundException e) {
-        throw new IllegalStateException(e);
+      for (String split : splits) {
+        String[] parts = split.split("#");
+        String className = parts[0];
+        classNames.add(className);
+        methodNames.addAll(getMethodNames(parts[1]));
       }
 
-      // pick all overloaded methods
-      return Arrays.stream(klass.getDeclaredMethods())
-          .filter(method -> methodNames.contains(method.getName()))
-          .map(
-              method ->
-                  SELECT_METHOD + "=" + ReflectionUtils.getFullyQualifiedMethodName(klass, method))
-          .collect(Collectors.toList());
+      List<String> parsedOptions = new ArrayList<>();
+
+      for (String className : classNames) {
+        Class<?> klass;
+        try {
+          klass = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+          throw new IllegalStateException(e);
+        }
+
+        parsedOptions.addAll(Arrays.stream(klass.getDeclaredMethods())
+            .filter(method -> methodNames.contains(method.getName()))
+            .map(
+                method ->
+                    SELECT_METHOD + "=" + ReflectionUtils
+                        .getFullyQualifiedMethodName(klass, method))
+            .collect(Collectors.toList()));
+      }
+
+      return parsedOptions;
     }
 
     try {
