@@ -123,6 +123,7 @@ public class BazelJUnit5ConsoleLauncher {
       }
     }
 
+    addMessageAttributeToFailureNodes(mergedXmlOutput.getElementsByTagName("failure"));
     return mergedXmlOutput;
   }
 
@@ -153,6 +154,13 @@ public class BazelJUnit5ConsoleLauncher {
 
       nameAttribute.setNodeValue(testCaseName);
       System.out.println(node.getNodeName());
+    }
+  }
+
+  private static void addMessageAttributeToFailureNodes(NodeList failureNodes) {
+    for (int i = 0; i < failureNodes.getLength(); ++i) {
+      Node node = failureNodes.item(i);
+      ((Element) node).setAttribute("message", "");
     }
   }
 
