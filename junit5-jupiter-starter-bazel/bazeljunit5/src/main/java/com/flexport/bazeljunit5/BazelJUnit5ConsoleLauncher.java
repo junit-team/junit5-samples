@@ -84,11 +84,6 @@ public class BazelJUnit5ConsoleLauncher {
       return;
     }
 
-    if (files.length > 1) {
-      // The XML output file is not found.
-      System.err.println("More than one XML output file is found");
-    }
-
     try {
       Document mergedXmlOutput = mergeTestResultXmls(files);
       writeXmlOutputToFile(mergedXmlOutput, requiredPath.toString());
