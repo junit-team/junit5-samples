@@ -1,8 +1,8 @@
 load(":junit5.bzl", "junit_jupiter_java_repositories", "junit_platform_java_repositories")
 
-JUNIT_JUPITER_VERSION = "5.6.2"
+JUNIT_JUPITER_VERSION = "5.7.0"
 
-JUNIT_PLATFORM_VERSION = "1.6.2"
+JUNIT_PLATFORM_VERSION = "1.7.0"
 
 junit_jupiter_java_repositories(
     version = JUNIT_JUPITER_VERSION,
