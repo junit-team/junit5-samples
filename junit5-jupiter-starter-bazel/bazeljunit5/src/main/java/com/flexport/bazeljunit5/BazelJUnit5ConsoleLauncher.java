@@ -103,7 +103,7 @@ public class BazelJUnit5ConsoleLauncher {
     List<Document> xmlDocuments = new ArrayList<>();
     for (File file : files) {
       Document xmlDocument = loadXmlDocument(file);
-      removeParanthesesFromTestCaseNames(xmlDocument);
+      removeParenthesesFromTestCaseNames(xmlDocument);
       xmlDocuments.add(xmlDocument);
     }
 
@@ -135,7 +135,7 @@ public class BazelJUnit5ConsoleLauncher {
    * Having parantheses in the test case names seems to cause issues in IntelliJ - `jump to source`
    * doesn't work in test explorer. This method simply trims everything following the test method name.
    */
-  private static void removeParanthesesFromTestCaseNames(Document document) {
+  private static void removeParenthesesFromTestCaseNames(Document document) {
     NodeList nodeList = document.getElementsByTagName("testcase");
     for (int i = 0; i < nodeList.getLength(); i++) {
       Node node = nodeList.item(i);
