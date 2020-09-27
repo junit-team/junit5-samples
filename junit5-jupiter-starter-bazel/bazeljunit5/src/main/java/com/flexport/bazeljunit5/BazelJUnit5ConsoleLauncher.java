@@ -132,7 +132,7 @@ public class BazelJUnit5ConsoleLauncher {
   }
 
   /**
-   * Having parantheses in the test case names seems to cause issues in IntelliJ - `jump to source`
+   * Having parentheses in the test case names seems to cause issues in IntelliJ - `jump to source`
    * doesn't work in test explorer. This method simply trims everything following the test method name.
    */
   private static void removeParenthesesFromTestCaseNames(Document document) {
