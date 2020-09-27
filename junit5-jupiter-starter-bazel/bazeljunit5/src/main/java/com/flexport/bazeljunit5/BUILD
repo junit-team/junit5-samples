@@ -18,6 +18,6 @@ java_library(
 
         # External dependencies
         "@org_junit_platform_junit_platform_commons//:org_junit_platform_junit_platform_commons",
-        "@org_junit_platform_junit_platform_console//:org_junit_platform_junit_platform_console"
+        "@org_junit_platform_junit_platform_console//:org_junit_platform_junit_platform_console",
     ],
 )

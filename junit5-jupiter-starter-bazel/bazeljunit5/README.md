@@ -38,9 +38,37 @@ and put the XML test report in a file `TEST-*.xml` in the reports dir.
 and rename the file `TEST-*.xml` to XML_OUTPUT_FILE.
 
 ### How
+* Import this repository into your bazel `WORKSPACE` file
+
+```python
+###########
+# JUnit 5 #
+###########
+
+git_repository(
+    name = "bazel_junit5",
+    # branch = "master",
+    commit = "<INSERT_COMMIT_SHA>",
+    remote = "https://github.com/junit-team/junit5-samples.git",
+)
+
+load("@bazel_junit5//junit5-jupiter-starter-bazel:junit5.bzl", "junit_jupiter_java_repositories", "junit_platform_java_repositories")
+
+JUNIT_JUPITER_VERSION = "5.6.2"
+JUNIT_PLATFORM_VERSION = "1.6.2"
+
+junit_jupiter_java_repositories(
+    version = JUNIT_JUPITER_VERSION,
+)
+
+junit_platform_java_repositories(
+    version = JUNIT_PLATFORM_VERSION,
+)
+```
+
 * Set the main_class and deps for java_junit5_test
 ```python
-load("//:junit5.bzl", "java_junit5_test")
+load("@bazel_junit5//junit5-jupiter-starter-bazel:junit5.bzl", "java_junit5_test")
 
 java_junit5_test(
     # ...

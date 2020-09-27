@@ -12,18 +12,35 @@ package com.flexport.bazeljunit5;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.junit.platform.console.ConsoleLauncher;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
-/** A ConsoleLauncher to transform a test into JUnit5 fashion for Bazel. */
+/**
+ * A ConsoleLauncher to transform a test into JUnit5 fashion for Bazel.
+ */
 public class BazelJUnit5ConsoleLauncher {
 
   private static final String SELECT_PACKAGE = "--select-package";
@@ -35,7 +52,9 @@ public class BazelJUnit5ConsoleLauncher {
   // https://github.com/junit-team/junit5/blob/37e0f559277f0065f8057cc465a1e8eb91563af6/junit-platform-reporting/src/main/java/org/junit/platform/reporting/legacy/xml/LegacyXmlReportGeneratingListener.java#L116
   private static final String XML_OUTPUT_FILE_PATTERN = "^TEST-.*\\.xml$";
 
-  /** Transform args and invoke the real implementation. */
+  /**
+   * Transform args and invoke the real implementation.
+   */
   public static void main(String... args) {
     int exitCode =
         ConsoleLauncher.execute(System.out, System.err, transformArgs(args)).getExitCode();
@@ -44,7 +63,9 @@ public class BazelJUnit5ConsoleLauncher {
     System.exit(exitCode);
   }
 
-  /** Move the generated reports to where they should be. */
+  /**
+   * Move the generated reports to where they should be.
+   */
   public static void afterExecute(int exitCode) {
     fixXmlOutputFile(System.getenv("XML_OUTPUT_FILE"));
   }
@@ -64,19 +85,111 @@ public class BazelJUnit5ConsoleLauncher {
       return;
     }
 
-    if (files.length > 1) {
-      // The XML output file is not found.
-      System.err.println("More than one XML output file is found");
-    }
-
     try {
-      Files.move(files[0].toPath(), requiredPath);
-    } catch (IOException e) {
+      Document mergedXmlOutput = mergeTestResultXmls(files);
+      writeXmlOutputToFile(mergedXmlOutput, requiredPath.toString());
+    } catch (ParserConfigurationException | IOException | SAXException | TransformerException e) {
       e.printStackTrace();
     }
   }
 
-  /** Transform args into JUnit5 fashion. */
+  /**
+   * Merges multiple JUnit test result xmls into a single one by grouping <testsuite> from individual
+   * files under <testsuites> in the final output file. Useful if ConsoleLauncher generates test result
+   * xmls for both 'JUnit Jupiter' and 'JUnit Vintage'
+   */
+  private static Document mergeTestResultXmls(File[] files)
+      throws ParserConfigurationException, IOException, SAXException {
+    List<Document> xmlDocuments = new ArrayList<>();
+    for (File file : files) {
+      Document xmlDocument = loadXmlDocument(file);
+      removeParenthesesFromTestCaseNames(xmlDocument);
+      xmlDocuments.add(xmlDocument);
+    }
+
+    Document mergedXmlOutput = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+        .newDocument();
+    Element rootElement = mergedXmlOutput.createElement("testsuites");
+    mergedXmlOutput.appendChild(rootElement);
+
+    for (Document xmlDocument : xmlDocuments) {
+      NodeList testSuites = xmlDocument.getElementsByTagName("testsuite");
+      for (int i = 0; i < testSuites.getLength(); i++) {
+        rootElement.appendChild(mergedXmlOutput.importNode(testSuites.item(i), true));
+      }
+    }
+
+    addEmptyMessageAttributeToNodes(mergedXmlOutput.getElementsByTagName("failure"));
+    addEmptyMessageAttributeToNodes(mergedXmlOutput.getElementsByTagName("skipped"));
+    return mergedXmlOutput;
+  }
+
+  private static Document loadXmlDocument(File file)
+      throws ParserConfigurationException, IOException, SAXException {
+    DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+    Document document = documentBuilder.parse(file);
+    return document;
+  }
+
+  /**
+   * Having parentheses in the test case names seems to cause issues in IntelliJ - `jump to source`
+   * doesn't work in test explorer. This method simply trims everything following the test method name.
+   */
+  private static void removeParenthesesFromTestCaseNames(Document document) {
+    NodeList nodeList = document.getElementsByTagName("testcase");
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      Node node = nodeList.item(i);
+      Node nameAttribute = node.getAttributes().getNamedItem("name");
+      String testCaseName =
+          nameAttribute.getNodeValue().split("\\(")[0];
+
+      // Appends display name to test case name in the case of parameterized tests (a bit hacky)
+      String testDisplayName = getTestCaseDisplayName(node);
+      if (testDisplayName.trim().startsWith("[")) {
+        testCaseName += testDisplayName;
+      }
+
+      nameAttribute.setNodeValue(testCaseName);
+    }
+  }
+
+  /**
+   * Adds an empty 'message' attribute to specified nodes in test cases. This was needed to get
+   * IntelliJ to show failed/ignored tests correctly.
+   */
+  private static void addEmptyMessageAttributeToNodes(NodeList failureNodes) {
+    for (int i = 0; i < failureNodes.getLength(); ++i) {
+      Node node = failureNodes.item(i);
+      ((Element) node).setAttribute("message", "");
+    }
+  }
+
+  /**
+   * Every <testcase> node in the xml has a <system-out> node which has some additional info including
+   * a friendly 'display-name'. This is useful especially for parameterized tests to show the params used
+   * in individual runs of the test-case.
+   */
+  private static String getTestCaseDisplayName(Node testCase) {
+    String systemOutText = ((Element) testCase).getElementsByTagName("system-out").item(0)
+        .getFirstChild().getNodeValue();
+    final String displayNameTag = "display-name:";
+    String displayName = systemOutText
+        .substring(systemOutText.indexOf(displayNameTag) + displayNameTag.length());
+    displayName = displayName.replaceAll("\\(,\\)", "");
+    return displayName;
+  }
+
+  private static void writeXmlOutputToFile(Document xmlDocument, String fileName)
+      throws TransformerException {
+    Transformer transformer = TransformerFactory.newInstance().newTransformer();
+    DOMSource source = new DOMSource(xmlDocument);
+    StreamResult streamResult = new StreamResult(new File(fileName));
+    transformer.transform(source, streamResult);
+  }
+
+  /**
+   * Transform args into JUnit5 fashion.
+   */
   public static String[] transformArgs(String[] args) {
     return transformArgsForXmlOutputFile(
         transformArgsForTestBridgeTestOnly(
@@ -142,29 +255,38 @@ public class BazelJUnit5ConsoleLauncher {
     }
 
     if (testBridgeTestOnly.contains("#")) {
-      String[] splits = testBridgeTestOnly.split("#");
-      String className = splits[0];
-      String methodName = splits[1];
+      // There could be multiple classes in TESTBRIDGE_TEST_ONLY which are separated by $|
+      String[] splits = testBridgeTestOnly.split("\\$\\|");
+      HashSet<String> methodNames = new HashSet<>();
+      HashSet<String> classNames = new HashSet<>();
 
-      // already in format test.package.TestClass#testMethod(...)
-      if (methodName.matches(".*\\(.*\\)")) {
-        return Arrays.asList(SELECT_METHOD + "=" + testBridgeTestOnly);
+      for (String split : splits) {
+        String[] parts = split.split("#");
+        String className = parts[0];
+        classNames.add(className);
+        methodNames.addAll(getMethodNames(parts[1]));
       }
 
-      Class<?> klass;
-      try {
-        klass = Class.forName(className);
-      } catch (ClassNotFoundException e) {
-        throw new IllegalStateException(e);
+      List<String> parsedOptions = new ArrayList<>();
+
+      for (String className : classNames) {
+        Class<?> klass;
+        try {
+          klass = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+          throw new IllegalStateException(e);
+        }
+
+        parsedOptions.addAll(Arrays.stream(klass.getDeclaredMethods())
+            .filter(method -> methodNames.contains(method.getName()))
+            .map(
+                method ->
+                    SELECT_METHOD + "=" + ReflectionUtils
+                        .getFullyQualifiedMethodName(klass, method))
+            .collect(Collectors.toList()));
       }
 
-      // pick all overloaded methods
-      return Arrays.stream(klass.getDeclaredMethods())
-          .filter(method -> method.getName().equals(methodName))
-          .map(
-              method ->
-                  SELECT_METHOD + "=" + ReflectionUtils.getFullyQualifiedMethodName(klass, method))
-          .collect(Collectors.toList());
+      return parsedOptions;
     }
 
     try {
@@ -174,6 +296,20 @@ public class BazelJUnit5ConsoleLauncher {
       // should be a package
       return Arrays.asList(SELECT_PACKAGE + "=" + testBridgeTestOnly);
     }
+  }
+
+  /**
+   * bazel --test_filter seems to pass multiple method names in different ways
+   * 1. method1,method2,method3
+   * 2. (method1|method2|method3)
+   * <p>
+   * Also in the case of parameterized tests, split on whitespace, '[' or '\' to get only the method name.
+   */
+  private static HashSet<String> getMethodNames(String testFilterMethodsSubstring) {
+    testFilterMethodsSubstring = testFilterMethodsSubstring.replace("(", "").replace(")", "");
+    HashSet<String> methodNames = Arrays.stream(testFilterMethodsSubstring.split("[,|]")).distinct()
+        .map(s -> s.split("[ \\[\\\\]")[0]).collect(Collectors.toCollection(HashSet::new));
+    return methodNames;
   }
 
   /**
