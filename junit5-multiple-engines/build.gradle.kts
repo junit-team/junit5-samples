@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    val junit4Version = "4.13"
+    val junit4Version = "4.13.1"
     val junitBomVersion = "5.6.3"
 
     // Use junit-bom to align versions
