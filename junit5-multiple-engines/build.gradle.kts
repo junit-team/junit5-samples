@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     val junit4Version = "4.13.1"
-    val junitBomVersion = "5.7.0"
+    val junitBomVersion = "5.7.1"
 
     // Use junit-bom to align versions
     // https://docs.gradle.org/current/userguide/managing_transitive_dependencies.html#sec:bom_import

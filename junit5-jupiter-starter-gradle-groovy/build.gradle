@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
 	implementation(localGroovy())
-	testImplementation(platform('org.junit:junit-bom:5.7.0'))
+	testImplementation(platform('org.junit:junit-bom:5.7.1'))
 	testImplementation('org.junit.jupiter:junit-jupiter')
 }
 
