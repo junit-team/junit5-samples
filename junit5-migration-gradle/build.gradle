@@ -16,7 +16,7 @@ dependencies {
 		because 'allows to write and run Jupiter tests'
 	}
 
-	testImplementation("junit:junit:4.13.1")
+	testImplementation("junit:junit:4.13.2")
 	testRuntimeOnly("org.junit.vintage:junit-vintage-engine") {
 		because 'allows JUnit 3 and JUnit 4 tests to run'
 	}
