@@ -5,3 +5,5 @@ JUnit Jupiter using [Gradle's native JUnit Platform support], Gradle's Kotlin DS
 and code and tests written in Kotlin.
 
 [Gradle's native JUnit Platform support]: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
+
+Run `./gradlew test` to execute all tests.
