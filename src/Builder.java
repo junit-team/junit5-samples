@@ -51,7 +51,7 @@ class Builder {
 
 		// migration
 		run("junit5-migration-gradle", "gradlew", "clean", "test");
-		run("junit5-migration-maven", "mvnw", "clean", "test");
+		run("junit5-migration-maven", "mvnw", "--batch-mode", "clean", "test");
 		run("junit5-multiple-engines", "gradlew", "clean", "test");
 
 		// modular
