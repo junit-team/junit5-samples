@@ -8,12 +8,12 @@
  * http://www.eclipse.org/legal/epl-v20.html
  */
 
-package kotlintest
+package kotest
 
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
-class KotlinTest : StringSpec({
+class KotestSpec : StringSpec({
   "1 + 2 should be 3" {
     1 + 2 shouldBe 3
   }
