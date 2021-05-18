@@ -11,6 +11,7 @@ repositories {
     jcenter {
         content {
             includeGroup("org.spekframework.spek2")
+            includeGroup("spek")
         }
     }
 }
@@ -53,9 +54,9 @@ dependencies {
     }
 
     // Spek2
-    testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.16") {
-        exclude(module = "kotlin-stdlib-jdk8").because("we want to override the Kotlin version")
-    }
+    val spekVersion = "2.0.15"
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
 
     // Spock2
     testImplementation(platform("org.spockframework:spock-bom:2.0-groovy-3.0")) {
