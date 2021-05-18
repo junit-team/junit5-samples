@@ -1,3 +1,5 @@
+package spock
+
 import spock.lang.Specification
 
 class SpockSpec extends Specification {
