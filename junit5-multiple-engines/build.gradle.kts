@@ -59,13 +59,9 @@ dependencies {
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
 
     // Spock2
-    testImplementation(platform("org.spockframework:spock-bom:2.0-groovy-3.0")) {
-        because("use spock-bom to align versions")
-    }
-    testImplementation("org.spockframework:spock-core") {
+    testImplementation("org.spockframework:spock-core:2.0-groovy-3.0") {
         because("allows Spock specifications to run")
     }
-    testCompile("org.codehaus.groovy:groovy:3.0.8")
 
     // Kotest
     testImplementation("io.kotest:kotest-runner-junit5:4.5.0")
