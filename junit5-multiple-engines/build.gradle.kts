@@ -1,5 +1,6 @@
 plugins {
     java
+    groovy
     eclipse // optional (to generate Eclipse project files)
     idea // optional (to generate IntelliJ IDEA project files)
     kotlin("jvm") version "1.3.50"
@@ -55,6 +56,15 @@ dependencies {
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.16") {
         exclude(module = "kotlin-stdlib-jdk8").because("we want to override the Kotlin version")
     }
+
+    // Spock2
+    testImplementation(platform("org.spockframework:spock-bom:2.0-groovy-3.0")) {
+        because("use spock-bom to align versions")
+    }
+    testImplementation("org.spockframework:spock-core") {
+        because("allows Spock specifications to run")
+    }
+    testCompile("org.codehaus.groovy:groovy:3.0.8")
 
     // Kotest
     testImplementation("io.kotest:kotest-runner-junit5:4.5.0")
