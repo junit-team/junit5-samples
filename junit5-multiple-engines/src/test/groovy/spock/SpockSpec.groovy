@@ -3,12 +3,12 @@ package spock
 import spock.lang.Specification
 
 class SpockSpec extends Specification {
-  def "length of Spock's names"() {
+  def "assert that the sum of two numbers equals an expected result"() {
     expect:
-    name.size() == length
+    a + b == result
 
     where:
-    name     | length
-    "Spock"  | 5
+    a | b | result
+    1 | 2 | 3
   }
 }
