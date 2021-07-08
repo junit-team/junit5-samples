@@ -71,10 +71,10 @@ dependencies {
 
     // TestNG
     testImplementation("org.testng:testng:7.4.0") {
-        because("allows TestNG tests to run")
+        because("allows writing TestNG tests")
     }
-    testRuntimeOnly("com.github.testng-team:testng-junit5:0.0.1") {
-        because("allows TestNG tests to run")
+    testRuntimeOnly("org.junit.support:testng-engine:1.0.0-M1") {
+        because("allows running TestNG tests on the JUnit Platform")
     }
 }
 
