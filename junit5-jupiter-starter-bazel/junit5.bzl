@@ -15,6 +15,7 @@ JUNIT_PLATFORM_ARTIFACT_ID_LIST = [
     "junit-platform-console",
     "junit-platform-engine",
     "junit-platform-launcher",
+    "junit-platform-reporting",
     "junit-platform-suite-api",
 ]
 
@@ -61,9 +62,8 @@ def junit_platform_java_repositories(
             licenses = ["notice"], # EPL 2.0 License
         )
 
-def java_junit5_test(name, srcs, test_package, deps = [], runtime_deps = [], **kwargs):
+def java_junit5_test(name, srcs, test_package, main_class = None, deps = [], runtime_deps = [], **kwargs):
     FILTER_KWARGS = [
-        "main_class",
         "use_testrunner",
         "args",
     ]
@@ -82,7 +82,7 @@ def java_junit5_test(name, srcs, test_package, deps = [], runtime_deps = [], **k
         name = name,
         srcs = srcs,
         use_testrunner = False,
-        main_class = "org.junit.platform.console.ConsoleLauncher",
+        main_class = main_class or "org.junit.platform.console.ConsoleLauncher",
         args = junit_console_args,
         deps = deps + [
             _format_maven_jar_dep_name(JUNIT_JUPITER_GROUP_ID, artifact_id)
