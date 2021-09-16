@@ -4,7 +4,7 @@
 # Set constants.
 #
 junit_platform_version='1.8.0'
-ant_version='1.10.10'
+ant_version='1.10.11'
 ant_folder="apache-ant-${ant_version}"
 ant_archive="${ant_folder}-bin.tar.gz"
 
