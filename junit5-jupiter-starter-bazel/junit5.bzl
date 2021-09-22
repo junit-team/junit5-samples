@@ -24,7 +24,7 @@ JUNIT_EXTRA_DEPENDENCIES = [
 ]
 
 def junit_jupiter_java_repositories(
-        version = "5.8.0"):
+        version = "5.8.1"):
     """Imports dependencies for JUnit Jupiter"""
     for artifact_id in JUNIT_JUPITER_ARTIFACT_ID_LIST:
         jvm_maven_import_external(
@@ -47,7 +47,7 @@ def junit_jupiter_java_repositories(
         )
 
 def junit_platform_java_repositories(
-        version = "1.8.0"):
+        version = "1.8.1"):
     """Imports dependencies for JUnit Platform"""
     for artifact_id in JUNIT_PLATFORM_ARTIFACT_ID_LIST:
         jvm_maven_import_external(
