@@ -35,6 +35,9 @@ dependencies {
         because("allows JUnit 3 and JUnit 4 tests to run")
     }
 
+    // JUnit Suites
+    testImplementation("org.junit.platform:junit-platform-suite")
+
     // JUnit Platform Launcher + Console
     testRuntimeOnly("org.junit.platform:junit-platform-launcher") {
         because("allows tests to run from IDEs that bundle older version of launcher")
