@@ -49,12 +49,12 @@ dependencies {
     }
 
     // jqwik
-    testImplementation("net.jqwik:jqwik:1.5.1") {
+    testImplementation("net.jqwik:jqwik:1.5.6") {
         because("allows jqwik properties to run")
     }
 
     // Spek2
-    val spekVersion = "2.0.15"
+    val spekVersion = "2.0.17"
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
 
@@ -64,8 +64,8 @@ dependencies {
     }
 
     // Kotest
-    testImplementation("io.kotest:kotest-runner-junit5:4.5.0")
-    testRuntimeOnly("org.slf4j:slf4j-nop:1.7.30") {
+    testImplementation("io.kotest:kotest-runner-junit5:4.6.3")
+    testRuntimeOnly("org.slf4j:slf4j-nop:1.7.32") {
         because("defaulting to no-operation (NOP) logger implementation")
     }
 
