@@ -80,6 +80,10 @@ dependencies {
 
 tasks {
 
+    withType<JavaCompile>().configureEach {
+        options.release.set(8)
+    }
+
     val consoleLauncherTest by registering(JavaExec::class) {
         dependsOn(testClasses)
         val reportsDir = file("$buildDir/test-results")
