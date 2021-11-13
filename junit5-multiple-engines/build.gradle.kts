@@ -52,7 +52,7 @@ dependencies {
     }
 
     // jqwik
-    testImplementation("net.jqwik:jqwik:1.5.6") {
+    testImplementation("net.jqwik:jqwik:1.6.0") {
         because("allows jqwik properties to run")
     }
 
