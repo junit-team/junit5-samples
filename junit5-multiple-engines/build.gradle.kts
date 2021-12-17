@@ -8,12 +8,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    jcenter {
-        content {
-            includeGroup("org.spekframework.spek2")
-            includeGroup("spek")
-        }
-    }
 }
 
 dependencies {
