@@ -31,5 +31,10 @@ class CalculatorTests {
 	void pow() {
 		Assertions.assertEquals(8, calculator.pow(2, 3), "2 ^ 3 should equal 8");
 	}
+	
+	@Test
+	void subs() {
+		Assertions.assertEquals(6, calculator.substract(18,12), " 18 - 12 should equal 6");
+	}
 
 }
