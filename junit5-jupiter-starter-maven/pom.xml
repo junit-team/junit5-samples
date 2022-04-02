@@ -33,6 +33,13 @@
 		</dependency>
 	</dependencies>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>staged-releases</id>
+			<url>https://repository.apache.org/content/repositories/maven-1731/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -41,7 +48,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
+				<version>3.0.0-M6</version>
 			</plugin>
 		</plugins>
 	</build>
