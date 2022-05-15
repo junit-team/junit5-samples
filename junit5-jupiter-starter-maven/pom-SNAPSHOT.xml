@@ -31,6 +31,11 @@
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-reporting</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -53,6 +58,14 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M6</version>
+				<configuration>
+					<properties>
+						<configurationParameters>
+							junit.platform.reporting.open.xml.enabled = true
+							junit.platform.reporting.output.dir = ${project.build.directory}/surefire-reports
+						</configurationParameters>
+					</properties>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
