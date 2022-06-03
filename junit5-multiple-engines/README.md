@@ -8,6 +8,7 @@ using the JUnit Platform with various [TestEngine][guide-custom-engine] implemen
  * [JUnit Jupiter](https://junit.org/junit5/docs/current/user-guide)
  * [JUnit Vintage](https://junit.org/junit5/docs/current/user-guide)
  * [JUnit Platform Suite Engine](https://junit.org/junit5/docs/current/user-guide/#junit-platform-suite-engine)
+ * [TestNG](https://github.com/junit-team/testng-engine)
  
 ## 3rd-party test engines 
  
@@ -16,7 +17,6 @@ using the JUnit Platform with various [TestEngine][guide-custom-engine] implemen
  * [MAINRUNNER](https://github.com/sormuras/mainrunner)
  * [Spek](https://spekframework.org)
  * [Spock](https://spockframework.org/)
- * [TestNG](https://github.com/junit-team/testng-engine)
 
 ## More engines
 
