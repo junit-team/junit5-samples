@@ -16,8 +16,28 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.platform.engine.discovery.DiscoverySelectors;
+import org.junit.platform.launcher.Launcher;
+import org.junit.platform.launcher.LauncherDiscoveryRequest;
+import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
+import org.junit.platform.launcher.core.LauncherFactory;
 
 class CalculatorTests {
+
+	@Test
+	public void testFoobar() {
+		System.setProperty("junit.platform.reporting.open.xml.enabled", "true");
+
+		LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
+				.request()
+				.selectors(DiscoverySelectors.selectPackage("foo.bar"))
+				.build();
+
+		Launcher launcher = LauncherFactory.create();
+		launcher.discover(request);
+
+		launcher.execute(request);
+	}
 
 	@Test
 	@DisplayName("1 + 1 = 2")
