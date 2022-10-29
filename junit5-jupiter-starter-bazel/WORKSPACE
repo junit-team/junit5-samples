@@ -1,8 +1,8 @@
 JUNIT_JUPITER_VERSION = "5.9.1"
 JUNIT_PLATFORM_VERSION = "1.9.1"
 
-RULES_JVM_EXTERNAL_VERSION = "4.2"
-RULES_JVM_EXTERNAL_SHA = "cd1a77b7b02e8e008439ca76fd34f5b07aecb8c752961f9640dea15e9e5ba1ca"
+RULES_JVM_EXTERNAL_TAG = "4.4.2"
+RULES_JVM_EXTERNAL_SHA = "735602f50813eb2ea93ca3f5e43b1959bd80b213b836a07a62a29d757670b77b"
 
 CONTRIB_RULES_JVM_VERSION = "0.9.0"
 CONTRIB_RULES_JVM_SHA = "548f0583192ff79c317789b03b882a7be9b1325eb5d3da5d7fdcc4b7ca69d543"
@@ -10,9 +10,9 @@ CONTRIB_RULES_JVM_SHA = "548f0583192ff79c317789b03b882a7be9b1325eb5d3da5d7fdcc4b
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
     name = "rules_jvm_external",
-    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_VERSION,
+    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
     sha256 = RULES_JVM_EXTERNAL_SHA,
-    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_VERSION,
+    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
 http_archive(
     name = "contrib_rules_jvm",
