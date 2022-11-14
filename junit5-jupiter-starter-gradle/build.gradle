@@ -6,16 +6,22 @@ plugins {
 
 repositories {
 	mavenCentral()
+	maven {
+		url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+	}
 }
 
 dependencies {
-	testImplementation(platform('org.junit:junit-bom:5.9.1'))
+	testImplementation(platform('org.junit:junit-bom:5.10.0-20221114.081236-52'))
 	testImplementation('org.junit.jupiter:junit-jupiter')
+	testImplementation('org.junit.platform:junit-platform-launcher')
 }
 
 test {
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
+		showStandardStreams = true
+		systemProperty("junit.platform.launcher.interceptors.enabled", "true")
 	}
 }
