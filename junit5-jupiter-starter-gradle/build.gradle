@@ -11,8 +11,16 @@ repositories {
 	}
 }
 
+configurations.all {
+	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+		if (details.requested.group.startsWith("org.junit") && details.requested.version.endsWith("-SNAPSHOT")) {
+			details.useVersion(details.requested.version.replace("SNAPSHOT", '20221114.081236-52'))
+		}
+	}
+}
+
 dependencies {
-	testImplementation(platform('org.junit:junit-bom:5.10.0-20221114.081236-52'))
+	testImplementation(platform("org.junit:junit-bom:5.10.0-SNAPSHOT"))
 	testImplementation('org.junit.jupiter:junit-jupiter')
 	testImplementation('org.junit.platform:junit-platform-launcher')
 }
