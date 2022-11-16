@@ -14,7 +14,7 @@ repositories {
 configurations.all {
 	resolutionStrategy.eachDependency { DependencyResolveDetails details ->
 		if (details.requested.group.startsWith("org.junit") && details.requested.version.endsWith("-SNAPSHOT")) {
-			details.useVersion(details.requested.version.replace("SNAPSHOT", '20221114.081236-52'))
+			details.useVersion(details.requested.version.replace("SNAPSHOT", '20221115.202208-57'))
 		}
 	}
 }
