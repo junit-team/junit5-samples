@@ -100,6 +100,7 @@ for the JUnit Platform using the Java Platform Module System.
 [junit5-jupiter-starter-maven]: junit5-jupiter-starter-maven
 [junit5-jupiter-starter-maven-kotlin]: junit5-jupiter-starter-maven-kotlin
 [junit5-jupiter-starter-bazel]: junit5-jupiter-starter-bazel
+[junit5-jupiter-starter-sbt]: junit5-jupiter-starter-sbt
 [junit5-migration-gradle]: junit5-migration-gradle
 [junit5-migration-maven]: junit5-migration-maven
 [junit5-multiple-engines]: junit5-multiple-engines
