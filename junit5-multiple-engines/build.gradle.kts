@@ -86,7 +86,7 @@ tasks {
         val reportsDir = file("$buildDir/test-results")
         outputs.dir(reportsDir)
         classpath = sourceSets.test.get().runtimeClasspath
-        main = "org.junit.platform.console.ConsoleLauncher"
+        mainClass.set("org.junit.platform.console.ConsoleLauncher")
         args("--scan-classpath")
         args("--include-classname", ".*((Tests?)|(Spec))$")
         args("--details", "tree")
