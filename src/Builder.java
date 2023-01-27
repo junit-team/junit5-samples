@@ -35,7 +35,7 @@ class Builder {
 	int build() {
 		System.out.printf("|%n| Building all samples...%n|%n");
 		run(".", "java", "--version");
-		checkLicense("src/eclipse-public-license-2.0.java", ".java");
+		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala");
 
 		// jupiter-starter
 		// TODO run("junit5-jupiter-starter-ant", "antw"); https://github.com/junit-team/junit5-samples/issues/66
@@ -93,7 +93,7 @@ class Builder {
 		}
 	}
 
-	void checkLicense(String blueprint, String extension) {
+	void checkLicense(String blueprint, String... extensions) {
 		if (status != 0) {
 			return;
 		}
@@ -102,7 +102,7 @@ class Builder {
 			var expected = Files.readAllLines(Paths.get(blueprint));
 			var errors = 0;
 			var paths = Files.walk(Paths.get("."))
-					.filter(path -> path.getFileName().toString().endsWith(extension))
+					.filter(path -> Arrays.stream(extensions).anyMatch(extension -> path.getFileName().toString().endsWith(extension)))
 					.filter(path -> !path.getFileName().toString().equals("MavenWrapperDownloader.java"))
 					.collect(Collectors.toList());
 			for (var path : paths) {
