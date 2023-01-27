@@ -47,6 +47,11 @@ getting started with JUnit Jupiter project using Maven build system and Kotlin p
 The [junit5-jupiter-starter-bazel] sample demonstrates the bare minimum configuration for
 getting started with JUnit Jupiter using the Bazel build system.
 
+### Jupiter on sbt ![badge-jdk-8] ![badge-tool-sbt] ![badge-junit-jupiter]
+
+The [junit5-jupiter-starter-sbt] sample demonstrates the bare minimum configuration for
+getting started with JUnit Jupiter using sbt and the Scala programming language.
+
 ## Jupiter Feature Samples
 
 _Extending JUnit Jupiter using its `Extension` API._
@@ -106,6 +111,7 @@ for the JUnit Platform using the Java Platform Module System.
 [badge-tool-gradle]: https://img.shields.io/badge/tool-gradle-blue.svg "Gradle wrapper included"
 [badge-tool-maven]: https://img.shields.io/badge/tool-maven-0440af.svg "Maven wrapper included"
 [badge-tool-bazel]: https://img.shields.io/badge/tool-bazel-43a047.svg "Bazel"
+[badge-tool-sbt]: https://img.shields.io/badge/tool-sbt-43a047.svg "SBT"
 [badge-tool-console]: https://img.shields.io/badge/tool-console-022077.svg "Command line tools"
 [badge-junit-platform]: https://img.shields.io/badge/junit-platform-brightgreen.svg "JUnit Platform"
 [badge-junit-jupiter]: https://img.shields.io/badge/junit-jupiter-green.svg "JUnit Jupiter Engine"
