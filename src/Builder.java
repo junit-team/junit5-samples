@@ -45,6 +45,7 @@ class Builder {
 		run("junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", "test");
 		run("junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", "test");
 		run("junit5-jupiter-starter-bazel", "bazel", "test", "//...", "--test_output", "all");
+		run("junit5-jupiter-starter-sbt", "sbt", "test");
 
 		// jupiter-extensions
 		run("junit5-jupiter-extensions", "gradlew", "test");
