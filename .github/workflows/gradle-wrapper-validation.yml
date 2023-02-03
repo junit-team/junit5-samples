@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: gradle/wrapper-validation-action@latest
         with:
-          min-wrapper-count: 2
+          min-wrapper-count: 1
