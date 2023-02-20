@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     java
     groovy
@@ -98,4 +100,9 @@ tasks {
         dependsOn(consoleLauncherTest)
         exclude("**/*")
     }
+}
+
+// config JVM target to 1.8 for kotlin compilation tasks
+tasks.withType<KotlinCompile>().configureEach {
+	kotlinOptions.jvmTarget = "1.8"
 }
