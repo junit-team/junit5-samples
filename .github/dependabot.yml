@@ -19,13 +19,6 @@ updates:
       interval: "weekly"
     labels: [ ]
   - package-ecosystem: "gradle"
-    directory: "/junit5-jupiter-extensions"
-    registries:
-      - gradle-plugin-portal
-    schedule:
-      interval: "weekly"
-    labels: [ ]
-  - package-ecosystem: "gradle"
     directory: "/junit5-jupiter-starter-gradle"
     registries:
       - gradle-plugin-portal
