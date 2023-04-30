@@ -68,3 +68,4 @@ updates:
     schedule:
       interval: "weekly"
     labels: [ ]
+    open-pull-requests-limit: 10
