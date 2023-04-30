@@ -53,7 +53,7 @@ dependencies {
     }
 
     // Spek2
-    val spekVersion = "2.0.17"
+    val spekVersion = "2.0.19"
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
 
