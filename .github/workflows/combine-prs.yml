@@ -13,4 +13,5 @@ jobs:
       - name: combine-prs
         uses: github/combine-prs@v3.1.1
         with:
+          branch_regex: '(dependabot|wrapperbot)/.+'
           github_token: ${{ secrets.GH_TOKEN }}
