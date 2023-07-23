@@ -89,6 +89,7 @@ tasks {
         outputs.dir(reportsDir)
         classpath = sourceSets.test.get().runtimeClasspath
         mainClass.set("org.junit.platform.console.ConsoleLauncher")
+        args("execute")
         args("--scan-classpath")
         args("--include-classname", ".*((Tests?)|(Spec))$")
         args("--details", "tree")
