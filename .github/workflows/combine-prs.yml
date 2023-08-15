@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: combine-prs
-        uses: github/combine-prs@v3.1.1
+        uses: github/combine-prs@v3.1.2
         with:
           branch_regex: '(dependabot|wrapperbot)/.+'
           github_token: ${{ secrets.GH_TOKEN }}
