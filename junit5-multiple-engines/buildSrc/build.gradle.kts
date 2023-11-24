@@ -8,9 +8,9 @@ repositories {
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = "11"
     }
     compileJava {
-        options.release.set(17)
+        options.release.set(11)
     }
 }
