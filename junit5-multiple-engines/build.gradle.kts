@@ -83,6 +83,10 @@ tasks {
         options.release.set(8)
     }
 
+    withType<KotlinCompile>().configureEach {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+
     val consoleLauncherTest by registering(JavaExec::class) {
         dependsOn(testClasses)
         val reportsDir = file("$buildDir/test-results")
@@ -101,9 +105,4 @@ tasks {
         dependsOn(consoleLauncherTest)
         exclude("**/*")
     }
-}
-
-// config JVM target to 1.8 for kotlin compilation tasks
-tasks.withType<KotlinCompile>().configureEach {
-	kotlinOptions.jvmTarget = "1.8"
 }
