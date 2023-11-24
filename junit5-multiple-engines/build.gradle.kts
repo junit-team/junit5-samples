@@ -89,15 +89,15 @@ tasks {
 
     val consoleLauncherTest by registering(JavaExec::class) {
         dependsOn(testClasses)
-        val reportsDir = file("$buildDir/test-results")
-        outputs.dir(reportsDir)
         classpath = sourceSets.test.get().runtimeClasspath
         mainClass.set("org.junit.platform.console.ConsoleLauncher")
         args("execute")
         args("--scan-classpath")
         args("--include-classname", ".*((Tests?)|(Spec))$")
         args("--details", "tree")
-        args("--reports-dir", reportsDir)
+        argumentProviders += objects.newInstance(ReportsDirArgumentProvider::class).apply {
+            reportsDir.set(layout.buildDirectory.dir("test-results"))
+        }
     }
 
     test {
