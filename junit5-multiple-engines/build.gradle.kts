@@ -61,6 +61,9 @@ dependencies {
     testImplementation("org.spockframework:spock-core:2.4-M1-groovy-4.0") {
         because("allows Spock specifications to run")
     }
+    testImplementation(platform("org.apache.groovy:groovy-bom:4.0.15")) {
+        because("use latest 4.x version of Groovy for maximum compatibility with new JDKs")
+    }
 
     // Kotest
     testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
