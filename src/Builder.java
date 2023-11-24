@@ -35,7 +35,7 @@ class Builder {
 	int build() {
 		System.out.printf("|%n| Building all samples...%n|%n");
 		run(".", "java", "--version");
-		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala");
+		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala", ".groovy");
 
 		// jupiter-starter
 		// TODO run("junit5-jupiter-starter-ant", "antw"); https://github.com/junit-team/junit5-samples/issues/66
