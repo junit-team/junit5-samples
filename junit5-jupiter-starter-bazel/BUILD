@@ -8,6 +8,7 @@ java_library(
 
 java_test_suite(
     name = "junit5-jupiter-starter-bazel-tests",
+    size = "small",
     srcs = glob(["src/test/java/**/*.java"]),
     runner = "junit5",
     test_suffixes = ["Tests.java"],

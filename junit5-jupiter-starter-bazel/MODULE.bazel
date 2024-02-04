@@ -1,0 +1,24 @@
+JUNIT_JUPITER_VERSION = "5.10.2"
+
+JUNIT_PLATFORM_VERSION = "1.10.2"
+
+bazel_dep(name = "rules_jvm_external", version = "6.0")
+bazel_dep(name = "contrib_rules_jvm", version = "0.24.0")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+
+maven.install(
+    artifacts = [
+        "org.junit.platform:junit-platform-launcher:%s" % JUNIT_PLATFORM_VERSION,
+        "org.junit.platform:junit-platform-reporting:%s" % JUNIT_PLATFORM_VERSION,
+        "org.junit.jupiter:junit-jupiter-api:%s" % JUNIT_JUPITER_VERSION,
+        "org.junit.jupiter:junit-jupiter-params:%s" % JUNIT_JUPITER_VERSION,
+        "org.junit.jupiter:junit-jupiter-engine:%s" % JUNIT_JUPITER_VERSION,
+    ],
+    repositories = [
+        "https://repo1.maven.org/maven2",
+        "https://oss.sonatype.org/content/repositories/orgjunit-1155",
+    ],
+)
+
+use_repo(maven, "maven")
