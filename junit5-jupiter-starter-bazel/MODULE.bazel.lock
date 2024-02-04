@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "16a1e841dcaa68a0efe83f2d46c4682e217f735277e111078a6ca0d228f69273",
+  "moduleFileHash": "09a2d492c1038e5a1aef16549ebd9744f081c6dab1a635011fa0560561fd9780",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -49,8 +49,7 @@
                   "org.junit.jupiter:junit-jupiter-engine:5.10.2"
                 ],
                 "repositories": [
-                  "https://repo1.maven.org/maven2",
-                  "https://oss.sonatype.org/content/repositories/orgjunit-1155"
+                  "https://repo1.maven.org/maven2"
                 ]
               },
               "devDependency": false,
@@ -4374,8 +4373,7 @@
               "name": "rules_jvm_external~6.0~maven~maven",
               "user_provided_name": "maven",
               "repositories": [
-                "{ \"repo_url\": \"https://repo1.maven.org/maven2\" }",
-                "{ \"repo_url\": \"https://oss.sonatype.org/content/repositories/orgjunit-1155\" }"
+                "{ \"repo_url\": \"https://repo1.maven.org/maven2\" }"
               ],
               "artifacts": [
                 "{ \"group\": \"org.junit.platform\", \"artifact\": \"junit-platform-launcher\", \"version\": \"1.10.2\" }",
