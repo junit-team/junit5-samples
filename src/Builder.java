@@ -39,7 +39,7 @@ class Builder {
 		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala", ".groovy");
 
 		// jupiter-starter
-		if (!isWindows()) {
+		if (!isWindows()) { // TODO https://github.com/junit-team/junit5-samples/issues/66
 			run("junit5-jupiter-starter-ant", "build.sh");
 		}
 		run("junit5-jupiter-starter-gradle", "gradlew", "test");
