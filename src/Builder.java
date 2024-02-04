@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -38,7 +39,9 @@ class Builder {
 		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala", ".groovy");
 
 		// jupiter-starter
-		// TODO run("junit5-jupiter-starter-ant", "antw"); https://github.com/junit-team/junit5-samples/issues/66
+		if (!isWindows()) {
+			run("junit5-jupiter-starter-ant", "build.sh");
+		}
 		run("junit5-jupiter-starter-gradle", "gradlew", "test");
 		run("junit5-jupiter-starter-gradle-groovy", "gradlew", "test");
 		run("junit5-jupiter-starter-gradle-kotlin", "gradlew", "test");
@@ -69,7 +72,7 @@ class Builder {
 		System.out.printf("%n%n%n|%n| %s%n|%n", directory);
 		System.out.printf("| %s %s%n|%n", executable, String.join(" ", args));
 		var path = Paths.get(directory);
-		var isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+		var isWindows = isWindows();
 		if (!isWindows) {
 			if (Files.isExecutable(path.resolve(executable))) {
 				executable = "./" + executable;
@@ -92,6 +95,10 @@ class Builder {
 			exception.printStackTrace(System.err);
 			status = 1;
 		}
+	}
+
+	boolean isWindows() {
+		return System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win");
 	}
 
 	void checkLicense(String blueprint, String... extensions) {
