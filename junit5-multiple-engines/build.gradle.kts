@@ -58,7 +58,7 @@ dependencies {
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
 
     // Spock2
-    testImplementation("org.spockframework:spock-core:2.4-M1-groovy-4.0") {
+    testImplementation("org.spockframework:spock-core:2.4-M2-groovy-4.0") {
         because("allows Spock specifications to run")
     }
     testImplementation(platform("org.apache.groovy:groovy-bom:4.0.18")) {
