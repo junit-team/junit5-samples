@@ -10,6 +10,9 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://oss.sonatype.org/content/repositories/orgtestng-1092")
+    }
 }
 
 dependencies {
@@ -72,7 +75,7 @@ dependencies {
     }
 
     // TestNG
-    testImplementation("org.testng:testng:7.9.0") {
+    testImplementation("org.testng:testng:7.10.1") {
         because("allows writing TestNG tests")
     }
     testRuntimeOnly("org.junit.support:testng-engine:1.0.5") {
