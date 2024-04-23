@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: 'Set up JDK 17'
+      - name: 'Set up JDK 21'
         uses: actions/setup-java@v4
         with:
-          java-version: 17
+          java-version: 21
           distribution: temurin
       - name: 'JUnit 5 SNAPSHOT build: Gradle'
         run: cd ${GITHUB_WORKSPACE}/junit5-jupiter-starter-gradle && ./gradlew test --console plain --build-file build-SNAPSHOT.gradle
