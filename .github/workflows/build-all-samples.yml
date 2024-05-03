@@ -13,3 +13,5 @@ jobs:
           distribution: temurin
       - name: 'Build all samples using JShell'
         run: java src/Builder.java
+      - name: 'Check automation for updating versions'
+        run: java src/Updater.java 42
