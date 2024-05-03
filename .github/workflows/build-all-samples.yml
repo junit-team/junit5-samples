@@ -12,4 +12,4 @@ jobs:
           java-version: 21
           distribution: temurin
       - name: 'Build all samples using JShell'
-        run: jshell build-all-samples.jsh
+        run: java src/Builder.java

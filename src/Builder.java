@@ -16,10 +16,9 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 /**
- * Platform-agnostic builder used by {@code build-all-samples.jsh}.
+ * Platform-agnostic builder
  */
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
 class Builder {
@@ -109,16 +108,16 @@ class Builder {
 		try {
 			var expected = Files.readAllLines(Paths.get(blueprint));
 			var errors = 0;
-			var paths = Files.walk(Paths.get("."))
+			try (var paths = Files.walk(Paths.get("."))
 					.filter(path -> Arrays.stream(extensions).anyMatch(extension -> path.getFileName().toString().endsWith(extension)))
-					.filter(path -> !path.getFileName().toString().equals("MavenWrapperDownloader.java"))
-					.collect(Collectors.toList());
-			for (var path : paths) {
-				if (checkLicense(path, expected)) {
-					continue;
+					.filter(path -> !path.getFileName().toString().equals("MavenWrapperDownloader.java"))) {
+				for (var path : paths.toList()) {
+					if (checkLicense(path, expected)) {
+						continue;
+					}
+					System.out.printf("| %s%n", path);
+					errors++;
 				}
-				System.out.printf("| %s%n", path);
-				errors++;
 			}
 			if (errors > 0) {
 				System.out.printf("| %d file(s) with no or false license.%n", errors);
