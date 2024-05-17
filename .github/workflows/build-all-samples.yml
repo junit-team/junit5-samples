@@ -15,3 +15,4 @@ jobs:
         run: java src/Builder.java
       - name: 'Check automation for updating versions'
         run: java src/Updater.java 42
+        if: github.repository == 'junit-team/junit5-samples' && github.ref == 'refs/heads/main'
