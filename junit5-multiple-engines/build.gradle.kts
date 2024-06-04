@@ -5,7 +5,7 @@ plugins {
     groovy
     eclipse // optional (to generate Eclipse project files)
     idea // optional (to generate IntelliJ IDEA project files)
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "2.0.0"
 }
 
 repositories {
@@ -48,7 +48,7 @@ dependencies {
     }
 
     // jqwik
-    testImplementation("net.jqwik:jqwik:1.8.4") {
+    testImplementation("net.jqwik:jqwik:1.8.5") {
         because("allows jqwik properties to run")
     }
 
