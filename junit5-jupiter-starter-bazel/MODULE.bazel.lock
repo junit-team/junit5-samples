@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "09a2d492c1038e5a1aef16549ebd9744f081c6dab1a635011fa0560561fd9780",
+  "moduleFileHash": "be3f2301b7a7747e63d8f37f0b2de34f073ea906f86a54d659b40777d977bf6f",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -42,11 +42,11 @@
               "tagName": "install",
               "attributeValues": {
                 "artifacts": [
-                  "org.junit.platform:junit-platform-launcher:1.10.2",
-                  "org.junit.platform:junit-platform-reporting:1.10.2",
-                  "org.junit.jupiter:junit-jupiter-api:5.10.2",
-                  "org.junit.jupiter:junit-jupiter-params:5.10.2",
-                  "org.junit.jupiter:junit-jupiter-engine:5.10.2"
+                  "org.junit.platform:junit-platform-launcher:1.10.3",
+                  "org.junit.platform:junit-platform-reporting:1.10.3",
+                  "org.junit.jupiter:junit-jupiter-api:5.10.3",
+                  "org.junit.jupiter:junit-jupiter-params:5.10.3",
+                  "org.junit.jupiter:junit-jupiter-engine:5.10.3"
                 ],
                 "repositories": [
                   "https://repo1.maven.org/maven2"
@@ -4259,11 +4259,11 @@
                 "{ \"repo_url\": \"https://repo1.maven.org/maven2\" }"
               ],
               "artifacts": [
-                "{ \"group\": \"org.junit.platform\", \"artifact\": \"junit-platform-launcher\", \"version\": \"1.10.2\" }",
-                "{ \"group\": \"org.junit.platform\", \"artifact\": \"junit-platform-reporting\", \"version\": \"1.10.2\" }",
-                "{ \"group\": \"org.junit.jupiter\", \"artifact\": \"junit-jupiter-api\", \"version\": \"5.10.2\" }",
-                "{ \"group\": \"org.junit.jupiter\", \"artifact\": \"junit-jupiter-params\", \"version\": \"5.10.2\" }",
-                "{ \"group\": \"org.junit.jupiter\", \"artifact\": \"junit-jupiter-engine\", \"version\": \"5.10.2\" }",
+                "{ \"group\": \"org.junit.platform\", \"artifact\": \"junit-platform-launcher\", \"version\": \"1.10.3\" }",
+                "{ \"group\": \"org.junit.platform\", \"artifact\": \"junit-platform-reporting\", \"version\": \"1.10.3\" }",
+                "{ \"group\": \"org.junit.jupiter\", \"artifact\": \"junit-jupiter-api\", \"version\": \"5.10.3\" }",
+                "{ \"group\": \"org.junit.jupiter\", \"artifact\": \"junit-jupiter-params\", \"version\": \"5.10.3\" }",
+                "{ \"group\": \"org.junit.jupiter\", \"artifact\": \"junit-jupiter-engine\", \"version\": \"5.10.3\" }",
                 "{ \"group\": \"com.google.code.findbugs\", \"artifact\": \"jsr305\", \"version\": \"3.0.2\" }",
                 "{ \"group\": \"com.google.code.gson\", \"artifact\": \"gson\", \"version\": \"2.8.9\" }",
                 "{ \"group\": \"com.google.errorprone\", \"artifact\": \"error_prone_annotations\", \"version\": \"2.3.2\" }",
