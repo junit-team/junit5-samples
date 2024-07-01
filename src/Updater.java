@@ -67,6 +67,7 @@ class Updater {
                 new Replacement("org.junit.jupiter:junit-jupiter:" + VERSION_REGEX, VersionType.JUPITER),
                 new Replacement("org.junit.vintage:junit-vintage-engine:" + VERSION_REGEX, VersionType.VINTAGE)
         ));
+        update(Path.of("junit5-migration-maven/pom.xml"), List.of(mavenBomReplacement));
         update(Path.of("junit5-modular-world/compile.jsh"), List.of(
                 new Replacement("platformVersion = \"" + VERSION_REGEX + '"', VersionType.PLATFORM),
                 new Replacement("jupiterVersion = \"" + VERSION_REGEX + '"', VersionType.JUPITER),
