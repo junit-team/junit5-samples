@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -87,7 +88,7 @@ tasks {
     }
 
     withType<KotlinCompile>().configureEach {
-        kotlinOptions.jvmTarget = "1.8"
+        compilerOptions.jvmTarget = JVM_1_8
     }
 
     val consoleLauncherTest by registering(JavaExec::class) {

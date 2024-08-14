@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -25,7 +26,6 @@ tasks.withType<JavaCompile>().configureEach {
 	options.release.set(8)
 }
 
-// config JVM target to 1.8 for kotlin compilation tasks
 tasks.withType<KotlinCompile>().configureEach {
-	kotlinOptions.jvmTarget = "1.8"
+	compilerOptions.jvmTarget = JVM_1_8
 }
