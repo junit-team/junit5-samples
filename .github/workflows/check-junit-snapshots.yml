@@ -1,6 +1,5 @@
 name: Build starters using JUnit SNAPSHOT
 on:
-  push:
   pull_request:
   schedule:
   - cron: '0 6 * * *'

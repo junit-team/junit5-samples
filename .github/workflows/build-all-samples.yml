@@ -1,5 +1,5 @@
 name: Build all samples
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   linux:
     name: Linux
