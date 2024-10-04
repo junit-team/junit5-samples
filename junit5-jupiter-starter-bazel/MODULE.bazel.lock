@@ -175,7 +175,7 @@
     },
     "@@rules_go~//go:extensions.bzl%go_sdk": {
       "os:linux,arch:amd64": {
-        "bzlTransitiveDigest": "O5v9Kco3EZ/rfjpAAMMtpR8m5Ti6iO2bEhWP3uEoA2g=",
+        "bzlTransitiveDigest": "AVhAyTUeb8TQI4L5vkvDMBTdeGAZFJIhQpy3dedqv5c=",
         "usagesDigest": "hDVusLfvhtwQv2rBEYrGxjx747n7ssnCTHRZI/1Sfk4=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
