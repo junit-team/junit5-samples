@@ -175,7 +175,7 @@
     },
     "@@rules_go~//go:extensions.bzl%go_sdk": {
       "os:linux,arch:amd64": {
-        "bzlTransitiveDigest": "O5v9Kco3EZ/rfjpAAMMtpR8m5Ti6iO2bEhWP3uEoA2g=",
+        "bzlTransitiveDigest": "AVhAyTUeb8TQI4L5vkvDMBTdeGAZFJIhQpy3dedqv5c=",
         "usagesDigest": "hDVusLfvhtwQv2rBEYrGxjx747n7ssnCTHRZI/1Sfk4=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -573,7 +573,7 @@
             "bzlFile": "@@rules_python~//python/private:toolchains_repo.bzl",
             "ruleClassName": "toolchain_aliases",
             "attributes": {
-              "python_version": "3.11.1",
+              "python_version": "3.11.2",
               "user_repository_name": "python_3_11"
             }
           },
@@ -584,10 +584,10 @@
               "sha256": "debf15783bdcb5530504f533d33fda75a7b905cec5361ae8f33da5ba6599f8b4",
               "patches": [],
               "platform": "aarch64-unknown-linux-gnu",
-              "python_version": "3.11.1",
-              "release_filename": "20230116/cpython-3.11.1+20230116-aarch64-unknown-linux-gnu-install_only.tar.gz",
+              "python_version": "3.11.2",
+              "release_filename": "20230116/cpython-3.11.2+20230116-aarch64-unknown-linux-gnu-install_only.tar.gz",
               "urls": [
-                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.1+20230116-aarch64-unknown-linux-gnu-install_only.tar.gz"
+                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.2+20230116-aarch64-unknown-linux-gnu-install_only.tar.gz"
               ],
               "distutils_content": "",
               "strip_prefix": "python",
@@ -601,10 +601,10 @@
               "sha256": "4918cdf1cab742a90f85318f88b8122aeaa2d04705803c7b6e78e81a3dd40f80",
               "patches": [],
               "platform": "aarch64-apple-darwin",
-              "python_version": "3.11.1",
-              "release_filename": "20230116/cpython-3.11.1+20230116-aarch64-apple-darwin-install_only.tar.gz",
+              "python_version": "3.11.2",
+              "release_filename": "20230116/cpython-3.11.2+20230116-aarch64-apple-darwin-install_only.tar.gz",
               "urls": [
-                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.1+20230116-aarch64-apple-darwin-install_only.tar.gz"
+                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.2+20230116-aarch64-apple-darwin-install_only.tar.gz"
               ],
               "distutils_content": "",
               "strip_prefix": "python",
@@ -618,10 +618,10 @@
               "sha256": "20a4203d069dc9b710f70b09e7da2ce6f473d6b1110f9535fb6f4c469ed54733",
               "patches": [],
               "platform": "x86_64-apple-darwin",
-              "python_version": "3.11.1",
-              "release_filename": "20230116/cpython-3.11.1+20230116-x86_64-apple-darwin-install_only.tar.gz",
+              "python_version": "3.11.2",
+              "release_filename": "20230116/cpython-3.11.2+20230116-x86_64-apple-darwin-install_only.tar.gz",
               "urls": [
-                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.1+20230116-x86_64-apple-darwin-install_only.tar.gz"
+                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.2+20230116-x86_64-apple-darwin-install_only.tar.gz"
               ],
               "distutils_content": "",
               "strip_prefix": "python",
@@ -653,10 +653,10 @@
               "sha256": "edc08979cb0666a597466176511529c049a6f0bba8adf70df441708f766de5bf",
               "patches": [],
               "platform": "x86_64-pc-windows-msvc",
-              "python_version": "3.11.1",
-              "release_filename": "20230116/cpython-3.11.1+20230116-x86_64-pc-windows-msvc-shared-install_only.tar.gz",
+              "python_version": "3.11.2",
+              "release_filename": "20230116/cpython-3.11.2+20230116-x86_64-pc-windows-msvc-shared-install_only.tar.gz",
               "urls": [
-                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.1+20230116-x86_64-pc-windows-msvc-shared-install_only.tar.gz"
+                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.2+20230116-x86_64-pc-windows-msvc-shared-install_only.tar.gz"
               ],
               "distutils_content": "",
               "strip_prefix": "python",
@@ -670,10 +670,10 @@
               "sha256": "02a551fefab3750effd0e156c25446547c238688a32fabde2995c941c03a6423",
               "patches": [],
               "platform": "x86_64-unknown-linux-gnu",
-              "python_version": "3.11.1",
-              "release_filename": "20230116/cpython-3.11.1+20230116-x86_64-unknown-linux-gnu-install_only.tar.gz",
+              "python_version": "3.11.2",
+              "release_filename": "20230116/cpython-3.11.2+20230116-x86_64-unknown-linux-gnu-install_only.tar.gz",
               "urls": [
-                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.1+20230116-x86_64-unknown-linux-gnu-install_only.tar.gz"
+                "https://github.com/indygreg/python-build-standalone/releases/download/20230116/cpython-3.11.2+20230116-x86_64-unknown-linux-gnu-install_only.tar.gz"
               ],
               "distutils_content": "",
               "strip_prefix": "python",
