@@ -1,6 +1,6 @@
-JUNIT_JUPITER_VERSION = "5.11.2"
+JUNIT_JUPITER_VERSION = "5.11.3"
 
-JUNIT_PLATFORM_VERSION = "1.11.2"
+JUNIT_PLATFORM_VERSION = "1.11.3"
 
 bazel_dep(name = "rules_jvm_external", version = "6.4")
 bazel_dep(name = "contrib_rules_jvm", version = "0.27.0")
