@@ -7,7 +7,7 @@ the JUnit Platform.
 
 This sample project does not aim to demonstrate how to use the JUnit Jupiter APIs.
 For detailed information on the JUnit Jupiter programming and extension models,
-please consult the [User Guide](http://junit.org/junit5/docs/current/user-guide/).
+please consult the [User Guide](https://junit.org/junit5/docs/current/user-guide/).
 
 Please note that this project uses the [Maven Wrapper](https://github.com/takari/maven-wrapper).
 Thus, to ensure that the correct version of Maven is used, invoke `mvnw` instead of `mvn`.
@@ -16,7 +16,7 @@ Thus, to ensure that the correct version of Maven is used, invoke `mvnw` instead
 
 Invoking `mvnw clean test` from the command line will execute all tests in the test source
 folder that follow one of following patterns: `Test*`, `*Test`, `*Tests`, or `*TestCase`.
-Note that [Surefire's default naming patterns](http://maven.apache.org/surefire/maven-surefire-plugin/examples/inclusion-exclusion.html)
+Note that [Surefire's default naming patterns](https://maven.apache.org/surefire/maven-surefire-plugin/examples/inclusion-exclusion.html)
 have been overridden in the `pom.xml` file. Surefire's execution of
 the sample tests should result in output similar to the following:
 

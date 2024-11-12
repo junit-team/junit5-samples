@@ -12,7 +12,7 @@ using the JUnit Platform with various [TestEngine][guide-custom-engine] implemen
  
 ## 3rd-party test engines 
  
- * [JQwik Test Engine](http://jqwik.net)
+ * [JQwik Test Engine](https://jqwik.net)
  * [KotlinTest](https://github.com/kotlintest/kotlintest)
  * [MAINRUNNER](https://github.com/sormuras/mainrunner)
  * [Spek](https://spekframework.org)
@@ -24,4 +24,4 @@ See https://github.com/junit-team/junit5/wiki/Third-party-Extensions#junit-platf
 for even more test engine implementations and feel free to add minimal working samples of other
 engines to this project and the wiki page.
 
-[guide-custom-engine]: http://junit.org/junit5/docs/current/user-guide/#launcher-api-engines-custom "Plugging in Your Own Test Engine"
+[guide-custom-engine]: https://junit.org/junit5/docs/current/user-guide/#launcher-api-engines-custom "Plugging in Your Own Test Engine"
