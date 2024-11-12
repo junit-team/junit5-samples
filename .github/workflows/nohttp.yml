@@ -13,16 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: actions/cache@v1
-        with:
-          path: /root/.jbang
-          key: $-jbang-$
-          restore-keys: |
-            $-jbang-
       - name: 'Run nohttp'
         uses: jbangdev/jbang-action@v0.119.0
         with:
           script: io.spring.nohttp:nohttp-cli:0.0.9
           scriptargs: "-D=\\.git -D=build -D=target -D=apache-ant-.+ -F=maven-wrapper\\.properties -F=mvnw\\.cmd -Fmvnw"
-        env:
-          JBANG_REPO: /root/.jbang/repository
