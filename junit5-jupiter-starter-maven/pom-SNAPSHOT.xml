@@ -15,13 +15,13 @@
 
 	<dependencyManagement>
 		<dependencies>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.9.1-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.12.0-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -47,12 +47,8 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-			</plugin>
-			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M6</version>
+				<version>3.2.5</version>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,9 +1,12 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     java
     groovy
     eclipse // optional (to generate Eclipse project files)
     idea // optional (to generate IntelliJ IDEA project files)
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version "2.0.21"
 }
 
 repositories {
@@ -12,7 +15,7 @@ repositories {
 
 dependencies {
     val junit4Version = "4.13.2"
-    val junitBomVersion = "5.9.0"
+    val junitBomVersion = "5.11.3"
 
     // Use junit-bom to align versions
     // https://docs.gradle.org/current/userguide/managing_transitive_dependencies.html#sec:bom_import
@@ -46,31 +49,34 @@ dependencies {
     }
 
     // jqwik
-    testImplementation("net.jqwik:jqwik:1.6.0") {
+    testImplementation("net.jqwik:jqwik:1.9.1") {
         because("allows jqwik properties to run")
     }
 
     // Spek2
-    val spekVersion = "2.0.17"
+    val spekVersion = "2.0.19"
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
 
     // Spock2
-    testImplementation("org.spockframework:spock-core:2.1-M2-groovy-3.0") {
+    testImplementation("org.spockframework:spock-core:2.4-M4-groovy-4.0") {
         because("allows Spock specifications to run")
+    }
+    testImplementation(platform("org.apache.groovy:groovy-bom:4.0.24")) {
+        because("use latest 4.x version of Groovy for maximum compatibility with new JDKs")
     }
 
     // Kotest
-    testImplementation("io.kotest:kotest-runner-junit5:4.6.3")
-    testRuntimeOnly("org.slf4j:slf4j-nop:1.7.32") {
+    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
+    testRuntimeOnly("org.slf4j:slf4j-nop:2.0.16") {
         because("defaulting to no-operation (NOP) logger implementation")
     }
 
     // TestNG
-    testImplementation("org.testng:testng:7.5") {
+    testImplementation("org.testng:testng:7.10.2") {
         because("allows writing TestNG tests")
     }
-    testRuntimeOnly("org.junit.support:testng-engine:1.0.4") {
+    testRuntimeOnly("org.junit.support:testng-engine:1.0.5") {
         because("allows running TestNG tests on the JUnit Platform")
     }
 }
@@ -81,16 +87,21 @@ tasks {
         options.release.set(8)
     }
 
+    withType<KotlinCompile>().configureEach {
+        compilerOptions.jvmTarget = JVM_1_8
+    }
+
     val consoleLauncherTest by registering(JavaExec::class) {
         dependsOn(testClasses)
-        val reportsDir = file("$buildDir/test-results")
-        outputs.dir(reportsDir)
         classpath = sourceSets.test.get().runtimeClasspath
-        main = "org.junit.platform.console.ConsoleLauncher"
+        mainClass.set("org.junit.platform.console.ConsoleLauncher")
+        args("execute")
         args("--scan-classpath")
         args("--include-classname", ".*((Tests?)|(Spec))$")
         args("--details", "tree")
-        args("--reports-dir", reportsDir)
+        argumentProviders += objects.newInstance(ReportsDirArgumentProvider::class).apply {
+            reportsDir.set(layout.buildDirectory.dir("test-results"))
+        }
     }
 
     test {

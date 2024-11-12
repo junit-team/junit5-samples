@@ -1,12 +1,18 @@
 name: "Validate Gradle Wrapper"
-on: [push, pull_request]
-
+on:
+  push:
+    branches:
+      - main
+      - 'r5.*'
+  pull_request:
+    branches:
+      - '*'
 jobs:
   validation:
     name: "Validation"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: gradle/actions/wrapper-validation@d156388eb19639ec20ade50009f3d199ce1e2808 # v4
         with:
-          min-wrapper-count: 2
+          min-wrapper-count: 6

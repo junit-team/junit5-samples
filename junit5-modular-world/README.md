@@ -170,6 +170,7 @@ java
 	--module-path ...
 	--add-modules ALL-MODULE-PATH
 	--module org.junit.platform.console
+    execute
 	--scan-modules
 ```
 

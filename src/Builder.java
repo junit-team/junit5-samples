@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 the original author or authors.
+ * Copyright 2015-2024 the original author or authors.
  *
  * All rights reserved. This program and the accompanying materials are
  * made available under the terms of the Eclipse Public License v2.0 which
@@ -15,10 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 /**
- * Platform-agnostic builder used by {@code build-all-samples.jsh}.
+ * Platform-agnostic builder
  */
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
 class Builder {
@@ -35,16 +35,19 @@ class Builder {
 	int build() {
 		System.out.printf("|%n| Building all samples...%n|%n");
 		run(".", "java", "--version");
-		checkLicense("src/eclipse-public-license-2.0.java", ".java");
+		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala", ".groovy");
 
 		// jupiter-starter
-		// TODO run("junit5-jupiter-starter-ant", "antw"); https://github.com/junit-team/junit5-samples/issues/66
+		if (!isWindows()) { // TODO https://github.com/junit-team/junit5-samples/issues/66
+			run("junit5-jupiter-starter-ant", "build.sh");
+		}
 		run("junit5-jupiter-starter-gradle", "gradlew", "test");
 		run("junit5-jupiter-starter-gradle-groovy", "gradlew", "test");
 		run("junit5-jupiter-starter-gradle-kotlin", "gradlew", "test");
 		run("junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", "test");
 		run("junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", "test");
-		run("junit5-jupiter-starter-bazel", "bazelisk.py", "test", "//...", "--test_output", "all");
+		run("junit5-jupiter-starter-bazel", "bazel", "test", "//...", "--test_output", "all");
+		run("junit5-jupiter-starter-sbt", "sbt", "test");
 
 		// jupiter-extensions
 		run("junit5-jupiter-extensions", "gradlew", "test");
@@ -68,7 +71,7 @@ class Builder {
 		System.out.printf("%n%n%n|%n| %s%n|%n", directory);
 		System.out.printf("| %s %s%n|%n", executable, String.join(" ", args));
 		var path = Paths.get(directory);
-		var isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+		var isWindows = isWindows();
 		if (!isWindows) {
 			if (Files.isExecutable(path.resolve(executable))) {
 				executable = "./" + executable;
@@ -93,7 +96,11 @@ class Builder {
 		}
 	}
 
-	void checkLicense(String blueprint, String extension) {
+	boolean isWindows() {
+		return System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win");
+	}
+
+	void checkLicense(String blueprint, String... extensions) {
 		if (status != 0) {
 			return;
 		}
@@ -101,16 +108,16 @@ class Builder {
 		try {
 			var expected = Files.readAllLines(Paths.get(blueprint));
 			var errors = 0;
-			var paths = Files.walk(Paths.get("."))
-					.filter(path -> path.getFileName().toString().endsWith(extension))
-					.filter(path -> !path.getFileName().toString().equals("MavenWrapperDownloader.java"))
-					.collect(Collectors.toList());
-			for (var path : paths) {
-				if (checkLicense(path, expected)) {
-					continue;
+			try (var paths = Files.walk(Paths.get("."))
+					.filter(path -> Arrays.stream(extensions).anyMatch(extension -> path.getFileName().toString().endsWith(extension)))
+					.filter(path -> !path.getFileName().toString().equals("MavenWrapperDownloader.java"))) {
+				for (var path : paths.toList()) {
+					if (checkLicense(path, expected)) {
+						continue;
+					}
+					System.out.printf("| %s%n", path);
+					errors++;
 				}
-				System.out.printf("| %s%n", path);
-				errors++;
 			}
 			if (errors > 0) {
 				System.out.printf("| %d file(s) with no or false license.%n", errors);

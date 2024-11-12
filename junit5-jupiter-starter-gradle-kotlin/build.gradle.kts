@@ -1,7 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.5.31"
+	kotlin("jvm") version "2.0.21"
 }
 
 repositories {
@@ -9,8 +10,9 @@ repositories {
 }
 
 dependencies {
-	testImplementation(platform("org.junit:junit-bom:5.9.0"))
+	testImplementation(platform("org.junit:junit-bom:5.11.3"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
@@ -20,7 +22,10 @@ tasks.test {
 	}
 }
 
-// config JVM target to 1.8 for kotlin compilation tasks
+tasks.withType<JavaCompile>().configureEach {
+	options.release.set(8)
+}
+
 tasks.withType<KotlinCompile>().configureEach {
-	kotlinOptions.jvmTarget = "1.8"
+	compilerOptions.jvmTarget = JVM_1_8
 }

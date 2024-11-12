@@ -27,3 +27,4 @@ out
 *.class
 .jqwik-database
 install-jdk.sh
+.sdkmanrc

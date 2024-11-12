@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-	testImplementation(platform('org.junit:junit-bom:5.9.1-SNAPSHOT'))
+	testImplementation(platform('org.junit:junit-bom:5.12.0-SNAPSHOT'))
 	testImplementation('org.junit.jupiter:junit-jupiter')
 }
 
