@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 #
 # Set constants.
@@ -13,7 +14,8 @@ standalone_jar="${ant_folder}/lib/junit-platform-console-standalone-${junit_plat
 # Load and extract Apache Ant.
 #
 if [ ! -d "${ant_folder}" ]; then
-    curl --remote-name "https://archive.apache.org/dist/ant/binaries/${ant_archive}"
+    echo "Downloading Ant $ant_version..."
+    curl --silent --show-error --remote-name "https://archive.apache.org/dist/ant/binaries/${ant_archive}"
     tar --extract -z --exclude "${ant_folder}/manual" --file "${ant_archive}"
 fi
 
@@ -21,7 +23,8 @@ fi
 # Load and store junit-platform-console-standalone jar into ${ANT_HOME}/lib.
 #
 if [ ! -f "${standalone_jar}" ]; then
-    curl "https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit_platform_version}/junit-platform-console-standalone-${junit_platform_version}.jar" \
+    echo "Downloading junit-platform-console-standalone $junit_platform_version..."
+    curl --silent --show-error "https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit_platform_version}/junit-platform-console-standalone-${junit_platform_version}.jar" \
          --output "${standalone_jar}"
 fi
 
