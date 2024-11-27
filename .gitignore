@@ -28,3 +28,4 @@ out
 .jqwik-database
 install-jdk.sh
 .sdkmanrc
+.tool-versions
