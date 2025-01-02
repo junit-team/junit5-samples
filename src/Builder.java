@@ -14,8 +14,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Platform-agnostic builder
@@ -23,8 +25,11 @@ import java.util.Locale;
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
 class Builder {
 
+	private static final java.lang.String EXCLUDE_OPTION = "--exclude=";
+
 	public static void main(String[] args) {
-		var status = new Builder().build();
+		var excludedProjects = determineExcludedProjects(args);
+		var status = new Builder().build(excludedProjects);
 		if (status != 0) {
 			throw new AssertionError("Expected exit status of zero, but got: " + status);
 		}
@@ -32,36 +37,54 @@ class Builder {
 
 	int status = 0;
 
-	int build() {
+	int build(Set<String> excludedProjects) {
 		System.out.printf("|%n| Building all samples...%n|%n");
 		run(".", "java", "--version");
 		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala", ".groovy");
 
 		// jupiter-starter
 		if (!isWindows()) { // TODO https://github.com/junit-team/junit5-samples/issues/66
-			run("junit5-jupiter-starter-ant", "build.sh");
+			runProject(excludedProjects, "junit5-jupiter-starter-ant", "build.sh");
 		}
-		run("junit5-jupiter-starter-gradle", "gradlew", "test");
-		run("junit5-jupiter-starter-gradle-groovy", "gradlew", "test");
-		run("junit5-jupiter-starter-gradle-kotlin", "gradlew", "test");
-		run("junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", "test");
-		run("junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", "test");
-		run("junit5-jupiter-starter-bazel", "bazel", "test", "//...", "--test_output", "all");
-		run("junit5-jupiter-starter-sbt", "sbt", "test");
+		runProject(excludedProjects, "junit5-jupiter-starter-gradle", "gradlew", "test");
+		runProject(excludedProjects, "junit5-jupiter-starter-gradle-groovy", "gradlew", "test");
+		runProject(excludedProjects, "junit5-jupiter-starter-gradle-kotlin", "gradlew", "test");
+		runProject(excludedProjects, "junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", "test");
+		runProject(excludedProjects, "junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", "test");
+		runProject(excludedProjects, "junit5-jupiter-starter-bazel", "bazel", "test", "//...", "--test_output", "all");
+		runProject(excludedProjects, "junit5-jupiter-starter-sbt", "sbt", "test");
 
 		// jupiter-extensions
-		run("junit5-jupiter-extensions", "gradlew", "test");
+		runProject(excludedProjects, "junit5-jupiter-extensions", "gradlew", "test");
 
 		// migration
-		run("junit5-migration-gradle", "gradlew", "test");
-		run("junit5-migration-maven", "mvnw", "--batch-mode", "clean", "test");
-		run("junit5-multiple-engines", "gradlew", "test");
+		runProject(excludedProjects, "junit5-migration-gradle", "gradlew", "test");
+		runProject(excludedProjects, "junit5-migration-maven", "mvnw", "--batch-mode", "clean", "test");
+		runProject(excludedProjects, "junit5-multiple-engines", "gradlew", "test");
 
 		// modular
-		run("junit5-modular-world", "jshell", "build.jsh");
+		runProject(excludedProjects, "junit5-modular-world", "jshell", "build.jsh");
 
 		System.out.printf("%n%n%n|%n| Done. Build exits with status = %d.%n|%n", status);
 		return status;
+	}
+
+	private static Set<String> determineExcludedProjects(String[] args) {
+		Set<String> excludedProjects = new HashSet<>();
+		for (var arg : args) {
+			if (arg.startsWith(EXCLUDE_OPTION)) {
+				excludedProjects.addAll(Set.of(arg.substring(EXCLUDE_OPTION.length()).split(",")));
+			}
+		}
+		return Set.copyOf(excludedProjects);
+	}
+
+	void runProject(Set<String> excludedProjects, String project, String executable, String... args) {
+		if (excludedProjects.contains(project)) {
+			System.out.printf("%n%n%n|%n| %s is excluded.%n|%n", project);
+			return;
+		}
+		run(project, executable, args);
 	}
 
 	void run(String directory, String executable, String... args) {
