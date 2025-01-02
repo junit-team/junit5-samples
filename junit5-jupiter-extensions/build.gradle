@@ -24,6 +24,7 @@ dependencies {
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine") {
         because 'at least one engine is needed at test runtime'
     }
+	testRuntimeOnly('org.junit.platform:junit-platform-launcher')
 }
 
 test {
