@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: 21
           distribution: temurin
-      - uses: sbt/setup-sbt@v1
+      - uses: sbt/setup-sbt@96cf3f09dc501acdad7807fffe97dba9fa0709be # v1
       - name: 'Build all samples using JShell'
         run: java src/Builder.java
       - name: 'Check automation for updating versions'
