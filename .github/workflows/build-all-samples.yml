@@ -18,8 +18,11 @@ jobs:
         with:
           java-version: 21
           distribution: temurin
-      - name: 'Build all samples using JShell'
-        run: java src/Builder.java
+#      - name: 'Build all samples using JShell'
+#        run: java src/Builder.java
       - name: 'Check automation for updating versions'
         run: java src/Updater.java 42
+        if: github.repository == 'junit-team/junit5-samples' && github.ref == 'refs/heads/main'
+      - name: 'Check automation for injecting a staging repository'
+        run: java src/StagingRepoInjector.java https://example.org/service/local/repositories/orgjunit-1234/content
         if: github.repository == 'junit-team/junit5-samples' && github.ref == 'refs/heads/main'
