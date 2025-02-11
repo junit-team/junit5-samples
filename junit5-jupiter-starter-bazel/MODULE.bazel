@@ -2,7 +2,7 @@ JUNIT_JUPITER_VERSION = "5.11.4"
 
 JUNIT_PLATFORM_VERSION = "1.11.4"
 
-bazel_dep(name = "rules_jvm_external", version = "6.6")
+bazel_dep(name = "rules_jvm_external", version = "6.7")
 bazel_dep(name = "contrib_rules_jvm", version = "0.27.0")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
