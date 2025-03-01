@@ -12,7 +12,7 @@ jobs:
   nohttp:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: 'Run nohttp'
         uses: jbangdev/jbang-action@dce3ba6614a1316eddf5f9d02925e5687b3af2b9 # v0.124.0
         with:
