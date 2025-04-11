@@ -4,7 +4,7 @@ set -e
 #
 # Set constants.
 #
-junit_platform_version='1.12.1'
+junit_platform_version='1.12.2'
 ant_version='1.10.13'
 ant_folder="apache-ant-${ant_version}"
 ant_archive="${ant_folder}-bin.tar.gz"
