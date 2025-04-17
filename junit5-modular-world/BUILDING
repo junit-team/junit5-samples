@@ -1,3 +1,4 @@
+import java.net.*
 import java.nio.file.*
 import java.util.function.*
 import java.util.spi.*
@@ -98,7 +99,12 @@ Path get(String directory, URI uri) throws Exception {
     }
     System.out.printf("[get] %s%n", target);
     Files.createDirectories(folder);
-    try (InputStream sourceStream = uri.toURL().openStream(); OutputStream targetStream = Files.newOutputStream(target)) {
+    var connection = (HttpURLConnection) uri.toURL().openConnection();
+    if ("central.sonatype.com".equals(uri.getHost())) {
+        var mavenCentralUserToken = Objects.requireNonNull(System.getenv("MAVEN_CENTRAL_USER_TOKEN"), "The MAVEN_CENTRAL_USER_TOKEN environment variable must be set");
+        connection.setRequestProperty("Authorization", "Bearer " + mavenCentralUserToken);
+    }
+    try (InputStream sourceStream = connection.getInputStream(); OutputStream targetStream = Files.newOutputStream(target)) {
         sourceStream.transferTo(targetStream);
     }
     return target;
