@@ -5,9 +5,9 @@
 //
 // download main and test dependencies
 //
-String platformVersion = "1.12.2"
-String jupiterVersion = "5.12.2"
-String vintageVersion = "5.12.2"
+String platformVersion = "1.13.0-M3"
+String jupiterVersion = "5.13.0-M3"
+String vintageVersion = "5.13.0-M3"
 get("lib", "org.junit.platform", "junit-platform-commons", platformVersion)
 get("lib", "org.junit.platform", "junit-platform-console", platformVersion)
 get("lib", "org.junit.platform", "junit-platform-engine", platformVersion)
