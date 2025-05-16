@@ -17,7 +17,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 dependencies {
-	api(platform("org.junit:junit-bom:5.12.2"))
+	api(platform("org.junit:junit-bom:5.13.0-RC1"))
 	api("org.junit.jupiter:junit-jupiter-api") {
         because 'building extensions in "main" using JUnit Jupiter API'
     }
