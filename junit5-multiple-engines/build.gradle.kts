@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     val junit4Version = "4.13.2"
-    val junitBomVersion = "5.12.2"
+    val junitBomVersion = "5.13.1"
 
     // Use junit-bom to align versions
     // https://docs.gradle.org/current/userguide/managing_transitive_dependencies.html#sec:bom_import
@@ -49,7 +49,7 @@ dependencies {
     }
 
     // jqwik
-    testImplementation("net.jqwik:jqwik:1.9.2") {
+    testImplementation("net.jqwik:jqwik:1.9.3") {
         because("allows jqwik properties to run")
     }
 
