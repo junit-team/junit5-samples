@@ -25,11 +25,13 @@ import java.util.Set;
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
 class Builder {
 
-	private static final java.lang.String EXCLUDE_OPTION = "--exclude=";
+	private static final String TARGET_OPTION = "--target=";
+	private static final String EXCLUDE_OPTION = "--exclude=";
 
 	public static void main(String[] args) {
+		var target = determineTarget(args);
 		var excludedProjects = determineExcludedProjects(args);
-		var status = new Builder().build(excludedProjects);
+		var status = new Builder().build(target, excludedProjects);
 		if (status != 0) {
 			throw new AssertionError("Expected exit status of zero, but got: " + status);
 		}
@@ -37,36 +39,54 @@ class Builder {
 
 	int status = 0;
 
-	int build(Set<String> excludedProjects) {
-		System.out.printf("|%n| Building all samples...%n|%n");
+	int build(Target target, Set<String> excludedProjects) {
+		System.out.printf("|%n| Building all samples (%s)...%n|%n", target);
 		run(".", "java", "--version");
-		checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala", ".groovy");
+		if (target == Target.TEST) {
+			checkLicense("src/eclipse-public-license-2.0.java", ".java", ".kt", ".scala", ".groovy");
+		}
+
+		var antTarget = target == Target.TEST ? "test" : "compile";
+		var gradleTask = target == Target.TEST ? "test" : "testClasses";
+		var mavenLifecycle = target == Target.TEST ? "test" : "test-compile";
+		var bazelTarget = target == Target.TEST ? "test" : "build";
+		var sbtTask = target == Target.TEST ? "test" : "Test / compile";
 
 		// jupiter-starter
 		if (!isWindows()) { // TODO https://github.com/junit-team/junit5-samples/issues/66
-			runProject(excludedProjects, "junit5-jupiter-starter-ant", "build.sh");
+			runProject(excludedProjects, "junit5-jupiter-starter-ant", "build.sh", "clean", antTarget);
 		}
-		runProject(excludedProjects, "junit5-jupiter-starter-gradle", "gradlew", "test");
-		runProject(excludedProjects, "junit5-jupiter-starter-gradle-groovy", "gradlew", "test");
-		runProject(excludedProjects, "junit5-jupiter-starter-gradle-kotlin", "gradlew", "test");
-		runProject(excludedProjects, "junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", "test");
-		runProject(excludedProjects, "junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", "test");
-		runProject(excludedProjects, "junit5-jupiter-starter-bazel", "bazel", "test", "//...", "--test_output", "all");
-		runProject(excludedProjects, "junit5-jupiter-starter-sbt", "sbt", "test");
+
+		runProject(excludedProjects, "junit5-jupiter-starter-gradle", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit5-jupiter-starter-gradle-groovy", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit5-jupiter-starter-gradle-kotlin", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", mavenLifecycle);
+		runProject(excludedProjects, "junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", mavenLifecycle);
+		runProject(excludedProjects, "junit5-jupiter-starter-bazel", "bazel", bazelTarget, "//...", "--test_output", "all");
+		runProject(excludedProjects, "junit5-jupiter-starter-sbt", "sbt", sbtTask);
 
 		// jupiter-extensions
-		runProject(excludedProjects, "junit5-jupiter-extensions", "gradlew", "test");
+		runProject(excludedProjects, "junit5-jupiter-extensions", "gradlew", gradleTask);
 
 		// migration
-		runProject(excludedProjects, "junit5-migration-gradle", "gradlew", "test");
-		runProject(excludedProjects, "junit5-migration-maven", "mvnw", "--batch-mode", "clean", "test");
-		runProject(excludedProjects, "junit5-multiple-engines", "gradlew", "test");
+		runProject(excludedProjects, "junit5-migration-gradle", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit5-migration-maven", "mvnw", "--batch-mode", "clean", mavenLifecycle);
+		runProject(excludedProjects, "junit5-multiple-engines", "gradlew", gradleTask);
 
 		// modular
-		runProject(excludedProjects, "junit5-modular-world", "jshell", "build.jsh");
+		runProject(excludedProjects, "junit5-modular-world", "jshell", "-R-Dtarget=" + target.name(), "build.jsh");
 
 		System.out.printf("%n%n%n|%n| Done. Build exits with status = %d.%n|%n", status);
 		return status;
+	}
+
+	private static Target determineTarget(String[] args) {
+		for (var arg : args) {
+			if (arg.startsWith(TARGET_OPTION)) {
+				return Target.valueOf(arg.substring(TARGET_OPTION.length()).toUpperCase(Locale.ROOT));
+			}
+		}
+		return Target.TEST;
 	}
 
 	private static Set<String> determineExcludedProjects(String[] args) {
@@ -161,5 +181,9 @@ class Builder {
 			return actual.equals(expected);
 		}
 		return false;
+	}
+
+	enum Target {
+		COMPILE, TEST
 	}
 }

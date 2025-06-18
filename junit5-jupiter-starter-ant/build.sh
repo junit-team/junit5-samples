@@ -31,4 +31,4 @@ fi
 #
 # Finally, let Ant do its work...
 #
-ANT_HOME=${ant_folder} "./${ant_folder}/bin/ant"
+ANT_HOME=${ant_folder} "./${ant_folder}/bin/ant" "$@"

@@ -9,8 +9,10 @@ del("lib")
 
 exe("jshell", "compile.jsh")
 
-exe("jshell", "test-classpath.jsh")
-exe("jshell", "test-patch-compile.jsh")
-exe("jshell", "test-patch-runtime.jsh")
+if ("TEST".equalsIgnoreCase(System.getProperty("target"))) {
+  exe("jshell", "test-classpath.jsh");
+  exe("jshell", "test-patch-compile.jsh");
+  exe("jshell", "test-patch-runtime.jsh");
+}
 
 /exit
