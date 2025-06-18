@@ -7,6 +7,10 @@ on:
   pull_request:
     branches:
       - '*'
+
+permissions:
+  contents: read
+
 jobs:
   validation:
     name: "Validation"
