@@ -7,7 +7,7 @@ Invoke the [jshell](https://docs.oracle.com/javase/9/tools/jshell.htm) script
 
 This sample project does not aim to demonstrate how to use the JUnit Platform APIs.
 For detailed  information on the JUnit Platform programming and extension models,
-please consult the [User Guide](https://junit.org/junit5/docs/current/user-guide/).
+please consult the [User Guide](https://docs.junit.org/current/user-guide/).
 
 ## Source Layout
 
