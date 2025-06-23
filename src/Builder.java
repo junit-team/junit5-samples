@@ -53,28 +53,28 @@ class Builder {
 		var sbtTask = target == Target.TEST ? "test" : "Test / compile";
 
 		// jupiter-starter
-		if (!isWindows()) { // TODO https://github.com/junit-team/junit5-samples/issues/66
-			runProject(excludedProjects, "junit5-jupiter-starter-ant", "build.sh", "clean", antTarget);
+		if (!isWindows()) { // TODO https://github.com/junit-team/junit-examples/issues/66
+			runProject(excludedProjects, "junit-jupiter-starter-ant", "build.sh", "clean", antTarget);
 		}
 
-		runProject(excludedProjects, "junit5-jupiter-starter-gradle", "gradlew", gradleTask);
-		runProject(excludedProjects, "junit5-jupiter-starter-gradle-groovy", "gradlew", gradleTask);
-		runProject(excludedProjects, "junit5-jupiter-starter-gradle-kotlin", "gradlew", gradleTask);
-		runProject(excludedProjects, "junit5-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", mavenLifecycle);
-		runProject(excludedProjects, "junit5-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", mavenLifecycle);
-		runProject(excludedProjects, "junit5-jupiter-starter-bazel", "bazel", bazelTarget, "//...", "--test_output", "all");
-		runProject(excludedProjects, "junit5-jupiter-starter-sbt", "sbt", sbtTask);
+		runProject(excludedProjects, "junit-jupiter-starter-gradle", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit-jupiter-starter-gradle-groovy", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit-jupiter-starter-gradle-kotlin", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", mavenLifecycle);
+		runProject(excludedProjects, "junit-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", mavenLifecycle);
+		runProject(excludedProjects, "junit-jupiter-starter-bazel", "bazel", bazelTarget, "//...", "--test_output", "all");
+		runProject(excludedProjects, "junit-jupiter-starter-sbt", "sbt", sbtTask);
 
 		// jupiter-extensions
-		runProject(excludedProjects, "junit5-jupiter-extensions", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit-jupiter-extensions", "gradlew", gradleTask);
 
 		// migration
-		runProject(excludedProjects, "junit5-migration-gradle", "gradlew", gradleTask);
-		runProject(excludedProjects, "junit5-migration-maven", "mvnw", "--batch-mode", "clean", mavenLifecycle);
-		runProject(excludedProjects, "junit5-multiple-engines", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit-migration-gradle", "gradlew", gradleTask);
+		runProject(excludedProjects, "junit-migration-maven", "mvnw", "--batch-mode", "clean", mavenLifecycle);
+		runProject(excludedProjects, "junit-multiple-engines", "gradlew", gradleTask);
 
 		// modular
-		runProject(excludedProjects, "junit5-modular-world", "jshell", "-R-Dtarget=" + target.name(), "build.jsh");
+		runProject(excludedProjects, "junit-modular-world", "jshell", "-R-Dtarget=" + target.name(), "build.jsh");
 
 		System.out.printf("%n%n%n|%n| Done. Build exits with status = %d.%n|%n", status);
 		return status;

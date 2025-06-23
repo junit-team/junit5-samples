@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Updates the versions of JUnit Platform artifacts in all sample projects.
+ * Updates the versions of JUnit Platform artifacts in all example projects.
  */
 @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 class Updater {
@@ -45,35 +45,35 @@ class Updater {
                 VersionType.BOM
         );
 
-        update(Path.of("junit5-jupiter-extensions/build.gradle"), List.of(gradleBomReplacement));
-        update(Path.of("junit5-jupiter-starter-ant/build.sh"), List.of(
+        update(Path.of("junit-jupiter-extensions/build.gradle"), List.of(gradleBomReplacement));
+        update(Path.of("junit-jupiter-starter-ant/build.sh"), List.of(
                 new Replacement("junit_platform_version='" + VERSION_REGEX + "'", VersionType.PLATFORM)
         ));
-        update(Path.of("junit5-jupiter-starter-bazel/MODULE.bazel"), List.of(
+        update(Path.of("junit-jupiter-starter-bazel/MODULE.bazel"), List.of(
                 new Replacement("JUNIT_JUPITER_VERSION = \"" + VERSION_REGEX + '"', VersionType.JUPITER),
                 new Replacement("JUNIT_PLATFORM_VERSION = \"" + VERSION_REGEX + '"', VersionType.PLATFORM)
         ));
-        update(Path.of("junit5-jupiter-starter-gradle/build.gradle"), List.of(gradleBomReplacement));
-        update(Path.of("junit5-jupiter-starter-gradle-groovy/build.gradle"), List.of(gradleBomReplacement));
-        update(Path.of("junit5-jupiter-starter-gradle-kotlin/build.gradle.kts"), List.of(gradleBomReplacement));
-        update(Path.of("junit5-jupiter-starter-maven/pom.xml"), List.of(mavenBomReplacement));
-        update(Path.of("junit5-jupiter-starter-maven-kotlin/pom.xml"), List.of(mavenBomReplacement));
-        update(Path.of("junit5-jupiter-starter-sbt/build.sbt"), List.of(
+        update(Path.of("junit-jupiter-starter-gradle/build.gradle"), List.of(gradleBomReplacement));
+        update(Path.of("junit-jupiter-starter-gradle-groovy/build.gradle"), List.of(gradleBomReplacement));
+        update(Path.of("junit-jupiter-starter-gradle-kotlin/build.gradle.kts"), List.of(gradleBomReplacement));
+        update(Path.of("junit-jupiter-starter-maven/pom.xml"), List.of(mavenBomReplacement));
+        update(Path.of("junit-jupiter-starter-maven-kotlin/pom.xml"), List.of(mavenBomReplacement));
+        update(Path.of("junit-jupiter-starter-sbt/build.sbt"), List.of(
                 new Replacement("\"org.junit.jupiter\" % \"junit-jupiter\" % \"" + VERSION_REGEX + '"', VersionType.JUPITER),
                 new Replacement("\"org.junit.platform\" % \"junit-platform-launcher\" % \"" + VERSION_REGEX + '"', VersionType.PLATFORM)
         ));
-        update(Path.of("junit5-migration-gradle/build.gradle"), List.of(gradleBomReplacement));
-        update(Path.of("junit5-migration-gradle/README.md"), List.of(
+        update(Path.of("junit-migration-gradle/build.gradle"), List.of(gradleBomReplacement));
+        update(Path.of("junit-migration-gradle/README.md"), List.of(
                 new Replacement("org.junit.jupiter:junit-jupiter:" + VERSION_REGEX, VersionType.JUPITER),
                 new Replacement("org.junit.vintage:junit-vintage-engine:" + VERSION_REGEX, VersionType.VINTAGE)
         ));
-        update(Path.of("junit5-migration-maven/pom.xml"), List.of(mavenBomReplacement));
-        update(Path.of("junit5-modular-world/compile.jsh"), List.of(
+        update(Path.of("junit-migration-maven/pom.xml"), List.of(mavenBomReplacement));
+        update(Path.of("junit-modular-world/compile.jsh"), List.of(
                 new Replacement("platformVersion = \"" + VERSION_REGEX + '"', VersionType.PLATFORM),
                 new Replacement("jupiterVersion = \"" + VERSION_REGEX + '"', VersionType.JUPITER),
                 new Replacement("vintageVersion = \"" + VERSION_REGEX + '"', VersionType.VINTAGE)
         ));
-        update(Path.of("junit5-multiple-engines/build.gradle.kts"), List.of(
+        update(Path.of("junit-multiple-engines/build.gradle.kts"), List.of(
                 new Replacement("junitBomVersion = \"" + VERSION_REGEX + '"', VersionType.BOM)
         ));
     }

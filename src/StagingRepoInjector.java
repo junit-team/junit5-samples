@@ -59,28 +59,28 @@ public class StagingRepoInjector {
                 """
                 .formatted(stagingRepoUrl);
 
-        appendAfter("junit5-jupiter-extensions/build.gradle", "mavenCentral()",
+        appendAfter("junit-jupiter-extensions/build.gradle", "mavenCentral()",
                 gradleGroovyDslSnippet);
 
-        replace("junit5-jupiter-starter-ant/build.sh", "\"https://repo1.maven.org/maven2",
+        replace("junit-jupiter-starter-ant/build.sh", "\"https://repo1.maven.org/maven2",
                 "--header \"Authorization: Bearer $MAVEN_CENTRAL_USER_TOKEN\" \"%s".formatted(stagingRepoUrl));
 
-        appendAfter("junit5-jupiter-starter-gradle/build.gradle", "mavenCentral()",
+        appendAfter("junit-jupiter-starter-gradle/build.gradle", "mavenCentral()",
                 gradleGroovyDslSnippet);
 
-        appendAfter("junit5-jupiter-starter-gradle-groovy/build.gradle", "mavenCentral()",
+        appendAfter("junit-jupiter-starter-gradle-groovy/build.gradle", "mavenCentral()",
                 gradleGroovyDslSnippet);
 
-        appendAfter("junit5-jupiter-starter-gradle-kotlin/build.gradle.kts", "mavenCentral()",
+        appendAfter("junit-jupiter-starter-gradle-kotlin/build.gradle.kts", "mavenCentral()",
                 gradleKotlinDslSnippet);
 
-        appendAfter("junit5-migration-gradle/build.gradle", "mavenCentral()",
+        appendAfter("junit-migration-gradle/build.gradle", "mavenCentral()",
                 gradleGroovyDslSnippet);
 
-        replace("junit5-modular-world/BUILDING", "\"https://repo1.maven.org/maven2\"",
+        replace("junit-modular-world/BUILDING", "\"https://repo1.maven.org/maven2\"",
                 "group.startsWith(\"org.junit\") ? \"%s\" : \"https://repo1.maven.org/maven2\"".formatted(stagingRepoUrl));
 
-        appendAfter("junit5-multiple-engines/build.gradle.kts", "mavenCentral()",
+        appendAfter("junit-multiple-engines/build.gradle.kts", "mavenCentral()",
                 gradleKotlinDslSnippet);
     }
 
