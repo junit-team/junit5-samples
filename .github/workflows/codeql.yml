@@ -30,7 +30,7 @@ jobs:
         with:
           java-version: 21
           distribution: temurin
-      - uses: sbt/setup-sbt@6c68d2fe8dfbc0a0534d70101baa2e0420e1a506 # v1.1.9
+      - uses: sbt/setup-sbt@a9d38be6cfa0c7bfb8be93b4cc4e1edaa6351728 # v1.1.10
       - name: Initialize CodeQL
         uses: github/codeql-action/init@ce28f5bb42b7a9f2c824e633a3f6ee835bab6858 # v3.29.0
         with:
