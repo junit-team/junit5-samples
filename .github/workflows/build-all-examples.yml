@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - 'r5.*'
+      - 'develop/*'
   pull_request:
     branches:
       - '*'
