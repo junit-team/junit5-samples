@@ -11,5 +11,6 @@ lazy val root = project
       "org.junit.jupiter" % "junit-jupiter" % "5.13.2" % Test,
       "org.junit.platform" % "junit-platform-launcher" % "1.13.2" % Test,
     ),
-    testOptions += Tests.Argument(jupiterTestFramework, "--display-mode=tree")
+    testOptions += Tests.Argument(jupiterTestFramework, "--display-mode=tree"),
+    resolvers += "Maven Central Snapshots" at "https://central.sonatype.com/repository/maven-snapshots"
   )
