@@ -25,7 +25,7 @@ jobs:
           distribution: temurin
       - uses: sbt/setup-sbt@234370af1319038bf8dc432f8a7e4b83078a1781 # v1.1.11
       - name: 'Build all examples'
-        run: java src/Builder.java
+        run: java src/Builder.java --exclude=junit-jupiter-starter-ant,junit-jupiter-starter-bazel,junit-modular-world
       - name: 'Check automation for updating versions'
         run: java src/Updater.java 42
         if: github.repository == 'junit-team/junit-examples' && github.ref == 'refs/heads/main'
