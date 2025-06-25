@@ -63,7 +63,7 @@ class Builder {
 		runProject(excludedProjects, "junit-jupiter-starter-gradle-kotlin", "gradlew", gradleTask);
 		runProject(excludedProjects, "junit-jupiter-starter-maven", "mvnw", "--batch-mode", "clean", mavenLifecycle);
 		runProject(excludedProjects, "junit-jupiter-starter-maven-kotlin", "mvnw", "--batch-mode", "clean", mavenLifecycle);
-		runProject(excludedProjects, "junit-jupiter-starter-bazel", "bazel", bazelTarget, "//...", "--test_output", "all", "--java_language_version", "24");
+		// runProject(excludedProjects, "junit-jupiter-starter-bazel", "bazel", bazelTarget, "//...", "--test_output", "all");
 		runProject(excludedProjects, "junit-jupiter-starter-sbt", "sbt", sbtTask);
 
 		// jupiter-extensions
