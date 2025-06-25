@@ -17,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: 'Set up JDK 21'
+      - name: 'Set up JDK 24'
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
-          java-version: 21
+          java-version: 24
           distribution: temurin
       - uses: sbt/setup-sbt@a9d38be6cfa0c7bfb8be93b4cc4e1edaa6351728 # v1.1.10
-      - name: 'Build all examples using JShell'
+      - name: 'Build all examples'
         run: java src/Builder.java
       - name: 'Check automation for updating versions'
         run: java src/Updater.java 42

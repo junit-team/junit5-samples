@@ -68,7 +68,7 @@ class Updater {
                 new Replacement("org.junit.vintage:junit-vintage-engine:" + VERSION_REGEX, VersionType.VINTAGE)
         ));
         update(Path.of("junit-migration-maven/pom.xml"), List.of(mavenBomReplacement));
-        update(Path.of("junit-modular-world/compile.jsh"), List.of(
+        update(Path.of("junit-modular-world/src/build/Project.java"), List.of(
                 new Replacement("platformVersion = \"" + VERSION_REGEX + '"', VersionType.PLATFORM),
                 new Replacement("jupiterVersion = \"" + VERSION_REGEX + '"', VersionType.JUPITER),
                 new Replacement("vintageVersion = \"" + VERSION_REGEX + '"', VersionType.VINTAGE)

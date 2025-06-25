@@ -5,7 +5,7 @@ set -e
 # Set constants.
 #
 junit_platform_version='1.13.2'
-ant_version='1.10.13'
+ant_version='1.10.15'
 ant_folder="apache-ant-${ant_version}"
 ant_archive="${ant_folder}-bin.tar.gz"
 standalone_jar="${ant_folder}/lib/junit-platform-console-standalone-${junit_platform_version}.jar"
