@@ -3,8 +3,9 @@
 Welcome to _JUnit Examples_, a collection of example applications and extensions
 using JUnit Jupiter, JUnit Vintage, and the JUnit Platform on various build systems.
 
-CI builds for example projects are performed by [GitHub Actions][ci-actions]. Using JDK 11+'s
-`jshell` tool, you may build all examples via the `build-all-examples.jsh` script.
+CI builds for example projects are performed by [GitHub Actions][ci-actions]. Using JDK 24+'s
+`java` multi-file source-code launcher feature, you may build all examples by running
+`java src/Builder.java` in the main directory of this project.
 
 ## Jupiter Starter Examples
 
