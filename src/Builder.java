@@ -51,7 +51,7 @@ class Builder {
 		var mavenLifecycle = target == Target.TEST ? "test" : "test-compile";
 		var bazelTarget = target == Target.TEST ? "test" : "build";
 		var sbtTask = target == Target.TEST ? "test" : "Test / compile";
-        var modularAction = target == Target.TEST ? "src/build/Build.java" : "src/build/Compile.java";
+		var modularAction = target == Target.TEST ? "src/build/Build.java" : "src/build/Compile.java";
 
 		// jupiter-starter
 		if (!isWindows()) { // TODO https://github.com/junit-team/junit-examples/issues/66
@@ -75,7 +75,7 @@ class Builder {
 		runProject(excludedProjects, "junit-multiple-engines", "gradlew", gradleTask);
 
 		// modular
-        runProject(excludedProjects, "junit-modular-world", "java", modularAction);
+		runProject(excludedProjects, "junit-modular-world", "java", modularAction);
 
 		System.out.printf("%n%n%n|%n| Done. Build exits with status = %d.%n|%n", status);
 		return status;
