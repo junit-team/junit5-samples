@@ -22,7 +22,7 @@ jobs:
         with:
           java-version: 24
           distribution: temurin
-      - uses: sbt/setup-sbt@6c68d2fe8dfbc0a0534d70101baa2e0420e1a506 # v1.1.9
+      - uses: sbt/setup-sbt@a9d38be6cfa0c7bfb8be93b4cc4e1edaa6351728 # v1.1.10
       - name: 'Build all examples'
         run: java src/Builder.java
       - name: 'Check automation for updating versions'
